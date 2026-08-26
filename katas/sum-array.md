@@ -1,4 +1,6 @@
 ---
+id: 1
+category: arrays
 title: Sum an array
 type: code
 difficulty: easy

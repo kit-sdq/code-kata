@@ -1,10 +1,12 @@
-import { describe, expect, it } from 'vitest';
+import { describe, expect, it, vi } from 'vitest';
 import { parseKata } from '../src/kata/parse.ts';
 import type { ChoiceKata, CodeKata, TextKata } from '../src/kata/types.ts';
 
 describe('parseKata — text', () => {
   it('parses a valid text kata with defaults', () => {
     const raw = `---
+id: 1
+category: basics
 title: The final keyword
 type: text
 difficulty: easy
@@ -15,7 +17,9 @@ hints: ["hint one"]
 What keyword?
 `;
     const k = parseKata(raw, 'keyword-final') as TextKata;
-    expect(k.id).toBe('keyword-final');
+    expect(k.slug).toBe('keyword-final');
+    expect(k.id).toBe('1');
+    expect(k.category).toBe('basics');
     expect(k.type).toBe('text');
     expect(k.title).toBe('The final keyword');
     expect(k.answers).toEqual(['final']);
@@ -23,9 +27,10 @@ What keyword?
     expect(k.body.trim()).toBe('What keyword?');
   });
 
-  it('uses frontmatter id over filename fallback', () => {
+  it('normalizes a numeric YAML id to a string', () => {
     const raw = `---
-id: custom-id
+id: 2
+category: basics
 title: T
 type: text
 difficulty: easy
@@ -34,11 +39,44 @@ answers: ["x"]
 body
 `;
     const k = parseKata(raw, 'fallback');
-    expect(k.id).toBe('custom-id');
+    expect(k.id).toBe('2');
+    expect(typeof k.id).toBe('string');
+  });
+
+  it('throws on missing id', () => {
+    const raw = `---
+category: basics
+title: T
+type: text
+difficulty: easy
+answers: ["x"]
+---
+body
+`;
+    expect(() => parseKata(raw, 'id')).toThrow();
+  });
+
+  it('defaults missing category to uncategorized and warns', () => {
+    const warnSpy = vi.spyOn(console, 'warn').mockImplementation(() => {});
+    const raw = `---
+id: 1
+title: T
+type: text
+difficulty: easy
+answers: ["x"]
+---
+body
+`;
+    const k = parseKata(raw, 'id');
+    expect(k.category).toBe('uncategorized');
+    expect(warnSpy).toHaveBeenCalled();
+    warnSpy.mockRestore();
   });
 
   it('throws on missing answers', () => {
     const raw = `---
+id: 1
+category: basics
 title: T
 type: text
 difficulty: easy
@@ -54,6 +92,8 @@ body
 
   it('throws on missing title', () => {
     const raw = `---
+id: 1
+category: basics
 type: text
 difficulty: easy
 answers: ["x"]
@@ -67,6 +107,8 @@ body
 describe('parseKata — choice', () => {
   it('parses options and defaults', () => {
     const raw = `---
+id: 1
+category: basics
 title: Primitives
 type: choice
 difficulty: easy
@@ -87,6 +129,8 @@ Pick one.
 
   it('throws when no option is correct', () => {
     const raw = `---
+id: 1
+category: basics
 title: Primitives
 type: choice
 difficulty: easy
@@ -103,6 +147,8 @@ body
 describe('parseKata — code', () => {
   it('extracts the template and removes it from the body', () => {
     const raw = `---
+id: 1
+category: basics
 title: FizzBuzz
 type: code
 difficulty: medium
@@ -136,6 +182,8 @@ public class Main {
 
   it('parses return checks with nested array args', () => {
     const raw = `---
+id: 1
+category: arrays
 title: Sum
 type: code
 difficulty: easy
@@ -166,6 +214,8 @@ public class Main {
 
   it('throws when a code kata has no template', () => {
     const raw = `---
+id: 1
+category: arrays
 title: Sum
 type: code
 difficulty: easy
@@ -180,6 +230,8 @@ Body text, no template.
 
   it('throws on missing checks', () => {
     const raw = `---
+id: 1
+category: arrays
 title: Sum
 type: code
 difficulty: easy

@@ -7,9 +7,9 @@ function loadAll(): Kata[] {
   const katas: Kata[] = [];
   for (const [path, raw] of Object.entries(modules)) {
     const filename = path.split('/').pop() ?? path;
-    const fallbackId = filename.replace(/\.md$/, '');
+    const slug = filename.replace(/\.md$/, '');
     try {
-      katas.push(parseKata(raw, fallbackId));
+      katas.push(parseKata(raw, slug));
     } catch (err) {
       console.error(`Failed to parse kata "${filename}":`, err);
     }
@@ -23,6 +23,6 @@ export function getKatas(): Kata[] {
   return katas;
 }
 
-export function getKata(id: string): Kata | undefined {
-  return katas.find((k) => k.id === id);
+export function getKata(slug: string): Kata | undefined {
+  return katas.find((k) => k.slug === slug);
 }

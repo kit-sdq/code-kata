@@ -1,4 +1,6 @@
 ---
+id: 2
+category: basics
 title: Primitive types
 type: choice
 difficulty: easy

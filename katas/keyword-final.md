@@ -1,4 +1,6 @@
 ---
+id: 1
+category: basics
 title: The final keyword
 type: text
 difficulty: easy

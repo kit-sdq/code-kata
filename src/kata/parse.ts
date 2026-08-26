@@ -4,19 +4,30 @@ import type { Check, ChoiceKata, CodeKata, Difficulty, JavaValue, Kata, Match, T
 const FRONTMATTER_RE = /^---\r?\n([\s\S]*?)\r?\n---\r?\n?/;
 const TEMPLATE_RE = /```java template\r?\n([\s\S]*?)```/;
 
-/** Parse a raw .md string into a Kata. `fallbackId` is used when frontmatter omits `id` (typically the filename). */
-export function parseKata(raw: string, fallbackId: string): Kata {
+/** Parse a raw .md string into a Kata. `slug` is the filename-derived routing/progress key. */
+export function parseKata(raw: string, slug: string): Kata {
   const fmMatch = raw.match(FRONTMATTER_RE);
-  if (!fmMatch) throw new Error(`${fallbackId}: missing YAML frontmatter (expected leading "---" block)`);
+  if (!fmMatch) throw new Error(`${slug}: missing YAML frontmatter (expected leading "---" block)`);
 
   const parsed = yaml.load(fmMatch[1]);
   if (typeof parsed !== 'object' || parsed === null) {
-    throw new Error(`${fallbackId}: frontmatter must be a YAML mapping`);
+    throw new Error(`${slug}: frontmatter must be a YAML mapping`);
   }
   const fm = parsed as Record<string, unknown>;
   let body = raw.slice(fmMatch[0].length);
 
-  const id = typeof fm.id === 'string' && fm.id ? fm.id : fallbackId;
+  if (fm.id === undefined || fm.id === null || fm.id === '' || (typeof fm.id !== 'string' && typeof fm.id !== 'number')) {
+    throw new Error(`${slug}: missing required field "id"`);
+  }
+  const id = String(fm.id);
+
+  let category: string;
+  if (typeof fm.category === 'string' && fm.category) {
+    category = fm.category;
+  } else {
+    console.warn(`${slug}: missing "category", defaulting to "uncategorized"`);
+    category = 'uncategorized';
+  }
 
   const title = fm.title;
   if (typeof title !== 'string' || !title) throw new Error(`${id}: missing required field "title"`);
@@ -41,7 +52,7 @@ export function parseKata(raw: string, fallbackId: string): Kata {
     body = (body.slice(0, templateMatch.index) + body.slice(templateMatch.index + templateMatch[0].length)).trim();
   }
 
-  const base = { id, title, difficulty: difficulty as Difficulty, tags, hints, body };
+  const base = { slug, id, category, title, difficulty: difficulty as Difficulty, tags, hints, body };
 
   if (type === 'text') return parseTextKata(fm, base, id);
   if (type === 'choice') return parseChoiceKata(fm, base, id);

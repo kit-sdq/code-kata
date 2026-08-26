@@ -1,4 +1,6 @@
 ---
+id: 3
+category: basics
 title: FizzBuzz
 type: code
 difficulty: medium

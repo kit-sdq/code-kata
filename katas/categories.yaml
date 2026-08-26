@@ -1,0 +1,7 @@
+- id: basics
+  name: Java Basics
+  description: Core language fundamentals — keywords, types, and control flow.
+  order: 1
+- id: arrays
+  name: Arrays
+  order: 2

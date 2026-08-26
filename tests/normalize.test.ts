@@ -4,7 +4,7 @@ import type { TextKata } from '../src/kata/types.ts';
 
 function textKata(overrides: Partial<TextKata> = {}): TextKata {
   return {
-    id: 'k', title: 'k', difficulty: 'easy', tags: [], hints: [], body: '',
+    slug: 'k', id: 'k', category: 'basics', title: 'k', difficulty: 'easy', tags: [], hints: [], body: '',
     type: 'text',
     answers: ['final'],
     match: { mode: 'normalized', caseSensitive: false },

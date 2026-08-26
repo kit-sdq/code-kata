@@ -5,7 +5,7 @@ import type { RunResult } from '../src/runner/runner.ts';
 
 function codeKata(checks: Check[]): CodeKata {
   return {
-    id: 'k', title: 'k', difficulty: 'easy', tags: [], hints: [], body: '',
+    slug: 'k', id: 'k', category: 'basics', title: 'k', difficulty: 'easy', tags: [], hints: [], body: '',
     type: 'code', mainClass: 'Main', allowedImports: [], timeoutMs: 5000, template: '',
     checks,
   };

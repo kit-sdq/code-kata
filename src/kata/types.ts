@@ -1,9 +1,10 @@
 export type Difficulty = 'easy' | 'medium' | 'hard';
 export interface Match { mode: 'normalized' | 'exact' | 'regex'; caseSensitive: boolean }
 export interface KataBase {
-  id: string; title: string; difficulty: Difficulty; tags: string[];
+  slug: string; id: string; category: string; title: string; difficulty: Difficulty; tags: string[];
   hints: string[]; body: string;           // markdown, template block removed
 }
+export interface Category { id: string; name: string; description?: string; order: number }
 export interface TextKata extends KataBase { type: 'text'; answers: string[]; match: Match }
 export interface ChoiceKata extends KataBase {
   type: 'choice'; multiple: boolean; shuffle: boolean;

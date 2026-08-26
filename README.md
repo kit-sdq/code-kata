@@ -44,6 +44,76 @@ locked-region template syntax) is fully specified in
 [`docs/TASK_FORMAT.md`](docs/TASK_FORMAT.md), including three complete
 example files (text, choice, code).
 
+## Adding a category
+
+Categories are defined in `katas/categories.yaml`, a flat list of
+`{ id, name, description?, order }` entries. A kata joins a category by
+setting its frontmatter `category` to a manifest `id`. To add a new category:
+add an entry to `categories.yaml` with a unique `id` and an `order` (ascending
+front-page section position), then point kata(s) at it via `category: <id>`.
+Categories with no katas are omitted from the front page; katas with a
+missing or unrecognized `category` land in a synthetic "Uncategorized"
+section at the end (and log a console warning naming the kata and the
+unrecognized category).
+
+Within a category, katas are ordered by their frontmatter `id` — a
+dotted-numeric string (`1`, `2`, `2.1`, `10`, ...) compared segment-by-segment
+as numbers, not as plain strings, so `id: 10` sorts after `id: 3`, not before
+`id: 2`. Full semantics (duplicate-id/unknown-category warnings, comparison
+rules) are in [`docs/TASK_FORMAT.md`](docs/TASK_FORMAT.md).
+
+## Theming
+
+The site follows the OS color scheme (`prefers-color-scheme`) by default. The
+header's "Dark mode" toggle (a real `<button>` with `aria-pressed` reflecting
+the current state) overrides this and persists the choice in `localStorage`;
+once overridden, the site stops following OS changes until the toggle is used
+again. Theme is applied before first paint (an inline script in
+`index.html`'s `<head>` sets `data-theme` from storage-or-OS before the
+stylesheet loads), so there's no flash of the wrong theme on load. Both
+themes cover the whole UI, including the CodeMirror editor and
+`highlight.js`-rendered code blocks in kata bodies, which restyle live via
+CSS custom properties with no editor rebuild. See
+[`docs/DESIGN.md`](docs/DESIGN.md) for the palette, measured contrast ratios,
+and theming mechanics in detail.
+
+## Accessibility
+
+Target conformance: **WCAG 2.2 AA**. What was actually tested, and how:
+
+- **Color contrast** (light and dark themes): computed automatically in
+  `tests/contrast.test.ts` from the literal color values in `src/styles.css`
+  — every text/background and UI-component/background pair used in the app,
+  asserted against the 4.5:1 (text) / 3:1 (large text, UI components, focus
+  indicators) thresholds. Measured values are recorded in
+  [`docs/DESIGN.md`](docs/DESIGN.md).
+- **Keyboard-only pass**: manually walked the full kata workflow (list → open
+  a kata → wrong answer → reveal hint → correct answer, for a text/choice
+  kata and for the FizzBuzz code kata including writing and running a
+  solution) using only the keyboard, in a real browser. The code editor's one
+  custom keyboard surface — Tab is captured for indentation — has an
+  `Escape` binding that blurs the editor, releasing Tab so it moves focus on;
+  this is documented both as a visually-hidden hint attached to the editor
+  via `aria-describedby` and here: **press Escape, then Tab, to leave the
+  code editor.**
+- **Reflow**: checked at 320px viewport width and at a 200%-zoom-equivalent
+  viewport — no page-level horizontal scrolling (the code editor and long
+  code/diff lines scroll internally, which is the standard exception for
+  two-dimensional content).
+- **Semantics / live regions**: verified one `<h1>` per page, `<label>`s on
+  the text input and every choice option, `<fieldset>`/`<legend>` on choice
+  questions, and that correct/incorrect feedback, revealed hints, run-phase
+  changes, and execution errors are all announced via persistent
+  `role="status" aria-live="polite"` containers (present in the DOM before
+  their content changes, not recreated on each update).
+
+Full criterion-by-criterion mapping and known limitations:
+[`docs/A11Y-CHECKLIST.md`](docs/A11Y-CHECKLIST.md). Headline limitations: no
+real screen-reader session was performed (verification was structural/
+computational plus a sighted keyboard-only pass, not an NVDA/JAWS/VoiceOver
+run); no automated accessibility linter (e.g. axe) was run; the CheerpJ
+first-load phase indicator is text-only, with no numeric progress bar.
+
 ## Configuring allowed imports
 
 Each `code` kata declares its own `allowedImports` whitelist in frontmatter

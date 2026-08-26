@@ -1,6 +1,7 @@
 .claude
 node_modules
 dist
+docs
 .github/workflows/openwiki-update.yml
 
 # Logs

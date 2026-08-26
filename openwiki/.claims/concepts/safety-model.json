@@ -1,0 +1,254 @@
+{
+  "schemaVersion": 1,
+  "pageVersion": "sha256:330d43972a76dabf7bfd38d8ad063e5122a86c3ce038fdcd57e884c2861e467a",
+  "claims": [
+    {
+      "id": "claim_000d9219a75649c1abeb1c6a4ab523e6",
+      "statement": "The pre-run gate order in src/ui/views/code.ts is: reassemble source, validateLocked (regions.ts), validateImports (imports.ts), and only then postMessage to the sandbox; a failure at any gate refuses the run with no network or iframe activity.",
+      "evidence": [
+        {
+          "resource": "repo://docs/ARCHITECTURE.md#L57-L100",
+          "version": "repo-lines-v1:sha256:15dfca6bbe2fbd76c4c2e406168e657e6b9c0856c46122f70dcf020ba65ae3c4:eyJzZWxlY3RlZExpbmVDb3VudCI6NDQsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjhkZDk4MDVkZDNhNThmNjk3M2NmZTE1ODkyOWI3NDVkNmJmZGQxYThiYjZjNjAxOTFjMTQ1Y2VmNzlmNmFjZjYiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6ImQxYjA5ZjNkOWMzYjExNWNmZTFlMWRiOWMwN2Q4MmFjY2JlOWFkZDM2N2E4ZTJkN2VlOWI2ZWJkZDRhMWYwODgiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImI4YmU2YWU1NDllNDBmZjY5YzVmYTA0ZmU2ZDg2ZjhjNjgzNzI4MWQ1ZGY1ZDllYTkxNGViOTc2ZmYwNDkyMjYiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6Ijc4NGNlZGViYjc3ZDQ0NjBjYTYyYWRkMDVhNjU0Y2MwYzE2MjA3NzJhODJjYzE3MzVlMTZlZDMyYjIxMDQ2YjUifQ"
+        },
+        {
+          "resource": "repo://src/ui/views/code.ts#L84-L97",
+          "version": "repo-lines-v1:sha256:c58febb0f064c22c475bdf81792fe182d3465e5fa246af558493acef5e095fee:eyJzZWxlY3RlZExpbmVDb3VudCI6MTQsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjZjOTFjNWIxOTgzYWQ3MTgyODFhNjhhYWU1MTIyYzFiMTZmMTlkM2MwZTFiNGM0MWM3NGMxNmM0YjViNTI1ZDIiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjQ4OTNmNDBlMzc4MWViODk2YzgyZDA0NmEwODA2N2ExMWUzNWNkZjJmMWRmYWYyNmZlYTkwYjhkYjY2NzY0MTMiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjIzNThhZDU4OTkzNzlmNDYxYzVjZGFiMzg0YWMwYzY4Nzk5YjY0Y2I4MDU0YWMyMjc3ZTY0NTBjNmU1OTU4YWMiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjQ5MGQ5NTliOGRkYzg1NDAwOWVhMmM1NmUwMzA5NDZiZmU4YzlkOTg3NjVjYjlhZjA0OTg1ODFhYzEwYTI1NzgifQ"
+        }
+      ]
+    },
+    {
+      "id": "claim_d05c6b2b8dd9436cb098f8b229b72ac4",
+      "statement": "validateLocked (regions.ts) requires that every non-editable segment appears verbatim, in order, and non-overlapping in the submitted source; this re-validation defends against out-of-band tampering (e.g. devtools/DOM manipulation) that bypasses the CodeMirror live change filter, and a failed check refuses the run like a failed import check.",
+      "evidence": [
+        {
+          "resource": "repo://docs/ARCHITECTURE.md#L78-L90",
+          "version": "repo-lines-v1:sha256:b8a2bfc23966adf1394fe2e3be053cdae710d815089fe515fce719af60d9f789:eyJzZWxlY3RlZExpbmVDb3VudCI6MTMsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjIzYWQ4ZTAzNDJiOGU3M2M0NDkyZTNlY2M2ZTRjMzhhNGYwMDM5MWQ0MjhjYTVhMGI0YThiMjY0YjExMzc4YWYiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjlmZjE0ZTE1MzM4NDE3ZDA2YzYwMzQ5ZTAzOGRjODcyZjlmYTFmOTg0Y2QyNjRkZTRkMzNlMDExNjA2YTI4YTciLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjRhYTU1ZWNjNDliOGM4OGM5ZDRlZGIzZTIxNzRkODZkOWRhYjEzOGIwMmFhNDY3ZGZlYmM5ZThhNDllOTJmY2MiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjUwOWE2MzkxZjA5NTQzNmE0NjFmYWRkMzQxYTRjNDIwYjQ1YzI4MTc1ZmEwZGJmZGIwODRhY2Q3MTJiNWU4NTkifQ"
+        },
+        {
+          "resource": "repo://src/editor/regions.ts#L41-L50",
+          "version": "repo-lines-v1:sha256:f1eebf50f22e0815eb171317ed72b4d3fa02a2a3c3efaedca69f367e2cc32bab:eyJzZWxlY3RlZExpbmVDb3VudCI6MTAsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjAzYzc5MDg1ZjY4NGZjMTY0ZWM0Mjk1Y2ZmNDhiOWJhMzU5MzUxMTU1MDFmYjFjNjdmZDI1NzhhYTcxMTgyZjYiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjNkZDgyYjliNjZlZGNkMDQ0NDUxYzY5MDRhMjJlNDk0NGRkNDhjZWFjOGUxOGQ3MWZkZGQyZjFjMzlmMmM4MzciLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjI1Y2QyODJkYjRkZTkyYjA4NWRhMjA4NjNmN2RlNzM2NWJiYTc2ZjI0NWZjZjVlYjhjODc2ZjA0MDA1NTFkY2YiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjoxLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjQxMmNhMzQ1Y2NmNzViZjljMDgwNmJjZTY5NWJlOGRlODA4Yjc5OTg0MjUxYTdhNTRkMjAyY2Y2MTAxZGQ0NTEifQ"
+        }
+      ]
+    },
+    {
+      "id": "claim_13fbdad8b5124016a906fb452c781cda",
+      "statement": "stripNonCode in imports.ts replaces line comments, block comments, string literals, char literals, and text blocks with spaces while preserving newlines, so masked-out tokens are not falsely flagged and reported line numbers stay correct.",
+      "evidence": [
+        {
+          "resource": "repo://src/check/imports.ts#L35-L89",
+          "version": "repo-lines-v1:sha256:fc3f369e9d6fc59f5d74994ae39517c36ea404baeeb27b8ec34c35d9f1784ef3:eyJzZWxlY3RlZExpbmVDb3VudCI6NTUsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6ImI0ZWUxNzEzMTU5YWNhMGI4N2ZhZmMyZWRmMTJmNjJhY2RmM2RlNGQ3OTc1YWUxYmQ4ZTg3YzVmNWI3M2E3NjQiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjQxMmNhMzQ1Y2NmNzViZjljMDgwNmJjZTY5NWJlOGRlODA4Yjc5OTg0MjUxYTdhNTRkMjAyY2Y2MTAxZGQ0NTEiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImU5ZjFiZmNiZGUyMzdhMTIxNDEyMDUyNDRhOWNhNDAzM2I4OGVkYzAwNTlmNmQ1YzAzM2U0MTcxMmRhYTEyMWIiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImM0N2YxZTYxODIwMDFhZWQzMjdmYjE1OTE1NGViMTY0ZmY3NTE5ZmNmOTQ5ZTNmMGJjZjA2NTI2NjA2Yzk1NjgifQ"
+        }
+      ]
+    },
+    {
+      "id": "claim_7fed599466054122933b06d3bbd1e89b",
+      "statement": "validateImports checks each import statement against the kata allowedImports whitelist, with java.lang implicitly allowed except java.lang.reflect; package wildcards (pkg.*) match only direct members of that package and exact rules must match exactly.",
+      "evidence": [
+        {
+          "resource": "repo://src/check/imports.ts#L118-L140",
+          "version": "repo-lines-v1:sha256:5a6878d596d3bfb37b9f3f0c5424544df84ca26d08468c519cf1c5ce5864293d:eyJzZWxlY3RlZExpbmVDb3VudCI6MjMsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6ImQzNmNhN2NkODNlZjQzYzIxNDA5MWVhOWNiZDBiM2Q2NDcyMmRmOGM3ZGFhNjJiZjRkNzg4NmY2MWI3YjQzNDUiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjI3ZTU3ODhkNWQ5ZDczZDI0YTgxZGJjMGE1YTc0YmZhODJjOWMzYjNhZjk5ZTUyYWY3OTZlOTBiNDY4YThhM2QiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjBlZGZmYmU3ZWI0YWNhZWQ3NDMyY2E4ODUwZDA1ODlmOWI4MjBiMjQ1OGI0Mzg5Mjk4NTFlMTk1OTdjOGQ3NmQiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImQ5MWRiYTlmNjUzNGU5MmMyYjQwMjcyZDQxODRhZWNhZWI4MzhmOTNhNDhkYWQ2MDJhNzk4NDEwZjliM2JjNTYifQ"
+        },
+        {
+          "resource": "repo://src/check/imports.ts#L97-L108",
+          "version": "repo-lines-v1:sha256:e4000a01f6a81714003718837bba629a5ef4ae56ffaf207381c9230d1adbd87d:eyJzZWxlY3RlZExpbmVDb3VudCI6MTIsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjFhOWRkN2VlY2IwMDBhNTliZjU3MmI4ZTlkNmE0YmY0M2M3NWVjNmVkZjEwZWJhMDEwNWFmZTk2NTdkOTYzYTQiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjQxMmNhMzQ1Y2NmNzViZjljMDgwNmJjZTY5NWJlOGRlODA4Yjc5OTg0MjUxYTdhNTRkMjAyY2Y2MTAxZGQ0NTEiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjQ2M2RmZTBjM2M4NmE5OWJkNjhhNTNiMWQ3NWY5YzRkMTNjMDc4MGE1NDhhYjA0OTczMWQ4MTA0M2MyYjk2YzgiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjQ4NTRjNzkxOGZhZGU5NTMzNmMzOTRjMmVjMmVhMThjMzBmYTc1NWJmMTU4OGI0ZjUyMzhkMzM3ZGZjOTkzNjIifQ"
+        }
+      ]
+    },
+    {
+      "id": "claim_90764470e8f74a7ebc55696327039036",
+      "statement": "validateImports scans for FQN bypass usage (fully-qualified names used without an import, e.g. new java.io.File(...)) over trigger prefixes java/javax/jakarta/sun/jdk/com/org/net/io, reporting banned or non-whitelisted FQN tokens.",
+      "evidence": [
+        {
+          "resource": "repo://src/check/imports.ts#L142-L153",
+          "version": "repo-lines-v1:sha256:f82353cf6ac0c1ee13f2d93b27541a217b428fd280674fdd2147819200537f06:eyJzZWxlY3RlZExpbmVDb3VudCI6MTIsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6ImU0YWNkZDhmNzA3NzJhMjkwNzk4MTRkMWRiMTA2MjkwZjkyZTk0NDUyYTY1NDVhYzdlNmZlZjc1ZDlkZWEyMTAiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjI3ZTU3ODhkNWQ5ZDczZDI0YTgxZGJjMGE1YTc0YmZhODJjOWMzYjNhZjk5ZTUyYWY3OTZlOTBiNDY4YThhM2QiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjgzMGU4NzEwYzY4MGY2NzdjNjk0OWVkNDY0YzAwMmQxYjM3NmFmODMyZDg0Mzc1NDRjOGFmMzM0ZmYxZjYwMGYiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjRmZDhkOTRjMWFmNmQxYzE2ZDc3MDM1ZDJmZmVmNWM1YTU0ZjAwOGMyMDJjNGFjNzA3MzVkM2RjMGMzNjE3YjkifQ"
+        },
+        {
+          "resource": "repo://src/check/imports.ts#L3-L5",
+          "version": "repo-lines-v1:sha256:615b1bf0b1fc2fd2ae4026fd5c563cb39b4db196bcc586932af89b7292f3a651:eyJzZWxlY3RlZExpbmVDb3VudCI6MywiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiODc1Y2QwMmQ2Mjc0MTgxZTYyZTg1ZTdmMzk2ZTkwNzlkMzhiNmU2OTRmMTExMWE2ZmQxMTI2MTJmZDg1OTYwYSIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiMjM2NTQ3ODQ3ZDhkZWE4MjUzMzkwY2UzNjQ5MzFmYmM4NWVkMzFhNzFhMmZlYjlhMTk5YTBkOGQ4ZWJmZDE2YiIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjIsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiNjdiYTljN2FkNGEwMDNmZTQ3MGZkZjUyOGMyYzI5ZWQ4OGQ0YjY0ZjQ2NGQwM2QwNjk3MGZhNzE0MzMzY2YyNyIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjMsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiMmJlYWJjMjkyNWVlZjg1MjlkNTk1MTgwNzA2NTNjNDU5MDk2MzkzYTljOTY3YTExNDA5MWQ5NzBmYTJmOGNjMSJ9"
+        }
+      ]
+    },
+    {
+      "id": "claim_04c3248b36c74b32a5eb5892f2197f4b",
+      "statement": "A fixed hard ban list — reflection (Class.forName, java.lang.reflect, ClassLoader, MethodHandles, Unsafe), process/native (Runtime.getRuntime, ProcessBuilder, ProcessHandle, System.exit, System.load), thread creation (new Thread, Executors), and packages java.io/java.net/java.nio/javax/sun/jdk — is enforced by validateImports and cannot be re-enabled by any kata whitelist; the ban list wins unconditionally.",
+      "evidence": [
+        {
+          "resource": "repo://README.md#L47-L57",
+          "version": "repo-lines-v1:sha256:cb29cd9f107afc41a4edea3f310d725bb120849f4c63c473039da38535bbec31:eyJzZWxlY3RlZExpbmVDb3VudCI6MTEsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjhmOTY5MzExYTBkNjg1Y2U1Njk3ZWU2YjNiMjhlNzI0NWE4ZDY0YTczZDI0MTIzMTE4NGIyMWJiZDNjOTExOTUiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjQ5N2M2YThlMjBmNjA3MzQ0M2ZjY2U1OTgzNTkxYzA0ZDg2MDEyZjBiY2FiODNkNzA4OTlmYjFkZjA4ZTAyMjQiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjM5NzBmZTI4OTZhYmViODIzODQ0ZjE0NjQ3OTFmYTYxYTZmYjdiOWU0ZTkyZTQzN2RlMDVlNjY0MDI4NzM1Y2YiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjAxODRiNTAxZWVlMjNkOWQ3YmY3ZWE0MTg1MGQ0OGIyMTI4MmUzMmNlYjcyYzM5YTcwMTY4YTEyZjIwYTQwNWMifQ"
+        },
+        {
+          "resource": "repo://src/check/imports.ts#L110-L137",
+          "version": "repo-lines-v1:sha256:76429f4817247ba4b77f4cc01406831db100a082c16ee9ca9a22355c50d00467:eyJzZWxlY3RlZExpbmVDb3VudCI6MjgsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6ImVhZjIyY2YwNzMyNTkyYzI0NzE0MWNiZTYxZWZhMTEwMTI2MTJmNWEzMTIyYjlhZjliYmFmNTJmNTcyNGQxOTQiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjQ4OTNmNDBlMzc4MWViODk2YzgyZDA0NmEwODA2N2ExMWUzNWNkZjJmMWRmYWYyNmZlYTkwYjhkYjY2NzY0MTMiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImI2MmM0ZmZlZGM1NzYzNTZmYzllZGE5N2E2NTY3MzU1YTFiOTZkNzQ3NTk0MTEyMWM0ZTcxMDY5ODYyZDQ4NjYiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImM4NDdiOTEyZGUyMTQ1YmU5MWZhNGQzYTVhMDlmNWMwYTYwMjQxNzJjZjM3NWM5YWY1ZDQ1M2ZlYzUzODNmMGIifQ"
+        },
+        {
+          "resource": "repo://src/check/imports.ts#L8-L33",
+          "version": "repo-lines-v1:sha256:194f03c164b8a84a4e930e636acbbf2859b96cf3815634bb8e1acc0c25cc6219:eyJzZWxlY3RlZExpbmVDb3VudCI6MjYsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjUwMDhiMDBmOWEyZjY2ZmMxYmRmYWMwYjdkNzY2MTMwMjliZWIwYTIwNTk3OTc5OGEyY2U4YmQwNTMwMWQ1OWQiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjQxMmNhMzQ1Y2NmNzViZjljMDgwNmJjZTY5NWJlOGRlODA4Yjc5OTg0MjUxYTdhNTRkMjAyY2Y2MTAxZGQ0NTEiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjNjOTAyYjA0YWU4YmNhZjBjNzRjMzY0YTMwMjIxMjgwMjk0YTU1NmFhYWNmNDkyNmQ0YTVhMjJkYTY1MzBjZGQiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjFlOTQ0ODZjYjFlNmQyNmMzNGIyMjcyMmM0OWE3MGE0ZDQ5NzZmZTg0NDQxNTZkYzA3ZDI5MDQ4MmE0NGRjNjkifQ"
+        }
+      ]
+    },
+    {
+      "id": "claim_58f33d538da64d13acce24f0528c7623",
+      "statement": "The sandbox is a nested isolation stack: a sandboxed iframe (sandbox=allow-scripts allow-same-origin) that is a thin relay, a dedicated Worker (sandbox-worker.js) where all CheerpJ compile/run happens, and the CheerpJ JVM-in-WASM inside the Worker.",
+      "evidence": [
+        {
+          "resource": "repo://docs/ARCHITECTURE.md#L102-L121",
+          "version": "repo-lines-v1:sha256:3e054965133c8dad1569b519d45120b5bb79957fefb9a748bc10767b9d1b489c:eyJzZWxlY3RlZExpbmVDb3VudCI6MjAsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjlkZmUwNDMxNWU0OWJhZjBjMTVlNDhlM2I0OTdjNzA4YmViZmVhOWVhZGYzYTk4Y2I4ZDYwOTlmMjI3YWY0ZjAiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjAxYmE0NzE5YzgwYjZmZTkxMWIwOTFhN2MwNTEyNGI2NGVlZWNlOTY0ZTA5YzA1OGVmOGY5ODA1ZGFjYTU0NmIiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjA0Y2ZlNjYzYTNkY2EzZTcxZGMyNmExMjZmN2VlZjNhYzRmZjJkNGEwNzY3MTdkYjM4YTMwNDE5MGNlZjExN2QiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjljYWViZTVmNWRhYTVlMGEzY2M2ZGRkMTU5MzllNjQ1YWM2YTg1OTg3NDVlNjI2Yzk4Mzc3ZjFiYTE1MjIwNzMifQ"
+        },
+        {
+          "resource": "repo://public/sandbox.js#L35-L57",
+          "version": "repo-lines-v1:sha256:d3638e7de76b5420c6b230848638d021b586c4ff28695078e3f66c628367b726:eyJzZWxlY3RlZExpbmVDb3VudCI6MjMsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6Ijc4ZjVjYWZlODgzZGY5ZjJkNDE0ZWE5ODk5ZDY2ZGUzMTQ5MDI0MzAyNzA2NTc1ZDM2MjFlNjk4NDQ2NDIzZGIiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjU2MTM2NmM1NWM3Y2IyNjhmNTZhYTdhODA2OWVkZmMwYTdiMzc2NmYxNzM2MTIxOTQyNGJmZjA3ZGZmN2YwY2YiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjAzZWJiNjA1Mzk0MzE2ZGM2ODZhZWZlM2RiZDZiZWY4MGI4NjY3MzA5ZmVhMWMwOTZjNWI5NTc2MDM3NTY3ODEiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjE4ZWZkNmZlMTNiYWJiNjJjNmQ0NDJkNWRjNGJkMDI4MzJhZGVlY2EyNzMzZTM5OTY4ZDIyNGY0Y2E0YjI2YzgifQ"
+        },
+        {
+          "resource": "repo://src/runner/runner.ts#L41-L48",
+          "version": "repo-lines-v1:sha256:99ae1a7f026d7ff7c4c8eaac97aa898e2b87553f568c09ca3b49641a2cb5d1b1:eyJzZWxlY3RlZExpbmVDb3VudCI6OCwiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiMDcyYTgxZGFhYWYyMGM2YWMwYzk4OGE1YWE0M2Y2YjY1YjMwOWQ3OTc3NDY1MDYzM2NkNDY2N2E0ZDNhZDY3MCIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiNDEyY2EzNDVjY2Y3NWJmOWMwODA2YmNlNjk1YmU4ZGU4MDhiNzk5ODQyNTFhN2E1NGQyMDJjZjYxMDFkZDQ1MSIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiZmI1ODBlOTY0ZjgzYTQ3M2Y0M2Q0NDM4NDYyOTQ5ZDY4YjU2MDBmZGE3ODdmMTYzNzQ1ZDAwZGU4OWNiZjM2YSIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjMsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiNzkzZWE0ZDNkZGMwZWM4ZDgxMjQ4MmRjZTViZGYyODQ0ZjcyNDQ4Njg4MDJmNTZmYWM3MTM2OGE3ZTI3OGZkZiJ9"
+        }
+      ]
+    },
+    {
+      "id": "claim_44f4405f3bd241e09cc00250e3845d63",
+      "statement": "The Worker split exists because a tight non-yielding infinite loop in learner Java (e.g. while(true){}) ran on the iframe main thread wedged the whole tab, stopping even the timeout timer from firing; moving CheerpJ into a Worker keeps the iframe thread responsive so its timer fires and worker.terminate() can hard-kill the runaway code from outside regardless of what it is doing.",
+      "evidence": [
+        {
+          "resource": "repo://docs/ARCHITECTURE.md#L102-L121",
+          "version": "repo-lines-v1:sha256:3e054965133c8dad1569b519d45120b5bb79957fefb9a748bc10767b9d1b489c:eyJzZWxlY3RlZExpbmVDb3VudCI6MjAsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjlkZmUwNDMxNWU0OWJhZjBjMTVlNDhlM2I0OTdjNzA4YmViZmVhOWVhZGYzYTk4Y2I4ZDYwOTlmMjI3YWY0ZjAiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjAxYmE0NzE5YzgwYjZmZTkxMWIwOTFhN2MwNTEyNGI2NGVlZWNlOTY0ZTA5YzA1OGVmOGY5ODA1ZGFjYTU0NmIiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjA0Y2ZlNjYzYTNkY2EzZTcxZGMyNmExMjZmN2VlZjNhYzRmZjJkNGEwNzY3MTdkYjM4YTMwNDE5MGNlZjExN2QiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjljYWViZTVmNWRhYTVlMGEzY2M2ZGRkMTU5MzllNjQ1YWM2YTg1OTg3NDVlNjI2Yzk4Mzc3ZjFiYTE1MjIwNzMifQ"
+        },
+        {
+          "resource": "repo://public/sandbox-worker.js#L1-L13",
+          "version": "repo-lines-v1:sha256:242e6afb81220d14a7d8a1a13f972bc27730c82a3ee4f9529403d6ccd4b6cea8:eyJzZWxlY3RlZExpbmVDb3VudCI6MTMsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjJhYTc2OWE5M2RjMzk1NzEwNmQ1NGY4MGFmNjZmOTU5ODU0ZjQ1NTg2ODM1MTZkMDU1NDFmNTMwZDQxODE2MTIiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjY5ZjJhYjljYmE1MDlkMGUzNWVmOWM4NDBiMWQ3N2Y5YzRjMGIxMDUxZWYzNGM1ZjdlYzBkYTE2ZjQ5MTRmNTkiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjowLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImUzYjBjNDQyOThmYzFjMTQ5YWZiZjRjODk5NmZiOTI0MjdhZTQxZTQ2NDliOTM0Y2E0OTU5OTFiNzg1MmI4NTUiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjUzYzAwOTEyMjM0MTA0YWM1YjMxNzNiNmZhNWNmZmYzNWE5OWE1NTg2ZjcxNWE4NDRmZjljMTUzNjVhMmIyMGMifQ"
+        },
+        {
+          "resource": "repo://public/sandbox.js#L1-L9",
+          "version": "repo-lines-v1:sha256:9d18e61b934fb4d735e9584fb82885b592e1f116c23a81f9bf8b7d8653b20673:eyJzZWxlY3RlZExpbmVDb3VudCI6OSwiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiYzUzZWU1NTQxYTFmMWIzNTNmNjZmZWRhNmQ4MWQ0OGJhODE4MjFjZjk5NTk1ZjcwNzBmODZhNmRmZjIzYTAwZCIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiYzlhZWRhZmJhOThjNTdhZjE2OGY5Mjc4ODg1ZjgwNjJmNzkxYjQwMzdjMWRiNDVkNWU4NWRjNmViNzZhMzRmNSIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjAsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiZTNiMGM0NDI5OGZjMWMxNDlhZmJmNGM4OTk2ZmI5MjQyN2FlNDFlNDY0OWI5MzRjYTQ5NTk5MWI3ODUyYjg1NSIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjMsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiYmQzZDVhZmRlOTg4OGZlN2JlOTE4NDM5NjFkNGUwNDIwODgxZTc5YzQ3MDk5YzE2Y2FhOWExMmUyMzE1ZTdiNiJ9"
+        }
+      ]
+    },
+    {
+      "id": "claim_d33a5212c3a64f8dbe8602a9b2df37ce",
+      "statement": "The iframe uses allow-same-origin because CheerpJ needs same-origin access to its own worker/caching machinery; combined with the static ban list blocking java.io/java.net/java.nio before compilation, the JVM-in-WASM has no host filesystem or OS-process access, and any network access is limited to the browser's fetch/XHR stack with no raw sockets.",
+      "evidence": [
+        {
+          "resource": "repo://docs/ARCHITECTURE.md#L104-L107",
+          "version": "repo-lines-v1:sha256:d48cc177c883d8756e8938a74a7abefb8957c454ab9ec61fdb029017fd4c71b4:eyJzZWxlY3RlZExpbmVDb3VudCI6NCwiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiZWFjY2YyYmQ4YTg1YTgzMDYxZTRkMjNlZjZlMzg1MTY4YmZhYzJhYTc5MzFhZTUwMGUwOTlhODFhYTE1NTQ2MyIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiOTRiMDY3MmM3Y2RkMGU4Njc5MTEyNzczMjBlYmJlNzRlMzI4NTYwNmNkYWFiNDU2NzYzMTdkMzQ5M2E0ZjI5OSIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiNzg0Y2VkZWJiNzdkNDQ2MGNhNjJhZGQwNWE2NTRjYzBjMTYyMDc3MmE4MmNjMTczNWUxNmVkMzJiMjEwNDZiNSIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjMsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiNTk0YTc1NzA4ZDQzNDY5NTdhNGU2NTg4NGUwMzJjMzU1ZGUyZmE4YmI1MmY0ZmE5MTRkNzE1MzJlMWM1MWNiZCJ9"
+        },
+        {
+          "resource": "repo://docs/ARCHITECTURE.md#L182-L203",
+          "version": "repo-lines-v1:sha256:f2e9c5754d2a78a9c3da56ecc49682b721b248e0f139044b3bca0080636a9bad:eyJzZWxlY3RlZExpbmVDb3VudCI6MjIsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6ImM3OTMzZjk3MDA3NTdhNDQwN2NkZmM4ODI3Y2M2NTM3ZGE4ZjRmMjE0M2YyYWM2NjBhZmRjYTcwMDM4YzUxM2UiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjU4Yjc3ZTg1NjE5ZDdmNmFkMTA0ZDEzM2M5YTlmMWJmYWMxNTliYmNkNWMwY2Q3YTE1YzM0NGExMDMwZDRkNDYiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImRhMTg4OTdkNjZlODhjODRiYWNhNDI1OWZjOWU3NTIwOGVjMmQwZjk2NmE4NzM4NmFiMWQxYmQzMWE0NzFmZDciLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjZkNWFhZjRhZjllYzEwZmM4M2EzYTRjNTU1NzU3MmU1ZWM3NzUxNWZiN2NiZmVmNWFlMGRhOGQ4NjdjMjQyNTYifQ"
+        },
+        {
+          "resource": "repo://src/runner/runner.ts#L41-L48",
+          "version": "repo-lines-v1:sha256:99ae1a7f026d7ff7c4c8eaac97aa898e2b87553f568c09ca3b49641a2cb5d1b1:eyJzZWxlY3RlZExpbmVDb3VudCI6OCwiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiMDcyYTgxZGFhYWYyMGM2YWMwYzk4OGE1YWE0M2Y2YjY1YjMwOWQ3OTc3NDY1MDYzM2NkNDY2N2E0ZDNhZDY3MCIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiNDEyY2EzNDVjY2Y3NWJmOWMwODA2YmNlNjk1YmU4ZGU4MDhiNzk5ODQyNTFhN2E1NGQyMDJjZjYxMDFkZDQ1MSIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiZmI1ODBlOTY0ZjgzYTQ3M2Y0M2Q0NDM4NDYyOTQ5ZDY4YjU2MDBmZGE3ODdmMTYzNzQ1ZDAwZGU4OWNiZjM2YSIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjMsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiNzkzZWE0ZDNkZGMwZWM4ZDgxMjQ4MmRjZTViZGYyODQ0ZjcyNDQ4Njg4MDJmNTZmYWM3MTM2OGE3ZTI3OGZkZiJ9"
+        }
+      ]
+    },
+    {
+      "id": "claim_f460b0ae2ae94d328267afac4fb80b5d",
+      "statement": "Two budgets govern a run: INIT_BUDGET_MS=90s in runner.ts covers loading+compiling (the slow first CheerpJ load per session), and the kata's timeoutMs (default 5000) covers the run phase; both runner.ts and sandbox.js reset their budget timer to timeoutMs when the sandbox reports the running phase, so per-kata timeout does not count against variable load+compile time.",
+      "evidence": [
+        {
+          "resource": "repo://docs/ARCHITECTURE.md#L161-L175",
+          "version": "repo-lines-v1:sha256:e9711e882928a7477c7dbaf8ef5cd5a8b42ffce4d917e5aa8625fffce2d7d014:eyJzZWxlY3RlZExpbmVDb3VudCI6MTUsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6Ijc4NTc0MDQ4MDc5MTc3ZGI4OTNkMDczYWVlODFkYWRkMTZjN2M3YzAzODM3ZmI4ZmI1ZTU2NmYxMWYzNTU4ZDUiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjVmYzRhZGM5OGI2NWZkOWRmNDVmZDVhZmE2N2ZiM2MxMTk3ZWZiZTE3OGI5Y2M0Y2Q4NDBmZDg0Yzg3ZDc5YWYiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjE4Njc3MDk2YmRkZDUyMjc3NDM4NTRlOTI3OGNiYjZkZDM0MmZkYWUxNjVhOGY0Zjg1YzUxMTFjOWI2NDZhZDMiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjQwMzhmMWVlMDg5ZDQ1MzIzZDYyOWJmM2I2MDYzNTc4NjY3Y2ExNjYxNjJlNzk0NmM4ZmZkYWZjYjVkNTRiM2IifQ"
+        },
+        {
+          "resource": "repo://public/sandbox.js#L43-L48",
+          "version": "repo-lines-v1:sha256:d0866b3cfa9154c9dba0fb4e239a8c7feab0440a24f865aae0292bfd9dad0935:eyJzZWxlY3RlZExpbmVDb3VudCI6NiwiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiY2ZiNTExNzFiZTBiZDFlYjUyNWNhYTVlODEwYmFjZmVhNTlmNDkzMGIxYzNhNThlMTM1NzhjMzMzYmQyZTQ0MSIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiZTZiMDQ0OTE0Njk3MjJlODM2M2E5NGU0MDQ0NTM4ZTAxM2EyYTIxN2UzNmIxZTU2OGJhNjBhY2I3YjRjOGYyZSIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiMTQ3MDk5MDM2OTc3ZmIxZDJiY2EwMmNiNDhkY2I1Y2RkN2RiNjQyZDllMjJhYzQwOTk3NTJlNWI5NzQzZDBhZiIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjMsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiZmU3MDc1NTkwZGJhYTczYjZhZGVhMTMxNzZkYmIwNjRlZWU5ZmU1ODI4Y2ZlNDY3YTk2NzhiYjJjNjg5Mzc2NSJ9"
+        },
+        {
+          "resource": "repo://src/runner/runner.ts#L18-L20",
+          "version": "repo-lines-v1:sha256:1114e9d03bfc0a2f50ae445b2fd4aa5d87a23e75ed299aa6b13b3cba9b1737f4:eyJzZWxlY3RlZExpbmVDb3VudCI6MywiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiMzI5NmI5MmY3NDRjOTMzZDQxMjY5NzY3MmVkODcyMDZhMGUwMDY5ZWMwYWM2NDhhNDFhMTk4Y2JkZWNjZTVlMCIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiNDRiOGMzZjY1NTBkY2Q4ZGE5ODllNTViZDU2MTA5YzYzNjBhMWQ4YzQwOGE1Mzg0ZjMwNTczMmU0OWE3YzVhMiIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiYmE4MzJlZWZlNDE2Y2ExODk3N2UxYTY3NTYzODY1NjM5ZDk1NDJkNzlkZmY1MWI2YWFmZWY1YmUzM2FhZjViOCIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjMsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiNGYxZDAzMWIxMjEwYjYzNTM0NTVjNzk4Y2I5YmFlNTNhNzg0NmJhNWFjZGYwZDY2OTVkODkwYzk1OGRiYjY3OCJ9"
+        },
+        {
+          "resource": "repo://src/runner/runner.ts#L68-L73",
+          "version": "repo-lines-v1:sha256:c5c2a4117a1aaaaf7c706c2187f0083b0d9d7ca7a4b22ee233c15e636636e78b:eyJzZWxlY3RlZExpbmVDb3VudCI6NiwiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiMzYwZGI1YWUyZTFjMjY1MmUyZTljNTE2MjkzYzI4NjUwNGVkZDRhZGFhMmUzNzZiOGI5MGI5N2Q1YjgwOTNlOCIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiNDg5M2Y0MGUzNzgxZWI4OTZjODJkMDQ2YTA4MDY3YTExZTM1Y2RmMmYxZGZhZjI2ZmVhOTBiOGRiNjY3NjQxMyIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiZWMwODRhODIzNGZmMTA2MmU2NWE1NzFjZjZiZmU2Yzc4Y2YxY2I3ZTllYzA0OTI0N2Y5NzViMzIzODZhNTMyZSIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjMsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiNjQ0ODIyYjNiMWE0ODFkNTYwZWJiMTljOGE1YzNkYWU1ZWQxZGE2MDExNGI5NDkzMWEyNmZjMzA4YjA1ODYyOCJ9"
+        }
+      ]
+    },
+    {
+      "id": "claim_d838396a79ca43a48e64c2c7485b8ad9",
+      "statement": "On timeout or Stop, sandbox.js calls worker.terminate() (a hard kill with no cooperative cancellation inside the JVM-in-WASM) and posts timeout/stopped; runner.ts always tears down and removes the iframe regardless of terminal status.",
+      "evidence": [
+        {
+          "resource": "repo://docs/ARCHITECTURE.md#L166-L175",
+          "version": "repo-lines-v1:sha256:10567628b7c05a73c838664fcbcfed456696b0d7b4f5684afbac97e224277dfa:eyJzZWxlY3RlZExpbmVDb3VudCI6MTAsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjA3MTBhNWRlNTk3OGEwNGI0OGJiZjRhM2Q0ODljYWFlYWZjM2ZkYWFiOTkyMDQyOTNmY2RiMjY3YTFjNzU3OTciLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjVmYzRhZGM5OGI2NWZkOWRmNDVmZDVhZmE2N2ZiM2MxMTk3ZWZiZTE3OGI5Y2M0Y2Q4NDBmZDg0Yzg3ZDc5YWYiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjJkNGNkZWU4NGQzY2FjNzM3MDYyYjhjMWRiYTQ2Njk3MDgwNGE1NTFjMDUwNGQxZDRjMDYzZjBkMmI3YTg5NTEiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjQwMzhmMWVlMDg5ZDQ1MzIzZDYyOWJmM2I2MDYzNTc4NjY3Y2ExNjYxNjJlNzk0NmM4ZmZkYWZjYjVkNTRiM2IifQ"
+        },
+        {
+          "resource": "repo://public/sandbox.js#L18-L28",
+          "version": "repo-lines-v1:sha256:eb9643af16cd5bde9d2b44c897a33b5ba2548b334f0c7e215a9d944c36c677a5:eyJzZWxlY3RlZExpbmVDb3VudCI6MTEsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjMwNDQ2N2E0Y2Q4M2RmOWIzMjNhNmNmZTYzZDJiOTdlNzc0ZjdkOWEyYWY2ODg1ZWFhNzM4ZjI0NzU3NTI4NmUiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjQxMmNhMzQ1Y2NmNzViZjljMDgwNmJjZTY5NWJlOGRlODA4Yjc5OTg0MjUxYTdhNTRkMjAyY2Y2MTAxZGQ0NTEiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjYyNzUzMWJjNTJiOTc4ZmJiNDk4NDM1MGMwMDE5YmI2ZjFiZTUwYThkNjhjMmVhMDVmMzc2YzRmM2FhZjYyMzAiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjcwOGFiM2ZlMGQ1YTZiMzZlY2EyYmM1YjUwODI5NTM0NjNiOGU0MTk1MDE3ZjFhNTBmYmY1NDVlM2VlZmVlMWQifQ"
+        },
+        {
+          "resource": "repo://src/runner/runner.ts#L50-L61",
+          "version": "repo-lines-v1:sha256:42ade35912c03f633711a47274717872a1ffdf3d0a40bb7a3fe80422a237904b:eyJzZWxlY3RlZExpbmVDb3VudCI6MTIsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjFhZGIwOGE1YTQxMjJjOTFkMjg2MTJhYTMwMDQ1YmU4Yjc0ZTY4OWE0NjY0YmM4YTk2MGM0MmFmYjM3MTI3MjciLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjQxMmNhMzQ1Y2NmNzViZjljMDgwNmJjZTY5NWJlOGRlODA4Yjc5OTg0MjUxYTdhNTRkMjAyY2Y2MTAxZGQ0NTEiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImJhMmQ1MjIzZGJmYWM2Zjg3NWExY2Y3ODJkOTRjNGM3NTk2ZDQyYzM4Y2Q1YTZmNWNhMDgzZDI0MGJkMWY3YjgiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImYyZDA3ZjZlZjI3Zjc2Y2FjZWQ2MjMyODA1NzY0OTUwNWQxZDczN2U0NmIzNTM0ZGI5NGQ1YThiZTY3MWJmMGYifQ"
+        }
+      ]
+    },
+    {
+      "id": "claim_3f259ee39415447daad268e623048d8c",
+      "statement": "A fresh iframe is created per run with no CheerpJ session reuse; teardown after every run avoids the JVM classloader serving a stale Main/KataRunner class from a previous run under the same class names, and the documented upgrade path is to reuse the iframe once CheerpJ per-call class reloading is confirmed safe.",
+      "evidence": [
+        {
+          "resource": "repo://docs/ARCHITECTURE.md#L171-L175",
+          "version": "repo-lines-v1:sha256:6c9bdf0d5f0ae81ab3fe26b766dbcf6e67aaf817ba2de0bd01eaac7fb150ff19:eyJzZWxlY3RlZExpbmVDb3VudCI6NSwiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiODVmNWZmNDE2NzIzNzMwNWNlYjlmZWEwYWYxODgwYjE4ZmFhMGVlZjExNTVjZTJiNmEwNTU3ZTIxZTZkYTFjYyIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiNWZjNGFkYzk4YjY1ZmQ5ZGY0NWZkNWFmYTY3ZmIzYzExOTdlZmJlMTc4YjljYzRjZDg0MGZkODRjODdkNzlhZiIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiZmRmYzAwNGU3YWNiMjQyNDNkZTQ2ZmExYTJjMmM1NjZiYjYwN2RkMDRhMzg4MmY1NGQ2YzQxZjFjMjVjNjU5OCIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjMsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiNDAzOGYxZWUwODlkNDUzMjNkNjI5YmYzYjYwNjM1Nzg2NjdjYTE2NjE2MmU3OTQ2YzhmZmRhZmNiNWQ1NGIzYiJ9"
+        },
+        {
+          "resource": "repo://src/runner/runner.ts#L50-L61",
+          "version": "repo-lines-v1:sha256:42ade35912c03f633711a47274717872a1ffdf3d0a40bb7a3fe80422a237904b:eyJzZWxlY3RlZExpbmVDb3VudCI6MTIsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjFhZGIwOGE1YTQxMjJjOTFkMjg2MTJhYTMwMDQ1YmU4Yjc0ZTY4OWE0NjY0YmM4YTk2MGM0MmFmYjM3MTI3MjciLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjQxMmNhMzQ1Y2NmNzViZjljMDgwNmJjZTY5NWJlOGRlODA4Yjc5OTg0MjUxYTdhNTRkMjAyY2Y2MTAxZGQ0NTEiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImJhMmQ1MjIzZGJmYWM2Zjg3NWExY2Y3ODJkOTRjNGM3NTk2ZDQyYzM4Y2Q1YTZmNWNhMDgzZDI0MGJkMWY3YjgiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImYyZDA3ZjZlZjI3Zjc2Y2FjZWQ2MjMyODA1NzY0OTUwNWQxZDczN2U0NmIzNTM0ZGI5NGQ1YThiZTY3MWJmMGYifQ"
+        }
+      ]
+    },
+    {
+      "id": "claim_e58b1c3790da4115920390c1f762fcab",
+      "statement": "There is no enforceable memory cap; the timeout plus worker.terminate()/iframe-teardown is the only backstop against a runaway submission, and one that allocates aggressively but finishes within its timeout is not stopped early.",
+      "evidence": [
+        {
+          "resource": "repo://README.md#L87-L92",
+          "version": "repo-lines-v1:sha256:309399185967f58ef011215d76453a888c9abcc6e917c234cb0822d895939f18:eyJzZWxlY3RlZExpbmVDb3VudCI6NiwiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiNzNiY2U2ZTdjMTM4MWFhZTNiNzY4M2ZiZWEwM2JjODVhZjJkMThkMzc0OTJkZThlOTUyOTg5NjhkMDMyODI2OSIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiNDUzMzQ1MmU2OTc3ZThkZWY4YzEyNGNhZWNkYTQxY2Y1ODY5YzY2MDFjNjhmODg0N2E3ZTJlMmZhMjQ5NGFlMCIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiMTE5MWM4MmRiNTlhYjlhMDZkNTllMjM4YzUzN2FiY2I1Mzk5ZWJmNzZiZGY3ZmIyYWRhZTdkY2Q4ZGJjYTA2ZSIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjMsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiNTI0MDc2MjM4NDA4NDgzZTI2YzkyY2RiZGM2NzhiMjA2OTIzNGE4ZGMyZDIwZGI0YTEwYjYyMjljMGRjMGE0ZCJ9"
+        },
+        {
+          "resource": "repo://docs/ARCHITECTURE.md#L176-L180",
+          "version": "repo-lines-v1:sha256:f7b9df9b459f5f1aca1141ab200f552f02345c0cad7c1056e9a3dc6cb4546bae:eyJzZWxlY3RlZExpbmVDb3VudCI6NSwiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiNWY5ZjZiYTU0N2FlODE3YjFhMTBlYzI2MmZhMDY5OWU0ZmM0NWQwY2YyNjBlNzk0NTdkZjNhZDllYTA1OTRmNiIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiYzkxMDk2NmI5NDcyYTFhZGI3OWYyOGE4MzQ3NGQ3ZmVjZTAxZGFhNjAwZjA4ODMzYWM3ZDc3MjQ2MjI2ZWRiOSIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiYjJjMjg0OWIwMTk4MWI3ZTNjYjNlMWM4ODhiNGU0NWRiNDQ3ODYzZWZlYWU4MWYzZTUwMWFiY2FhOGQ5YTY1MyIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjMsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiNWM4ZDAzOWEyZjE1NDBjOGY5Yzg3YWM3ZWM5N2YwZjY4MWRmMjNhNjc4M2VhZTFkYmE2N2M3OWI5M2Y2ZTk2ZiJ9"
+        }
+      ]
+    },
+    {
+      "id": "claim_504742c61bfc45ae9dd30bd209d87b25",
+      "statement": "The sandbox is defense-in-depth against misbehaving submissions, not a security boundary against a local attacker: the code runs in the visitor's own browser under their own OS user, there is no server and no cross-visitor/shared state to protect, and the static check plus sandbox plus timeout only stop runaway or ill-behaved submissions from hanging the tab or misusing browser-reachable APIs.",
+      "evidence": [
+        {
+          "resource": "repo://README.md#L99-L107",
+          "version": "repo-lines-v1:sha256:90008826de4373bd4aca5ed2ce550df91f1572fd9acdc2df172351078b7c4f84:eyJzZWxlY3RlZExpbmVDb3VudCI6OSwiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiZGI3YjhhZjk3OGQ2MWU5ODJjODQzOTVjODNhYjA2N2ZlYzNiOWUwZjk2ZGY1MTJiNzk0MThlZDg0YzIwMTk5ZiIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiZDA4NzFiOTUzNTNlYTkyYTdiY2FjZmY0OGRiMzRhNDljZjMyOGQxNDQxMzVjZWRkMjFhMmY5NmEwYjUzOTJjYyIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiYzcxNDY0NmVmNmUxOGZkYmI4ODBlMzZkYmY5YjdhZWU1NDJkOTI0ZWUzZmYyODY2YWM5YjA2NDczZDQzMjBhYSIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjMsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiM2I3Njg3Zjc4Y2MwZWJjOGM4MDkzNGMyYzIzOWIzYWVjNTY3ZWJkMDgwYTg1OWViY2QyY2U0ZGU2NDhiZDA2OCJ9"
+        },
+        {
+          "resource": "repo://docs/ARCHITECTURE.md#L182-L203",
+          "version": "repo-lines-v1:sha256:f2e9c5754d2a78a9c3da56ecc49682b721b248e0f139044b3bca0080636a9bad:eyJzZWxlY3RlZExpbmVDb3VudCI6MjIsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6ImM3OTMzZjk3MDA3NTdhNDQwN2NkZmM4ODI3Y2M2NTM3ZGE4ZjRmMjE0M2YyYWM2NjBhZmRjYTcwMDM4YzUxM2UiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjU4Yjc3ZTg1NjE5ZDdmNmFkMTA0ZDEzM2M5YTlmMWJmYWMxNTliYmNkNWMwY2Q3YTE1YzM0NGExMDMwZDRkNDYiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImRhMTg4OTdkNjZlODhjODRiYWNhNDI1OWZjOWU3NTIwOGVjMmQwZjk2NmE4NzM4NmFiMWQxYmQzMWE0NzFmZDciLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjZkNWFhZjRhZjllYzEwZmM4M2EzYTRjNTU1NzU3MmU1ZWM3NzUxNWZiN2NiZmVmNWFlMGRhOGQ4NjdjMjQyNTYifQ"
+        }
+      ]
+    },
+    {
+      "id": "claim_eae9b6150b8440bfa72b2a0afd4ce6bb",
+      "statement": "The runner enforces one run at a time: a runJava call while another is in progress is refused with an error rather than queued.",
+      "evidence": [
+        {
+          "resource": "repo://src/runner/runner.ts#L87-L89",
+          "version": "repo-lines-v1:sha256:92e6446d0411a36276e141919e2e758c7cb711da03a4d1ae217037b9182749e7:eyJzZWxlY3RlZExpbmVDb3VudCI6MywiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiYzRjN2E1ODhiYjk1NzRlMDQ1OTY0NWEwM2ZhYjZmOTJhYmQ2M2FkZGEwNjk0MjVhODg5MWE4YTZiYTFhOGJiYyIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiMjdlNTc4OGQ1ZDlkNzNkMjRhODFkYmMwYTVhNzRiZmE4MmM5YzNiM2FmOTllNTJhZjc5NmU5MGI0NjhhOGEzZCIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiYjU3ZmY2N2Q1MDg4YmVjN2FlMTZhYTI4ZWM5MDc3NDVmNGM4MTI4MjI2ODUzNjY2N2E2ZmI1MmVhZWUwZTY1OCIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjMsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiNzNjM2FhZDQ3YTJhM2Q5NWYxMGMyNmVjNzIzMmVjZTQyNGU5YjAyZDQ4MjY4NzNkNWMwYmQyYWU5NzJmOGJiOCJ9"
+        }
+      ]
+    },
+    {
+      "id": "claim_078e3e4e759d4bde9ba69183e4542483",
+      "statement": "Live locked-region enforcement in src/editor/editor.ts is a CodeMirror 6 StateField + transaction filter: locked ranges are recomputed from the template segments and remapped through every doc change via mapPos (boundary insertions push the range edges outward so the locked text never drifts), while the transaction filter blocks any change overlapping the interior of a locked range and permits insertions exactly at a boundary. This is a UX convenience only — the pre-run validateLocked re-check is what makes the locked regions security-relevant.",
+      "evidence": [
+        {
+          "resource": "repo://docs/ARCHITECTURE.md#L78-L90",
+          "version": "repo-lines-v1:sha256:b8a2bfc23966adf1394fe2e3be053cdae710d815089fe515fce719af60d9f789:eyJzZWxlY3RlZExpbmVDb3VudCI6MTMsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjIzYWQ4ZTAzNDJiOGU3M2M0NDkyZTNlY2M2ZTRjMzhhNGYwMDM5MWQ0MjhjYTVhMGI0YThiMjY0YjExMzc4YWYiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjlmZjE0ZTE1MzM4NDE3ZDA2YzYwMzQ5ZTAzOGRjODcyZjlmYTFmOTg0Y2QyNjRkZTRkMzNlMDExNjA2YTI4YTciLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjRhYTU1ZWNjNDliOGM4OGM5ZDRlZGIzZTIxNzRkODZkOWRhYjEzOGIwMmFhNDY3ZGZlYmM5ZThhNDllOTJmY2MiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjUwOWE2MzkxZjA5NTQzNmE0NjFmYWRkMzQxYTRjNDIwYjQ1YzI4MTc1ZmEwZGJmZGIwODRhY2Q3MTJiNWU4NTkifQ"
+        },
+        {
+          "resource": "repo://src/editor/editor.ts#L10-L67",
+          "version": "repo-lines-v1:sha256:b50138b860fb6799112c31fb8fef72e47927f83e6b5fd3260b9d7fb18f80ab33:eyJzZWxlY3RlZExpbmVDb3VudCI6NTgsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6Ijc3YTk3ODUzYzM2NDBmMjUzZjdiMTZjNzU4YzUxNjk5NGVmNTdlNTYyNTU3YTUwYTM3ZTYzZGUwMzI5Y2FhMjIiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6ImY2ZjViNDBiMTU4NDU3ZDE3ODY0ZjIxNzkwNzg2ZGQ1YTJlY2RiNjRiNjZhNjUxZjc4OGQ0ZTI1Y2QzMzAzZDIiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjczMTFlZDhjMzc5M2RhN2Y4M2E0NjljYjhhZDEzMTY5Yzg4ZDJmYTAwNDgwYzFjMzg0ZTEzOTY5ODI2M2M0OWIiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjEwZWEwMjViMGYyYTQzZWIzZGE2NGEwZjYxOTBhN2RjNjJhZjBkYjc3NDMzOTZkMjI2Njc4NWY0MjYxYzg0MzMifQ"
+        }
+      ]
+    }
+  ],
+  "verification": {
+    "by": "openwiki/0.4.0",
+    "at": "2026-08-26T15:48:44.789Z"
+  }
+}

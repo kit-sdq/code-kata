@@ -1,0 +1,314 @@
+{
+  "schemaVersion": 1,
+  "pageVersion": "sha256:732a05c020d9898a9aabec3e37c7af54afafea5f23f5d0cd37115ddd1de2e295",
+  "claims": [
+    {
+      "id": "claim_0a0a3db29deb47258c566af18fb91727",
+      "statement": "The kata site uses a two-layer test strategy: automated Vitest unit tests for pure logic (no browser, no CheerpJ, no DOM) run in CI via npm test, and manual browser + live CheerpJ CDN integration checks required before release or when sandbox/runner code changes; docs/TESTPLAN.md is the long-form matrix.",
+      "evidence": [
+        {
+          "resource": "repo://docs/TESTPLAN.md#L1-L7",
+          "version": "repo-lines-v1:sha256:548617ea83de75b8fd8a710ab210bd07ff190bafdc0cff1c2fe9c90d21d9a0ac:eyJzZWxlY3RlZExpbmVDb3VudCI6NywiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiZjZmOTI3Y2RiOWUyNDhhODU0Y2NmMDZkZWQ2YzQ5MzE5YjJmZGZjNGIwZjQyZTc2YTcxZGJhNzQ4YjQxNjYyMSIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiMDFiYTQ3MTljODBiNmZlOTExYjA5MWE3YzA1MTI0YjY0ZWVlY2U5NjRlMDljMDU4ZWY4Zjk4MDVkYWNhNTQ2YiIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjAsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiZTNiMGM0NDI5OGZjMWMxNDlhZmJmNGM4OTk2ZmI5MjQyN2FlNDFlNDY0OWI5MzRjYTQ5NTk5MWI3ODUyYjg1NSIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjMsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiYTQ1MDQzZDBmNWM4ZDY0YzcwZWEyZTY3NzM5YmRiNDQwZDBiZTMwNDRkYTRiYjMyZDBjZTNhZGY5OGE0M2NlZiJ9"
+        },
+        {
+          "resource": "repo://package.json#L7-L12",
+          "version": "repo-lines-v1:sha256:b8e442715585e4bc46555dd8e4ee52a3f37f0df8be36ba38ec78d901cc6a3847:eyJzZWxlY3RlZExpbmVDb3VudCI6NiwiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiMzQ4MzNkNTk0OWMwM2E0MGNhOTUyNDkxNjEwYTY2NTk2NDRiM2FhNDY2MzYyZjc5OTAyMGRiZjE5ODE1NDdkYiIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiNGQ1Y2QyZmI0ZjNkZjg4NDUxNTI1NWIzOTUyM2YyZjhiNTQ3MmJlZWE5ZjU2NmZmY2EyMDRkYjgwMjU2MTA0MSIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiZWViMmFmMTdiMmY0ODA5NDliZTY2ZDY5MzQ4NjZhZGIxYmI4ZjRjNzVlZjZiYzk1NzJkZDBkYWRmODRiYzIzNSIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjMsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiYzVlMmMzMmQ1NDU3YzhlM2JjNDVhNDcxMmI3ZWFhYmJhZjVmN2JlYTIyNzRiN2Q4YjVlMTFjMTQ1MmEwYTc0NSJ9"
+        }
+      ]
+    },
+    {
+      "id": "claim_3622fa9ee16c41669e20bfec9308c558",
+      "statement": "npm test is a hard gate in the GitHub Pages deploy workflow: the build job runs npm ci, then npm test, then npm run build, so a failing unit test aborts before the Vite artifact is produced; Node 22 is pinned.",
+      "evidence": [
+        {
+          "resource": "repo://.github/workflows/deploy.yml#L18-L31",
+          "version": "repo-lines-v1:sha256:7427c3c4d0ce953cca08f49e86be2cf7cab61efaec0a34a4e96f4ee646cde7e7:eyJzZWxlY3RlZExpbmVDb3VudCI6MTQsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjdlZTNjNjBkYjI1M2NiY2VhNzI0YWFkZDkxOGViOTQ2NjRmN2M2N2U3ODRmNzk2Zjc4NGNmMTAyMjA3ZDI2YmUiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6ImEyNWQ0YWQ2NjFhMjRkZDk3MGM2NWU2MWMwYmY1YTZlNzcxNTExYzU2OGJiYjRlNmZhOWQwZDU4MTdkZmE1YzciLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImNjYzg0MTU0OTE3Njk0Y2U2YTMxYWRjNDZkMjcwZTNkMzNkOTJhZmE2ZDhiZTI4ZjUyN2Q4MTkyOGMzZGI2YTgiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImZhOWEyMmVmZTc2MWE0YzM4OTFiMjQwODZiM2IxZmFlODE1OWUyYmNhNjIyN2UxNDE3NGE5OTg4NDhkNWQ3ODgifQ"
+        }
+      ]
+    },
+    {
+      "id": "claim_2a81a55930b4442c9e98a59b0187feaa",
+      "statement": "npm test resolves to vitest run, and the unit suite under tests/*.test.ts is pure logic with no browser/DOM/CheerpJ/mocking of the runner or sandbox; Vitest is the sole testing devDependency.",
+      "evidence": [
+        {
+          "resource": "repo://package.json#L11-L11",
+          "version": "repo-lines-v1:sha256:d04fb2f5a462577422df1b091ac1508715d7237dda8a058bfebddb45c621c5e6:eyJzZWxlY3RlZExpbmVDb3VudCI6MSwiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiZDA0ZmIyZjVhNDYyNTc3NDIyZGYxYjA5MWFjMTUwODcxNWQ3MjM3ZGRhOGEwNThiZmViZGRiNDVjNjIxYzVlNiIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiZDA0ZmIyZjVhNDYyNTc3NDIyZGYxYjA5MWFjMTUwODcxNWQ3MjM3ZGRhOGEwNThiZmViZGRiNDVjNjIxYzVlNiIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiMDVkYTAxZmY5NjczZjRlZGYzYzg4MzY4ZjVkNTgyYzM0ZTY4MWQ1YmIzYWE4YzlmNjVjNmE0NWZkYTQyOTJiOCIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjMsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiMzNkMjNlMjlhNjlhM2NiOTE1OGQ3NjRlNGYzZWIwMGI2YzYxNDRkY2JmZDhiZjRhN2NiNWE1NGNiMDdkZjg0YiJ9"
+        },
+        {
+          "resource": "repo://package.json#L22-L27",
+          "version": "repo-lines-v1:sha256:0c1c24c0ee2fe22b755be2f2105f1af57c303ea4212c84933c3955ef71527b94:eyJzZWxlY3RlZExpbmVDb3VudCI6NiwiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiOWRjNGRlN2VkMzVhMjMzNjQ1Mzk4NjRkYWRiOTM4Yjg3MjMzMzc5MTc5ZDYyOTJiOWZmNWY2MTlhNmMxMzE2NCIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiMjdlNTc4OGQ1ZDlkNzNkMjRhODFkYmMwYTVhNzRiZmE4MmM5YzNiM2FmOTllNTJhZjc5NmU5MGI0NjhhOGEzZCIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiNDVjMDg1NDNhYTc0MzliNTgwNTk1OWQ1OTQyZDE2OWI5NWVlMjlhOTNmZTZkNWI3Mzk3MmRiNmI2YjI2NTRlNyIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjEsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiNDEyY2EzNDVjY2Y3NWJmOWMwODA2YmNlNjk1YmU4ZGU4MDhiNzk5ODQyNTFhN2E1NGQyMDJjZjYxMDFkZDQ1MSJ9"
+        }
+      ]
+    },
+    {
+      "id": "claim_11cc74a8155143b5b8697dea906f46be",
+      "statement": "tests/normalize.test.ts covers src/check/normalize.ts: normalizeText (trim, collapse whitespace, lowercase); matchText across normalized, exact, and regex modes with caseSensitive handling; any-of-answers matching; and normalizeStdout (CRLF to LF, trailing whitespace per line, trailing blank lines removed only at end-of-output).",
+      "evidence": [
+        {
+          "resource": "repo://src/check/normalize.ts#L1-L43",
+          "version": "repo-lines-v1:sha256:53c6623ad9ab63e06559ba59ea750a171a8f9f81e60200b3a0dee7b5d3f58000:eyJzZWxlY3RlZExpbmVDb3VudCI6NDMsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6ImZhOGFkZmZmYmY4NDEzNjZhYzg3ODhjZWIwZWQxYTNiYWY1Y2QzOWY4YTJkMzQzYzM2ZDE4MmQwYmYxMWIwNmIiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6Ijk4YjkwMDQ3Mjg5MGI4YWY5ODlmMTlhNjQxNGUxMGNiMzk1MTY0ZTNmODhiMWY2ZmFhYTEzNGIzMGY0MjNmOGEiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjowLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImUzYjBjNDQyOThmYzFjMTQ5YWZiZjRjODk5NmZiOTI0MjdhZTQxZTQ2NDliOTM0Y2E0OTU5OTFiNzg1MmI4NTUiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjoxLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjQxMmNhMzQ1Y2NmNzViZjljMDgwNmJjZTY5NWJlOGRlODA4Yjc5OTg0MjUxYTdhNTRkMjAyY2Y2MTAxZGQ0NTEifQ"
+        },
+        {
+          "resource": "repo://tests/normalize.test.ts#L1-L77",
+          "version": "repo-lines-v1:sha256:8b7dbeb2be0c07d2097f53f7c409a80f4b4bdcc6e40e6f6cc0a6c73e325d1aee:eyJzZWxlY3RlZExpbmVDb3VudCI6NzcsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjY2MDNhNjRhNzkzYWM1ZGE0MWZiZTdiYjgzYTM2ODNiZWYzYzc1NTU3NTQwN2NlOGI1YThmMjM5YzMxMDE5NjMiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6ImY2ZjViNDBiMTU4NDU3ZDE3ODY0ZjIxNzkwNzg2ZGQ1YTJlY2RiNjRiNjZhNjUxZjc4OGQ0ZTI1Y2QzMzAzZDIiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjowLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImUzYjBjNDQyOThmYzFjMTQ5YWZiZjRjODk5NmZiOTI0MjdhZTQxZTQ2NDliOTM0Y2E0OTU5OTFiNzg1MmI4NTUiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjowLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImUzYjBjNDQyOThmYzFjMTQ5YWZiZjRjODk5NmZiOTI0MjdhZTQxZTQ2NDliOTM0Y2E0OTU5OTFiNzg1MmI4NTUifQ"
+        }
+      ]
+    },
+    {
+      "id": "claim_645a02e16f3f4244a422916b06160668",
+      "statement": "tests/parse.test.ts covers src/kata/parse.ts: parseKata for text/choice/code, frontmatter parsing per type with defaults (id from filename with override, tags:[], hints:[], match defaults, multiple:false, shuffle:true, mainClass:Main, timeoutMs:5000), java template block extraction, BEGIN/END EDIT handling, and clear parse errors for missing required fields.",
+      "evidence": [
+        {
+          "resource": "repo://src/kata/parse.ts#L1-L99",
+          "version": "repo-lines-v1:sha256:876eba46996a364f9ddcafe3f68a3e4fc82a35f896e5faa2da057630494eefdc:eyJzZWxlY3RlZExpbmVDb3VudCI6OTksImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjZjNDA2ODdmNTdmZjQ4ZmZlNDk4YjVjY2VkN2MyYjBkNzQyYTFjZWU4MmY4MGUyNmNkZGFiZDgyODg0ZjcwOTgiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjQxMmNhMzQ1Y2NmNzViZjljMDgwNmJjZTY5NWJlOGRlODA4Yjc5OTg0MjUxYTdhNTRkMjAyY2Y2MTAxZGQ0NTEiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjowLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImUzYjBjNDQyOThmYzFjMTQ5YWZiZjRjODk5NmZiOTI0MjdhZTQxZTQ2NDliOTM0Y2E0OTU5OTFiNzg1MmI4NTUiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjhlYjc4MzhjNzZhNzQ1MWVkMzhkYmRlN2RkMzM0YWE2YzQ2NGUyYjc1NTYzZGZmZGJhMTI4NjZhNWI1YTM0YTMifQ"
+        },
+        {
+          "resource": "repo://tests/parse.test.ts#L1-L195",
+          "version": "repo-lines-v1:sha256:1743d1cb31b555055bf124bf3fd039657879ade29a86148b3964d9d462217b8b:eyJzZWxlY3RlZExpbmVDb3VudCI6MTk1LCJmaXJzdFNlbGVjdGVkTGluZUhhc2giOiI2NjAzYTY0YTc5M2FjNWRhNDFmYmU3YmI4M2EzNjgzYmVmM2M3NTU1NzU0MDdjZThiNWE4ZjIzOWMzMTAxOTYzIiwibGFzdFNlbGVjdGVkTGluZUhhc2giOiJmNmY1YjQwYjE1ODQ1N2QxNzg2NGYyMTc5MDc4NmRkNWEyZWNkYjY0YjY2YTY1MWY3ODhkNGUyNWNkMzMwM2QyIiwicHJlY2VkaW5nQ29udGV4dExpbmVDb3VudCI6MCwicHJlY2VkaW5nQ29udGV4dEhhc2giOiJlM2IwYzQ0Mjk4ZmMxYzE0OWFmYmY0Yzg5OTZmYjkyNDI3YWU0MWU0NjQ5YjkzNGNhNDk1OTkxYjc4NTJiODU1IiwiZm9sbG93aW5nQ29udGV4dExpbmVDb3VudCI6MCwiZm9sbG93aW5nQ29udGV4dEhhc2giOiJlM2IwYzQ0Mjk4ZmMxYzE0OWFmYmY0Yzg5OTZmYjkyNDI3YWU0MWU0NjQ5YjkzNGNhNDk1OTkxYjc4NTJiODU1In0"
+        }
+      ]
+    },
+    {
+      "id": "claim_4c64f3aebde948a2981379d70b03df1b",
+      "statement": "tests/imports.test.ts covers src/check/imports.ts: exact and wildcard whitelist pass, subpackage boundary rejection, disallowed-import rejection (kind import), FQN-bypass detection, whitelisted FQN usage allowed, import static ownership checks, ban-list rejection even when whitelisted (kind banned), comment/string/char/text-block masking preventing false positives, java.lang usable without a whitelist entry, and correct line numbers.",
+      "evidence": [
+        {
+          "resource": "repo://src/check/imports.ts#L1-L164",
+          "version": "repo-lines-v1:sha256:56a769fde3737ad24f8febaadc16c9c18096f3dba54a61e4cadc3fdc1885522a:eyJzZWxlY3RlZExpbmVDb3VudCI6MTY0LCJmaXJzdFNlbGVjdGVkTGluZUhhc2giOiI5MGFjYTc4NWQzNGUwYzhiYTVjM2IwZWRiOWMwNmE0Yjk2ZTYyZTBjYjFjOWZmYjE0YTNmYjNmOTQ3NmU5YmNmIiwibGFzdFNlbGVjdGVkTGluZUhhc2giOiI0MTJjYTM0NWNjZjc1YmY5YzA4MDZiY2U2OTViZThkZTgwOGI3OTk4NDI1MWE3YTU0ZDIwMmNmNjEwMWRkNDUxIiwicHJlY2VkaW5nQ29udGV4dExpbmVDb3VudCI6MCwicHJlY2VkaW5nQ29udGV4dEhhc2giOiJlM2IwYzQ0Mjk4ZmMxYzE0OWFmYmY0Yzg5OTZmYjkyNDI3YWU0MWU0NjQ5YjkzNGNhNDk1OTkxYjc4NTJiODU1IiwiZm9sbG93aW5nQ29udGV4dExpbmVDb3VudCI6MCwiZm9sbG93aW5nQ29udGV4dEhhc2giOiJlM2IwYzQ0Mjk4ZmMxYzE0OWFmYmY0Yzg5OTZmYjkyNDI3YWU0MWU0NjQ5YjkzNGNhNDk1OTkxYjc4NTJiODU1In0"
+        },
+        {
+          "resource": "repo://tests/imports.test.ts#L1-L97",
+          "version": "repo-lines-v1:sha256:0892c0c3259e7925d44de289bb5b9d37891968e1a31508cdbc747ac3d6c6963e:eyJzZWxlY3RlZExpbmVDb3VudCI6OTcsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6ImMwOGU0NjkxYmE2NTMxNDg4YmZlMTMzOTYzZTJjYzI1OTkzMGI0MWYwZjU1YWI1ZTVjZWEyYWQ2MTFkODQxODkiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6ImY2ZjViNDBiMTU4NDU3ZDE3ODY0ZjIxNzkwNzg2ZGQ1YTJlY2RiNjRiNjZhNjUxZjc4OGQ0ZTI1Y2QzMzAzZDIiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjowLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImUzYjBjNDQyOThmYzFjMTQ5YWZiZjRjODk5NmZiOTI0MjdhZTQxZTQ2NDliOTM0Y2E0OTU5OTFiNzg1MmI4NTUiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjowLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImUzYjBjNDQyOThmYzFjMTQ5YWZiZjRjODk5NmZiOTI0MjdhZTQxZTQ2NDliOTM0Y2E0OTU5OTFiNzg1MmI4NTUifQ"
+        }
+      ]
+    },
+    {
+      "id": "claim_a77b4b010ca744d28c984f6865d6c0f0",
+      "statement": "tests/regions.test.ts covers src/editor/regions.ts: parseTemplate splits on BEGIN/END EDIT markers (stripped) into alternating editable/locked Segment[], a marker-less template becomes one fully-editable segment, initialDoc reassembles the starter document, and validateLocked accepts verbatim in-order locked segments while rejecting deleted/modified/reordered/overlapping ones and is a no-op for fully-editable templates.",
+      "evidence": [
+        {
+          "resource": "repo://src/editor/regions.ts#L1-L51",
+          "version": "repo-lines-v1:sha256:47e7ee2ac4b25d74462eb22866045e65cab97597bf79d146077bba47ef28744c:eyJzZWxlY3RlZExpbmVDb3VudCI6NTEsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6ImEzOWI0MDU2MDBmODIyN2IxZWY3NDJkYzE0ZjdhYTQyMDM5MDNiYjhmNDI0YjcwMWY1ODZlNmQ1M2M3YTk0MWQiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjQxMmNhMzQ1Y2NmNzViZjljMDgwNmJjZTY5NWJlOGRlODA4Yjc5OTg0MjUxYTdhNTRkMjAyY2Y2MTAxZGQ0NTEiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjowLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImUzYjBjNDQyOThmYzFjMTQ5YWZiZjRjODk5NmZiOTI0MjdhZTQxZTQ2NDliOTM0Y2E0OTU5OTFiNzg1MmI4NTUiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjowLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImUzYjBjNDQyOThmYzFjMTQ5YWZiZjRjODk5NmZiOTI0MjdhZTQxZTQ2NDliOTM0Y2E0OTU5OTFiNzg1MmI4NTUifQ"
+        },
+        {
+          "resource": "repo://tests/regions.test.ts#L1-L93",
+          "version": "repo-lines-v1:sha256:05e35082569f1162aee8a78f3364a3250d828fc003f569e8536e2ae5872745e3:eyJzZWxlY3RlZExpbmVDb3VudCI6OTMsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6ImMwOGU0NjkxYmE2NTMxNDg4YmZlMTMzOTYzZTJjYzI1OTkzMGI0MWYwZjU1YWI1ZTVjZWEyYWQ2MTFkODQxODkiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6ImY2ZjViNDBiMTU4NDU3ZDE3ODY0ZjIxNzkwNzg2ZGQ1YTJlY2RiNjRiNjZhNjUxZjc4OGQ0ZTI1Y2QzMzAzZDIiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjowLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImUzYjBjNDQyOThmYzFjMTQ5YWZiZjRjODk5NmZiOTI0MjdhZTQxZTQ2NDliOTM0Y2E0OTU5OTFiNzg1MmI4NTUiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjowLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImUzYjBjNDQyOThmYzFjMTQ5YWZiZjRjODk5NmZiOTI0MjdhZTQxZTQ2NDliOTM0Y2E0OTU5OTFiNzg1MmI4NTUifQ"
+        }
+      ]
+    },
+    {
+      "id": "claim_9ccdfbd3fe0449cb8e746d7125c373d6",
+      "statement": "tests/harness.test.ts covers src/runner/harness.ts: generateHarness emits Main.main(new String[0]) for stdout checks and all output sentinels (OUT_BEGIN/OUT_END/RET_PREFIX/ERR_PREFIX, public class KataRunner), and JavaValue to Java-literal codegen for every supported type (int, boolean, String, long with L suffix, float with f suffix, char, double with .0 suffix, null), string escaping, empty-array element type inferred from a sibling case or defaulted to int[], and method calls emitted in check/case order to match RunResult.returns ordering.",
+      "evidence": [
+        {
+          "resource": "repo://src/runner/harness.ts#L1-L120",
+          "version": "repo-lines-v1:sha256:628bea4bc551c9a60c68c3fb46b590ec878dfa75ff87781c937beac4b7428f8a:eyJzZWxlY3RlZExpbmVDb3VudCI6MTIwLCJmaXJzdFNlbGVjdGVkTGluZUhhc2giOiIzNDk0OTAyMjg5YWUyNWNjMjUzZTUwYWI3ZTA5MDE3ODJmOThkYTFiNWYxYTFjNDMwMDNkYWZiZDZmZDMyMTM1IiwibGFzdFNlbGVjdGVkTGluZUhhc2giOiI0MTJjYTM0NWNjZjc1YmY5YzA4MDZiY2U2OTViZThkZTgwOGI3OTk4NDI1MWE3YTU0ZDIwMmNmNjEwMWRkNDUxIiwicHJlY2VkaW5nQ29udGV4dExpbmVDb3VudCI6MCwicHJlY2VkaW5nQ29udGV4dEhhc2giOiJlM2IwYzQ0Mjk4ZmMxYzE0OWFmYmY0Yzg5OTZmYjkyNDI3YWU0MWU0NjQ5YjkzNGNhNDk1OTkxYjc4NTJiODU1IiwiZm9sbG93aW5nQ29udGV4dExpbmVDb3VudCI6MywiZm9sbG93aW5nQ29udGV4dEhhc2giOiI2NTEzN2Q4Yzk4MTQyYjIzZjkzOTU2MDY1MzJjZGNlMWUxOTc0NDFkZjk2MThkOTJiNTU2MzdhOTY4OGQ3NjUwIn0"
+        },
+        {
+          "resource": "repo://tests/harness.test.ts#L1-L88",
+          "version": "repo-lines-v1:sha256:a67ba7760e325f9aae111e15f5e595da01a9d23e3121e708c243cc7f4ef3f480:eyJzZWxlY3RlZExpbmVDb3VudCI6ODgsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjY2MDNhNjRhNzkzYWM1ZGE0MWZiZTdiYjgzYTM2ODNiZWYzYzc1NTU3NTQwN2NlOGI1YThmMjM5YzMxMDE5NjMiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6ImY2ZjViNDBiMTU4NDU3ZDE3ODY0ZjIxNzkwNzg2ZGQ1YTJlY2RiNjRiNjZhNjUxZjc4OGQ0ZTI1Y2QzMzAzZDIiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjowLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImUzYjBjNDQyOThmYzFjMTQ5YWZiZjRjODk5NmZiOTI0MjdhZTQxZTQ2NDliOTM0Y2E0OTU5OTFiNzg1MmI4NTUiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjowLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImUzYjBjNDQyOThmYzFjMTQ5YWZiZjRjODk5NmZiOTI0MjdhZTQxZTQ2NDliOTM0Y2E0OTU5OTFiNzg1MmI4NTUifQ"
+        }
+      ]
+    },
+    {
+      "id": "claim_67ad6a9b385b4890a656358293323034",
+      "statement": "tests/verify.test.ts covers src/check/verify.ts: verifyResult carries non-ok statuses (compile-error, runtime-error, timeout, stopped) as a failure with no per-check data; stdout checks pass on normalized match tolerating trailing newline/whitespace/CRLF and fail on real mismatch; return checks compare ints exactly, long-wrapper values exactly past 2^53, doubles/floats with epsilon (EPS=1e-9), arrays element-wise (length-sensitive), and char via {type,value} unwrapping; a mixed pass/fail case set is not solved but reports each case individually.",
+      "evidence": [
+        {
+          "resource": "repo://src/check/verify.ts#L26-L110",
+          "version": "repo-lines-v1:sha256:37461f5773d08e6fbca06288649fcf5f246dcdaf972a32639d8ef44f39a2853d:eyJzZWxlY3RlZExpbmVDb3VudCI6ODUsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjllODliMzI4MDc2MzJkZTQ3ODZhZjQ0NDQzNGFhMjAwNTdjN2I3NWY3M2M3ZjgwYTBjOTJlODg5NTFlZTgwYzciLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjQxMmNhMzQ1Y2NmNzViZjljMDgwNmJjZTY5NWJlOGRlODA4Yjc5OTg0MjUxYTdhNTRkMjAyY2Y2MTAxZGQ0NTEiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImEwOWEzZDY2ZjBiNDlkYTdlYjM1M2M3ZjBjMDY5NjY0YzZlNDFiNDYzNjI0NzY5YTE4MmEzNGUwMWJjZjc3YjAiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjowLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImUzYjBjNDQyOThmYzFjMTQ5YWZiZjRjODk5NmZiOTI0MjdhZTQxZTQ2NDliOTM0Y2E0OTU5OTFiNzg1MmI4NTUifQ"
+        },
+        {
+          "resource": "repo://tests/verify.test.ts#L1-L112",
+          "version": "repo-lines-v1:sha256:de6efcc2167c5e98daec04e66d74e967478e964d42850a32f8167834946c092f:eyJzZWxlY3RlZExpbmVDb3VudCI6MTEyLCJmaXJzdFNlbGVjdGVkTGluZUhhc2giOiI2NjAzYTY0YTc5M2FjNWRhNDFmYmU3YmI4M2EzNjgzYmVmM2M3NTU1NzU0MDdjZThiNWE4ZjIzOWMzMTAxOTYzIiwibGFzdFNlbGVjdGVkTGluZUhhc2giOiJmNmY1YjQwYjE1ODQ1N2QxNzg2NGYyMTc5MDc4NmRkNWEyZWNkYjY0YjY2YTY1MWY3ODhkNGUyNWNkMzMwM2QyIiwicHJlY2VkaW5nQ29udGV4dExpbmVDb3VudCI6MCwicHJlY2VkaW5nQ29udGV4dEhhc2giOiJlM2IwYzQ0Mjk4ZmMxYzE0OWFmYmY0Yzg5OTZmYjkyNDI3YWU0MWU0NjQ5YjkzNGNhNDk1OTkxYjc4NTJiODU1IiwiZm9sbG93aW5nQ29udGV4dExpbmVDb3VudCI6MCwiZm9sbG93aW5nQ29udGV4dEhhc2giOiJlM2IwYzQ0Mjk4ZmMxYzE0OWFmYmY0Yzg5OTZmYjkyNDI3YWU0MWU0NjQ5YjkzNGNhNDk1OTkxYjc4NTJiODU1In0"
+        }
+      ]
+    },
+    {
+      "id": "claim_5b22d55f09c845f8ac106fa36d054fef",
+      "statement": "The unit tests import src/runner/runner.ts only as a type (RunResult) for verify.test.ts and do not instantiate the runner or exercise its iframe/postMessage lifecycle; the runner module is exercised solely by manual checks.",
+      "evidence": [
+        {
+          "resource": "repo://src/runner/runner.ts#L30-L117",
+          "version": "repo-lines-v1:sha256:40d2282c3586837f3c3990e351dca23c4d660675a9b34227bec44a892b8a5999:eyJzZWxlY3RlZExpbmVDb3VudCI6ODgsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjNhNjlhMGFiZDhlNzAxZTFhMWZjZTUzYmEzZGVhMTU0MTNiNzMyYjc3NWFiMmQ3NTFiNWViNDJmNDc2NjYwMWEiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjQxMmNhMzQ1Y2NmNzViZjljMDgwNmJjZTY5NWJlOGRlODA4Yjc5OTg0MjUxYTdhNTRkMjAyY2Y2MTAxZGQ0NTEiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImY1MjdiOGI2ZjI2MWVmM2FkYjllMTdkZDI4NGUzYjMxMjNkNGZkYWYxODQ3ZjRlMDU5MjRhYWQzMDMwNjU5OWEiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjhmNzk2MWNjZmMxZGE5ZDFhYjFiMTUzYmM1ZmQ2NmFiNWIyMGU2MTkwM2UwZGViMDkwZGYxZGVhZTQyOTlkMTEifQ"
+        },
+        {
+          "resource": "repo://tests/verify.test.ts#L1-L5",
+          "version": "repo-lines-v1:sha256:0444a8a4f4a9da1574b5e63819d646f78d9b0f2fe6e66332190e4e5f187997c4:eyJzZWxlY3RlZExpbmVDb3VudCI6NSwiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiNjYwM2E2NGE3OTNhYzVkYTQxZmJlN2JiODNhMzY4M2JlZjNjNzU1NTc1NDA3Y2U4YjVhOGYyMzljMzEwMTk2MyIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiMDFiYTQ3MTljODBiNmZlOTExYjA5MWE3YzA1MTI0YjY0ZWVlY2U5NjRlMDljMDU4ZWY4Zjk4MDVkYWNhNTQ2YiIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjAsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiZTNiMGM0NDI5OGZjMWMxNDlhZmJmNGM4OTk2ZmI5MjQyN2FlNDFlNDY0OWI5MzRjYTQ5NTk5MWI3ODUyYjg1NSIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjMsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiZGNjNzc0YzcwOTE4NzFlMWI5ZWQ1MzE5MzdkZWQwNTA2NTE4NDhkOTNkMWI0ZGVlOTdiNjdjNWYxYjQxMzMwZSJ9"
+        }
+      ]
+    },
+    {
+      "id": "claim_6221ae1d103c42768d4aaad10d4918d3",
+      "statement": "There is no automated browser or CheerpJ CDN integration test in the repository; the CheerpJ-dependent path (public/sandbox.js, public/sandbox-worker.js, and the runner iframe lifecycle in src/runner/runner.ts) is covered only by manual checks, so changes to those files are a mandatory manual-review item.",
+      "evidence": [
+        {
+          "resource": "repo://docs/TESTPLAN.md#L42-L61",
+          "version": "repo-lines-v1:sha256:c6648200bfa4a31a117c6bd6441b439bb19c1fda30d5829b5a3090d973ed434d:eyJzZWxlY3RlZExpbmVDb3VudCI6MjAsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjU4N2NjMTJhNDFiYjY2NDM2Yzc4NzdjMTZjZTE2ZmY2YzM2MDA0Y2ZmNTBjODY3ZDg0Y2UwNmJkOTVmNWRiMTUiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjVjNTljNDZmYzJmNzgzOWFhMjdkZGEyZmIzM2U2NWNhYzllNDQ1N2YxNGE1YzdjYTVjYTMxZjg0YjBmMDc4MWIiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6Ijg1ZGM0MGUwMjJjMGMwYjAwZWQ1ZWIwMjNjOGY2OGEyMjA5MzUwYjljNTJlMDVlNzdjNmFkOTc4NWQ1Zjk4MzgiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjowLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImUzYjBjNDQyOThmYzFjMTQ5YWZiZjRjODk5NmZiOTI0MjdhZTQxZTQ2NDliOTM0Y2E0OTU5OTFiNzg1MmI4NTUifQ"
+        },
+        {
+          "resource": "repo://public/sandbox-worker.js#L1-L14",
+          "version": "repo-lines-v1:sha256:cbc6ce6f40e4868838fe529d8ec832350d31aa4afd7a0ec83ad66aabefcc582f:eyJzZWxlY3RlZExpbmVDb3VudCI6MTQsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjJhYTc2OWE5M2RjMzk1NzEwNmQ1NGY4MGFmNjZmOTU5ODU0ZjQ1NTg2ODM1MTZkMDU1NDFmNTMwZDQxODE2MTIiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjE4OTJiOGFiM2ZhOGQwMDRiNTdmZDUxZDMzMzNiZGYwZmQ0NmI3MDI4YTQyOWJjYTdmYjVhYmI3MDU5MDA1YTUiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjowLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImUzYjBjNDQyOThmYzFjMTQ5YWZiZjRjODk5NmZiOTI0MjdhZTQxZTQ2NDliOTM0Y2E0OTU5OTFiNzg1MmI4NTUiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6Ijg3ZTkyMTQ2NjJkYWU0NTVkNzQyYjE0NWFlYjA1MGYyNTcxYTg0YWM4Y2YzOWVlMjgwZjJhZjRjZGY1YTBhMzgifQ"
+        },
+        {
+          "resource": "repo://src/runner/runner.ts#L30-L117",
+          "version": "repo-lines-v1:sha256:40d2282c3586837f3c3990e351dca23c4d660675a9b34227bec44a892b8a5999:eyJzZWxlY3RlZExpbmVDb3VudCI6ODgsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjNhNjlhMGFiZDhlNzAxZTFhMWZjZTUzYmEzZGVhMTU0MTNiNzMyYjc3NWFiMmQ3NTFiNWViNDJmNDc2NjYwMWEiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjQxMmNhMzQ1Y2NmNzViZjljMDgwNmJjZTY5NWJlOGRlODA4Yjc5OTg0MjUxYTdhNTRkMjAyY2Y2MTAxZGQ0NTEiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImY1MjdiOGI2ZjI2MWVmM2FkYjllMTdkZDI4NGUzYjMxMjNkNGZkYWYxODQ3ZjRlMDU5MjRhYWQzMDMwNjU5OWEiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjhmNzk2MWNjZmMxZGE5ZDFhYjFiMTUzYmM1ZmQ2NmFiNWIyMGU2MTkwM2UwZGViMDkwZGYxZGVhZTQyOTlkMTEifQ"
+        }
+      ]
+    },
+    {
+      "id": "claim_1ad6e18e2a8841169c7c0173b7c32f08",
+      "statement": "The manual timeout and Stop-button checks validate the Worker-split design: public/sandbox.js (the iframe main thread) stays responsive to fire its setTimeout and call worker.terminate() even when the compiled Java is a tight infinite loop that never yields; the run ends as timeout within timeoutMs + teardown overhead, and Stop resolves status stopped and tears down the iframe so a subsequent Run recreates it.",
+      "evidence": [
+        {
+          "resource": "repo://docs/TESTPLAN.md#L51-L53",
+          "version": "repo-lines-v1:sha256:945de8c3224189079a8003c34187a80778904e7a3ebdb30f2864a19753f120ce:eyJzZWxlY3RlZExpbmVDb3VudCI6MywiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiMDM0ODEyMDU1NjdkODg1ODMxZTQyZjZlMGNmNDZkZmQwOGQzNGI2ZGViM2YwZDE1MjA3M2QzYjdmMGE5OGNlNiIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiZTg2MjNmNTg0ZjRjMzMyYmFjZjFjMjc0ZDU4MWM2NTI0YTE0N2RkM2I3ZGVmMjJiOTA2OGZkNzlkOTNjZTgxYiIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiMjNkNGQwZjZmOGYyNTUzYmUxYjJmNjQ4M2MzZTVlODFkZTY0MDQ1OGNkNDRmNWRlNThhNTBhYzljZGZmZGYzNyIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjMsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiNzBlN2E1MjgwNTdmMWQ0ZDc0N2VmMmUwYmU0ODE1NTI5YTZjOThmZWNkZWY5NWNjMWIxYzFjMWNjYjUzYjcwZSJ9"
+        },
+        {
+          "resource": "repo://public/sandbox.js#L1-L61",
+          "version": "repo-lines-v1:sha256:c417d4b9fb707c2b87ba86c1a8f76c96db57409b7c0f068a0dff9eef28330a78:eyJzZWxlY3RlZExpbmVDb3VudCI6NjEsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6ImM1M2VlNTU0MWExZjFiMzUzZjY2ZmVkYTZkODFkNDhiYTgxODIxY2Y5OTU5NWY3MDcwZjg2YTZkZmYyM2EwMGQiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6ImY2ZjViNDBiMTU4NDU3ZDE3ODY0ZjIxNzkwNzg2ZGQ1YTJlY2RiNjRiNjZhNjUxZjc4OGQ0ZTI1Y2QzMzAzZDIiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjowLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImUzYjBjNDQyOThmYzFjMTQ5YWZiZjRjODk5NmZiOTI0MjdhZTQxZTQ2NDliOTM0Y2E0OTU5OTFiNzg1MmI4NTUiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjowLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImUzYjBjNDQyOThmYzFjMTQ5YWZiZjRjODk5NmZiOTI0MjdhZTQxZTQ2NDliOTM0Y2E0OTU5OTFiNzg1MmI4NTUifQ"
+        }
+      ]
+    },
+    {
+      "id": "claim_d08d663d978945f88b59ca991369af59",
+      "statement": "The manual first-run load phase check confirms the 'Loading Java runtime' phase shows during the slow initial CheerpJ CDN fetch and does not hang past the runner's 90s INIT_BUDGET_MS, after which the run phase gets its own timeoutMs budget once the sandbox reports it is running.",
+      "evidence": [
+        {
+          "resource": "repo://docs/TESTPLAN.md#L57-L57",
+          "version": "repo-lines-v1:sha256:052959ad08a0065bb12cf347e1243c273e33a3ea725191953c71d6f8cb03425d:eyJzZWxlY3RlZExpbmVDb3VudCI6MSwiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiMDUyOTU5YWQwOGEwMDY1YmIxMmNmMzQ3ZTEyNDNjMjczZTMzYTNlYTcyNTE5MTk1M2M3MWQ2ZjhjYjAzNDI1ZCIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiMDUyOTU5YWQwOGEwMDY1YmIxMmNmMzQ3ZTEyNDNjMjczZTMzYTNlYTcyNTE5MTk1M2M3MWQ2ZjhjYjAzNDI1ZCIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiNzBlN2E1MjgwNTdmMWQ0ZDc0N2VmMmUwYmU0ODE1NTI5YTZjOThmZWNkZWY5NWNjMWIxYzFjMWNjYjUzYjcwZSIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjMsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiYTIxMzA5NDVkOTUzYmQ5NGM1NDBkZmM2YzgwNGViMzA2MDM5NzQ0NWQ1MzFkMTNhZjFlNTVmZDgyYjMzOGQxNCJ9"
+        },
+        {
+          "resource": "repo://src/runner/runner.ts#L18-L21",
+          "version": "repo-lines-v1:sha256:60c3928e66dcb0761d21581c7444f1c3f2f8963a31f61e7368e67d6fc0b3606d:eyJzZWxlY3RlZExpbmVDb3VudCI6NCwiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiMzI5NmI5MmY3NDRjOTMzZDQxMjY5NzY3MmVkODcyMDZhMGUwMDY5ZWMwYWM2NDhhNDFhMTk4Y2JkZWNjZTVlMCIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiMDFiYTQ3MTljODBiNmZlOTExYjA5MWE3YzA1MTI0YjY0ZWVlY2U5NjRlMDljMDU4ZWY4Zjk4MDVkYWNhNTQ2YiIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiYmE4MzJlZWZlNDE2Y2ExODk3N2UxYTY3NTYzODY1NjM5ZDk1NDJkNzlkZmY1MWI2YWFmZWY1YmUzM2FhZjViOCIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjMsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiZWM3MWE5YWE5ODgwMTZkNDMxZjk1NGZhZGYxZTI4YjBiNDJkYmI3NGUxYzRkYzBlMjNmMjAwMmI4ZjgwNjA0OCJ9"
+        }
+      ]
+    },
+    {
+      "id": "claim_eed1dbb569a6443ba3181f1061c6f69c",
+      "statement": "The manual locked-region-tamper and import-bypass checks validate the pre-run gate order in src/ui/views/code.ts: on Run, validateLocked runs first, then validateImports, both short-circuiting before any iframe/network activity, so a tampered locked region or banned import is rejected with no run sent to the sandbox.",
+      "evidence": [
+        {
+          "resource": "repo://docs/TESTPLAN.md#L58-L59",
+          "version": "repo-lines-v1:sha256:236fb50d5be0658df007cd2c31f9e3d95aa44e1e47c7c5b24733aa0f62027d22:eyJzZWxlY3RlZExpbmVDb3VudCI6MiwiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiODJiMTdiODcxMDc2MGJkYWE5MzQ0NGIxZmFhYjc0YjRlZDkwZDZmZTIzODZjODlhMjgzYzNjMTFhNzhkMzYxMSIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiOTU2NWUyYThiNjFlNDBmMDQ0YWM1MjYyYWJlMDdhMjRhMDJkMDVlM2U1NDg5YTc1MzAwNjRkZGFhZGRhMzRjMSIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiYjk3ZjRjYThkN2FlMzNiZjZiMDFkZjA5YTgxM2M4Y2U3ZTdhNDcxNTFjY2VlZmI4M2Y5ZGMzYWI2MTk0ZDA1OCIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjIsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiMzdiMDJjNDc2NWMzYmVhZjYyNGFjMGZjNGViNDhmOTAxOGE4NDg5MGEwMmJmNjhlNWMzOTU3YmJlY2NlOTE0NyJ9"
+        },
+        {
+          "resource": "repo://src/ui/views/code.ts#L84-L97",
+          "version": "repo-lines-v1:sha256:c58febb0f064c22c475bdf81792fe182d3465e5fa246af558493acef5e095fee:eyJzZWxlY3RlZExpbmVDb3VudCI6MTQsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjZjOTFjNWIxOTgzYWQ3MTgyODFhNjhhYWU1MTIyYzFiMTZmMTlkM2MwZTFiNGM0MWM3NGMxNmM0YjViNTI1ZDIiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjQ4OTNmNDBlMzc4MWViODk2YzgyZDA0NmEwODA2N2ExMWUzNWNkZjJmMWRmYWYyNmZlYTkwYjhkYjY2NzY0MTMiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjIzNThhZDU4OTkzNzlmNDYxYzVjZGFiMzg0YWMwYzY4Nzk5YjY0Y2I4MDU0YWMyMjc3ZTY0NTBjNmU1OTU4YWMiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjQ5MGQ5NTliOGRkYzg1NDAwOWVhMmM1NmUwMzA5NDZiZmU4YzlkOTg3NjVjYjlhZjA0OTg1ODFhYzEwYTI1NzgifQ"
+        }
+      ]
+    },
+    {
+      "id": "claim_f0081c0c6e864bc0b54e8d940720fc12",
+      "statement": "The manual compile-error and runtime-error surfacing checks confirm distinct non-ok RunResult statuses: compile-error with a usable javac message (from the sandbox worker when cheerpjRunMain javac returns nonzero) and runtime-error (from the ERR_PREFIX sentinel or nonzero run exit) are shown distinctly from each other and from a check failure in the UI.",
+      "evidence": [
+        {
+          "resource": "repo://docs/TESTPLAN.md#L53-L55",
+          "version": "repo-lines-v1:sha256:1f533388164d43eedee3c7b09e80250094d03358dacb0dda15538c386496f78c:eyJzZWxlY3RlZExpbmVDb3VudCI6MywiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiZTg2MjNmNTg0ZjRjMzMyYmFjZjFjMjc0ZDU4MWM2NTI0YTE0N2RkM2I3ZGVmMjJiOTA2OGZkNzlkOTNjZTgxYiIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiOGJiN2UxODBhYWY4YzgxYzRmMzZkMzI0MWZlZGEzMzYwOWQ2YTFkYTg2OTk3YmVhMmIwYTNhMTEwNmRhNjQ0ZiIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiY2Y0YzdkMzFmZGY1ZWNmYmM2NTM5NDExNDhlZTNkZmYyNDllMTRlYTA4ZDJhNGY0MTE4MTMyMTg2NTk3ZDFhMCIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjMsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiNDMwZTNiMmM4YTE0YzMxYWY2MTI0YmExOGQ2ZDBmYzBlMjNjN2E2NTI2YTI3ZDg1ZDkxZmNhMDNiYmMwYmZmYiJ9"
+        },
+        {
+          "resource": "repo://public/sandbox-worker.js#L56-L92",
+          "version": "repo-lines-v1:sha256:f3429ec8fd8533c2b09115811d0c0d34edcf9b7146576c1992e8d4c6a967968b:eyJzZWxlY3RlZExpbmVDb3VudCI6MzcsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6Ijc0MTIyYzY4NzMyNDk3Y2ViNjY1MGY4MTg1NWVmYjVmNGQ0ZWQ1NDI2MDRkNTA3Nzc4MWE0ZTc0YmFlNjk0OTQiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjQ4OTNmNDBlMzc4MWViODk2YzgyZDA0NmEwODA2N2ExMWUzNWNkZjJmMWRmYWYyNmZlYTkwYjhkYjY2NzY0MTMiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6Ijk0YTdhMzhlMzYzYzcyMTNmY2Y2YzJiM2Y5YWQ1MGQxN2I0NTkwZDRhNWJmM2ZiN2FjNzQ1ZmVlMzA2YTk3NzciLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjliZDQyMzQ1OWM5OTNiM2EwMjg5MmQzNjcwNjNiZmYyOGJiOTQ5N2M1MTBmYjJlZTZlNWNiNDY5NGFiMWQzODgifQ"
+        },
+        {
+          "resource": "repo://src/ui/views/code.ts#L122-L155",
+          "version": "repo-lines-v1:sha256:373c54496682f97e45647380f2f396083308343e9f48891a7027a58edf99bc69:eyJzZWxlY3RlZExpbmVDb3VudCI6MzQsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjIzZDJmOTAwM2ZjZjk1NWE0YjgzZWQxODE2ZmFkMTA5OWM1NWQ0Njg2NTMwYzk0ZDRlYWE3MDZiYzM2ZGEzNTUiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjQxMmNhMzQ1Y2NmNzViZjljMDgwNmJjZTY5NWJlOGRlODA4Yjc5OTg0MjUxYTdhNTRkMjAyY2Y2MTAxZGQ0NTEiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjdiMjAwNTRhODRlYzg5NTllNzQ0MzZlZWE3YmMxMzIwZDdiZjg5MmVhYWNjOTliNDZlMDhhYmU5OTQwNjIwYTgiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjFiYzYyMTZkMjA5NzQ0MmQ2NjdkYjQzMmQzOGYwYzE5N2FiOWI2ZjQ5N2YwN2RmYjRiYjkwNzk5MjJmM2MxN2UifQ"
+        }
+      ]
+    },
+    {
+      "id": "claim_e85ec925f61548a7ab04c7e43f39a818",
+      "statement": "The manual return-value check exercises all supported JavaValue types (int, long incl. values > 2^53 via wrapper form, double, float wrapper, boolean, char wrapper, String, null, and 1-D arrays of each) and confirms the per-case pass/fail table rendered by verifyResult is correct end to end through the harness sentinel capture path.",
+      "evidence": [
+        {
+          "resource": "repo://docs/TESTPLAN.md#L55-L55",
+          "version": "repo-lines-v1:sha256:8bb7e180aaf8c81c4f36d3241feda33609d6a1da86997bea2b0a3a1106da644f:eyJzZWxlY3RlZExpbmVDb3VudCI6MSwiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiOGJiN2UxODBhYWY4YzgxYzRmMzZkMzI0MWZlZGEzMzYwOWQ2YTFkYTg2OTk3YmVhMmIwYTNhMTEwNmRhNjQ0ZiIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiOGJiN2UxODBhYWY4YzgxYzRmMzZkMzI0MWZlZGEzMzYwOWQ2YTFkYTg2OTk3YmVhMmIwYTNhMTEwNmRhNjQ0ZiIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiMDM5NDlkNzhkYjFiODA2Mzg2ZTZjZTU5N2NjM2ViMTFjODQ1NmVmYzU0NjA3NTViZDA5YTUyMDAyMDhkOWMyNiIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjMsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiNDMwZTNiMmM4YTE0YzMxYWY2MTI0YmExOGQ2ZDBmYzBlMjNjN2E2NTI2YTI3ZDg1ZDkxZmNhMDNiYmMwYmZmYiJ9"
+        },
+        {
+          "resource": "repo://src/check/verify.ts#L45-L110",
+          "version": "repo-lines-v1:sha256:766296bb0e55be806cb7bf754d3fa1aa326a4c666b7b0f6de1415ffa543dce72:eyJzZWxlY3RlZExpbmVDb3VudCI6NjYsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjJiMWY1ZDRkYTg4NzJmZGYwNWI3NDRiYzg5YmE5NDA2MWJkNmM5MWY1NDYzZjhkODdjYWZmZjc2MzlmNmYwYjkiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjQxMmNhMzQ1Y2NmNzViZjljMDgwNmJjZTY5NWJlOGRlODA4Yjc5OTg0MjUxYTdhNTRkMjAyY2Y2MTAxZGQ0NTEiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImJlYTgwNjM1NjFiYjJiYzNkMzZiOTliOWNhNGQ4OTQ2ODQzMzA5OTVjN2FkNWUzMjU4YTZlZGM2YjMxZDY2ZGEiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjowLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImUzYjBjNDQyOThmYzFjMTQ5YWZiZjRjODk5NmZiOTI0MjdhZTQxZTQ2NDliOTM0Y2E0OTU5OTFiNzg1MmI4NTUifQ"
+        },
+        {
+          "resource": "repo://src/runner/harness.ts#L72-L120",
+          "version": "repo-lines-v1:sha256:aebadceed0ede2f3d9edd1ddd971953124b012e1358eb5a65a05c7e328768816:eyJzZWxlY3RlZExpbmVDb3VudCI6NDksImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjRjMmNjZTMwZGYxMGQxM2NkMGM0N2FlZDUxNjg4ODcwYjIzMzQ1YWFiOWVkY2E1MmJkZDRjZDM0MzRjMWU5YjgiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjQxMmNhMzQ1Y2NmNzViZjljMDgwNmJjZTY5NWJlOGRlODA4Yjc5OTg0MjUxYTdhNTRkMjAyY2Y2MTAxZGQ0NTEiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjhlMzY4ZDJiNDcwMDI5YTUwYmJkZmE1Y2E3NmVkOGYwMjhlMTMxOGRlNTcwY2ZkZTY3ODIxYzAyYThhN2IxODkiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjY1MTM3ZDhjOTgxNDJiMjNmOTM5NTYwNjUzMmNkY2UxZTE5NzQ0MWRmOTYxOGQ5MmI1NTYzN2E5Njg4ZDc2NTAifQ"
+        }
+      ]
+    },
+    {
+      "id": "claim_d27697d059344b8cb6f1d24e58ddac0c",
+      "statement": "The manual stdout diff UI check confirms that a one-line output mismatch produces a line-level diff and that normalizeStdout (trailing whitespace/newline/CRLF) prevents false mismatches; the diff columns in the code view align expected vs actual line-by-line.",
+      "evidence": [
+        {
+          "resource": "repo://docs/TESTPLAN.md#L56-L56",
+          "version": "repo-lines-v1:sha256:ba9f402b95019a7dd1be2c0757bed20558fe2d9410b8e3e03f82da5520d47f25:eyJzZWxlY3RlZExpbmVDb3VudCI6MSwiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiYmE5ZjQwMmI5NTAxOWE3ZGQxYmUyYzA3NTdiZWQyMDU1OGZlMmQ5NDEwYjhlM2UwM2Y4MmRhNTUyMGQ0N2YyNSIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiYmE5ZjQwMmI5NTAxOWE3ZGQxYmUyYzA3NTdiZWQyMDU1OGZlMmQ5NDEwYjhlM2UwM2Y4MmRhNTUyMGQ0N2YyNSIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiMWY1MzMzODgxNjRkNDNlZWRlZTNjN2IwOWU4MDI1MDA5NGQwMzM1OGRhY2IwZGRhMTU1MzhjMzg2NDk2Zjc4YyIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjMsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiNzI1OGJiMjEzZjM4NWQzYmJjOTA0MDM4MjNlMDZlNTRmMjU0ZmJiMDg5YjgxOGU1NGE3YTNhZjAxZTE4ZjU3NSJ9"
+        },
+        {
+          "resource": "repo://src/check/normalize.ts#L37-L43",
+          "version": "repo-lines-v1:sha256:170c007185fadd7d16df167e8d7012d6b787de209b056f04f7e7e08c89c616b6:eyJzZWxlY3RlZExpbmVDb3VudCI6NywiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiZmQzOGEzMWQ1ZjIxOGFhZWIxZTM0YjBjYWEyNzU3MzIxYWUzYjk4YWU1NmE0Yjg0MzQ3ZGRkOWRiYjk1ZTljNCIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiOThiOTAwNDcyODkwYjhhZjk4OWYxOWE2NDE0ZTEwY2IzOTUxNjRlM2Y4OGIxZjZmYWFhMTM0YjMwZjQyM2Y4YSIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiYTM3NzU0OWVlN2RmZTU2MmZmNGI3Y2E1OWYzN2U2OGI2N2Q0YjkxYjQ3ZjBiYmUzY2IwNDdjY2Y4YTliYjkyYiIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjEsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiNDEyY2EzNDVjY2Y3NWJmOWMwODA2YmNlNjk1YmU4ZGU4MDhiNzk5ODQyNTFhN2E1NGQyMDJjZjYxMDFkZDQ1MSJ9"
+        },
+        {
+          "resource": "repo://src/ui/views/code.ts#L169-L200",
+          "version": "repo-lines-v1:sha256:3e6c3b6f9613eb2c2d87534e17731b2036fdb2efbe7aa4e5c0458c5c36b4bd1a:eyJzZWxlY3RlZExpbmVDb3VudCI6MzIsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6Ijk0MmIyYmI5NTFjNDFiMmQ4YjAwOWYxYzFjODYyOWRkMmY5NGNlYTFlY2QxNTZkYzdhOTI4ODdlZjQ3MTBmYjUiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjI2N2YxNjI1ZGE1MmYyOWQ4NzBkNTAzMTY3ZDcwMmNiNzM1NzhmMDJkZDExYjIzZDhkYTgzOTRhNzgwNDg4ZTEiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImZiNTgwZTk2NGY4M2E0NzNmNDNkNDQzODQ2Mjk0OWQ2OGI1NjAwZmRhNzg3ZjE2Mzc0NWQwMGRlODljYmYzNmEiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjdkMTIyYzFkZTRlMzAwMjYwZjEyZmUyNzBhZTMxNjQyYmVhZWE0YjQ1ZGQwMmJjMDRiNGRmYzUxMzg4NjY4OTkifQ"
+        }
+      ]
+    },
+    {
+      "id": "claim_83be1857d95c4c90a6519f419bb9a896",
+      "statement": "The manual progress-persistence check confirms kata-progress:v1 in localStorage persists solved/attempts/hintsRevealed across a page reload, exercised by src/ui/progress.ts which reads/writes the map and src/ui/hints.ts which reports into it.",
+      "evidence": [
+        {
+          "resource": "repo://docs/TESTPLAN.md#L60-L60",
+          "version": "repo-lines-v1:sha256:e69a2a61b4a5e6c2c5ae512d5ada77401d5e3cef423fa3ad7ae2ff2c3e5b323d:eyJzZWxlY3RlZExpbmVDb3VudCI6MSwiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiZTY5YTJhNjFiNGE1ZTZjMmM1YWU1MTJkNWFkYTc3NDAxZDVlM2NlZjQyM2ZhM2FkN2FlMmZmMmMzZTViMzIzZCIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiZTY5YTJhNjFiNGE1ZTZjMmM1YWU1MTJkNWFkYTc3NDAxZDVlM2NlZjQyM2ZhM2FkN2FlMmZmMmMzZTViMzIzZCIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiNzI1OGJiMjEzZjM4NWQzYmJjOTA0MDM4MjNlMDZlNTRmMjU0ZmJiMDg5YjgxOGU1NGE3YTNhZjAxZTE4ZjU3NSIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjEsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiNWM1OWM0NmZjMmY3ODM5YWEyN2RkYTJmYjMzZTY1Y2FjOWU0NDU3ZjE0YTVjN2NhNWNhMzFmODRiMGYwNzgxYiJ9"
+        },
+        {
+          "resource": "repo://src/ui/hints.ts#L50-L64",
+          "version": "repo-lines-v1:sha256:88a69bde35e70ef571a8d36eff6985f2f9021b780ca095f93b4025b5173ec3c6:eyJzZWxlY3RlZExpbmVDb3VudCI6MTUsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6ImM5OGU0YWNjYjI1YWNhZmMwNzdjNGQyMjhmYTM4MmI0MDhlYjgyMzE2NWI2ZDZlNTU5NmM4OTU4YjYzMGM4NDIiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjI3ZTU3ODhkNWQ5ZDczZDI0YTgxZGJjMGE1YTc0YmZhODJjOWMzYjNhZjk5ZTUyYWY3OTZlOTBiNDY4YThhM2QiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6Ijk3ZDg2MzJlNTRlOTI5OGFiYjk1ODcyN2UyZDUxNDA4YWJhZjEzNjYwMzUzNzkxMDE0MGFiZjY1YjMwYWI2MTMiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjBjMGY2ODU2MzIzYTUwZDZiMDM0YzU2NjlmZDNkNzY5OTFiYTAyZWJhNmM5YjY2MjdkMjdhZjM1NWQwMWM2YTYifQ"
+        },
+        {
+          "resource": "repo://src/ui/progress.ts#L1-L27",
+          "version": "repo-lines-v1:sha256:7c3dbbc178c99142079c193cdd42849c55dda7b9478818c0f3bb4b0c1f168b2a:eyJzZWxlY3RlZExpbmVDb3VudCI6MjcsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjVmMWQ4OTc2NTU1MTFhOWI5OWYyZDk1MjZlY2I4M2E2MGM5MWMzZDBjMzIxOWEwMjdjN2Q4MDhjNzhmMzVmYmEiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjQxMmNhMzQ1Y2NmNzViZjljMDgwNmJjZTY5NWJlOGRlODA4Yjc5OTg0MjUxYTdhNTRkMjAyY2Y2MTAxZGQ0NTEiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjowLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImUzYjBjNDQyOThmYzFjMTQ5YWZiZjRjODk5NmZiOTI0MjdhZTQxZTQ2NDliOTM0Y2E0OTU5OTFiNzg1MmI4NTUiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjowLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImUzYjBjNDQyOThmYzFjMTQ5YWZiZjRjODk5NmZiOTI0MjdhZTQxZTQ2NDliOTM0Y2E0OTU5OTFiNzg1MmI4NTUifQ"
+        }
+      ]
+    },
+    {
+      "id": "claim_1e15576fae0a4eb8913893b7c17e5a37",
+      "statement": "The manual accessibility check confirms results are announced via aria-live polite elements and all interactive controls (Run, Stop, Reveal hint, Reset) are real buttons operable by keyboard with visible focus.",
+      "evidence": [
+        {
+          "resource": "repo://docs/TESTPLAN.md#L61-L61",
+          "version": "repo-lines-v1:sha256:5c59c46fc2f7839aa27dda2fb33e65cac9e4457f14a5c7ca5ca31f84b0f0781b:eyJzZWxlY3RlZExpbmVDb3VudCI6MSwiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiNWM1OWM0NmZjMmY3ODM5YWEyN2RkYTJmYjMzZTY1Y2FjOWU0NDU3ZjE0YTVjN2NhNWNhMzFmODRiMGYwNzgxYiIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiNWM1OWM0NmZjMmY3ODM5YWEyN2RkYTJmYjMzZTY1Y2FjOWU0NDU3ZjE0YTVjN2NhNWNhMzFmODRiMGYwNzgxYiIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiYTIxMzA5NDVkOTUzYmQ5NGM1NDBkZmM2YzgwNGViMzA2MDM5NzQ0NWQ1MzFkMTNhZjFlNTVmZDgyYjMzOGQxNCIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjAsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiZTNiMGM0NDI5OGZjMWMxNDlhZmJmNGM4OTk2ZmI5MjQyN2FlNDFlNDY0OWI5MzRjYTQ5NTk5MWI3ODUyYjg1NSJ9"
+        },
+        {
+          "resource": "repo://src/ui/hints.ts#L14-L48",
+          "version": "repo-lines-v1:sha256:d5084470e78ecb982a11d5232a380e202824550f74c13848a4563139da322ff9:eyJzZWxlY3RlZExpbmVDb3VudCI6MzUsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjAxYmE0NzE5YzgwYjZmZTkxMWIwOTFhN2MwNTEyNGI2NGVlZWNlOTY0ZTA5YzA1OGVmOGY5ODA1ZGFjYTU0NmIiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjI3ZTU3ODhkNWQ5ZDczZDI0YTgxZGJjMGE1YTc0YmZhODJjOWMzYjNhZjk5ZTUyYWY3OTZlOTBiNDY4YThhM2QiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImNhZWNjOTIyZDYxOTQzZDkyNjhjZTE2MDU5YjRlM2VkNDAxYWZlYjQxMTE1NDE1MTE1NDNlNTc4NWMwNTEzYTkiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjVkYzRhZTMxOTFkODNhZmZhNzdiMzM2YzlmMjUwMzZiMzVhYTY4NWZiYmNmZmM5OTNmODc3ZTQ0MDgxNGEzOWIifQ"
+        },
+        {
+          "resource": "repo://src/ui/views/code.ts#L29-L48",
+          "version": "repo-lines-v1:sha256:2df021bea5308acf419f37469657f08d8e750b260cf6205f4f74d7fcace50468:eyJzZWxlY3RlZExpbmVDb3VudCI6MjAsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjhkMDJkNjg3MDdhMTQzMjBlMWY3NzdlNzY4ZjYyMWYzZmNmZDJmNTYwNDdiMThkZTRhZGM5YmVlNzEzMGY1MzEiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6Ijk5MmFlMmM5MGRjZDQ5NDExNjA4YWQzNDUwZmE5OWVlMzgxOTNjZDBhNGE4NzRmN2I1MWQwYTZiYWUzMmRhMjciLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImM0NjU2YjEwNDI3ZDYzYjMyZDRjNzU5NWIzMWYwZDBiYjFiMTIzOTE1M2E3MWZlZTcwMzFjNDU5MmIxYWU0NjciLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImQ1MjAzMWZkNTQ2MGFmNjU0MTJhYjQ2YmQ0YzZmZmIwYmE4YzQ2ZDA0NThmNTQ5NTk4YWMwZmZkOTkyZTRmNDkifQ"
+        }
+      ]
+    },
+    {
+      "id": "claim_b203c0d04faf40f49f79debf6209a9df",
+      "statement": "The browser-only glue has no automated tests: src/ui/views/code.ts (gate order, diff UI, aria-live announcements), src/ui/progress.ts (localStorage), and the runner/sandbox execution path are covered only by the manual matrix, while the pure functions they call (regions, imports, normalize, verify) are separately unit-tested.",
+      "evidence": [
+        {
+          "resource": "repo://docs/TESTPLAN.md#L42-L61",
+          "version": "repo-lines-v1:sha256:c6648200bfa4a31a117c6bd6441b439bb19c1fda30d5829b5a3090d973ed434d:eyJzZWxlY3RlZExpbmVDb3VudCI6MjAsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjU4N2NjMTJhNDFiYjY2NDM2Yzc4NzdjMTZjZTE2ZmY2YzM2MDA0Y2ZmNTBjODY3ZDg0Y2UwNmJkOTVmNWRiMTUiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjVjNTljNDZmYzJmNzgzOWFhMjdkZGEyZmIzM2U2NWNhYzllNDQ1N2YxNGE1YzdjYTVjYTMxZjg0YjBmMDc4MWIiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6Ijg1ZGM0MGUwMjJjMGMwYjAwZWQ1ZWIwMjNjOGY2OGEyMjA5MzUwYjljNTJlMDVlNzdjNmFkOTc4NWQ1Zjk4MzgiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjowLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImUzYjBjNDQyOThmYzFjMTQ5YWZiZjRjODk5NmZiOTI0MjdhZTQxZTQ2NDliOTM0Y2E0OTU5OTFiNzg1MmI4NTUifQ"
+        },
+        {
+          "resource": "repo://src/ui/progress.ts#L1-L27",
+          "version": "repo-lines-v1:sha256:7c3dbbc178c99142079c193cdd42849c55dda7b9478818c0f3bb4b0c1f168b2a:eyJzZWxlY3RlZExpbmVDb3VudCI6MjcsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjVmMWQ4OTc2NTU1MTFhOWI5OWYyZDk1MjZlY2I4M2E2MGM5MWMzZDBjMzIxOWEwMjdjN2Q4MDhjNzhmMzVmYmEiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjQxMmNhMzQ1Y2NmNzViZjljMDgwNmJjZTY5NWJlOGRlODA4Yjc5OTg0MjUxYTdhNTRkMjAyY2Y2MTAxZGQ0NTEiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjowLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImUzYjBjNDQyOThmYzFjMTQ5YWZiZjRjODk5NmZiOTI0MjdhZTQxZTQ2NDliOTM0Y2E0OTU5OTFiNzg1MmI4NTUiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjowLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImUzYjBjNDQyOThmYzFjMTQ5YWZiZjRjODk5NmZiOTI0MjdhZTQxZTQ2NDliOTM0Y2E0OTU5OTFiNzg1MmI4NTUifQ"
+        },
+        {
+          "resource": "repo://src/ui/views/code.ts#L1-L120",
+          "version": "repo-lines-v1:sha256:123b8546da6aa8bdf52822202428ac165b628abb3e219c55f465f8a313ff8fd4:eyJzZWxlY3RlZExpbmVDb3VudCI6MTIwLCJmaXJzdFNlbGVjdGVkTGluZUhhc2giOiI0NDhmZmU1ZjJhYWUzYmNkZjdhNjQwM2YxNzE0ZmNhNGYwMTQxNzU1Yzc2ZDA4ZTFhYWM0YTUyZmU5ZWNhMGUwIiwibGFzdFNlbGVjdGVkTGluZUhhc2giOiI0MTJjYTM0NWNjZjc1YmY5YzA4MDZiY2U2OTViZThkZTgwOGI3OTk4NDI1MWE3YTU0ZDIwMmNmNjEwMWRkNDUxIiwicHJlY2VkaW5nQ29udGV4dExpbmVDb3VudCI6MCwicHJlY2VkaW5nQ29udGV4dEhhc2giOiJlM2IwYzQ0Mjk4ZmMxYzE0OWFmYmY0Yzg5OTZmYjkyNDI3YWU0MWU0NjQ5YjkzNGNhNDk1OTkxYjc4NTJiODU1IiwiZm9sbG93aW5nQ29udGV4dExpbmVDb3VudCI6MywiZm9sbG93aW5nQ29udGV4dEhhc2giOiIwYWZhODAzNmJjNWNhYzVjNWM4ZGU4MDI0ZTM4NGQ0OTUxNzg0NGE4ZWRjZGExODkxMDQwNzYxMTYzNTZkNGQxIn0"
+        }
+      ]
+    }
+  ],
+  "verification": {
+    "by": "openwiki/0.4.0",
+    "at": "2026-08-26T15:48:44.789Z"
+  }
+}

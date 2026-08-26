@@ -1,0 +1,230 @@
+{
+  "schemaVersion": 1,
+  "pageVersion": "sha256:61d03b64476ba286ac0ab01fc8f247b16bfa21a22d7789a0da0050437c57368a",
+  "claims": [
+    {
+      "id": "claim_2af07d5c3d1f4fef996cf362b672bac5",
+      "statement": "generateHarness (src/runner/harness.ts) emits KataRunner.java per run from a kata's Check[], and its design relies on Java overload resolution: toJson(...) has one overload per primitive and array type, so javac picks the right one for whatever the checked method statically returns, meaning the TS codegen never needs to know the target return type — it only renders JavaValue arguments as Java literals.",
+      "evidence": [
+        {
+          "resource": "repo://src/runner/harness.ts#L1-L8",
+          "version": "repo-lines-v1:sha256:c84d375d6b004fa58ac11ea0ba3ec60c8e2f92acec44b5078b958ab9ceaae184:eyJzZWxlY3RlZExpbmVDb3VudCI6OCwiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiMzQ5NDkwMjI4OWFlMjVjYzI1M2U1MGFiN2UwOTAxNzgyZjk4ZGExYjVmMWExYzQzMDAzZGFmYmQ2ZmQzMjEzNSIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiMGM1MmRiMWFjMGI5ZGU3MzM4NjI4ZjQ1ZTVkZGM3OTgyMTdkZDBhZDYzNDk3NmZhZWRmOTJiYjhmNDIxZmMwNyIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjAsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiZTNiMGM0NDI5OGZjMWMxNDlhZmJmNGM4OTk2ZmI5MjQyN2FlNDFlNDY0OWI5MzRjYTQ5NTk5MWI3ODUyYjg1NSIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjMsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiOTZkYmY5NzZiNDQ1NTMzMzQzN2MxYWM4NGI3MGNkOTRmZWRiNDRiZjRhNjIzYTg4YTM5ZDgzZjUxYjZhMTc0MiJ9"
+        },
+        {
+          "resource": "repo://src/runner/harness.ts#L186-L201",
+          "version": "repo-lines-v1:sha256:dcb083dc882fc202d98c10aff8e3bc411af699c9909f4caa7e50fc1f70e194ef:eyJzZWxlY3RlZExpbmVDb3VudCI6MTYsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6ImM5ZTU1Mzk3ZGYwYTViN2IzY2NiNmU2MjgzYWFkNjQzMGM3MmE1NjdlZjEyMmM0YmJjZDg1OGRiNGE1Njg4ZmUiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6ImI4NGUxOGU2NzE1YWJhZmJmZjNjNzBlZDIwY2M3YmUxOTQ1YWVjODYxMzQyZjVkNWFmMGQyOTQwN2Y4MDIyNWIiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjBiNTM1YjMxZWJlM2RjNjVhOGE5Y2I4YmVmNmQ4MTI0YWVhNjdiZWE3NzNjYjlmODJkY2NjZGE0ODA5YjMwODMiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImRkNzJhYzRmMjdhM2Y4ZDhlZWY0ZDRkZmNjMDc2YmM0YWM4YjMxOTRhMGVkZDUzNjk3MTg2Y2U0M2E5NjhkNTQifQ"
+        }
+      ]
+    },
+    {
+      "id": "claim_84c331edcbc44805b84574ae1f85a901",
+      "statement": "generateHarness emits one check body line per check/case in source order: Main.main(new String[0]) for a stdout check, and rets.add(toJson(Main.<method>(<args>))) per return-check case. This in-order emission is what makes the positional RunResult.returns mapping work in verify.ts.",
+      "evidence": [
+        {
+          "resource": "repo://src/runner/harness.ts#L128-L139",
+          "version": "repo-lines-v1:sha256:11f9449bcedcb607b48e93a41de23127b8d4be7cbfd3412a6834a782b210ca45:eyJzZWxlY3RlZExpbmVDb3VudCI6MTIsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6Ijg5YTYxYmY5MzYzMTIzOTZjMmJhZjUzYTljN2ZjZWI3Njg3NDgyZDNiZjkwODg5NWEzZDllZDI1YTVkNzQyM2YiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjI3ZTU3ODhkNWQ5ZDczZDI0YTgxZGJjMGE1YTc0YmZhODJjOWMzYjNhZjk5ZTUyYWY3OTZlOTBiNDY4YThhM2QiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjVjMzIyYjQ3MmQ2MTI4MDZlYWMyOTJmYTYwNTRkOTEyNTlmZjViODE3YTZmYTVmNGVlYzM3OWYxNDM2ZjNhN2MiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjczNmE3OGQxNjkwOTMxMzZhZjg1ZjBkYzZlNDkxNmU5ODg4NGNkZmY2N2FhN2RmZDkyNGZlYjhkZDU4ZDRhMzIifQ"
+        },
+        {
+          "resource": "repo://tests/harness.test.ts#L77-L87",
+          "version": "repo-lines-v1:sha256:e56cdfbe829ecf5b4b25b8453a18a3571296529b5b67d03233fefb8beb14ac93:eyJzZWxlY3RlZExpbmVDb3VudCI6MTEsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjQ1M2I4YTE5OTM1OWFiYWQyNmY3N2U4MTBkOTBlYzlkNjE0MGY4Njk2N2VhM2M4YWYwMjFkMzlkMjZmZDkzNGYiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjNhM2U0NmY5NDI3NmI2ZjZmNGVkMWYwMmFmNzhiZWY2YTJlZTFjNDM5ZGQ1NTg0Yjk3Mzk0ODMxMzIxNGQyYjciLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImYzY2RiYTM1ZDhlYjU0M2NmZTAyMDI1Y2FlMTg2ZTJlMGNjM2M3OGQzN2UzY2EyNTMyYWQ0ZDZjNGQwZThkMTQiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjoxLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImY2ZjViNDBiMTU4NDU3ZDE3ODY0ZjIxNzkwNzg2ZGQ1YTJlY2RiNjRiNjZhNjUxZjc4OGQ0ZTI1Y2QzMzAzZDIifQ"
+        }
+      ]
+    },
+    {
+      "id": "claim_25b33bf59e804a5d813780e40150f9c0",
+      "statement": "scalarLiteral renders a non-array JavaValue as a Java literal with type-specific suffixes/escaping: long gets the L suffix, float the f suffix, int is bare, double gets .0 appended when the textual form lacks a . or e/E, char is escaped via charJavaLiteral (handling quote, backslash, newline, tab, printable ASCII, else \\uXXXX), and string is escaped via escapeJavaChars (escaping backslash, quote, \\n, \\r, \\t, and any char outside 0x20-0x7e as \\uXXXX).",
+      "evidence": [
+        {
+          "resource": "repo://src/runner/harness.ts#L22-L52",
+          "version": "repo-lines-v1:sha256:15f90a6fd028b1a357421708a95c3e8019ffe0ce9696a4497ab967259cf69cd1:eyJzZWxlY3RlZExpbmVDb3VudCI6MzEsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjgzYTI1Zjg2OWY5MmM0NTJlZWU1YWUxZGZmN2IwMzM0OGYzOTQ3MTJjOGI3MmJjZjYxNmFiYTZhNGM2ZThlNGIiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjQxMmNhMzQ1Y2NmNzViZjljMDgwNmJjZTY5NWJlOGRlODA4Yjc5OTg0MjUxYTdhNTRkMjAyY2Y2MTAxZGQ0NTEiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjZjZjU1NWIzMTcxYWNiNmFmNzQyNDM4MWE5ZjNmMTJiYzAxZDI4NzRkYTIxNDg0MzYxOGM4MDcyYzRmYjhmMmUiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjUxYWRlYmFmOGI1MmQ5NjRhZmZjNTBlYmY0Y2Y1NjVhNzE2YmIyZTA3MDdjMWMzODg0YmFhZDMyNGNhODIxN2QifQ"
+        },
+        {
+          "resource": "repo://src/runner/harness.ts#L72-L93",
+          "version": "repo-lines-v1:sha256:d7cd4a7fea0df2e4b316e8af136781627ce5bcc4fc28f667b97a124a1d5f1174:eyJzZWxlY3RlZExpbmVDb3VudCI6MjIsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjRjMmNjZTMwZGYxMGQxM2NkMGM0N2FlZDUxNjg4ODcwYjIzMzQ1YWFiOWVkY2E1MmJkZDRjZDM0MzRjMWU5YjgiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjQxMmNhMzQ1Y2NmNzViZjljMDgwNmJjZTY5NWJlOGRlODA4Yjc5OTg0MjUxYTdhNTRkMjAyY2Y2MTAxZGQ0NTEiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjhlMzY4ZDJiNDcwMDI5YTUwYmJkZmE1Y2E3NmVkOGYwMjhlMTMxOGRlNTcwY2ZkZTY3ODIxYzAyYThhN2IxODkiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjNlZDRhODcyY2VjZDYwYzQ0NTM2OGQ1YjgwNjY5MDdiYTllODRlYjQ0ZTNjMzE0M2QxOWNiNzI0OWUzOGRiYTYifQ"
+        }
+      ]
+    },
+    {
+      "id": "claim_69fba185cda94d26931832dc1eaa25c0",
+      "statement": "arrayLiteral renders only 1-D arrays as new <type>[]{...}; nested arrays throw. The element type is inferred from the first non-null element via elementJavaType, which maps bare boolean/string/number and the {type} wrapper forms, throws on null (cannot infer) and on nested arrays.",
+      "evidence": [
+        {
+          "resource": "repo://src/runner/harness.ts#L54-L70",
+          "version": "repo-lines-v1:sha256:0d516375410145c5b6b98b8b0d7c06dbd11a5aa47f91aa2afdc1097dfd1cdd7e:eyJzZWxlY3RlZExpbmVDb3VudCI6MTcsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6ImYyN2M1YjQzMmViZGJiNGU4NjA3NWM4YTcwOWM2OTNmNzAzMGIwNTljMjk2MTY4MzlkMjE2MTAzOWMwNGNiMTgiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjQxMmNhMzQ1Y2NmNzViZjljMDgwNmJjZTY5NWJlOGRlODA4Yjc5OTg0MjUxYTdhNTRkMjAyY2Y2MTAxZGQ0NTEiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImQ0N2M2MWE3ZTk4MjU2ZjZjMjY3YzJiYzQ2N2U3NTQ1Njg5MTFlMDRjMzA3YTE1NjBhNDFjZDFiNDhjMjA0ZTciLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6Ijc0ZTY4M2E2YzViYjZjZTBlNmVhOTI0OWVmY2Y5NzVjNWY2ZDU2Y2UwZWRiZjg2YmFiY2RjMjA4N2IwMjM2ZDQifQ"
+        },
+        {
+          "resource": "repo://src/runner/harness.ts#L95-L105",
+          "version": "repo-lines-v1:sha256:184d179b2f232e5c9a8f4cfb5f564b102e16078b12f23be84f922a1165659112:eyJzZWxlY3RlZExpbmVDb3VudCI6MTEsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjZkNDBkMjIxODMzMzE3ZmQ0ZDM5NGY3OWM2NjhlYTExZjRhOTY4NTZlMTRmOWI4MmVlOTgwNzFmMTUxZTljNGQiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjQxMmNhMzQ1Y2NmNzViZjljMDgwNmJjZTY5NWJlOGRlODA4Yjc5OTg0MjUxYTdhNTRkMjAyY2Y2MTAxZGQ0NTEiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImQzM2EzNWIzYWYxYjFjZGI2Njc3Y2Y4NGI3YWNhZTVkM2ZjNjU0YTUyYWU5ZTFhMmYwNTg1ZDhjM2VkOGU0MGIiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjU4NmQ5ODRlZjAxYmQ0OTljN2U2M2Y5NjVlYWM2NmE3ZmIzNDE3NTcwYzQ2MjM4NDhmNzlkYzI4NGMxY2I0NzYifQ"
+        }
+      ]
+    },
+    {
+      "id": "claim_92bdef88176c4ce5ba915b33f62602f9",
+      "statement": "literalForArg infers an empty array's element type from a sibling case: it scans the same argument position across all cases of the check and, if another case has a non-empty array, uses that sibling's first non-null element to infer the hint for arrayLiteral. With no usable sibling the empty array defaults to int[].",
+      "evidence": [
+        {
+          "resource": "repo://src/runner/harness.ts#L107-L120",
+          "version": "repo-lines-v1:sha256:99be18e73ce269757258d5605582aa813e91697e10e089f871f7ded26cd0c0c1:eyJzZWxlY3RlZExpbmVDb3VudCI6MTQsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6ImU0MTU2YjA5ZGRhMzg2Mzc5NmI4MDA2YWEyY2Q0MWYwMzBjZDIyZWRhZWUxODk5MWNiODc0ZTJmYjgxM2E0ZDciLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjQxMmNhMzQ1Y2NmNzViZjljMDgwNmJjZTY5NWJlOGRlODA4Yjc5OTg0MjUxYTdhNTRkMjAyY2Y2MTAxZGQ0NTEiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImYxZjNiODkxOWFjMThmMGEzNDhlZjhlNTY0NTBiODg4NjgzYzFiMTYyNzVkYzE5ZjlkMGVjNmU1MjM2YmYwMDYiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjY1MTM3ZDhjOTgxNDJiMjNmOTM5NTYwNjUzMmNkY2UxZTE5NzQ0MWRmOTYxOGQ5MmI1NTYzN2E5Njg4ZDc2NTAifQ"
+        },
+        {
+          "resource": "repo://tests/harness.test.ts#L22-L35",
+          "version": "repo-lines-v1:sha256:42886674ee6fd4041fb8325178d7fa595751cc366202b2f45f42a0f60a32ad49:eyJzZWxlY3RlZExpbmVDb3VudCI6MTQsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjFiZTU1MzkyOGZlZDg5MzA5NjE2YmI4N2MzY2I5ZjhmNmI5YzE4N2Q2MmQ2ZjkyYTFlNGFlZjE0ZTUxMWU4NjMiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjNhM2U0NmY5NDI3NmI2ZjZmNGVkMWYwMmFmNzhiZWY2YTJlZTFjNDM5ZGQ1NTg0Yjk3Mzk0ODMxMzIxNGQyYjciLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImMzN2ZmOWU3OGQyNDIyNmM4ZmYwMTUwMDQwOTc1ODBlNTU2NzdmMzIzMTdiZWQwYTk2MzUwOWI1OTQ1NzgwNzYiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjkzZmQ0MDg0YzE3ZjI3Y2Y0ZjFiNDljNzBlNWYwZGNjYWQ3ZmMxNDA4ZmQ4MjliYjY2NDYzZjMwN2IxMTdhNDUifQ"
+        }
+      ]
+    },
+    {
+      "id": "claim_1444a52dd52944fd82839b4c7415d133",
+      "statement": "KataRunner.main redirects System.out to a ByteArrayOutputStream during the check body, restores it in a finally, then writes results to the real stream using four sentinels: OUT_BEGIN/OUT_END wrap the captured stdout block, RET_PREFIX prefixes each per-case return JSON line (one per return-check case in order), and ERR_PREFIX prefixes a single line carrying t.toString() + the first stack-trace element of a caught Throwable. A thrown exception during any check suppresses all subsequent checks.",
+      "evidence": [
+        {
+          "resource": "repo://src/runner/harness.ts#L11-L14",
+          "version": "repo-lines-v1:sha256:477a3791191ead90e52cf6920f416d3e64f610b6f1e04c921cc4cc0bd81a369e:eyJzZWxlY3RlZExpbmVDb3VudCI6NCwiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiNzQ1MTViYjQyNDNkZDU5M2Q5ODMwNGI2NDQ3ZGFmZmUyNTkwYmQ2NDNjZmNkMWRmM2U5NDkzZDczYjY2NjdiMiIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiMDBkMzQ1MzQ5MWI3NzdhMjllYTgyNTg4ZDljNzZjOGI5ZTQyNDlmNGNkYzkzZjQzMjMxMDcwODY4ZWNmOWE3YiIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiNzIyMDg5ZDY4N2JhODlkZGE2Mjg5ODFkOGZhOTZhODYxNGUyYzViNDUzMDk0ZjM1YzEwMTVkMzIwMjBhNzI2NSIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjMsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiNDBiNzM0Y2ViNGEwNzM5M2M5YmFjY2Q0ZWI0MzQ1MTU1MGY4YWY5MDgzOTEwNTUzNTM0OWQ2YWMxM2M3ZWE1MyJ9"
+        },
+        {
+          "resource": "repo://src/runner/harness.ts#L141-L166",
+          "version": "repo-lines-v1:sha256:0860413a77461cb87439cedb0f2000a1d145e653a2b7ed51ab6eee7132a2f032:eyJzZWxlY3RlZExpbmVDb3VudCI6MjYsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjdmYWQwODcwZTlhMDQ2M2RlNjk5YWQ4YTI4NDA2ZmYxYjhmZjQzMGQzNTJlOWJjM2Q0MzRjNDdiNDlkMGVhYmMiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjQ4OTNmNDBlMzc4MWViODk2YzgyZDA0NmEwODA2N2ExMWUzNWNkZjJmMWRmYWYyNmZlYTkwYjhkYjY2NzY0MTMiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6Ijk3ZDg2MzJlNTRlOTI5OGFiYjk1ODcyN2UyZDUxNDA4YWJhZjEzNjYwMzUzNzkxMDE0MGFiZjY1YjMwYWI2MTMiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjQ3NTVjNDQyMjVkZGNmMjhjYmFjN2I5ODU5YzliOGNjN2VlMjE5NmY5N2RjMTA0MTNmYzRmMjcwMWU2NDQ3MDUifQ"
+        }
+      ]
+    },
+    {
+      "id": "claim_b02d014ba8d14c08841b34b5b284c1f5",
+      "statement": "public/sandbox-worker.js runs CheerpJ in a dedicated Worker (so a tight infinite loop can be hard-stopped via terminate() without wedging the timeout owner). Because there is no DOM in the Worker, CheerpJ stdout/stderr land on the worker's console.log/error; the worker monkey-patches console.log/error/warn/info to append stringified args (joined with spaces) plus a trailing newline into a captured buffer, then forwards to the original.",
+      "evidence": [
+        {
+          "resource": "repo://public/sandbox-worker.js#L1-L31",
+          "version": "repo-lines-v1:sha256:caa85b37f56d0506d63b7f48b04112e34c6ac9774680596cade6dd7296081091:eyJzZWxlY3RlZExpbmVDb3VudCI6MzEsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjJhYTc2OWE5M2RjMzk1NzEwNmQ1NGY4MGFmNjZmOTU5ODU0ZjQ1NTg2ODM1MTZkMDU1NDFmNTMwZDQxODE2MTIiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjQxMmNhMzQ1Y2NmNzViZjljMDgwNmJjZTY5NWJlOGRlODA4Yjc5OTg0MjUxYTdhNTRkMjAyY2Y2MTAxZGQ0NTEiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjowLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImUzYjBjNDQyOThmYzFjMTQ5YWZiZjRjODk5NmZiOTI0MjdhZTQxZTQ2NDliOTM0Y2E0OTU5OTFiNzg1MmI4NTUiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6Ijk3YmE4Y2NkOTg5YzE1YmRhYzdlYzQyMDUyMzk1OWMzYWI3MGZhODJiYTc2ZGZlZTYzNTA5YTExODI2NWE5ZjMifQ"
+        }
+      ]
+    },
+    {
+      "id": "claim_46b5da6c52be4d4a9101cd83abc3fe66",
+      "statement": "The worker compiles <mainClass>.java + KataRunner.java via com.sun.tools.javac.Main (classpath /app/tools.jar:/files/) against in-memory string files; a non-zero compile exit reports compile-error with the trimmed captured output. It then runs KataRunner via cheerpjRunMain and parses the captured console text: an ERR_PREFIX line yields runtime-error with the first line after the prefix; OUT_BEGIN/OUT_END bound the stdout block; every RET_PREFIX line contributes an ordered {json} entry to returns.",
+      "evidence": [
+        {
+          "resource": "repo://public/sandbox-worker.js#L44-L94",
+          "version": "repo-lines-v1:sha256:37a44f0de0b1c07ef596a22fb9b72d770f847892672455dd1f2a74cd984c03e7:eyJzZWxlY3RlZExpbmVDb3VudCI6NTEsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6ImJmOTM4ZTNhMTllMzMwYzE1ZmI1MGQxZWVmOGQ2ZmYxNTE1Y2I2YzI5YTdjZjU0OTJiYTY3ODhlNWVlNmFmMmQiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6ImUxN2I2YTgyNjUyYmM2ZmY3ZDNiOTJjOWFmN2ZlMzk2YWI0ZDFhYTYxMmQyZDk0ZmE2YjhhODE1YTJjMGQ3Y2EiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjljNDdiY2Y4ZThlNzkyNTk0YjE5ZjQzMGEwNDhkYmRiMDdhNzBlM2VkZjdhMDg0Mzk4NTIyOTA0MGQ3YTI1YzciLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjMyY2Y2ZWUxY2MxMzEyOTBjMGE4MzgyN2Q4OWM4MmFkYTg2YjYxMzBjMDhmYzgwZDUxOTIzMjY4NDNkNTVkYTUifQ"
+        }
+      ]
+    },
+    {
+      "id": "claim_04b76336979b4788804b0aa41fb77cd9",
+      "statement": "The worker strips ALL leading and trailing blank lines from the stdout block (slice between OUT_BEGIN and OUT_END then replace /^\\n+/ and /\\n+$/), because CheerpJ's console bridge can flush print() vs println() into a different number of underlying writes than the Java calls made, so only the sentinel positions — not the exact newline count around the captured block — are reliable.",
+      "evidence": [
+        {
+          "resource": "repo://public/sandbox-worker.js#L73-L82",
+          "version": "repo-lines-v1:sha256:a204b7955bcfb8f131d2b8b975e33368b01ca28fd8d9ff719b8425691795c321:eyJzZWxlY3RlZExpbmVDb3VudCI6MTAsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjY0YTE1NTkzOTk0YjFiOGM3NzY1NTg1NjNjZjI5YmRiNDM3YTYzZjBlMGE0NWI3ZThmNmViNGUxOTIyOTU1ODIiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjQ4OTNmNDBlMzc4MWViODk2YzgyZDA0NmEwODA2N2ExMWUzNWNkZjJmMWRmYWYyNmZlYTkwYjhkYjY2NzY0MTMiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjZhNDFkNzNjNDUyMmJlYTM5ZmY4MTVlMjRiY2YxMzExODUzMWQ2NzFlYjNjZjUzMTIxODg1ZTExYTFjNDcyNGQiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjNlM2QwZjdiNmJlY2U3YWQzZjA4NWNmOTBiZmMwOTdhOTg1NzNhYjY3YWZkMDgyZmRmM2U4OGM0YjA2Mjg1MTEifQ"
+        }
+      ]
+    },
+    {
+      "id": "claim_f58d9b7841104f278351f503785ce66d",
+      "statement": "src/runner/runner.ts generates harnessSource via generateHarness(req.mainClass, req.checks) on every runJava call and tears down the sandbox iframe after each run (ok, error, timeout, or stop), rebuilding a fresh one on the next run. This avoids a stale Main/KataRunner class being served from a previous run under the same class names.",
+      "evidence": [
+        {
+          "resource": "repo://src/runner/runner.ts#L110-L112",
+          "version": "repo-lines-v1:sha256:97119a07fba4c38643b318e1471d4c46560062927b9f84d461c7bbdceb39b346:eyJzZWxlY3RlZExpbmVDb3VudCI6MywiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiMGFiNjE2ZWNkZTAyNWRmNDYwZDZkMmQ0MDYxNzg5OGExNjVjMWY5N2MwZDFjNjc2OGQ4M2JhYTNlMTNhYzFlZCIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiODYxOGUwZDc1NmIyMTg0ZGI2NzFmMDBkZTRhZTBiOWUwNmY5M2NjNzJkZDFmZjM1MDRmMjllZDA2YzAyODU5NyIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiNTFmMDRjNDUyZGQwOWE1OTkwNGFhMWFjNjIwNDI0ZmRiM2EwMDExNDZlYTJjMzc4MmI1MmZjMGQ0ZDcxNmUwYSIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjMsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiMzllYjJmNjQ4YmU5YzY3MTQzMGE4MDQyY2Q5MmYyMWRjY2RlZTQ1YWJjZmZmNGMwZjdhZWNiMWUxMWEwYjZmMSJ9"
+        },
+        {
+          "resource": "repo://src/runner/runner.ts#L50-L61",
+          "version": "repo-lines-v1:sha256:42ade35912c03f633711a47274717872a1ffdf3d0a40bb7a3fe80422a237904b:eyJzZWxlY3RlZExpbmVDb3VudCI6MTIsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjFhZGIwOGE1YTQxMjJjOTFkMjg2MTJhYTMwMDQ1YmU4Yjc0ZTY4OWE0NjY0YmM4YTk2MGM0MmFmYjM3MTI3MjciLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjQxMmNhMzQ1Y2NmNzViZjljMDgwNmJjZTY5NWJlOGRlODA4Yjc5OTg0MjUxYTdhNTRkMjAyY2Y2MTAxZGQ0NTEiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImJhMmQ1MjIzZGJmYWM2Zjg3NWExY2Y3ODJkOTRjNGM3NTk2ZDQyYzM4Y2Q1YTZmNWNhMDgzZDI0MGJkMWY3YjgiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImYyZDA3ZjZlZjI3Zjc2Y2FjZWQ2MjMyODA1NzY0OTUwNWQxZDczN2U0NmIzNTM0ZGI5NGQ1YThiZTY3MWJmMGYifQ"
+        }
+      ]
+    },
+    {
+      "id": "claim_3ff7b9c48cad4cddaf75da627902b3ac",
+      "statement": "verifyResult (src/check/verify.ts) returns a Verdict of {solved:false, checks:[], failure:{status, message?}} for any non-'ok' RunResult; non-ok statuses carry no per-check data because there is nothing to compare. timeout and stopped carry message: undefined.",
+      "evidence": [
+        {
+          "resource": "repo://src/check/verify.ts#L81-L89",
+          "version": "repo-lines-v1:sha256:f30f664297ae14731912ae58ad631c675a756a163c5da96f35d9a8085d955b8a:eyJzZWxlY3RlZExpbmVDb3VudCI6OSwiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiN2ZjMGQwYmE3ZDgwNzk3YjQyODk0ZmM2MTc5YmYzNzM1NWZlNzA2YjU0NTQ0MDhmMDBiY2M2MmU2YjBiOGY4ZiIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiMjdlNTc4OGQ1ZDlkNzNkMjRhODFkYmMwYTVhNzRiZmE4MmM5YzNiM2FmOTllNTJhZjc5NmU5MGI0NjhhOGEzZCIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiZjZiNWI2OTQ0M2IyMTBiNjg4MTg0MmE0YTc0OTlmYmE0YzExNmNkZjZjZjhkNDI1NTY4MDBmNWUxYTA5NDM3NSIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjMsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiMjdkNjE3NWQyMjM1MDIzZDYyM2Y5OTRhZDUyZGM3ZmQ5NGNiZTllNDlmMDcwYTEzMDkyYzU1ZGYwNzdkZTdkYSJ9"
+        },
+        {
+          "resource": "repo://tests/verify.test.ts#L18-L32",
+          "version": "repo-lines-v1:sha256:fe39e72107cd75e83c4035c575cca65a0ab81926c6832f0ea0e023f825ba3ab3:eyJzZWxlY3RlZExpbmVDb3VudCI6MTUsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjVlZDVkYWM2ZjU5YjRlMjVhMTg2ZTNiYTJiMDQ5NzZmMjI0YzI4ZDQ5YjczNDY5Y2IyOTU2ZTc4NDI0YWVhNzIiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6ImY2ZjViNDBiMTU4NDU3ZDE3ODY0ZjIxNzkwNzg2ZGQ1YTJlY2RiNjRiNjZhNjUxZjc4OGQ0ZTI1Y2QzMzAzZDIiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjE0YjM2OGU2NmNlOTM3OTNjMTA1NGIwZGY0OTMzN2M3M2QzMzdmNWFhNjRmNTZlMzI1Y2ZmYTgyMmU1MTc5NmIiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImJlODNlNTAzN2M4NzljNGE2ZTVjYjRjYjJjM2E0N2RjMzRmYWNlMzQzMzZhOTE0Nzc5NTA0YzVhNDA5Y2NkOWIifQ"
+        }
+      ]
+    },
+    {
+      "id": "claim_ccebba8765b84bfd9cfef4f636ef38a8",
+      "statement": "For stdout checks, verifyResult normalizes both the expected and actual strings with normalizeStdout before comparing for equality. normalizeStdout converts \\r\\n to \\n, strips trailing per-line whitespace ([ \\t]+$), and strips trailing newlines, tolerating CRLF, missing trailing newlines, trailing blank lines, and trailing spaces while preserving internal blank lines.",
+      "evidence": [
+        {
+          "resource": "repo://src/check/normalize.ts#L36-L44",
+          "version": "repo-lines-v1:sha256:21d1f992639f446405250db4f699018032b48c8a1e47bb059be959ede5e7ed93:eyJzZWxlY3RlZExpbmVDb3VudCI6OSwiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiMzJiNjBmODc1Zjc0MTVkZTBkMzNmNzhjOGY5ZGQzNDdjNmNmMDAyMjk3Y2Y1OGFiYjBkMWRiZmYzYTdmZWE2MCIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiNDEyY2EzNDVjY2Y3NWJmOWMwODA2YmNlNjk1YmU4ZGU4MDhiNzk5ODQyNTFhN2E1NGQyMDJjZjYxMDFkZDQ1MSIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiYmQwZjJkM2EzYWFkYTI3NTg2NDU3OGQwYTQzOTE1NjM4ZDU0M2ZlY2EyYzk0ODU4ZGI5NDEyMTFlODZjZWYyYiIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjAsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiZTNiMGM0NDI5OGZjMWMxNDlhZmJmNGM4OTk2ZmI5MjQyN2FlNDFlNDY0OWI5MzRjYTQ5NTk5MWI3ODUyYjg1NSJ9"
+        },
+        {
+          "resource": "repo://src/check/verify.ts#L94-L97",
+          "version": "repo-lines-v1:sha256:8b982d1ce06381de871d6f1a1656de52ce8ca966acc8c74341008d831ecfd1b9:eyJzZWxlY3RlZExpbmVDb3VudCI6NCwiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiZjZkNWYwYzJiYmE5NmVmNWU4MDZiMDdiYWMyNDliYTA5MmM5NWFjMTQyZTRjMDBiYjM0OTVhODM1YjdiNmY4YSIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiMGJkN2NlMDg4MWE5MjFiYTBkYmUzMGM5M2UwMmVmNmUyMDlmY2I1YWQ5OGExNzM3ZGQ1ZWIxMDdjN2E2NjMxYiIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiMzRlZDU3NWUxZTQ0OGQ5ZTJkN2NhMzc1Yjc0NTQxOGY2MzFlODA2YTcxNzU3YjE2NWY5MjY3OTVlNTM2NWJhMyIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjMsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiODFhNmM4MzRjZTU5OWRjMzYwNWFkYzIzNWY5NDc5MjEyYWE0ZmVkMTMyMWQ1YTFkM2E4MmNiZDQ1YjAyNDYwNiJ9"
+        },
+        {
+          "resource": "repo://tests/verify.test.ts#L43-L47",
+          "version": "repo-lines-v1:sha256:a29fd6a7b57abc905fa0cc58e4f5620cd086053281a1540e46ead1ed32747613:eyJzZWxlY3RlZExpbmVDb3VudCI6NSwiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiMTRiZTViMGFjMTFmMzNiY2I3Zjc1OWYzOWM3NGQ4YTQwNDJjM2IzMTJmNzBhYmE0YmUyYWQyZTM2N2MxZmM1ZSIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiM2EzZTQ2Zjk0Mjc2YjZmNmY0ZWQxZjAyYWY3OGJlZjZhMmVlMWM0MzlkZDU1ODRiOTczOTQ4MzEzMjE0ZDJiNyIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiODFhOTIxNzE1ODg0MjM4MzRkNmRlNDBhNDA2ZDYwZGM4MDNjMjNjNDE1N2NhOGQzMTA2ZTNkZWExODUzYjViNiIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjMsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiNTczYWQxYzkyMjc0YjZhY2ExMWMyYmRmODliNTI5ZDBiNWI1OTNjNzIzMmQ3MWY0MGFhNzczM2U4YjI4ZjMwMCJ9"
+        }
+      ]
+    },
+    {
+      "id": "claim_4cfe8f5aa71a4d20adee0cb538429de1",
+      "statement": "Return cases are positional: verifyResult keeps a single returnIdx counter that increments across checks in order, taking result.returns[returnIdx++] per case and JSON.parse-ing its json (parseActual returns undefined on parse failure or a missing entry, which makes the case fail). A return check passes only if every case passes; the verdict is solved only if every check passes.",
+      "evidence": [
+        {
+          "resource": "repo://src/check/verify.ts#L92-L109",
+          "version": "repo-lines-v1:sha256:5e3f6050a64c2d0cce0b1cbcbcefb5e0039863a6fd3b442fa7a7e7898d6eb6ca:eyJzZWxlY3RlZExpbmVDb3VudCI6MTgsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjgwMzE5NDliYjYyMjI2ZjExYmZjN2EzMzE3OTc3M2IwMDc2ZGM1YzhmMzhkYTM2MDVkZTY2MjhkZTEyNjBiNzkiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjFkOTkzNzk4YjljYzNjYTBmNjc2ZGE3ZDY1ZTM4ODVhYzYwOGMwYTA5YTU2ZWFmNjcxNWFiYmZiMTQzMzE1OTAiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjQyYjgxNDY0ZmNlNjM4N2Y4Y2VlZTRmOGI2Y2FlNGIzNDUxZTU2ZDlkNzg4YTVlMzI0NTRhZmI2ZWI4NDgxN2UiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjoxLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjQxMmNhMzQ1Y2NmNzViZjljMDgwNmJjZTY5NWJlOGRlODA4Yjc5OTg0MjUxYTdhNTRkMjAyY2Y2MTAxZGQ0NTEifQ"
+        },
+        {
+          "resource": "repo://tests/verify.test.ts#L102-L111",
+          "version": "repo-lines-v1:sha256:c15d669eea569055fe1ed6b76d0509e8ebebdffaa0b70f298851b364431af021:eyJzZWxlY3RlZExpbmVDb3VudCI6MTAsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6ImE3YWI0MzU1NTRiM2NhZWU0MmJhZjI3NTBiOGQ2NGY0NzUyYWIzNTM4MjQ4OTI1YWM5MzI4ZWZmZTJlMzU3ZDIiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjNhM2U0NmY5NDI3NmI2ZjZmNGVkMWYwMmFmNzhiZWY2YTJlZTFjNDM5ZGQ1NTg0Yjk3Mzk0ODMxMzIxNGQyYjciLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImI4NTBhODY0YTM0MTg3NjRiODgxMzUwYmM0M2Y2YjZlZWQ2NjJjNDg3ZjlmNTI3MmIxMGMxYmI3ZTJlYmY5NjciLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjoxLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImY2ZjViNDBiMTU4NDU3ZDE3ODY0ZjIxNzkwNzg2ZGQ1YTJlY2RiNjRiNjZhNjUxZjc4OGQ0ZTI1Y2QzMzAzZDIifQ"
+        }
+      ]
+    },
+    {
+      "id": "claim_5e0f9588b98942499be97f5a3c67ebe3",
+      "statement": "compareJavaValue unwraps the {type,value} wrapper on the expected side (unwrapExpected) and dispatches per kind: long is compared as a string (unwrapping an isLongTagged actual.value or String(actual)) to avoid 2^53 precision loss; float/double use EPS=1e-9 with finite check; char compares by codepoint; int by Number equality; plain bare numbers compare by Number (non-integer bare numbers use EPS) and strings/booleans by ===. Arrays compare element-wise with length check first.",
+      "evidence": [
+        {
+          "resource": "repo://src/check/verify.ts#L36-L79",
+          "version": "repo-lines-v1:sha256:1ea7f9e695414b51dc049e30bb8bf3d806bc8cb473e4cd80e7695d24a06b26f7:eyJzZWxlY3RlZExpbmVDb3VudCI6NDQsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjBmYzFiMmM4ZjY1M2YwZGM5YmMzN2MyMjhmZjEwMzRlNWZmYzNjNjJhZGJkZDE3MWQ0ZWM5NGJjMDdmMWMzMTQiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjQxMmNhMzQ1Y2NmNzViZjljMDgwNmJjZTY5NWJlOGRlODA4Yjc5OTg0MjUxYTdhNTRkMjAyY2Y2MTAxZGQ0NTEiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImZiNTgwZTk2NGY4M2E0NzNmNDNkNDQzODQ2Mjk0OWQ2OGI1NjAwZmRhNzg3ZjE2Mzc0NWQwMGRlODljYmYzNmEiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImZkOWVlOWMzNWFiY2IyNWQ3NTIxZDY0ZDAxNmU2ZDAxNzMyNjBkYTBhMDJlMWM5ZTViNDNkNTcyY2FiMjA3ZjMifQ"
+        },
+        {
+          "resource": "repo://tests/verify.test.ts#L63-L99",
+          "version": "repo-lines-v1:sha256:dde8fc7f483750cb800c1e97fbc17568cfd5262c098a3e6dacc27b0380fd7dac:eyJzZWxlY3RlZExpbmVDb3VudCI6MzcsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjAwMWFmNmYyYTg3MDVlOTYxMTU3OTg4Mjk0MDc5NjEyYzk5OGFiYTk3MzNkZWJmZWQ1MzUzYTU5YTc3Y2JiZDIiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjM3MTg5NjMzNjg4MDVhOGU5OWE5MTBiMzA5MWQwYzJkMTliNjIzNWMyZWJhZjhlODc1MGUwNDliMGRiOTE1NWEiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjFiMDMzODI2ZTJhNjk1MjkwNTMyOGU1Y2U4YmQ1NjM1YWIwMjIyYzBlMWYzYzMxYWNjMWY2ZTg4YTQ4YTZlZjciLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImZlNTg1MGE4YjYzNWFiYjc4MzY3YTBlZGM0MjgzODU0ZjU1OTk0ZGM3MWQ5NWM1NzRiOGYyNTlkMTU0OTQxOGMifQ"
+        }
+      ]
+    },
+    {
+      "id": "claim_33ab2d7a8f8d4012910d46d5df055730",
+      "statement": "JavaValue (src/kata/types.ts) is a discriminated union of bare number/boolean/string/null/array plus an object {type:'long'|'float'|'char'|'double'|'int', value:number|string} type wrapper. The wrapper carries precise primitive kind for values that lose information in JSON/JS (long beyond 2^53 carried as string, float vs double precision, char vs string/number). The harness's toJson overloads emit the same {type,value} shape for long, so expected (kata YAML) and actual (parsed runner JSON) compare with identical unwrap logic.",
+      "evidence": [
+        {
+          "resource": "repo://src/check/verify.ts#L1-L7",
+          "version": "repo-lines-v1:sha256:c39c8047d35022c4930802fffafbd7ca64050069d7f4a60698474fce884271a7:eyJzZWxlY3RlZExpbmVDb3VudCI6NywiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiODUyNzIwYjUwYzk2NzI3OTViYmFkZjI0ZTY2NWJlZWE5NDNlNGI1ZDdjMmNhYTczMWJjNDU5M2IwMTY2ZThlOSIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiNWFhYWNjZjc3NGMyZWM1NmYzYjFmNWUxMzQ5ZjdlNWM3YWFmODkyZWFjMjRiOGJlY2Y0MzU4OTZmN2Q2Y2ZkMCIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjAsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiZTNiMGM0NDI5OGZjMWMxNDlhZmJmNGM4OTk2ZmI5MjQyN2FlNDFlNDY0OWI5MzRjYTQ5NTk5MWI3ODUyYjg1NSIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjMsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiMzFkMjQ2YjVmNjVjZWZiNmI3MWE3ZTQ0YTA2MWFlYjljNjdmZTlkZjlhNmJlMDE5OThjN2QxNDE1ZTA0ZDY5MyJ9"
+        },
+        {
+          "resource": "repo://src/kata/types.ts#L12-L18",
+          "version": "repo-lines-v1:sha256:12e77c78845810ba292df795f278e0028a7f70efd9e68fc6a4bc20b6920a2516:eyJzZWxlY3RlZExpbmVDb3VudCI6NywiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiODYxMTM3OWM3MGJiZmMyNTg5OWI1OGYwZDBjZTAyY2I4M2I5NTBhYWQ4MWU4OGEyOWM0YzRkODgzM2IxNmRhOCIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiOTczMzg5MjFkNTkxNzMwZThiYTVkN2U4ZmVkOTNmOWZiMWNjOGNiODg2ZGQ3MTgxYTFhMGY5MjY5NWFmMjQxNiIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiZjM3ZjQyMTk5NDJkM2U4YzI0MTdiZGQ2MjY4MzlkOTZlNjNmYzJhZjZmNDEyOTc2YmNhODE1NjU4ZjYzMGJjNCIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjMsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiOTA0OGJiY2M4YzllNTg3MDhhZjU1N2ExNDY4Mjc4NTVkYjFiM2Q1N2U5MmNmY2UxNWUyOTYwMzA0NjQzY2FhMSJ9"
+        }
+      ]
+    },
+    {
+      "id": "claim_183969f53e3946debfdf737ee5f528ad",
+      "statement": "The runner arms an INIT_BUDGET_MS (90 s) timer covering CheerpJ load + compile; when the sandbox reports phase 'running' it clears that budget and arms the kata's timeoutMs instead. The phase messages flow worker→iframe→host, and the same running-phase budget swap is mirrored in both src/runner/runner.ts and public/sandbox.js so either layer can fire a timeout without relying on the Java thread yielding.",
+      "evidence": [
+        {
+          "resource": "repo://public/sandbox.js#L43-L48",
+          "version": "repo-lines-v1:sha256:d0866b3cfa9154c9dba0fb4e239a8c7feab0440a24f865aae0292bfd9dad0935:eyJzZWxlY3RlZExpbmVDb3VudCI6NiwiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiY2ZiNTExNzFiZTBiZDFlYjUyNWNhYTVlODEwYmFjZmVhNTlmNDkzMGIxYzNhNThlMTM1NzhjMzMzYmQyZTQ0MSIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiZTZiMDQ0OTE0Njk3MjJlODM2M2E5NGU0MDQ0NTM4ZTAxM2EyYTIxN2UzNmIxZTU2OGJhNjBhY2I3YjRjOGYyZSIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiMTQ3MDk5MDM2OTc3ZmIxZDJiY2EwMmNiNDhkY2I1Y2RkN2RiNjQyZDllMjJhYzQwOTk3NTJlNWI5NzQzZDBhZiIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjMsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiZmU3MDc1NTkwZGJhYTczYjZhZGVhMTMxNzZkYmIwNjRlZWU5ZmU1ODI4Y2ZlNDY3YTk2NzhiYjJjNjg5Mzc2NSJ9"
+        },
+        {
+          "resource": "repo://src/runner/runner.ts#L18-L20",
+          "version": "repo-lines-v1:sha256:1114e9d03bfc0a2f50ae445b2fd4aa5d87a23e75ed299aa6b13b3cba9b1737f4:eyJzZWxlY3RlZExpbmVDb3VudCI6MywiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiMzI5NmI5MmY3NDRjOTMzZDQxMjY5NzY3MmVkODcyMDZhMGUwMDY5ZWMwYWM2NDhhNDFhMTk4Y2JkZWNjZTVlMCIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiNDRiOGMzZjY1NTBkY2Q4ZGE5ODllNTViZDU2MTA5YzYzNjBhMWQ4YzQwOGE1Mzg0ZjMwNTczMmU0OWE3YzVhMiIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiYmE4MzJlZWZlNDE2Y2ExODk3N2UxYTY3NTYzODY1NjM5ZDk1NDJkNzlkZmY1MWI2YWFmZWY1YmUzM2FhZjViOCIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjMsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiNGYxZDAzMWIxMjEwYjYzNTM0NTVjNzk4Y2I5YmFlNTNhNzg0NmJhNWFjZGYwZDY2OTVkODkwYzk1OGRiYjY3OCJ9"
+        },
+        {
+          "resource": "repo://src/runner/runner.ts#L68-L73",
+          "version": "repo-lines-v1:sha256:c5c2a4117a1aaaaf7c706c2187f0083b0d9d7ca7a4b22ee233c15e636636e78b:eyJzZWxlY3RlZExpbmVDb3VudCI6NiwiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiMzYwZGI1YWUyZTFjMjY1MmUyZTljNTE2MjkzYzI4NjUwNGVkZDRhZGFhMmUzNzZiOGI5MGI5N2Q1YjgwOTNlOCIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiNDg5M2Y0MGUzNzgxZWI4OTZjODJkMDQ2YTA4MDY3YTExZTM1Y2RmMmYxZGZhZjI2ZmVhOTBiOGRiNjY3NjQxMyIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiZWMwODRhODIzNGZmMTA2MmU2NWE1NzFjZjZiZmU2Yzc4Y2YxY2I3ZTllYzA0OTI0N2Y5NzViMzIzODZhNTMyZSIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjMsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiNjQ0ODIyYjNiMWE0ODFkNTYwZWJiMTljOGE1YzNkYWU1ZWQxZGE2MDExNGI5NDkzMWEyNmZjMzA4YjA1ODYyOCJ9"
+        }
+      ]
+    }
+  ],
+  "verification": {
+    "by": "openwiki/0.4.0",
+    "at": "2026-08-26T15:48:44.789Z"
+  }
+}

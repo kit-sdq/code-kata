@@ -1,0 +1,316 @@
+{
+  "schemaVersion": 1,
+  "pageVersion": "sha256:dea59e006e434b3cd0ec1b996924500216d3bf05985b6e1d7ef21b34a0e5073a",
+  "claims": [
+    {
+      "id": "claim_334572a15e07443abc2188b5991cba45",
+      "statement": "`npm run build` is the composition `tsc --noEmit && vite build`: `tsc --noEmit` is a pure type-check gate that emits nothing and aborts the build on failure, then `vite build` bundles the app into `dist/`.",
+      "evidence": [
+        {
+          "resource": "repo://package.json#L8-L12",
+          "version": "repo-lines-v1:sha256:3bb050a95c1dc63a486f5974f5d32877056ec6d0267db8126c5ebcf392c1351f:eyJzZWxlY3RlZExpbmVDb3VudCI6NSwiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiN2JhNDM0ODUzMDIyZTBkZWRlMDhjYzRkYTVmNjZlNzNlZTJlNjg2NjM3ZmY0MzJlZGYyZjAyOGNmOWNkNDkyMSIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiNGQ1Y2QyZmI0ZjNkZjg4NDUxNTI1NWIzOTUyM2YyZjhiNTQ3MmJlZWE5ZjU2NmZmY2EyMDRkYjgwMjU2MTA0MSIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiOWNkNzdkNmMyNjYyZDE1NjhjMWNjOTI1YmZhOGM2ZjVlZmVlOTViNjRhMjNkMTg2ZGMyMmQzZGVjMWJiNzUzYyIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjMsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiYzVlMmMzMmQ1NDU3YzhlM2JjNDVhNDcxMmI3ZWFhYmJhZjVmN2JlYTIyNzRiN2Q4YjVlMTFjMTQ1MmEwYTc0NSJ9"
+        },
+        {
+          "resource": "repo://tsconfig.json#L1-L20",
+          "version": "repo-lines-v1:sha256:3e97e7ccb28828f08124f7485c22b7072b57379a80cfdfd5eafd8a3c9a549c2a:eyJzZWxlY3RlZExpbmVDb3VudCI6MjAsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6ImE2ZmIwOGZkYTFhY2I5NTdiNjExNmJkMzc4MTFhMWZlNDFhMDE2MTFjMDYzMWVkYmY3ODZkNjg4OWEyN2E1NWMiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6ImE2MWEzYzZkMGI5NjA1NjMyOTgxNDFmYWNkMDM2MzAwYzM0NTNmZmJiN2RiM2I5NjFjNjBiMjk2MDdjMzVjN2MiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjowLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImUzYjBjNDQyOThmYzFjMTQ5YWZiZjRjODk5NmZiOTI0MjdhZTQxZTQ2NDliOTM0Y2E0OTU5OTFiNzg1MmI4NTUiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjoxLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjQxMmNhMzQ1Y2NmNzViZjljMDgwNmJjZTY5NWJlOGRlODA4Yjc5OTg0MjUxYTdhNTRkMjAyY2Y2MTAxZGQ0NTEifQ"
+        }
+      ]
+    },
+    {
+      "id": "claim_98be9c3b52bc42adace8ebde7b266882",
+      "statement": "`vite.config.ts` sets `base: './'` so Vite emits relative asset URLs (`./assets/...`) instead of absolute root-anchored ones. This is required for GitHub Pages project-site deployment at `https://<user>.github.io/<repo>/` (a sub-path), and makes the same `dist/` portable across repo names.",
+      "evidence": [
+        {
+          "resource": "repo://docs/CONTRACT.md#L6-L7",
+          "version": "repo-lines-v1:sha256:cc080a9a8c303b0880bcd876401e0d7ae63405d497e08f4177941075da5d9c20:eyJzZWxlY3RlZExpbmVDb3VudCI6MiwiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiMDFiYTQ3MTljODBiNmZlOTExYjA5MWE3YzA1MTI0YjY0ZWVlY2U5NjRlMDljMDU4ZWY4Zjk4MDVkYWNhNTQ2YiIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiYjA5NDFjODgzY2E4NzBjZDMxMDMwNzg2ZmI4ODQzZDFkMDU0NGMyZTViZmNlMDU5NGQyZWVkOTNhYjQ2ODYwOSIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiNGRkODFmMDg2MTZkMzU1MDI2NmE0NTE3NmRlYWZiMzk4NGE5N2Q2NzQyMjc2ZTcyZjU4ZjVlY2I1OGI4MWI1YyIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjMsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiZDc2MjI4OWViZTM5NWNhMmIzOWI5ZjI0ZWY1NjcxZjJkMDM4MTdiYTA3NTAyMzU5NGZiZGVjOTFlZjIyOTMyZSJ9"
+        },
+        {
+          "resource": "repo://vite.config.ts#L1-L5",
+          "version": "repo-lines-v1:sha256:37f7c42ef02c665c69c6cebdb9358fff04bc91bdddeea3799537a43b0b685f00:eyJzZWxlY3RlZExpbmVDb3VudCI6NSwiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiNzFkMDIxMjc5OTMzNTg3NjU5ODQyOTdkZDMzODM1ZTAwZjIyNzQyNGNiZDY0YzJjYmYwMmNiNzExNDVjZmYyYiIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiZjZmNWI0MGIxNTg0NTdkMTc4NjRmMjE3OTA3ODZkZDVhMmVjZGI2NGI2NmE2NTFmNzg4ZDRlMjVjZDMzMDNkMiIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjAsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiZTNiMGM0NDI5OGZjMWMxNDlhZmJmNGM4OTk2ZmI5MjQyN2FlNDFlNDY0OWI5MzRjYTQ5NTk5MWI3ODUyYjg1NSIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjAsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiZTNiMGM0NDI5OGZjMWMxNDlhZmJmNGM4OTk2ZmI5MjQyN2FlNDFlNDY0OWI5MzRjYTQ5NTk5MWI3ODUyYjg1NSJ9"
+        }
+      ]
+    },
+    {
+      "id": "claim_367bf80a45c34263a866889fd035acf1",
+      "statement": "`index.html` is Vite's single entry point; its `<link rel=\"stylesheet\" href=\"/src/styles.css\">` and module `<script src=\"/src/main.ts\">` are the two roots of the bundle graph, and Vite rewrites these absolute `/src/...` references to hashed asset URLs during build.",
+      "evidence": [
+        {
+          "resource": "repo://index.html#L1-L16",
+          "version": "repo-lines-v1:sha256:369ef9a6f0b7dbcffea1f0c84405e8d617bceae774689265521628a8c903a49d:eyJzZWxlY3RlZExpbmVDb3VudCI6MTYsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjMzNWZjYTg1NzRmMDYwZWVhMjRlYmNkYWU2Yjc4ZjMyNDE0ZjVkZTAzZGExMDg0ZmQwZTczZDcxMDc2OGUzYTkiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6ImQzZWQ4MWNkMTZkZjg4ZDY5MjE2NjQ2ZDhkYWRhNzYzNGIzM2E2OTg2ZTljMjNhNzI2MzFkMTkzM2I2MzVhNTIiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjowLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImUzYjBjNDQyOThmYzFjMTQ5YWZiZjRjODk5NmZiOTI0MjdhZTQxZTQ2NDliOTM0Y2E0OTU5OTFiNzg1MmI4NTUiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjowLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImUzYjBjNDQyOThmYzFjMTQ5YWZiZjRjODk5NmZiOTI0MjdhZTQxZTQ2NDliOTM0Y2E0OTU5OTFiNzg1MmI4NTUifQ"
+        }
+      ]
+    },
+    {
+      "id": "claim_dec9e75465014680875640e42b63a6af",
+      "statement": "`public/sandbox.html`, `public/sandbox.js`, and `public/sandbox-worker.js` are copied verbatim (un-bundled, un-hashed) into the deploy root by Vite, and the runner/relay address them by fixed relative paths (`./sandbox.html` in `runner.ts`, `./sandbox-worker.js` via `new Worker(...)` in `sandbox.js`). Their filenames are part of the runtime contract and must not be changed without updating those references.",
+      "evidence": [
+        {
+          "resource": "repo://public/sandbox.html#L1-L11",
+          "version": "repo-lines-v1:sha256:014a074f47f8345f15344762a9b693961c560128503160d86fcca8d4b67e72f0:eyJzZWxlY3RlZExpbmVDb3VudCI6MTEsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjMzNWZjYTg1NzRmMDYwZWVhMjRlYmNkYWU2Yjc4ZjMyNDE0ZjVkZTAzZGExMDg0ZmQwZTczZDcxMDc2OGUzYTkiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6Ijg1NzdiYmQwZjNlOWZmYTM3YTE0YmZlZjgwY2NlMWFmZTI2MWYzNTljMzFlNjM2ODQ2N2VhMTNlY2UyM2M1ZWQiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjowLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImUzYjBjNDQyOThmYzFjMTQ5YWZiZjRjODk5NmZiOTI0MjdhZTQxZTQ2NDliOTM0Y2E0OTU5OTFiNzg1MmI4NTUiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjoxLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImQzZWQ4MWNkMTZkZjg4ZDY5MjE2NjQ2ZDhkYWRhNzYzNGIzM2E2OTg2ZTljMjNhNzI2MzFkMTkzM2I2MzVhNTIifQ"
+        },
+        {
+          "resource": "repo://public/sandbox.js#L35-L57",
+          "version": "repo-lines-v1:sha256:d3638e7de76b5420c6b230848638d021b586c4ff28695078e3f66c628367b726:eyJzZWxlY3RlZExpbmVDb3VudCI6MjMsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6Ijc4ZjVjYWZlODgzZGY5ZjJkNDE0ZWE5ODk5ZDY2ZGUzMTQ5MDI0MzAyNzA2NTc1ZDM2MjFlNjk4NDQ2NDIzZGIiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjU2MTM2NmM1NWM3Y2IyNjhmNTZhYTdhODA2OWVkZmMwYTdiMzc2NmYxNzM2MTIxOTQyNGJmZjA3ZGZmN2YwY2YiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjAzZWJiNjA1Mzk0MzE2ZGM2ODZhZWZlM2RiZDZiZWY4MGI4NjY3MzA5ZmVhMWMwOTZjNWI5NTc2MDM3NTY3ODEiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjE4ZWZkNmZlMTNiYWJiNjJjNmQ0NDJkNWRjNGJkMDI4MzJhZGVlY2EyNzMzZTM5OTY4ZDIyNGY0Y2E0YjI2YzgifQ"
+        },
+        {
+          "resource": "repo://src/runner/runner.ts#L41-L47",
+          "version": "repo-lines-v1:sha256:c2de9602de4cae53330ca3850eee4d2005c180f2a8caccf00bf56571443cbe57:eyJzZWxlY3RlZExpbmVDb3VudCI6NywiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiMDcyYTgxZGFhYWYyMGM2YWMwYzk4OGE1YWE0M2Y2YjY1YjMwOWQ3OTc3NDY1MDYzM2NkNDY2N2E0ZDNhZDY3MCIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiYzgwZmM3NGIyMzc0ZWY0ZDA3ODZiOGRhNDZmYjg3NDQ2OGJlNjYwODI5ZDRjYzA4NGI5ZWZlZmE1NWU1MzhjZCIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiZmI1ODBlOTY0ZjgzYTQ3M2Y0M2Q0NDM4NDYyOTQ5ZDY4YjU2MDBmZGE3ODdmMTYzNzQ1ZDAwZGU4OWNiZjM2YSIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjMsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiYTJjNDRlNmQ2OWE5ZTlmYjAwODNjMmNhNjliNDAyZjE2ZWJlNjllNGZiZWE0YTc0NjM3YTg2NGNhODEwMTJmNSJ9"
+        }
+      ]
+    },
+    {
+      "id": "claim_1d326494290c4d8e82a5492de10f9ed1",
+      "statement": "The deploy workflow triggers on push to `main` and `workflow_dispatch`. The `build` job (ubuntu-latest, Node 22, `cache: npm`) runs `npm ci`, `npm test`, `npm run build`, then `upload-pages-artifact@v3` with `path: dist`. The `deploy` job (`needs: build`) runs `deploy-pages@v4` in the `github-pages` environment. A `pages` concurrency group with `cancel-in-progress: false` serializes deploys.",
+      "evidence": [
+        {
+          "resource": "repo://.github/workflows/deploy.yml#L1-L44",
+          "version": "repo-lines-v1:sha256:ed2f351a30e6a91ccee9addee2b4f2e0ff81652ea596ca097e6ed0137c917698:eyJzZWxlY3RlZExpbmVDb3VudCI6NDQsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6Ijk5OGI4YWRjMjU4MjA0MTAxYmUxM2M4OGYxNjM5MDc5ZTY0NTNiNzM1MTBhNDYxM2MwOTM4MjdkYjYwOWUwMjgiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6Ijc2MzQxMzJhMWI5YWUwNmQ4YjQ5YjY1ZTY0YmVhNTExZGQ2MGI5N2NkYjJhNDM1ZTQ2ZDAwYjIwYjUwODJjZGMiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjowLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImUzYjBjNDQyOThmYzFjMTQ5YWZiZjRjODk5NmZiOTI0MjdhZTQxZTQ2NDliOTM0Y2E0OTU5OTFiNzg1MmI4NTUiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjowLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImUzYjBjNDQyOThmYzFjMTQ5YWZiZjRjODk5NmZiOTI0MjdhZTQxZTQ2NDliOTM0Y2E0OTU5OTFiNzg1MmI4NTUifQ"
+        }
+      ]
+    },
+    {
+      "id": "claim_f3706855a4c149a2bdfd948e44c854b5",
+      "statement": "The deploy workflow declares `permissions: contents: read, pages: write, id-token: write`; the `id-token: write` is required for the OIDC-based `deploy-pages` action, and `pages: write` is needed to publish.",
+      "evidence": [
+        {
+          "resource": "repo://.github/workflows/deploy.yml#L36-L39",
+          "version": "repo-lines-v1:sha256:0720f4441b96eea2a0bd281960cc650809401a90613e0cd0191a985101993d19:eyJzZWxlY3RlZExpbmVDb3VudCI6NCwiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiNjUxNzRmZDI1NWNlNTY3MGI0NzhhZjA0NmNkNDNjNjczNGYyMDY1OWNkMTEyMzg1Zjc1MzMwNzU4M2JmY2RlMSIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiMjI3NDYzMzRmZGJkNjUxMzIzOWYxMzI2ZGI4YjYxMjc1N2I1YjMyYzA4MDhiNTA4MWE5OTM3ZjY1MzNiOGRiOSIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiNzBjNWQ2MDUxYmFiMzNjYjAxZjBmNzYxYTZjNDRhODI0YTIwMWVhNDNmYjc4NWZhYmE1MzZhOGE4Y2ViNzA0ZSIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjMsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiM2Q3YzM4YWEzY2M1ZmVlYWYxYTI0M2EwZWQ2NDY4MTJjYjQ1ZDFkZGZkYWE5ZDYwNDVkMDkwZWZmYTczNGMzMyJ9"
+        },
+        {
+          "resource": "repo://.github/workflows/deploy.yml#L8-L11",
+          "version": "repo-lines-v1:sha256:98efd163d060061113870612acf548df940b4a57b0a9075643590b3f841c2583:eyJzZWxlY3RlZExpbmVDb3VudCI6NCwiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiMzUyNjI0N2VkZTAwNmU5YmRhYjljNjg1MDcyODQyNWQxYjQxNjZjYWY1Y2FjNTBjZjA5NTVjNDRkMjRjMWE4ZCIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiNzFkNmRjNzMwNWM2YTJkZDllNzNjOWY1NWY0NmUzMDllMTI4NTIwZDdiMDgzNGEzZTliZDQxNDBlZjBlNTg5NCIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiYzcyZWNlZjZiM2NlMjA2NmQ4MDdhZDhkODQ4ODY2NzBlYmZjMGEyNjQxZWY1ODg2NjU1YzBiYjEzNjFlZDEyNCIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjMsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiMWQxZjBlNzhjM2U3MTA3YmVkM2JhNmI3MWY2NWNhNjk2ZjIxNDQzMjcwZThhMmEyNjAzYzcxODhhMWQ3ZDAxYyJ9"
+        }
+      ]
+    },
+    {
+      "id": "claim_60ed9bf28bf24d99acd2b333b0ee10fd",
+      "statement": "`npm test` (vitest run) runs in CI before `npm run build`, so failing unit tests abort the workflow and block deployment; nothing is deployed on red.",
+      "evidence": [
+        {
+          "resource": "repo://.github/workflows/deploy.yml#L26-L28",
+          "version": "repo-lines-v1:sha256:339357243389168d24097de16d3ea2d914aac8fcc7eae6f13d82aef870c28618:eyJzZWxlY3RlZExpbmVDb3VudCI6MywiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiNjNmMTdmNzA4YmY5NDE4YjhmYzA4YzE1YTBkNTFiMDE3YzNlNjRlNzkxOTYzZDk0ODI5YmFlNGY1M2ZhYzVkNyIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiZmZjNGU1NWViYTBlNzM4NDFjNjk0M2RhOTBkYzY2ODI2ODQxMjIyM2FhMjA1YWZkNzA0MTExMWE5MDJlNzcxZiIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiNmNiN2Y5N2IwZmU1Y2MzOTA3M2Y2MTQ0YTE1MmZiNWZkZGI5NWZjN2E3ODU2Y2IyMWM0NDhlZjU4YjZjY2JjNCIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjMsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiMDBmMmUxNjE1M2FmNTYzYWVmYjM0YTRlNDM2OGJmMGE1MzQ4NWRkZmI1ZmQzZDZlODQyMGU0ODcyMjEzNjA5ZCJ9"
+        },
+        {
+          "resource": "repo://package.json#L10-L11",
+          "version": "repo-lines-v1:sha256:4fa7235c7864a51ad31667640a488b4e725ca1176ba7df360c377e272a0de539:eyJzZWxlY3RlZExpbmVDb3VudCI6MiwiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiOTI5YjRiMjE1YjBhYmE4ZWQ1MzZmMTlkM2E5YTMxMTU1MDNjMDRmZTkyZjZiY2FkZDk5NTBhNjhhOTEzNzk2MiIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiZDA0ZmIyZjVhNDYyNTc3NDIyZGYxYjA5MWFjMTUwODcxNWQ3MjM3ZGRhOGEwNThiZmViZGRiNDVjNjIxYzVlNiIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiMjNjMDJlOTM3NWE2ODY3ZjQ2MDdhMzA4M2MxM2E1N2U2OTQ2YjY0YzczYWRiOTA0OTNmNjQxYWM2MzdhNDIwNSIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjMsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiMzNkMjNlMjlhNjlhM2NiOTE1OGQ3NjRlNGYzZWIwMGI2YzYxNDRkY2JmZDhiZjRhN2NiNWE1NGNiMDdkZjg0YiJ9"
+        }
+      ]
+    },
+    {
+      "id": "claim_763b1f8d4c9c49f2856447c4ba50256a",
+      "statement": "Enabling deployment requires the repository Settings → Pages → Source to be set to \"GitHub Actions\" (not \"Deploy from a branch\"); on a fork/new repo this per-repo setting must be re-enabled even though the workflow file is copied.",
+      "evidence": [
+        {
+          "resource": "repo://README.md#L59-L68",
+          "version": "repo-lines-v1:sha256:da9008ccf91d5becdd6e6bdf8a3d63eb07e7c750bf94c09c36cce1501c6a537e:eyJzZWxlY3RlZExpbmVDb3VudCI6MTAsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjQwMmUyYjMyMmRmMTkzYzEzN2ZlNTBlZDQ0NmVjNzQ2ZGVhY2Y1ODhjOTdiMzc0MDJkYWEzNjJhOGIzYjllZDUiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6ImNjYjM4MzU1OTcwNzkxYjgzNjk4ZWYwZmIyYzliMzQzNGM0NjBjNTljMTQzZjQ4NTU3YjRkOTlkOWI4ZDNmMTEiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImJkNWVmNTIzNDdlZTkwYmZlMTNkMGQxNjVjNmE5ZjU3MjA3MjNmMWE1NmRiN2NjZGIxYjQ2YzkzMzNkNjYyYmQiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjdkMzJhYzE0NTIxYWU2YmEwZTM1OGQxOWMyYjBkNmQ0NWEwMGMzY2M3ZWM4ZGY1YjkyOTE2OTM3ZTlkYjcxMzYifQ"
+        }
+      ]
+    },
+    {
+      "id": "claim_d4e8dcba0dff4963943fee0c33ed371d",
+      "statement": "Katas are `katas/*.md` files discovered at build time by `src/kata/load.ts` via Vite's `import.meta.glob` (eager, raw). There is no manifest; adding a kata is dropping a `.md` file and pushing to `main` so the workflow rebuilds. There is no way to add a kata without a rebuild — this is a static site, not a CMS.",
+      "evidence": [
+        {
+          "resource": "repo://README.md#L34-L45",
+          "version": "repo-lines-v1:sha256:a709a97b57965610d309f7a8f15629e08a6dda91de5f5dd0c98133938b877dc6:eyJzZWxlY3RlZExpbmVDb3VudCI6MTIsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6ImZlZjI2NzVkYWY0MGEyNmEzNWRjNmViMmJiYTFjN2VkYWVmZDYxNDU1NmYyNjgwYzg5OTFjMGVjY2M0YTdjZDAiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6ImNjMGMyNzkzYWJjYmQ5YWFkNDJiMGVhNzk0YzJiZjRjYzY1MDA0MWM4ZTgyZjNmM2IxNGE4OWY2MTM0ZDc1YjMiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImVhMmVkZWU4ODM2ZDlmYzA4NWUwN2Y0Mjk3YzZlZDM1ZDk1YTI1ZTNjMzM1Yjk2M2Y0OGRiMzU5Zjg0NzgzNTUiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjM3ODVmZGZmNzNmZTc4Mzg2YmQwMGU1OTVhYjZkNWU4ZWYxOWU4ODg0NmU1OGNjY2E0OWFlYjU3ZDY1MjI5MWQifQ"
+        },
+        {
+          "resource": "repo://docs/ARCHITECTURE.md#L26-L35",
+          "version": "repo-lines-v1:sha256:83fab857b58a3d18dba0836cc60a764034de085f01a24a87798cdb10f80f29db:eyJzZWxlY3RlZExpbmVDb3VudCI6MTAsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6Ijc1MWViZTdmYjljNTMxOGE3ZGI4N2I4MDU0ZGI1N2I5MzFjMjdkZDQ1MDgxYzZlZmZlZWI5OGEwYmZkOTdlZjkiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjczYjcxYzA1NTRmMzg5ZWYyZmI1YWFiM2FmOTQ5ZGViZTY5MTUyNzllNGY0ZjhmODk4NGFmNjAwOWU0OWM0NzYiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImY4NTRiNTUwZDA4ZWVhZWE3MTBlODViNWZmOWZiYjE5OTNmNjdkODI5MmZmYjE2NmRjNzNhODg1YTIwMTU5ZGQiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImE2ODgyYjYwYzY3NTZiNjNlOGE5YjI1OWVlMTgyNjhhZWFlMmNjNWI4MjdjMzc5MTgyYTE1YmJiNGJmODVlZDMifQ"
+        }
+      ]
+    },
+    {
+      "id": "claim_1bf6419699a642dc80c927171ab85752",
+      "statement": "The CheerpJ runtime is loaded live from Leaning Technologies' CDN via `importScripts('https://cjrtnc.leaningtech.com/4.3/loader.js')` at the top of `public/sandbox-worker.js`, then `cheerpjInit()` is called lazily on first use. The loader URL is pinned to major version 4.3 and is NOT bundled/vendored.",
+      "evidence": [
+        {
+          "resource": "repo://public/sandbox-worker.js#L1-L14",
+          "version": "repo-lines-v1:sha256:cbc6ce6f40e4868838fe529d8ec832350d31aa4afd7a0ec83ad66aabefcc582f:eyJzZWxlY3RlZExpbmVDb3VudCI6MTQsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjJhYTc2OWE5M2RjMzk1NzEwNmQ1NGY4MGFmNjZmOTU5ODU0ZjQ1NTg2ODM1MTZkMDU1NDFmNTMwZDQxODE2MTIiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjE4OTJiOGFiM2ZhOGQwMDRiNTdmZDUxZDMzMzNiZGYwZmQ0NmI3MDI4YTQyOWJjYTdmYjVhYmI3MDU5MDA1YTUiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjowLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImUzYjBjNDQyOThmYzFjMTQ5YWZiZjRjODk5NmZiOTI0MjdhZTQxZTQ2NDliOTM0Y2E0OTU5OTFiNzg1MmI4NTUiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6Ijg3ZTkyMTQ2NjJkYWU0NTVkNzQyYjE0NWFlYjA1MGYyNTcxYTg0YWM4Y2YzOWVlMjgwZjJhZjRjZGY1YTBhMzgifQ"
+        },
+        {
+          "resource": "repo://public/sandbox-worker.js#L39-L42",
+          "version": "repo-lines-v1:sha256:26e55008618b3cbf10dc748d6c7c7a3c5efb5f0bed867ee867d2d9d13f8605e4:eyJzZWxlY3RlZExpbmVDb3VudCI6NCwiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiNjAwOWFmOTBjOTk4YjA2ZjI0YWM5YTI0NDNjNGQxMmM4OTk5MWVjMjExMGE3MTJmMTIzYzkyYzI2ZGZjM2QxOSIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiNDEyY2EzNDVjY2Y3NWJmOWMwODA2YmNlNjk1YmU4ZGU4MDhiNzk5ODQyNTFhN2E1NGQyMDJjZjYxMDFkZDQ1MSIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiNDZhMWI1M2RkOTY0MjllOWU1OGVkMTE0MzExNDM3NGUyMDkzNzkwNTQwZDE4YTFiMWY4ZTI5OWE2NGI4ZjI5NCIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjMsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiZTA3Mjk4YzdiNDFlOTk4ZDhkMWJjZjE4YmMzMDI0ZmY5N2VhNzI3ODZmYTFjMDg0MDc1MTU1ZjMyODYzYzU0ZCJ9"
+        }
+      ]
+    },
+    {
+      "id": "claim_5901e22a5a294b5b99643bd27303d9f7",
+      "statement": "The first code-task run per browser session is slow because CheerpJ's JVM-in-WASM runtime is fetched from the CDN and JIT/AOT-warmed on first use (then browser-cached). The runner budgets 90 s (`INIT_BUDGET_MS = 90_000`) for loading+compiling and surfaces `loading`/`compiling` phases to the UI; the per-run timeout (`timeoutMs`, default 5000) only starts once the sandbox reports the `running` phase.",
+      "evidence": [
+        {
+          "resource": "repo://src/runner/runner.ts#L18-L20",
+          "version": "repo-lines-v1:sha256:1114e9d03bfc0a2f50ae445b2fd4aa5d87a23e75ed299aa6b13b3cba9b1737f4:eyJzZWxlY3RlZExpbmVDb3VudCI6MywiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiMzI5NmI5MmY3NDRjOTMzZDQxMjY5NzY3MmVkODcyMDZhMGUwMDY5ZWMwYWM2NDhhNDFhMTk4Y2JkZWNjZTVlMCIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiNDRiOGMzZjY1NTBkY2Q4ZGE5ODllNTViZDU2MTA5YzYzNjBhMWQ4YzQwOGE1Mzg0ZjMwNTczMmU0OWE3YzVhMiIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiYmE4MzJlZWZlNDE2Y2ExODk3N2UxYTY3NTYzODY1NjM5ZDk1NDJkNzlkZmY1MWI2YWFmZWY1YmUzM2FhZjViOCIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjMsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiNGYxZDAzMWIxMjEwYjYzNTM0NTVjNzk4Y2I5YmFlNTNhNzg0NmJhNWFjZGYwZDY2OTVkODkwYzk1OGRiYjY3OCJ9"
+        },
+        {
+          "resource": "repo://src/runner/runner.ts#L68-L79",
+          "version": "repo-lines-v1:sha256:639caf4758ac92e09e41ae3fb5c5d4ff80bcc0c4d6de5275cb6bb1e140dd50bd:eyJzZWxlY3RlZExpbmVDb3VudCI6MTIsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjM2MGRiNWFlMmUxYzI2NTJlMmU5YzUxNjI5M2MyODY1MDRlZGQ0YWRhYTJlMzc2YjhiOTBiOTdkNWI4MDkzZTgiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjQxMmNhMzQ1Y2NmNzViZjljMDgwNmJjZTY5NWJlOGRlODA4Yjc5OTg0MjUxYTdhNTRkMjAyY2Y2MTAxZGQ0NTEiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImVjMDg0YTgyMzRmZjEwNjJlNjVhNTcxY2Y2YmZlNmM3OGNmMWNiN2U5ZWMwNDkyNDdmOTc1YjMyMzg2YTUzMmUiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImMzNjJkNTJhODM2ZmJlYzYzNzQyYjY4YTM2YTAwNDc2MzAyMGEwODQ5MzQ4NTY2ZDc3YTBkMDUzNDJlNDc0MjMifQ"
+        },
+        {
+          "resource": "repo://src/runner/runner.ts#L95-L97",
+          "version": "repo-lines-v1:sha256:1cfd417e975bca3b02c6f46224a2e70f0c564dd4aa1921c66ffe579a08f8d231:eyJzZWxlY3RlZExpbmVDb3VudCI6MywiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiY2ExMGJiYjk2M2E2NjNjZDIwNzllNGRjY2U1ZDVkZjFhNTNlMjA3ZThiZDE5NjVjNjYyMjAzNTE4NmRjOTA3NSIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiOWIyYTg0MjgzYmE1NzQ0MWQ4YzBiOTljOWJkMjg5ZjBmN2VkMGNhMjg0OGNlMWIxMzUyZjM4NmVlYzY3NWVlZSIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiMWQ1N2IyNmM4ZDIwMWI3ZDhhMzZiMGNjOWVlNDhhMDZmYzg0M2ViYWU1MmExNTc5OTI4NDAwMTIwY2NhMjdhZiIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjMsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiMjMwMTFhOTg2MDU1NWNjYzBhYjY3YTM4NDc3MTQ2NzY1YjBkY2NiYzNmNDNlMWE5ZDg3N2IzZTg2YmI2N2E4NCJ9"
+        }
+      ]
+    },
+    {
+      "id": "claim_dc2fb060cb8242b389213da7c89bbee0",
+      "statement": "`importScripts` inside a Worker has no `integrity` attribute, so the CheerpJ loader is trusted at the URL/version level, not hash-verified via Subresource Integrity. Pinning the version (`4.3`) is the integrity control.",
+      "evidence": [
+        {
+          "resource": "repo://docs/ARCHITECTURE.md#L324-L328",
+          "version": "repo-lines-v1:sha256:3e6ee757afcf9ab4ae680b3c9fe10b83ff59dffc7446b46be7b8d4f77fb56c79:eyJzZWxlY3RlZExpbmVDb3VudCI6NSwiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiZmRmM2FhNmVlNmYzNzhiMjA0ZTVlYmQyZWRlMjJhZTQ3ZmQ3MDI3ZWQwZWUwMjA5MDhhNzllNmUzZDExMDhhYSIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiMTNhZWVkNWNjZTEwNGEzNTcxYjc0YjBjZjY4ZmM2MzYzOWIzN2M0ZDIxNWI2Y2ZiNDliN2E3YzgzN2ZiMTAzNSIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiYTZmODBiNTJjYWQxOTVlMmRmMGU3M2I3OTE2MDk5MzBhZTFjODBjMmRjYzE5ZTllOGZiYjgxZTRjMDFkYTUzMSIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjMsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiMjc1OTc4MTc2YWZlODNjZDQxMjU1MTU1NWZlNzkyMjc4Mzk0NGI2OTM3NWNjNDU3Mzc3MzAxNGUyMmY0MzQxMiJ9"
+        },
+        {
+          "resource": "repo://public/sandbox-worker.js#L14-L14",
+          "version": "repo-lines-v1:sha256:1892b8ab3fa8d004b57fd51d3333bdf0fd46b7028a429bca7fb5abb7059005a5:eyJzZWxlY3RlZExpbmVDb3VudCI6MSwiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiMTg5MmI4YWIzZmE4ZDAwNGI1N2ZkNTFkMzMzM2JkZjBmZDQ2YjcwMjhhNDI5YmNhN2ZiNWFiYjcwNTkwMDVhNSIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiMTg5MmI4YWIzZmE4ZDAwNGI1N2ZkNTFkMzMzM2JkZjBmZDQ2YjcwMjhhNDI5YmNhN2ZiNWFiYjcwNTkwMDVhNSIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiYzA2MDEwMTI0N2JjZjNkNDkxODkyYjg1MDQyNjdmYjRkNDZjMzFjOTE3NTdlYWM3MDEyOWRjYWJhZWZkOTk5MyIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjMsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiODdlOTIxNDY2MmRhZTQ1NWQ3NDJiMTQ1YWViMDUwZjI1NzFhODRhYzhjZjM5ZWUyODBmMmFmNGNkZjVhMGEzOCJ9"
+        }
+      ]
+    },
+    {
+      "id": "claim_ac223c4c1b8948209eda9a8a5b20445f",
+      "statement": "Code katas require network access to `cjrtnc.leaningtech.com` to load the CheerpJ runtime; text and choice katas have no such dependency and work fully offline.",
+      "evidence": [
+        {
+          "resource": "repo://README.md#L92-L98",
+          "version": "repo-lines-v1:sha256:c30a415b69c983d6df0ce656d5be3baeca9ccd17ceb8efc5a503d01bcabd1fb4:eyJzZWxlY3RlZExpbmVDb3VudCI6NywiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiNDUzMzQ1MmU2OTc3ZThkZWY4YzEyNGNhZWNkYTQxY2Y1ODY5YzY2MDFjNjhmODg0N2E3ZTJlMmZhMjQ5NGFlMCIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiOGVkNzU5Nzk0Nzc1OTU4MDhmZWM2YjNiNjI3ZWJiNzQ0ODFmYmZjZjM0NWJmNzQyNzk2ZTIwYTMyNTE5MmYzZCIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiODY0MWEwYmQ5ZWY3MTJjNGFjZjBmMmMzMjk2NTlmMzA2NWJlNGU4OGJjMDUyNjg4YTQwZjZkYjljZjU4ZjAxMSIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjMsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiOGNjOWUyOGMyZDNmOGJiZGI3Yjc4NzM3N2Y0ODE2YTU4ZDQ5NTAzNjA3NDRkMzYyMjc4MDhjNDViNTE4MjZlNiJ9"
+        },
+        {
+          "resource": "repo://docs/ARCHITECTURE.md#L321-L324",
+          "version": "repo-lines-v1:sha256:e146157d52cea44bd9f1d119f10efe45a6ba586ce7069704cc37c444ccb58b18:eyJzZWxlY3RlZExpbmVDb3VudCI6NCwiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiMjZhNzA2YTFjNjQyMDM5YmVjZDhjY2M1YTI3NTMwMTEzYmUyNzBjZDU0ODM4NTcwNWNkM2ViMDkxMjU5MDMxMCIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiZmRmM2FhNmVlNmYzNzhiMjA0ZTVlYmQyZWRlMjJhZTQ3ZmQ3MDI3ZWQwZWUwMjA5MDhhNzllNmUzZDExMDhhYSIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiMjQ1MTY4OWZhMjE3MjM2NDUwNzUxODRkNWI4ZjIyNWFmNDI4YWJiMDA0OGMyNjE2ZDBhN2Y5YTJiMTQ0MWNhMiIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjMsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiYjgzNjhlOGE5NTNlYWQxYWU3OWE5ODNiYmFmYmI0ZjM1MTFkNTBkYjI1NjYyYzQ2MDFkOTY2ZDVlYWQ2YjA3MSJ9"
+        }
+      ]
+    },
+    {
+      "id": "claim_954cfecdbeda4fc3b2b14116763421a8",
+      "statement": "`public/tools.jar` (~18 MB, OpenJDK 8, GPLv2 + Classpath Exception) is shipped as a static asset in `public/` and copied into `dist/` by Vite. It is the in-browser `javac` compiler, put on the classpath (`/app/tools.jar:/files/`) by `sandbox-worker.js` when invoking `com.sun.tools.javac.Main`. Bundling it is NOT self-hosting CheerpJ — it is a separate file under a separate, GPL-compatible license.",
+      "evidence": [
+        {
+          "resource": "repo://README.md#L126-L133",
+          "version": "repo-lines-v1:sha256:3dafc8471bcd2013d77f73620701997333674172c93712ab9f09cce996fa56bf:eyJzZWxlY3RlZExpbmVDb3VudCI6OCwiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiNTE4NDViYzg4N2FmMmRjMzBkOTY1OTIxYTk4ZWU0OTEyZTcxN2VhOWM2MWRmNzdjMTE3YTZkOGJjMjVlZGRjNiIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiNzBhODRhOTJiN2YyMDQxZGU5OTU0ZTI2ZjUzOWUxMDI0OTBmMjExMWQyNmYzNmUzMTEwYmZhYmU3Y2I2OGMzNSIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiODczNWNiYWE3OTY1MjhiZjA5Y2FiYWJjNjQ3Nzc1YjBkNWZlNTBlZGU1N2ViYTg5NDdlMjQzZjI5ZDY5MmU0NyIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjIsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiZDBkYTEzNmI2NDkxNDA1NWRmZmUwZGFhNTQyYjAzZDI2ZGNkNTZlODQ4YmNjMDQzNjAyNzg2MmYwZWUxYjhjZSJ9"
+        },
+        {
+          "resource": "repo://docs/ARCHITECTURE.md#L302-L308",
+          "version": "repo-lines-v1:sha256:39f64f9f7b57a5a35ca4a48433e57dfd19a05ee939151709c04179a11a07bc3a:eyJzZWxlY3RlZExpbmVDb3VudCI6NywiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiMzgwMzU2OGYzNmIzZmU3MDE4ZTE5MjY1NDlkMzYxNDU0ZTU0ODg4NzUxMDQ5YWQwN2Y0OWI3ZGI0ZTNjMjg3YyIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiMjVmM2I3NTkyYzU3MDZmNjUxYTg4YzJiYTYzYjZkZjlkOTZlOTA4OGM1ODcwNTYzYjQ1YzZkY2ZmMTlhZDA4NyIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiODVlYTM2ZjgzMDdmYmQwOTlkMjIzNDkwMDhlYjdkM2RjN2ExOGE0YmRlZDI0YzIyOWI2ZGFjZjExNzgyOTMwYSIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjMsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiZmIxMDIzMDc0Y2YzOTVlMTg1Nzc3N2FhYWIwZGI2ZDg1ZGEwYjBjMjJmYzhlZTM3MzNkZTI5ZTY3ZDdmMWUxNSJ9"
+        },
+        {
+          "resource": "repo://public/sandbox-worker.js#L20-L20",
+          "version": "repo-lines-v1:sha256:d90906ada6b8d7a4e021dadf0c9b0c5308e6b3d7ea1ad0e5d01696326b5c9b2a:eyJzZWxlY3RlZExpbmVDb3VudCI6MSwiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiZDkwOTA2YWRhNmI4ZDdhNGUwMjFkYWRmMGM5YjBjNTMwOGU2YjNkN2VhMWFkMGU1ZDAxNjk2MzI2YjVjOWIyYSIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiZDkwOTA2YWRhNmI4ZDdhNGUwMjFkYWRmMGM5YjBjNTMwOGU2YjNkN2VhMWFkMGU1ZDAxNjk2MzI2YjVjOWIyYSIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiZWRlMzVlMmE4OTc1Mzk2NzNlYjJkY2Q0ZTQyNjMxNzMyNTUzZmEyNzlmMWE0ZjlkMDA3NjNiODY4MGNmYjI4OSIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjMsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiZGQ3NDAyNDNkNDA5OTI4MDBlYzY5YTEyMTkzYjM1OWVmMTE0YjI2OWJjN2QxYThjMDQ2ZWY5NWYwNzAwZjljYyJ9"
+        },
+        {
+          "resource": "repo://public/sandbox-worker.js#L50-L56",
+          "version": "repo-lines-v1:sha256:0addf2b5300f4bede82b2ba8e2e72f56976af9ef189bf879dc47702937720047:eyJzZWxlY3RlZExpbmVDb3VudCI6NywiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiZTRhZmFhZDcxN2RjYTNhMzBiNDFjMjI1OTZmZGMxMjEzMDlhOGE5MzY3OGUwMWQ5NmU1MzkxNzhmNjg4YTNjMiIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiNzQxMjJjNjg3MzI0OTdjZWI2NjUwZjgxODU1ZWZiNWY0ZDRlZDU0MjYwNGQ1MDc3NzgxYTRlNzRiYWU2OTQ5NCIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiYWViNzY1NTAwMDhkOTc3MTljMWU3ODRkYzE5YTIzY2QzZjdkZTc5MTZjZGNlNWFjZWE5MzQ3OThjYmMyODMzNSIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjMsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiY2NjODk0M2QzMGQ5YjYxMjk5Njk3NWFiMzQyY2U1MTZjZmJhZGU3NTM4ZDIyOGVhODNjYWUwZjFjOThmZTc0ZCJ9"
+        }
+      ]
+    },
+    {
+      "id": "claim_56039d83545948f3a4cd089d5b7c1adc",
+      "statement": "CheerpJ's free Community License covers public, non-commercial, open-source, publicly-accessible projects and grants unlimited use of CheerpJ loaded from `cjrtnc.leaningtech.com` — exactly this project's deployment shape. It does NOT permit self-hosting or redistributing the CheerpJ runtime; commercial use or self-hosting/offline execution requires a Commercial License instead.",
+      "evidence": [
+        {
+          "resource": "repo://README.md#L92-L98",
+          "version": "repo-lines-v1:sha256:c30a415b69c983d6df0ce656d5be3baeca9ccd17ceb8efc5a503d01bcabd1fb4:eyJzZWxlY3RlZExpbmVDb3VudCI6NywiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiNDUzMzQ1MmU2OTc3ZThkZWY4YzEyNGNhZWNkYTQxY2Y1ODY5YzY2MDFjNjhmODg0N2E3ZTJlMmZhMjQ5NGFlMCIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiOGVkNzU5Nzk0Nzc1OTU4MDhmZWM2YjNiNjI3ZWJiNzQ0ODFmYmZjZjM0NWJmNzQyNzk2ZTIwYTMyNTE5MmYzZCIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiODY0MWEwYmQ5ZWY3MTJjNGFjZjBmMmMzMjk2NTlmMzA2NWJlNGU4OGJjMDUyNjg4YTQwZjZkYjljZjU4ZjAxMSIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjMsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiOGNjOWUyOGMyZDNmOGJiZGI3Yjc4NzM3N2Y0ODE2YTU4ZDQ5NTAzNjA3NDRkMzYyMjc4MDhjNDViNTE4MjZlNiJ9"
+        },
+        {
+          "resource": "repo://docs/ARCHITECTURE.md#L285-L300",
+          "version": "repo-lines-v1:sha256:6bf6cb35cc998d9f619788663affac136a43d7a84041d49e9d65faec82fdb558:eyJzZWxlY3RlZExpbmVDb3VudCI6MTYsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjAxYmE0NzE5YzgwYjZmZTkxMWIwOTFhN2MwNTEyNGI2NGVlZWNlOTY0ZTA5YzA1OGVmOGY5ODA1ZGFjYTU0NmIiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjBjNWFiYzZlYzEyNjhjMzI3ZjNmZmE0NTI1ZDZmMmM5ZjczZmRkODY5MjY2NTYxNmU0NjE4NmJiZmMzZjE1MzciLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImY3ZTQ4ZDZmNmY5NjRhOGU3Yjg5OTE3NWM5Nzc3MmZmYWI0ZWNhOTE0YTg3OTc5NWQxN2FlMDAxNzViYzMxMjkiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjYzZTAxYzE0NzhjOTcxMjBiNDk2M2YzODA2NDExNDc1MzkyZjI3NGJmNGM0ZTEzMTY4ZDc3NDMxMDZiODlmNjcifQ"
+        }
+      ]
+    },
+    {
+      "id": "claim_c75cf7d32aa248b48eb6f343c98b8715",
+      "statement": "GitHub Pages is purely static hosting and cannot set custom response headers (no `_headers` file, no per-response config). This is currently fine because CheerpJ 4.x does not require cross-origin isolation (COOP/COEP) or SharedArrayBuffer; its stated server requirements are HTTPS plus HTTP Range-request support, both of which GitHub Pages provides.",
+      "evidence": [
+        {
+          "resource": "repo://README.md#L108-L115",
+          "version": "repo-lines-v1:sha256:0bf5cbb97fe72008146a4f611fb9654cc7891e38effb6d0d1bf2bc2618ae49b2:eyJzZWxlY3RlZExpbmVDb3VudCI6OCwiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiMzI4ZjgwMjU3OGQxYWU2NzkyMGEwMWNjOTFlM2E3MzYzZGIzZTBiM2MxZjdjMWRjMWE1ZmNiMzFiZWNmNDc2ZCIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiNTY0N2NhNTk2YTBhMjY3Y2ExZmI0YzI2OTJjYjVmOGYzYTA0MzA1YjFlNmQ4ZjYwYzAzNTQ1NDhjOTJiOGM2YyIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiYjdhODE1YzRjM2RhMTJhOGFhMGQ3ZTdmODQ4ZjNjZTcxMGNjNjQ5NTUzMDFmZDU4ZDFhYTg4MzQzYjIwOTM1YiIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjMsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiMDI5YmU4YzRkNzZkMDg4ZjE1ODYyNjQyMDQ3ODNjYjZjM2FiZGYxZTNhZTc5NGQ0YzlmMzRmY2FkYjQ5MWEyMCJ9"
+        },
+        {
+          "resource": "repo://docs/ARCHITECTURE.md#L353-L362",
+          "version": "repo-lines-v1:sha256:01225f6f252b289b91bcd885b27aa11cc3696978e9d57d9d74fb524f03acc63f:eyJzZWxlY3RlZExpbmVDb3VudCI6MTAsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjRhN2NiMWIxYTRiNzM3OThlNGUyYjRhZTc1YWEyNGQxZDVkM2RjYjljZTAyZGJkNDU4ZTllY2RjOTI3YzExNmQiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjAxYmE0NzE5YzgwYjZmZTkxMWIwOTFhN2MwNTEyNGI2NGVlZWNlOTY0ZTA5YzA1OGVmOGY5ODA1ZGFjYTU0NmIiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImYyZmUwMjU0YTE0OTZkMmZkYmY5NWViZWQyYmE2ODYyYzYzNjJmOGYwZDM5YjIyMGRmMzFiMTg0OTZmYjA3NjkiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjU4NDZlMTc2YzIyN2M5Njg0NmExNjJiNjlhNjM2NWUyODYzOTI1NmNiZWMzMjY1OTk5NGU2Zjk0YzA2ZDVkMWYifQ"
+        }
+      ]
+    },
+    {
+      "id": "claim_6fd69666f9744f1caac6377425a00bc3",
+      "statement": "If a future engine upgrade ever required cross-origin isolation (e.g. for SharedArrayBuffer/WASM threads), GitHub Pages could not satisfy it directly; the documented workaround is coi-serviceworker, a client-side service worker that injects COOP/COEP headers on a host that cannot set them itself. It is not needed today and is noted as a forward-compatibility escape hatch.",
+      "evidence": [
+        {
+          "resource": "repo://README.md#L108-L115",
+          "version": "repo-lines-v1:sha256:0bf5cbb97fe72008146a4f611fb9654cc7891e38effb6d0d1bf2bc2618ae49b2:eyJzZWxlY3RlZExpbmVDb3VudCI6OCwiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiMzI4ZjgwMjU3OGQxYWU2NzkyMGEwMWNjOTFlM2E3MzYzZGIzZTBiM2MxZjdjMWRjMWE1ZmNiMzFiZWNmNDc2ZCIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiNTY0N2NhNTk2YTBhMjY3Y2ExZmI0YzI2OTJjYjVmOGYzYTA0MzA1YjFlNmQ4ZjYwYzAzNTQ1NDhjOTJiOGM2YyIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiYjdhODE1YzRjM2RhMTJhOGFhMGQ3ZTdmODQ4ZjNjZTcxMGNjNjQ5NTUzMDFmZDU4ZDFhYTg4MzQzYjIwOTM1YiIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjMsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiMDI5YmU4YzRkNzZkMDg4ZjE1ODYyNjQyMDQ3ODNjYjZjM2FiZGYxZTNhZTc5NGQ0YzlmMzRmY2FkYjQ5MWEyMCJ9"
+        },
+        {
+          "resource": "repo://docs/ARCHITECTURE.md#L362-L375",
+          "version": "repo-lines-v1:sha256:53c375a0dc6396da5ce6fbd9f9a1f033ffe816a59f7e89ec50d032b9199a4511:eyJzZWxlY3RlZExpbmVDb3VudCI6MTQsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjAxYmE0NzE5YzgwYjZmZTkxMWIwOTFhN2MwNTEyNGI2NGVlZWNlOTY0ZTA5YzA1OGVmOGY5ODA1ZGFjYTU0NmIiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6ImFjYWE0ZTg5OGZiNjM4ZjNjZjE0YTU0ZTM4Zjk1Y2VhNjcwNTZhMWQxYmJjYzY0M2QzYWNhZjllMmFhMDRhZTEiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImNiNzkwOTY2NDliYWNlMDYxYzMyMjc4ZmE2YmEzYzI0OTMyNGViZTVlMmU3ZmJjYzhjNGFmNTg0MTNmYjZmM2UiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjowLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImUzYjBjNDQyOThmYzFjMTQ5YWZiZjRjODk5NmZiOTI0MjdhZTQxZTQ2NDliOTM0Y2E0OTU5OTFiNzg1MmI4NTUifQ"
+        }
+      ]
+    },
+    {
+      "id": "claim_95946f2fd1fd49d2a3fe39b130f4be55",
+      "statement": "CheerpJ 4.x has full production-ready support for Java 8 and Java 11 (partial/production-supported Java 17). Kata templates and reference solutions target Java 8/11 features and must avoid Java 17-only syntax (records, sealed classes, pattern-matching switch). This is a content-authoring rule on `katas/*.md`, not a build flag, because Java is compiled at runtime in the browser by CheerpJ's in-browser javac rather than during `npm run build`.",
+      "evidence": [
+        {
+          "resource": "repo://README.md#L116-L119",
+          "version": "repo-lines-v1:sha256:e8e115474a1e606afe688bc6ab302c1c3c718c477ca054427cb785ad01719700:eyJzZWxlY3RlZExpbmVDb3VudCI6NCwiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiNGU0NTQyNDhjOTc2OTg2ZGI3ZjE0YzdiOWYzMWJjMDlkMjMzNzA0NzcwMWIzY2M0ZmM3NjM1MDk3YzI4MzkwNSIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiMWE4ODgxMTM4M2Y2NWNmYWI1OGNjZmIxZWYyYWJhMjU0YjZlMmNkODk4NGE2NThjZmJmMzczZTQzZDVmYjY4MSIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiMTIwNTMxMGNkYzU3NjA5N2YzNmFhOGJlN2RiM2MzZWM3ZTkxMTU1ODllYjk3OGE3ZjI2MjY1ZjUwYTBjOGE3MiIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjMsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiZDMwNDU1OGQ4YzMzZThjYWNlNTQxMDAwM2EwZjMxMTdkODQyMmE3ZDBhOWQ2OGFkZDY0OTBmMGM4ZWVkMWNhZiJ9"
+        },
+        {
+          "resource": "repo://docs/ARCHITECTURE.md#L330-L338",
+          "version": "repo-lines-v1:sha256:6843e2e2e5ecdc01d471c411820c8d369f773edf102059571b6e0f299cd74663:eyJzZWxlY3RlZExpbmVDb3VudCI6OSwiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiMDc5ZjZhZmQ2ZDk1NzNlYmNjYzQ4Y2EwZjg2OGU4NDEyYjM4MGM2NTI0ZjdmM2ZjMmRhMDA3OGViMGNlZjFlMiIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiN2MzYzM1MzYwYzQ3MGEzNWM0ODZhM2JkNTQ2ZjNhZDc4YWNhZWNmMDAxZmIyMWMxMjVjZjhhM2ZkOWViMzVlMCIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiZDUzYWZjOGVhMGU3ODY3NDA0ZDUyZTY2ZjZiNTUzOGFjNWIyZjFhZDBmOGViOWM3ZThhYjY4MWMxYWZhMDFjZCIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjMsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiOGY2Yzg2ZjBlMjA4NzRhNGVlZDg4ODkzYTg2ZTQ2MTJlODE1YmM2OGZmZDRlMjk5YWY3MmZkYzQ3YThlNGM0NCJ9"
+        }
+      ]
+    },
+    {
+      "id": "claim_a181e45bb2bf4da499e6fa596fcf5650",
+      "statement": "The runner always tears down and rebuilds the sandbox iframe after each run (on result, timeout, or Stop) rather than reusing the CheerpJ session, to avoid the JVM classloader serving a stale `Main`/`KataRunner` class from a previous run under the same class names. A fresh iframe is created lazily on the next run. Stop hard-kills via `worker.terminate()` inside the relay and resolves the pending promise as `{status:'stopped'}`.",
+      "evidence": [
+        {
+          "resource": "repo://public/sandbox.js#L18-L60",
+          "version": "repo-lines-v1:sha256:5846d0f3ce436ccea3859701adb20c0250beac6455b9e8d14f2d1b0b36ee2cd6:eyJzZWxlY3RlZExpbmVDb3VudCI6NDMsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjMwNDQ2N2E0Y2Q4M2RmOWIzMjNhNmNmZTYzZDJiOTdlNzc0ZjdkOWEyYWY2ODg1ZWFhNzM4ZjI0NzU3NTI4NmUiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjI3ZTU3ODhkNWQ5ZDczZDI0YTgxZGJjMGE1YTc0YmZhODJjOWMzYjNhZjk5ZTUyYWY3OTZlOTBiNDY4YThhM2QiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjYyNzUzMWJjNTJiOTc4ZmJiNDk4NDM1MGMwMDE5YmI2ZjFiZTUwYThkNjhjMmVhMDVmMzc2YzRmM2FhZjYyMzAiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjoxLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImY2ZjViNDBiMTU4NDU3ZDE3ODY0ZjIxNzkwNzg2ZGQ1YTJlY2RiNjRiNjZhNjUxZjc4OGQ0ZTI1Y2QzMzAzZDIifQ"
+        },
+        {
+          "resource": "repo://src/runner/runner.ts#L50-L61",
+          "version": "repo-lines-v1:sha256:42ade35912c03f633711a47274717872a1ffdf3d0a40bb7a3fe80422a237904b:eyJzZWxlY3RlZExpbmVDb3VudCI6MTIsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjFhZGIwOGE1YTQxMjJjOTFkMjg2MTJhYTMwMDQ1YmU4Yjc0ZTY4OWE0NjY0YmM4YTk2MGM0MmFmYjM3MTI3MjciLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjQxMmNhMzQ1Y2NmNzViZjljMDgwNmJjZTY5NWJlOGRlODA4Yjc5OTg0MjUxYTdhNTRkMjAyY2Y2MTAxZGQ0NTEiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImJhMmQ1MjIzZGJmYWM2Zjg3NWExY2Y3ODJkOTRjNGM3NTk2ZDQyYzM4Y2Q1YTZmNWNhMDgzZDI0MGJkMWY3YjgiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImYyZDA3ZjZlZjI3Zjc2Y2FjZWQ2MjMyODA1NzY0OTUwNWQxZDczN2U0NmIzNTM0ZGI5NGQ1YThiZTY3MWJmMGYifQ"
+        },
+        {
+          "resource": "repo://src/runner/runner.ts#L83-L117",
+          "version": "repo-lines-v1:sha256:c230973a71f35226f784989fd7c2ea934a9ab7ab414ba0b8bc91c5d11e695a5d:eyJzZWxlY3RlZExpbmVDb3VudCI6MzUsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjllMzdlZjIyYjA2MGRlMzkxNzM4YzI2MjcxMzU3NmM4NzQyYWI2MGYwNjk5YWQ5OWFkNDVhNTc3YWNhNjAxZjYiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjQxMmNhMzQ1Y2NmNzViZjljMDgwNmJjZTY5NWJlOGRlODA4Yjc5OTg0MjUxYTdhNTRkMjAyY2Y2MTAxZGQ0NTEiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImMzNjJkNTJhODM2ZmJlYzYzNzQyYjY4YTM2YTAwNDc2MzAyMGEwODQ5MzQ4NTY2ZDc3YTBkMDUzNDJlNDc0MjMiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjhmNzk2MWNjZmMxZGE5ZDFhYjFiMTUzYmM1ZmQ2NmFiNWIyMGU2MTkwM2UwZGViMDkwZGYxZGVhZTQyOTlkMTEifQ"
+        }
+      ]
+    },
+    {
+      "id": "claim_b92c9590a93d43fc9c56a4d3f78af0fc",
+      "statement": "CheerpJ runs inside a dedicated Worker (not the sandbox iframe's main thread) specifically so a tight non-yielding infinite loop in learner Java (e.g. `while(true){}`) cannot wedge the thread that owns the run timeout. The iframe's `sandbox.js` stays responsive, its setTimeout fires on timeout, and `worker.terminate()` hard-kills the runaway code from outside regardless of what it is doing.",
+      "evidence": [
+        {
+          "resource": "repo://docs/ARCHITECTURE.md#L102-L120",
+          "version": "repo-lines-v1:sha256:7c113752c5305d0399dd0bad7647b83926d246ea877ae1c7226e45e9d35084ca:eyJzZWxlY3RlZExpbmVDb3VudCI6MTksImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjlkZmUwNDMxNWU0OWJhZjBjMTVlNDhlM2I0OTdjNzA4YmViZmVhOWVhZGYzYTk4Y2I4ZDYwOTlmMjI3YWY0ZjAiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6ImY4MGE0MDhlMjI2Yjk4ODk0YjkzYzA3MDI1NjhhMTgyMjkwNzA5YzRjNDNlNjVmNzI2MDAxNzc1ZTRlNzQ1MmMiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjA0Y2ZlNjYzYTNkY2EzZTcxZGMyNmExMjZmN2VlZjNhYzRmZjJkNGEwNzY3MTdkYjM4YTMwNDE5MGNlZjExN2QiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6Ijg3MTczMDFhZGI3YmE3ZWQ0NmE0MDc3ZmQ4OTI1ZGI3YTI0NjhiMmNjNzAyMTZiNmIwYWIxNmFlMzJjZGJmY2YifQ"
+        },
+        {
+          "resource": "repo://public/sandbox-worker.js#L1-L8",
+          "version": "repo-lines-v1:sha256:23efec9aea6ce960efaae8c138b1ec25bbceb3387ca818be7927f3b92f5d12a3:eyJzZWxlY3RlZExpbmVDb3VudCI6OCwiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiMmFhNzY5YTkzZGMzOTU3MTA2ZDU0ZjgwYWY2NmY5NTk4NTRmNDU1ODY4MzUxNmQwNTU0MWY1MzBkNDE4MTYxMiIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiZGE2MDA0YmY1ZTExODJhZjU5ZmYxNTA3ZjMyYTBmYzQzM2VjMmE5MmZhMWQwYTQ1ZTIwZTFlODI0NzliNjU5YiIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjAsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiZTNiMGM0NDI5OGZjMWMxNDlhZmJmNGM4OTk2ZmI5MjQyN2FlNDFlNDY0OWI5MzRjYTQ5NTk5MWI3ODUyYjg1NSIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjMsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiNGU4ZGQxZmFlZGUwNjA4MWVjZWIzODkwMTIyZmEyYTMyNWExNDM1NDFkZmU4MTI1YzYwZWI3YTUwZDczMTBhNSJ9"
+        },
+        {
+          "resource": "repo://public/sandbox.js#L1-L9",
+          "version": "repo-lines-v1:sha256:9d18e61b934fb4d735e9584fb82885b592e1f116c23a81f9bf8b7d8653b20673:eyJzZWxlY3RlZExpbmVDb3VudCI6OSwiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiYzUzZWU1NTQxYTFmMWIzNTNmNjZmZWRhNmQ4MWQ0OGJhODE4MjFjZjk5NTk1ZjcwNzBmODZhNmRmZjIzYTAwZCIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiYzlhZWRhZmJhOThjNTdhZjE2OGY5Mjc4ODg1ZjgwNjJmNzkxYjQwMzdjMWRiNDVkNWU4NWRjNmViNzZhMzRmNSIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjAsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiZTNiMGM0NDI5OGZjMWMxNDlhZmJmNGM4OTk2ZmI5MjQyN2FlNDFlNDY0OWI5MzRjYTQ5NTk5MWI3ODUyYjg1NSIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjMsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiYmQzZDVhZmRlOTg4OGZlN2JlOTE4NDM5NjFkNGUwNDIwODgxZTc5YzQ3MDk5YzE2Y2FhOWExMmUyMzE1ZTdiNiJ9"
+        }
+      ]
+    },
+    {
+      "id": "claim_794fc0d2373c43e99081cceea675baa9",
+      "statement": "Inside the Worker there is no DOM, so CheerpJ's stdout/stderr land on the Worker's own `console.log`/`console.error`. `sandbox-worker.js` intercepts `log`/`error`/`warn`/`info` for the duration of each run to capture that text, then parses sentinel-delimited stdout (`___KATA_OUT_BEGIN___`/`___KATA_OUT_END___`) and `___KATA_RET___` lines back out into a `RunResult` posted up through the iframe to the main thread.",
+      "evidence": [
+        {
+          "resource": "repo://public/sandbox-worker.js#L16-L31",
+          "version": "repo-lines-v1:sha256:daa9033b641378ea53427ed989726a1edea3519539d8fd5836adfd37d4b75c91:eyJzZWxlY3RlZExpbmVDb3VudCI6MTYsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjkwNDhjMzAyYjYzNDI2MzhjYmRjZDg1N2FmZWRhMDI5NTUyMWYyZjhjYWViY2Q1ZGU3ZGQyOTMxMzE2ODI4ZTAiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjQxMmNhMzQ1Y2NmNzViZjljMDgwNmJjZTY5NWJlOGRlODA4Yjc5OTg0MjUxYTdhNTRkMjAyY2Y2MTAxZGQ0NTEiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImNkYTMyMDhhZDJlNjA4ODJiYzQ2MWUzNmFjNGFmZTE5NDQyZDJkYjZkZGU2YWJkNzA0NDFkN2E5MjZlMTM5ZTQiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6Ijk3YmE4Y2NkOTg5YzE1YmRhYzdlYzQyMDUyMzk1OWMzYWI3MGZhODJiYTc2ZGZlZTYzNTA5YTExODI2NWE5ZjMifQ"
+        },
+        {
+          "resource": "repo://public/sandbox-worker.js#L62-L94",
+          "version": "repo-lines-v1:sha256:7407ed08c6c1572fb0c6e0247fa85fa80e2576d7008806a974a986ebada438ab:eyJzZWxlY3RlZExpbmVDb3VudCI6MzMsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjFiNWNkMzkwZDBhMmQzMDdlMDY3OGNmMmFlZTRmM2EzNDdhMDU5ZWVmYzM4OTMxN2MyM2RhZWY4NDQ5Y2FiODciLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6ImUxN2I2YTgyNjUyYmM2ZmY3ZDNiOTJjOWFmN2ZlMzk2YWI0ZDFhYTYxMmQyZDk0ZmE2YjhhODE1YTJjMGQ3Y2EiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjZhNDFkNzNjNDUyMmJlYTM5ZmY4MTVlMjRiY2YxMzExODUzMWQ2NzFlYjNjZjUzMTIxODg1ZTExYTFjNDcyNGQiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjMyY2Y2ZWUxY2MxMzEyOTBjMGE4MzgyN2Q4OWM4MmFkYTg2YjYxMzBjMDhmYzgwZDUxOTIzMjY4NDNkNTVkYTUifQ"
+        }
+      ]
+    }
+  ],
+  "verification": {
+    "by": "openwiki/0.4.0",
+    "at": "2026-08-26T15:48:44.789Z"
+  }
+}

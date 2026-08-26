@@ -1,0 +1,258 @@
+{
+  "schemaVersion": 1,
+  "pageVersion": "sha256:7823eec7803b465a045e8fcb263ff9a7a670e46f431d9a72127bf0656fc3fd68",
+  "claims": [
+    {
+      "id": "claim_0489e0c38b0c4853bac7efbb2bfd4b3d",
+      "statement": "renderCodeView's onRun handler runs a strict gate order before any execution: reassemble source, then validateLocked(source, segments) (refuses with a locked-code error + Reset on failure), then validateImports(source, kata.allowedImports) (refuses by listing ImportViolation[] and recording an incorrect attempt on failure); only if both pass does it disable Run, enable Stop, and call runJava. Any failure refuses the run with no iframe or network activity.",
+      "evidence": [
+        {
+          "resource": "repo://src/ui/views/code.ts#L84-L119",
+          "version": "repo-lines-v1:sha256:8c2e0e8d6982fcdec7ca9e15c7e7cb3baa0603dc7e631a9a933b44168f9b3449:eyJzZWxlY3RlZExpbmVDb3VudCI6MzYsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjZjOTFjNWIxOTgzYWQ3MTgyODFhNjhhYWU1MTIyYzFiMTZmMTlkM2MwZTFiNGM0MWM3NGMxNmM0YjViNTI1ZDIiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjFkMjkzOWZlYTYxNzJiYTA1MTNiOGJhOGFjYTA5NDliMDU2YzRiODcwOTNjNWFiY2Y5ZjM3MGFjNjk2NTM0MmIiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjIzNThhZDU4OTkzNzlmNDYxYzVjZGFiMzg0YWMwYzY4Nzk5YjY0Y2I4MDU0YWMyMjc3ZTY0NTBjNmU1OTU4YWMiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImRjYWMzNGZkOTgxYzg5MDVlMzQ1NTZmMmU2MTQzZDBkMDFlMWZlOTcwNDk0NTUwNmFhZjI2ZGY4NTE0NmMxNmIifQ"
+        }
+      ]
+    },
+    {
+      "id": "claim_babef6b32427401f834550a2cb9159b4",
+      "statement": "runJava enforces a single-run invariant: a module-level active object holds the in-flight request, and a second runJava call while active is set returns immediately with { status: 'error', message: 'a run is already in progress' } rather than queueing.",
+      "evidence": [
+        {
+          "resource": "repo://src/runner/runner.ts#L83-L89",
+          "version": "repo-lines-v1:sha256:b7a8c1c986ad9731460f6b69a352ca55e8d7cf50b0d2258dd1c2b5905e01f2c1:eyJzZWxlY3RlZExpbmVDb3VudCI6NywiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiOWUzN2VmMjJiMDYwZGUzOTE3MzhjMjYyNzEzNTc2Yzg3NDJhYjYwZjA2OTlhZDk5YWQ0NWE1NzdhY2E2MDFmNiIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiMjdlNTc4OGQ1ZDlkNzNkMjRhODFkYmMwYTVhNzRiZmE4MmM5YzNiM2FmOTllNTJhZjc5NmU5MGI0NjhhOGEzZCIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiYzM2MmQ1MmE4MzZmYmVjNjM3NDJiNjhhMzZhMDA0NzYzMDIwYTA4NDkzNDg1NjZkNzdhMGQwNTM0MmU0NzQyMyIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjMsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiNzNjM2FhZDQ3YTJhM2Q5NWYxMGMyNmVjNzIzMmVjZTQyNGU5YjAyZDQ4MjY4NzNkNWMwYmQyYWU5NzJmOGJiOCJ9"
+        }
+      ]
+    },
+    {
+      "id": "claim_c6ee7062d56145e78b9628353396e459",
+      "statement": "runJava always tears down and rebuilds the iframe per run: it calls teardownIframe() then createIframe() (sandbox='allow-scripts allow-same-origin', src './sandbox.html', hidden) rather than reusing a CheerpJ session, to avoid the JVM classloader serving a stale Main/KataRunner class from a previous run under the same class names.",
+      "evidence": [
+        {
+          "resource": "repo://src/runner/runner.ts#L41-L48",
+          "version": "repo-lines-v1:sha256:99ae1a7f026d7ff7c4c8eaac97aa898e2b87553f568c09ca3b49641a2cb5d1b1:eyJzZWxlY3RlZExpbmVDb3VudCI6OCwiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiMDcyYTgxZGFhYWYyMGM2YWMwYzk4OGE1YWE0M2Y2YjY1YjMwOWQ3OTc3NDY1MDYzM2NkNDY2N2E0ZDNhZDY3MCIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiNDEyY2EzNDVjY2Y3NWJmOWMwODA2YmNlNjk1YmU4ZGU4MDhiNzk5ODQyNTFhN2E1NGQyMDJjZjYxMDFkZDQ1MSIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiZmI1ODBlOTY0ZjgzYTQ3M2Y0M2Q0NDM4NDYyOTQ5ZDY4YjU2MDBmZGE3ODdmMTYzNzQ1ZDAwZGU4OWNiZjM2YSIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjMsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiNzkzZWE0ZDNkZGMwZWM4ZDgxMjQ4MmRjZTViZGYyODQ0ZjcyNDQ4Njg4MDJmNTZmYWM3MTM2OGE3ZTI3OGZkZiJ9"
+        },
+        {
+          "resource": "repo://src/runner/runner.ts#L55-L59",
+          "version": "repo-lines-v1:sha256:eaeea6fe8b80d96034a75452e1c8efb871d933a8605acc602bdd375bc6ff7335:eyJzZWxlY3RlZExpbmVDb3VudCI6NSwiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiNjcxOTc5M2EyMGI0ZTY5NTg4NGYzNmViMDdlNTU1YjVkZDFhMmI4ZmY2ZmU5YjM5NDc4OTEwMDZiZDUzYTIxYiIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiNGFhNzFkMzg3Zjk1NDMxMmExMjE4ODE1ZmExOWE0N2YyMDc4ZTVhMGIyY2JkYzhmM2U5ZDc3NGJjZTkyY2E4NCIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiNzMyZTdkZTFmZDc2NjJhNWI5OGM1MWI1ZmU0NTdjYzVjOGEyZmY4MTk1NzgwNWE0NjA0MmM5MzI3MDJkMDI3ZiIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjMsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiYzQ1YjVmNmRlZWFjZGEzMzVkNjljYWVhNTc5NzI1ZjFhYjZjMTcxYzUwOGUwODVkZThiMTA3NjhlMzdlNjYwMyJ9"
+        },
+        {
+          "resource": "repo://src/runner/runner.ts#L91-L92",
+          "version": "repo-lines-v1:sha256:14b03625c6a95a28ecb14d5dc5f0776b9af45168ef9209b8187d4e8b12c80cad:eyJzZWxlY3RlZExpbmVDb3VudCI6MiwiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiNGFhNzFkMzg3Zjk1NDMxMmExMjE4ODE1ZmExOWE0N2YyMDc4ZTVhMGIyY2JkYzhmM2U5ZDc3NGJjZTkyY2E4NCIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiNjk4ZDg4NWU3MTRmN2Y3ODIxNzZiMmUxYmQ2ODRiYTA0NThjZTliY2JkMmZhMTMyNDAxMWMwOGVmZTRhZTRjNSIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiNDljNjdlZDdkOTA5NDg5ZmMzYWI3NWQxOTExNWIyMWI1NDVkMzEzMTE5MzllNmUwNzI4MzJkODc0YjdiZGJmMSIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjMsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiN2QzN2RkNWJmNjZkZGMzYmVmZjdhNTM1MWE5NDUwNjU5NTJlM2E0MTQwZWEwODNmMzM0ZWE1NTEyYzYwMzhlNiJ9"
+        }
+      ]
+    },
+    {
+      "id": "claim_3e0da0e259d9469e933005139447f16f",
+      "statement": "finish() in runner.ts always tears down the iframe regardless of outcome (ok, compile-error, runtime-error, error, timeout, stopped): it clears the budget timer, nulls active, calls teardownIframe(), then resolves the runJava promise with the RunResult.",
+      "evidence": [
+        {
+          "resource": "repo://src/runner/runner.ts#L50-L61",
+          "version": "repo-lines-v1:sha256:42ade35912c03f633711a47274717872a1ffdf3d0a40bb7a3fe80422a237904b:eyJzZWxlY3RlZExpbmVDb3VudCI6MTIsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjFhZGIwOGE1YTQxMjJjOTFkMjg2MTJhYTMwMDQ1YmU4Yjc0ZTY4OWE0NjY0YmM4YTk2MGM0MmFmYjM3MTI3MjciLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjQxMmNhMzQ1Y2NmNzViZjljMDgwNmJjZTY5NWJlOGRlODA4Yjc5OTg0MjUxYTdhNTRkMjAyY2Y2MTAxZGQ0NTEiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImJhMmQ1MjIzZGJmYWM2Zjg3NWExY2Y3ODJkOTRjNGM3NTk2ZDQyYzM4Y2Q1YTZmNWNhMDgzZDI0MGJkMWY3YjgiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImYyZDA3ZjZlZjI3Zjc2Y2FjZWQ2MjMyODA1NzY0OTUwNWQxZDczN2U0NmIzNTM0ZGI5NGQ1YThiZTY3MWJmMGYifQ"
+        }
+      ]
+    },
+    {
+      "id": "claim_e5de1eb3c5614769ac5bd818adc0ea22",
+      "statement": "runner.ts uses a phase-driven budget: the run is armed with INIT_BUDGET_MS = 90_000 covering loading + compiling, and when the sandbox reports phase 'running', handleMessage clears the init timer and rearms the budget to the kata's timeoutMs; a timeout during init still reports { status: 'timeout' }.",
+      "evidence": [
+        {
+          "resource": "repo://src/runner/runner.ts#L18-L20",
+          "version": "repo-lines-v1:sha256:1114e9d03bfc0a2f50ae445b2fd4aa5d87a23e75ed299aa6b13b3cba9b1737f4:eyJzZWxlY3RlZExpbmVDb3VudCI6MywiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiMzI5NmI5MmY3NDRjOTMzZDQxMjY5NzY3MmVkODcyMDZhMGUwMDY5ZWMwYWM2NDhhNDFhMTk4Y2JkZWNjZTVlMCIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiNDRiOGMzZjY1NTBkY2Q4ZGE5ODllNTViZDU2MTA5YzYzNjBhMWQ4YzQwOGE1Mzg0ZjMwNTczMmU0OWE3YzVhMiIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiYmE4MzJlZWZlNDE2Y2ExODk3N2UxYTY3NTYzODY1NjM5ZDk1NDJkNzlkZmY1MWI2YWFmZWY1YmUzM2FhZjViOCIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjMsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiNGYxZDAzMWIxMjEwYjYzNTM0NTVjNzk4Y2I5YmFlNTNhNzg0NmJhNWFjZGYwZDY2OTVkODkwYzk1OGRiYjY3OCJ9"
+        },
+        {
+          "resource": "repo://src/runner/runner.ts#L68-L75",
+          "version": "repo-lines-v1:sha256:03b9aec58c815b01a86994cbfbb2f591cefa797e8a8583a315bec1d0c22e326a:eyJzZWxlY3RlZExpbmVDb3VudCI6OCwiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiMzYwZGI1YWUyZTFjMjY1MmUyZTljNTE2MjkzYzI4NjUwNGVkZDRhZGFhMmUzNzZiOGI5MGI5N2Q1YjgwOTNlOCIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiMjdlNTc4OGQ1ZDlkNzNkMjRhODFkYmMwYTVhNzRiZmE4MmM5YzNiM2FmOTllNTJhZjc5NmU5MGI0NjhhOGEzZCIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiZWMwODRhODIzNGZmMTA2MmU2NWE1NzFjZjZiZmU2Yzc4Y2YxY2I3ZTllYzA0OTI0N2Y5NzViMzIzODZhNTMyZSIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjMsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiYmM0ODRlNGEwZDFjZjZlZTg4MTIyYTE0YmFhZjFiNmY3ZDQyZWQ0N2EwYTliYzEyNDkzMjcwYzcyMjA1OWUwOSJ9"
+        },
+        {
+          "resource": "repo://src/runner/runner.ts#L95-L97",
+          "version": "repo-lines-v1:sha256:1cfd417e975bca3b02c6f46224a2e70f0c564dd4aa1921c66ffe579a08f8d231:eyJzZWxlY3RlZExpbmVDb3VudCI6MywiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiY2ExMGJiYjk2M2E2NjNjZDIwNzllNGRjY2U1ZDVkZjFhNTNlMjA3ZThiZDE5NjVjNjYyMjAzNTE4NmRjOTA3NSIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiOWIyYTg0MjgzYmE1NzQ0MWQ4YzBiOTljOWJkMjg5ZjBmN2VkMGNhMjg0OGNlMWIxMzUyZjM4NmVlYzY3NWVlZSIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiMWQ1N2IyNmM4ZDIwMWI3ZDhhMzZiMGNjOWVlNDhhMDZmYzg0M2ViYWU1MmExNTc5OTI4NDAwMTIwY2NhMjdhZiIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjMsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiMjMwMTFhOTg2MDU1NWNjYzBhYjY3YTM4NDc3MTQ2NzY1YjBkY2NiYzNmNDNlMWE5ZDg3N2IzZTg2YmI2N2E4NCJ9"
+        }
+      ]
+    },
+    {
+      "id": "claim_f4458ed6aceb4cf19652820890940c8d",
+      "statement": "runner.ts's generateHarness is computed per run on the main thread: on the iframe load event runJava builds a RunRequestMessage whose harnessSource is generateHarness(req.mainClass, req.checks) and postMessages it to the iframe's contentWindow.",
+      "evidence": [
+        {
+          "resource": "repo://src/runner/runner.ts#L99-L115",
+          "version": "repo-lines-v1:sha256:63ea956c79bcd39d200b2c19c23ed99b61ae7709137d1e7d82699e2b6c970331:eyJzZWxlY3RlZExpbmVDb3VudCI6MTcsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjVlNWU5NTJhOTNmMTUyY2E4ZTU4OWVjMWI3NjRhNWIyMWU4MTI0MTExNmRhNmVjNmQwNTFkZTRlYzBhMGU5YWMiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6Ijg0ZTQyMDhjZDZmZmI4YzRhMzU0N2IyZjU0YWRhMTk5NzhjM2YzNjVlNzhmOTUwMmVmNTE0NWNkZDJhYTg1NDMiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImU3NGEyZGFlNmZjMWY3Mjg4N2M5MGNkNTRiZTg3MzU1MGYyNjNlODNkZDRmMWUxYjZmM2VlY2NiNWQzNjJiYmUiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImJkMGYyZDNhM2FhZGEyNzU4NjQ1NzhkMGE0MzkxNTYzOGQ1NDNmZWNhMmM5NDg1OGRiOTQxMjExZTg2Y2VmMmIifQ"
+        }
+      ]
+    },
+    {
+      "id": "claim_34c800515c3f4ad8b531ab899d21992c",
+      "statement": "The postMessage protocol in src/runner/protocol.ts defines RunRequestMessage (type 'run'; requestId, source, mainClass, checks, timeoutMs, harnessSource), StopMessage (type 'stop'; requestId), PhaseMessage (type 'phase'; requestId, phase: 'loading'|'compiling'|'running'), and ResultMessage (type 'result'; requestId, result) whose result.status is 'ok' (stdout, returns) | 'compile-error'|'runtime-error'|'error' (message) | 'timeout' | 'stopped'.",
+      "evidence": [
+        {
+          "resource": "repo://src/runner/protocol.ts#L5-L33",
+          "version": "repo-lines-v1:sha256:a7e7e405aefcc1dfca646e7658281fe8d9e4e668b294a60176ac9907540ade1b:eyJzZWxlY3RlZExpbmVDb3VudCI6MjksImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6ImFiZGFlOTYyY2FlYzg4MzlhNTUwMmI0YmMzODgxZTJjMmI4YWMyZWI4ZmM4NjY0ODQwZWFlNjlmZGRkNzA1M2IiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjlkNDUxODZkMmVkOTIwOWYxMzIxZGZiYWQ1ODU2ZWFlZTllYjJlYWU1Nzc2ZTJkMzc1ZDg0ZDkxODRhM2EwZjIiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImU3NWUwYTMzMDUwZmJlZGM3ZWIwODQwNjhlOTJhNTNkMWYzYmRiOWM5YzU1MzBkYTIzZGYxMzRjZTg1NTk5OTQiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjowLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImUzYjBjNDQyOThmYzFjMTQ5YWZiZjRjODk5NmZiOTI0MjdhZTQxZTQ2NDliOTM0Y2E0OTU5OTFiNzg1MmI4NTUifQ"
+        }
+      ]
+    },
+    {
+      "id": "claim_c229921813714b75a2fce7063c75f505",
+      "statement": "runner.ts filters incoming messages strictly: handleMessage ignores any message whose event.source is not the iframe's contentWindow or whose requestId does not match active.requestId, so a stale message from a torn-down iframe cannot resolve a later run.",
+      "evidence": [
+        {
+          "resource": "repo://src/runner/runner.ts#L63-L79",
+          "version": "repo-lines-v1:sha256:88883ac8544cabcdd4e471eae2c0953108c56febfa9eacd14b5ccf3ff0230217:eyJzZWxlY3RlZExpbmVDb3VudCI6MTcsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjQ4NzkzMDlhMmNmMjdjYzEzMmM2MjBiMDdkYzQ5MGIyM2FmYmQzMTRkOWVkNzBjYTIwNmY1ZTkzN2RmNTU2YWMiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjQxMmNhMzQ1Y2NmNzViZjljMDgwNmJjZTY5NWJlOGRlODA4Yjc5OTg0MjUxYTdhNTRkMjAyY2Y2MTAxZGQ0NTEiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImM0NWI1ZjZkZWVhY2RhMzM1ZDY5Y2FlYTU3OTcyNWYxYWI2YzE3MWM1MDhlMDg1ZGU4YjEwNzY4ZTM3ZTY2MDMiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImMzNjJkNTJhODM2ZmJlYzYzNzQyYjY4YTM2YTAwNDc2MzAyMGEwODQ5MzQ4NTY2ZDc3YTBkMDUzNDJlNDc0MjMifQ"
+        }
+      ]
+    },
+    {
+      "id": "claim_b373ff3a025f4d89a3ddb1fc3c8ad0b6",
+      "statement": "public/sandbox.js is a thin relay: on a 'run' message it creates new Worker('./sandbox-worker.js') and forwards {source, mainClass, harnessSource} (it does NOT forward checks/timeoutMs to the worker); it owns the run timeout and hard-kills the Worker, doing no CheerpJ work on its own thread so its setTimeout and worker.terminate() stay responsive to runaway Java.",
+      "evidence": [
+        {
+          "resource": "repo://public/sandbox.js#L35-L57",
+          "version": "repo-lines-v1:sha256:d3638e7de76b5420c6b230848638d021b586c4ff28695078e3f66c628367b726:eyJzZWxlY3RlZExpbmVDb3VudCI6MjMsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6Ijc4ZjVjYWZlODgzZGY5ZjJkNDE0ZWE5ODk5ZDY2ZGUzMTQ5MDI0MzAyNzA2NTc1ZDM2MjFlNjk4NDQ2NDIzZGIiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjU2MTM2NmM1NWM3Y2IyNjhmNTZhYTdhODA2OWVkZmMwYTdiMzc2NmYxNzM2MTIxOTQyNGJmZjA3ZGZmN2YwY2YiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjAzZWJiNjA1Mzk0MzE2ZGM2ODZhZWZlM2RiZDZiZWY4MGI4NjY3MzA5ZmVhMWMwOTZjNWI5NTc2MDM3NTY3ODEiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjE4ZWZkNmZlMTNiYWJiNjJjNmQ0NDJkNWRjNGJkMDI4MzJhZGVlY2EyNzMzZTM5OTY4ZDIyNGY0Y2E0YjI2YzgifQ"
+        }
+      ]
+    },
+    {
+      "id": "claim_0b97bcf2957847e289113fa0f00562d4",
+      "statement": "sandbox.js switches its timer from the implicit init budget to msg.timeoutMs only when the Worker reports phase 'running', and its finish() clears the timer, calls worker.terminate(), nulls the worker, and posts the ResultMessage up to window.parent on every result, stop (matching requestId), timeout, or worker.onerror.",
+      "evidence": [
+        {
+          "resource": "repo://public/sandbox.js#L18-L28",
+          "version": "repo-lines-v1:sha256:eb9643af16cd5bde9d2b44c897a33b5ba2548b334f0c7e215a9d944c36c677a5:eyJzZWxlY3RlZExpbmVDb3VudCI6MTEsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjMwNDQ2N2E0Y2Q4M2RmOWIzMjNhNmNmZTYzZDJiOTdlNzc0ZjdkOWEyYWY2ODg1ZWFhNzM4ZjI0NzU3NTI4NmUiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjQxMmNhMzQ1Y2NmNzViZjljMDgwNmJjZTY5NWJlOGRlODA4Yjc5OTg0MjUxYTdhNTRkMjAyY2Y2MTAxZGQ0NTEiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjYyNzUzMWJjNTJiOTc4ZmJiNDk4NDM1MGMwMDE5YmI2ZjFiZTUwYThkNjhjMmVhMDVmMzc2YzRmM2FhZjYyMzAiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjcwOGFiM2ZlMGQ1YTZiMzZlY2EyYmM1YjUwODI5NTM0NjNiOGU0MTk1MDE3ZjFhNTBmYmY1NDVlM2VlZmVlMWQifQ"
+        },
+        {
+          "resource": "repo://public/sandbox.js#L40-L55",
+          "version": "repo-lines-v1:sha256:d41f5f537682f838ba4e666518ea1340b46cbe9136920de15fba74d8dd280e57:eyJzZWxlY3RlZExpbmVDb3VudCI6MTYsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjUyZWYzMDZiNzQzZThlYTIyYzE3NWNiOTlmMjEwZmI2OTQ0Mzk3MTU0NTg1ODE5NDkxZDA1ZTE0NmU3OTVhYzAiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6ImFkOWUxMjU0NjQyNTU3NmQzZGVhZThjOWI5ZGJmMTI4ZDVkNmRkYWY1ZDdmZTg1NzkzNDkyN2RlZmZhM2I5ZGQiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjY2MDhmMzIwZTVhOGZmOGZmMWQ2ODI2MjIzYzk0YzkxYWQ0Yzk4OGMyYzVmMjhhZDVlZjJlMWMzYzIzODY5MzciLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjBhOGM5MjIwNTNkMDllNDIyYjRmMDE0ZWIxOGM4ZDIxZWQ5OTRhYjAzZWZiYjUzOTI2OTdjOTVkMDlkOGM5NTMifQ"
+        },
+        {
+          "resource": "repo://public/sandbox.js#L45-L48",
+          "version": "repo-lines-v1:sha256:ca1d8af9242fce9c7c63636f81a3c6016728b759e9e41cee8100281a2ad206cf:eyJzZWxlY3RlZExpbmVDb3VudCI6NCwiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiNzEyOGUyZDRkMTQ3YTY1ZTFiODc1YmRjZWZkM2U2MzgzNjc5ZjJlMDhhNmMzNDUzZGYwOTU4MGU4YmRiNGQ0MiIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiZTZiMDQ0OTE0Njk3MjJlODM2M2E5NGU0MDQ0NTM4ZTAxM2EyYTIxN2UzNmIxZTU2OGJhNjBhY2I3YjRjOGYyZSIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiNDYzOGRmODAxNTZjY2I2NDkzMmM4MDI4ZmE5NDBhOTMyMmQ0YTlhYjY3ZmY5YWRkNzQxYzVjZDdkMDdhMzkxOCIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjMsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiZmU3MDc1NTkwZGJhYTczYjZhZGVhMTMxNzZkYmIwNjRlZWU5ZmU1ODI4Y2ZlNDY3YTk2NzhiYjJjNjg5Mzc2NSJ9"
+        }
+      ]
+    },
+    {
+      "id": "claim_6618a81941164641b0fce550cdb06b32",
+      "statement": "sandbox-worker.js runs all CheerpJ work in the Worker: it importScripts the pinned CheerpJ loader (https://cjrtnc.leaningtech.com/4.3/loader.js), memoizes cheerpjInit in initPromise, posts phase 'loading' then 'compiling', writes the user source and harness to CheerpJ's virtual FS under /str/, and compiles both via cheerpjRunMain('com.sun.tools.javac.Main', CLASSPATH, srcMain, srcHarness, '-d', '/files/') with CLASSPATH '/app/tools.jar:/files/'.",
+      "evidence": [
+        {
+          "resource": "repo://public/sandbox-worker.js#L14-L17",
+          "version": "repo-lines-v1:sha256:295ff5065d242612320f7e8b68ffb75aca9189ab54b1b3007852a7eca8ccec79:eyJzZWxlY3RlZExpbmVDb3VudCI6NCwiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiMTg5MmI4YWIzZmE4ZDAwNGI1N2ZkNTFkMzMzM2JkZjBmZDQ2YjcwMjhhNDI5YmNhN2ZiNWFiYjcwNTkwMDVhNSIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiNDVjNGQ2MmMwZGQyMjllMGY1Zjg3MTkyZTc0Yjg0Yjk2NzMxNDE4OTVmNGE1MjZjMmNjMDRhMGM0MzY3OWY1MCIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiYzA2MDEwMTI0N2JjZjNkNDkxODkyYjg1MDQyNjdmYjRkNDZjMzFjOTE3NTdlYWM3MDEyOWRjYWJhZWZkOTk5MyIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjMsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiZjRkY2UzYmRkZTgxNWEwMjQ3OTAzZWZjY2NkZDExMGU3NjBjNTliMDZlM2NiNzZkYWU2YzMxNTQ1YWQyNWMzZCJ9"
+        },
+        {
+          "resource": "repo://public/sandbox-worker.js#L39-L56",
+          "version": "repo-lines-v1:sha256:c90cef82f3a1b7927ddb13930ac15db8d85e2c0ca2b69c850c44c33ddd9b9d49:eyJzZWxlY3RlZExpbmVDb3VudCI6MTgsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjYwMDlhZjkwYzk5OGIwNmYyNGFjOWEyNDQzYzRkMTJjODk5OTFlYzIxMTBhNzEyZjEyM2M5MmMyNmRmYzNkMTkiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6Ijc0MTIyYzY4NzMyNDk3Y2ViNjY1MGY4MTg1NWVmYjVmNGQ0ZWQ1NDI2MDRkNTA3Nzc4MWE0ZTc0YmFlNjk0OTQiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjQ2YTFiNTNkZDk2NDI5ZTllNThlZDExNDMxMTQzNzRlMjA5Mzc5MDU0MGQxOGExYjFmOGUyOTlhNjRiOGYyOTQiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImNjYzg5NDNkMzBkOWI2MTI5OTY5NzVhYjM0MmNlNTE2Y2ZiYWRlNzUzOGQyMjhlYTgzY2FlMGYxYzk4ZmU3NGQifQ"
+        }
+      ]
+    },
+    {
+      "id": "claim_b37a5875703d4b848f66f5144e096b9e",
+      "statement": "sandbox-worker.js reports a compile error when javac exits non-zero: it posts { status: 'compile-error', message: captured.trim() || 'Compilation failed.' } and returns without running the harness.",
+      "evidence": [
+        {
+          "resource": "repo://public/sandbox-worker.js#L57-L60",
+          "version": "repo-lines-v1:sha256:324e9954bbeb8806cdbc2079c301f11dc8db9154827a6fec7334be9eb2357da4:eyJzZWxlY3RlZExpbmVDb3VudCI6NCwiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiYzFlNzc4MGVmYmFjYWZkYzE0ZGJjOTc5YjFiN2M1MDVkMzVhNDc1ZTA1ODU2MjM4YjUyNmE2NDMzZmY0YzAxYiIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiNDg5M2Y0MGUzNzgxZWI4OTZjODJkMDQ2YTA4MDY3YTExZTM1Y2RmMmYxZGZhZjI2ZmVhOTBiOGRiNjY3NjQxMyIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiNGU0YzJhOGNlNzlkMWE0MmU1YWI5ZmYzOTM4MTBlZjVhZGFiOGI3NjRmMGNkNWRkYzJjODM1OTM0NzVlMWE0MCIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjMsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiYmQ3ZTc5MGY5ZjI0MGVhYjYzNGIwYzU2ZjNkMzY1ZGUwYTNhNDMzNTI5NDEzMzZkZmMzOWQ0Yjk4NDUzNzZkOSJ9"
+        }
+      ]
+    },
+    {
+      "id": "claim_c10e8f242217432ead85fce0cc376b0a",
+      "statement": "sandbox-worker.js captures CheerpJ output by monkeypatching console.log/error/warn/info to append to a captured string (no DOM exists in a Worker, so CheerpJ stdout/stderr land on the worker's own console), then parses sentinel-delimited output: it reports runtime-error if ERR_PREFIX is present, slices stdout between OUT_BEGIN/OUT_END stripping all leading/trailing blank lines (because CheerpJ's console bridge doesn't preserve exact newline counts), collects every RET_PREFIX line into returns, and a non-zero runExit with no OUT_BEGIN is a runtime-error; otherwise posts { status: 'ok', stdout, returns }. Thrown exceptions become { status: 'error', message }.",
+      "evidence": [
+        {
+          "resource": "repo://public/sandbox-worker.js#L25-L31",
+          "version": "repo-lines-v1:sha256:b97a7bbf0fba3bdedbc5a346a358aca7128c3ed8ef950ae4bdc1526220aa2a11:eyJzZWxlY3RlZExpbmVDb3VudCI6NywiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiOTkxNTlmNjkzMjViMGFmMTY5Zjg5MTA1NzJjOTc2OGI2MWZiN2ZmM2Y2ZjYyNDZmZjA3YzdhZWQxYWZiODc3ZiIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiNDEyY2EzNDVjY2Y3NWJmOWMwODA2YmNlNjk1YmU4ZGU4MDhiNzk5ODQyNTFhN2E1NGQyMDJjZjYxMDFkZDQ1MSIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiNzA4NjI2NjE2NDFlNTA1ZDk4YzBmYmZkNjE1NGRjYjA5MjRlOTI0NGFmMzA4NjkzMmY2NmNiOGE4Y2RhN2JlMyIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjMsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiOTdiYThjY2Q5ODljMTViZGFjN2VjNDIwNTIzOTU5YzNhYjcwZmE4MmJhNzZkZmVlNjM1MDlhMTE4MjY1YTlmMyJ9"
+        },
+        {
+          "resource": "repo://public/sandbox-worker.js#L62-L97",
+          "version": "repo-lines-v1:sha256:5dd57533073ac5e87d4dec46ca494f446a0d9e295c827274b8c22d6b49909664:eyJzZWxlY3RlZExpbmVDb3VudCI6MzYsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjFiNWNkMzkwZDBhMmQzMDdlMDY3OGNmMmFlZTRmM2EzNDdhMDU5ZWVmYzM4OTMxN2MyM2RhZWY4NDQ5Y2FiODciLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjI3ZTU3ODhkNWQ5ZDczZDI0YTgxZGJjMGE1YTc0YmZhODJjOWMzYjNhZjk5ZTUyYWY3OTZlOTBiNDY4YThhM2QiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjZhNDFkNzNjNDUyMmJlYTM5ZmY4MTVlMjRiY2YxMzExODUzMWQ2NzFlYjNjZjUzMTIxODg1ZTExYTFjNDcyNGQiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjoxLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImFhMWQxYTYzMzkwMjI5Yzc5ODM0N2U4M2EwNDA1NDQxYzk0MDAwMzUyODRhZDE2OGMxYmY2Y2RmMWQ3MGEzNzAifQ"
+        }
+      ]
+    },
+    {
+      "id": "claim_c411269c253e4bb4b6ee736a0e2f0b0a",
+      "statement": "The sentinel markers are defined identically in harness.ts and sandbox-worker.js: OUT_BEGIN '___KATA_OUT_BEGIN___', OUT_END '___KATA_OUT_END___', RET_PREFIX '___KATA_RET___', ERR_PREFIX '___KATA_ERR___'; the harness wraps stdout (redirecting System.out around Main.main) and per-case return values (toJson overloads) between these markers, and the worker parses them back into a RunResult.",
+      "evidence": [
+        {
+          "resource": "repo://public/sandbox-worker.js#L16-L19",
+          "version": "repo-lines-v1:sha256:8201578ef66f2f8006cc31187df0665d39c0ad55039ed22d3c562f61634d7efe:eyJzZWxlY3RlZExpbmVDb3VudCI6NCwiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiOTA0OGMzMDJiNjM0MjYzOGNiZGNkODU3YWZlZGEwMjk1NTIxZjJmOGNhZWJjZDVkZTdkZDI5MzEzMTY4MjhlMCIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiOTkwY2ZlNDc3OGNkN2JjMmFjOTJlODMzOGY5YzJjOGNmZTBmYzkzMDAwNDljMzRhN2UwYzdjMWM0MmVjZTFmYiIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiY2RhMzIwOGFkMmU2MDg4MmJjNDYxZTM2YWM0YWZlMTk0NDJkMmRiNmRkZTZhYmQ3MDQ0MWQ3YTkyNmUxMzllNCIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjMsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiNjcxYTJjMTAwYjc2ZGY5YTY3NGY0ODgzMjNlMTIyOTA4YmJhYzdjYzAwYWRmMjg2M2E0MWUxYjMzMWNlMmRkMiJ9"
+        },
+        {
+          "resource": "repo://src/runner/harness.ts#L11-L14",
+          "version": "repo-lines-v1:sha256:477a3791191ead90e52cf6920f416d3e64f610b6f1e04c921cc4cc0bd81a369e:eyJzZWxlY3RlZExpbmVDb3VudCI6NCwiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiNzQ1MTViYjQyNDNkZDU5M2Q5ODMwNGI2NDQ3ZGFmZmUyNTkwYmQ2NDNjZmNkMWRmM2U5NDkzZDczYjY2NjdiMiIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiMDBkMzQ1MzQ5MWI3NzdhMjllYTgyNTg4ZDljNzZjOGI5ZTQyNDlmNGNkYzkzZjQzMjMxMDcwODY4ZWNmOWE3YiIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiNzIyMDg5ZDY4N2JhODlkZGE2Mjg5ODFkOGZhOTZhODYxNGUyYzViNDUzMDk0ZjM1YzEwMTVkMzIwMjBhNzI2NSIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjMsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiNDBiNzM0Y2ViNGEwNzM5M2M5YmFjY2Q0ZWI0MzQ1MTU1MGY4YWY5MDgzOTEwNTUzNTM0OWQ2YWMxM2M3ZWE1MyJ9"
+        }
+      ]
+    },
+    {
+      "id": "claim_46d9aeb368684c328e318698bafca58b",
+      "statement": "The positional mapping between harness output and verification holds because generateHarness emits one rets.add(toJson(Main.method(args))) line per return-case in the same order as checks/cases, and verifyResult walks kata.checks in order incrementing a returnIdx for each return check so returns[i] corresponds to the i-th emitted case.",
+      "evidence": [
+        {
+          "resource": "repo://src/check/verify.ts#L92-L106",
+          "version": "repo-lines-v1:sha256:0c87828281030102f5f8ff5dcbbe17f464253b4d44ce463ab21ea120816214f4:eyJzZWxlY3RlZExpbmVDb3VudCI6MTUsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjgwMzE5NDliYjYyMjI2ZjExYmZjN2EzMzE3OTc3M2IwMDc2ZGM1YzhmMzhkYTM2MDVkZTY2MjhkZTEyNjBiNzkiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjQ4OTNmNDBlMzc4MWViODk2YzgyZDA0NmEwODA2N2ExMWUzNWNkZjJmMWRmYWYyNmZlYTkwYjhkYjY2NzY0MTMiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjQyYjgxNDY0ZmNlNjM4N2Y4Y2VlZTRmOGI2Y2FlNGIzNDUxZTU2ZDlkNzg4YTVlMzI0NTRhZmI2ZWI4NDgxN2UiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImE2ZjljZTM3NmI5M2M2NTQwNmIxNTFhYzY3MDk3ZGIzYmU4ZWY3MDg4YmE4ZWZhYWZlMmM0OWM4ZDI0MjA3NjQifQ"
+        }
+      ]
+    },
+    {
+      "id": "claim_53cddca0f6fc412ab7df1e77c68d11ce",
+      "statement": "verifyResult turns a completed RunResult into a Verdict: for status !== 'ok' it returns { solved: false, checks: [], failure: {status, message?} }; for 'ok' it normalizes stdout checks via normalizeStdout (equality) and compares return cases via compareJavaValue (unwrapping the {type,value} form: long as string, float/double with 1e-9 epsilon, char by code point, int by numeric value, arrays element-wise, plain values directly), with solved true only if every check and every case passes.",
+      "evidence": [
+        {
+          "resource": "repo://src/check/verify.ts#L45-L79",
+          "version": "repo-lines-v1:sha256:7d4b1171db7fae99d15b745641b17efcef4ea5b0c63bc0e20c75fd458c993a97:eyJzZWxlY3RlZExpbmVDb3VudCI6MzUsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjJiMWY1ZDRkYTg4NzJmZGYwNWI3NDRiYzg5YmE5NDA2MWJkNmM5MWY1NDYzZjhkODdjYWZmZjc2MzlmNmYwYjkiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjQxMmNhMzQ1Y2NmNzViZjljMDgwNmJjZTY5NWJlOGRlODA4Yjc5OTg0MjUxYTdhNTRkMjAyY2Y2MTAxZGQ0NTEiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImJlYTgwNjM1NjFiYjJiYzNkMzZiOTliOWNhNGQ4OTQ2ODQzMzA5OTVjN2FkNWUzMjU4YTZlZGM2YjMxZDY2ZGEiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImZkOWVlOWMzNWFiY2IyNWQ3NTIxZDY0ZDAxNmU2ZDAxNzMyNjBkYTBhMDJlMWM5ZTViNDNkNTcyY2FiMjA3ZjMifQ"
+        },
+        {
+          "resource": "repo://src/check/verify.ts#L82-L110",
+          "version": "repo-lines-v1:sha256:be8a6ba66a4f8fe42d1fb2ccec55313df9424cd9be168feceba4c200b30460f0:eyJzZWxlY3RlZExpbmVDb3VudCI6MjksImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjQ0NDk4OGFiM2Q3MDRjYTdlMDY5YjlmYWEyNzU3ZDU4MTY1ZmE3NDBkZjk3ODZlZDM5MjUzOWJhNTIzYmM4NDgiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjQxMmNhMzQ1Y2NmNzViZjljMDgwNmJjZTY5NWJlOGRlODA4Yjc5OTg0MjUxYTdhNTRkMjAyY2Y2MTAxZGQ0NTEiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjQ3MmUyNjdkYTQ5ZTk2ZGJmYTJlNTlhY2MxOWYxZDk5MzAyNGNkZjBjM2VkMTI3YmYyZWIzZWM2ZTI4NDcwNGQiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjowLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImUzYjBjNDQyOThmYzFjMTQ5YWZiZjRjODk5NmZiOTI0MjdhZTQxZTQ2NDliOTM0Y2E0OTU5OTFiNzg1MmI4NTUifQ"
+        }
+      ]
+    },
+    {
+      "id": "claim_eb44c40b49c246c993f80299b436ff00",
+      "statement": "code.ts renders non-ok results via renderFailure using a FAILURE_LABEL map: 'compile-error'->'Compilation failed:', 'runtime-error'->'Runtime error:', 'timeout'->'Timed out — check for infinite loops or long-running code.', 'stopped'->'Stopped.', 'error'->'Something went wrong running your code:'; compile-error/runtime-error/error additionally append the message in a <pre class=compiler-output> when a non-empty message is present, while timeout/stopped show the label alone. showResult returns undefined for these so no solved feedback is recorded.",
+      "evidence": [
+        {
+          "resource": "repo://src/ui/views/code.ts#L122-L155",
+          "version": "repo-lines-v1:sha256:373c54496682f97e45647380f2f396083308343e9f48891a7027a58edf99bc69:eyJzZWxlY3RlZExpbmVDb3VudCI6MzQsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjIzZDJmOTAwM2ZjZjk1NWE0YjgzZWQxODE2ZmFkMTA5OWM1NWQ0Njg2NTMwYzk0ZDRlYWE3MDZiYzM2ZGEzNTUiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjQxMmNhMzQ1Y2NmNzViZjljMDgwNmJjZTY5NWJlOGRlODA4Yjc5OTg0MjUxYTdhNTRkMjAyY2Y2MTAxZGQ0NTEiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjdiMjAwNTRhODRlYzg5NTllNzQ0MzZlZWE3YmMxMzIwZDdiZjg5MmVhYWNjOTliNDZlMDhhYmU5OTQwNjIwYTgiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjFiYzYyMTZkMjA5NzQ0MmQ2NjdkYjQzMmQzOGYwYzE5N2FiOWI2ZjQ5N2YwN2RmYjRiYjkwNzk5MjJmM2MxN2UifQ"
+        }
+      ]
+    },
+    {
+      "id": "claim_d3b8909d647348f6828de2e5af04babd",
+      "statement": "code.ts renders a successful verdict via renderVerdict: a summary line ('✓ All checks passed!' / '✗ Some checks failed.'), then per stdout check a check-block with a two-column line-level diff (diff-panel with Expected/Actual diff-columns, mismatched lines classed diff-line-mismatch) on failure, and per return check a per-case table (cases-table) with Args/Expected/Actual/pass-fail columns where formatValue/formatArgs unwrap the {type,value} wrapper; rows are classed case-pass/case-fail.",
+      "evidence": [
+        {
+          "resource": "repo://src/ui/views/code.ts#L157-L208",
+          "version": "repo-lines-v1:sha256:89c19db3327ba6edfa15bd2a70345df696d5e64acad813ddef480d263e339371:eyJzZWxlY3RlZExpbmVDb3VudCI6NTIsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6Ijg0ZDBiYzljMmQ3ZWU0ZjM4OTAwMmVlMjc4NTJjMmM2MGZmMzU2OTZjM2E1ZjJiMTdhNDM3ZmU5YmNiOTlhNzgiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjQxMmNhMzQ1Y2NmNzViZjljMDgwNmJjZTY5NWJlOGRlODA4Yjc5OTg0MjUxYTdhNTRkMjAyY2Y2MTAxZGQ0NTEiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImZiNTgwZTk2NGY4M2E0NzNmNDNkNDQzODQ2Mjk0OWQ2OGI1NjAwZmRhNzg3ZjE2Mzc0NWQwMGRlODljYmYzNmEiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6Ijc3NDdmMDNlYjFkMDI4MTdkMWEzZmM3YjY4NjQ3NzRhOTRiYjZlZGY5YjkwNjBhZWNlNjg2MWZiYjViOGY4NDUifQ"
+        },
+        {
+          "resource": "repo://src/ui/views/code.ts#L229-L263",
+          "version": "repo-lines-v1:sha256:bcc47754745d688296e52d07f138d02258caf67dfea71bc5394fbdb3524adc9b:eyJzZWxlY3RlZExpbmVDb3VudCI6MzUsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjQ3Y2QyNzIxNDFiMTIxZDY5NmRhOGZmOTkwZmYyNWJiOWM0NzQ3M2M3OTI5YjhkMmYyOTliZGQ4ZGRkOTNmMTUiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjQxMmNhMzQ1Y2NmNzViZjljMDgwNmJjZTY5NWJlOGRlODA4Yjc5OTg0MjUxYTdhNTRkMjAyY2Y2MTAxZGQ0NTEiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImQwY2UyZWVhYjFjMDEyMmFlMDYyOTc3YzgzOGM2MTc0NWJhZWQ5YmM3Yjg3YTg1YzMwMzMyMDVhNDBlMGFmNDAiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjowLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImUzYjBjNDQyOThmYzFjMTQ5YWZiZjRjODk5NmZiOTI0MjdhZTQxZTQ2NDliOTM0Y2E0OTU5OTFiNzg1MmI4NTUifQ"
+        }
+      ]
+    },
+    {
+      "id": "claim_c34ab1a206b6431c943aab952c2ba954",
+      "statement": "code.ts's onRun re-enables Run and disables Stop in a finally block regardless of outcome, and after a successful verify calls feedback.report(verdict.solved) so the hints controller records solved/attempts to localStorage under kata-progress:v1.",
+      "evidence": [
+        {
+          "resource": "repo://src/ui/views/code.ts#L104-L116",
+          "version": "repo-lines-v1:sha256:d17489f021affad04a543b875d0f164bacfae76e8150d5dd0d34b7c3ec26596a:eyJzZWxlY3RlZExpbmVDb3VudCI6MTMsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjExZGY4N2E0NzMxNmM3MDhjNTUwMjA5OGU5YWY2YzQ0NTM0ZWI4MGJlYWRjZjYwNjMwMjhlZmNhODU5MzdhYmUiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjI3ZTU3ODhkNWQ5ZDczZDI0YTgxZGJjMGE1YTc0YmZhODJjOWMzYjNhZjk5ZTUyYWY3OTZlOTBiNDY4YThhM2QiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjAzNDQ2M2FkODAxY2MyZWM2ZjZiYzU0ODkyNzE0ZDlmNGY1MGQzOTY2MGRmMWVmZWYzYWY5MmVmNDBkN2U1Y2UiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImUwY2E5NGI5Yzc3MjI4YWIzZmZhNGYyNTI1YTA2MzU1Y2VhOGYwM2RmOTM0ZDhkY2Y3MmE0MDY3MmZjN2VlYjYifQ"
+        }
+      ]
+    },
+    {
+      "id": "claim_08e37f520c6f4734a466a5f0d993b702",
+      "statement": "stop() in runner.ts tears down the iframe if no run is active, otherwise calls finish({ status: 'stopped' }); sandbox.js resolves { status: 'stopped' } only when a 'stop' message's requestId matches the active run, and both rely on worker.terminate() as the hard kill since there is no cooperative cancellation inside the JVM-in-WASM.",
+      "evidence": [
+        {
+          "resource": "repo://public/sandbox.js#L58-L60",
+          "version": "repo-lines-v1:sha256:18efd6fe13babb62c6d442d5dc4bd02832adeeca2733e39968d224f4ca4b26c8:eyJzZWxlY3RlZExpbmVDb3VudCI6MywiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiOTIwYzIwMWZkMjBhYTE4ZDBmZDE1ZmVmZjY4NWQ1NGMxYTk1NGY5YzZkNTQyMjI2MjIwMWQ4NzRjMDVhNGM1MSIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiMjdlNTc4OGQ1ZDlkNzNkMjRhODFkYmMwYTVhNzRiZmE4MmM5YzNiM2FmOTllNTJhZjc5NmU5MGI0NjhhOGEzZCIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiODAxOTY1NGU4N2M0ZTFhZWVhZGFiOGJjYjk3ZWQwNmFiZmFhN2M3ZDkxZGRlNzEzNWM5ODQ5NzQ3Zjg4OGVhYSIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjEsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiZjZmNWI0MGIxNTg0NTdkMTc4NjRmMjE3OTA3ODZkZDVhMmVjZGI2NGI2NmE2NTFmNzg4ZDRlMjVjZDMzMDNkMiJ9"
+        },
+        {
+          "resource": "repo://src/runner/runner.ts#L119-L125",
+          "version": "repo-lines-v1:sha256:f5c7576266f5852906b2cf9a5819a9a519bf6d407c921d0828a1fa8945643c30:eyJzZWxlY3RlZExpbmVDb3VudCI6NywiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiOTc4YTQwMTIzY2MwNzBlNmJmODFiMGMzZjllY2IwNWVjN2Y4ODJlNDg5MmIwNTMyYmU5N2Y1NmFkYWEyNjg2NiIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiNDEyY2EzNDVjY2Y3NWJmOWMwODA2YmNlNjk1YmU4ZGU4MDhiNzk5ODQyNTFhN2E1NGQyMDJjZjYxMDFkZDQ1MSIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiYmQwZjJkM2EzYWFkYTI3NTg2NDU3OGQwYTQzOTE1NjM4ZDU0M2ZlY2EyYzk0ODU4ZGI5NDEyMTFlODZjZWYyYiIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjAsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiZTNiMGM0NDI5OGZjMWMxNDlhZmJmNGM4OTk2ZmI5MjQyN2FlNDFlNDY0OWI5MzRjYTQ5NTk5MWI3ODUyYjg1NSJ9"
+        }
+      ]
+    }
+  ],
+  "verification": {
+    "by": "openwiki/0.4.0",
+    "at": "2026-08-26T15:48:44.789Z"
+  }
+}

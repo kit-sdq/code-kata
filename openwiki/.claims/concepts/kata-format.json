@@ -1,0 +1,304 @@
+{
+  "schemaVersion": 1,
+  "pageVersion": "sha256:4e8ab294400182e66af99c1ffd1f85e7b2a096b9b91cc2208bccb9d2e81759cb",
+  "claims": [
+    {
+      "id": "claim_373f4a60c48948f9b4d1e874c530fc38",
+      "statement": "A kata is a single file at katas/<id>.md consisting of a YAML frontmatter block followed by a Markdown body; parsing produces one of three Kata interfaces (TextKata, ChoiceKata, CodeKata), all extending KataBase.",
+      "evidence": [
+        {
+          "resource": "repo://src/kata/parse.ts#L8-L49",
+          "version": "repo-lines-v1:sha256:bb8b0a53fbcf923e7cfdeed466b06683abdfd2ec7b997cd2b8fec5cf4e6f2f82:eyJzZWxlY3RlZExpbmVDb3VudCI6NDIsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6Ijg4NmI2YzY2MGUwZjc2MGViYzZmOGZjNzFlNmE1ZmJjOTY3OTg0ZDEyMGFiYzhmYWI5Y2Q5OWQ4ZWY4ZjAwM2IiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjQxMmNhMzQ1Y2NmNzViZjljMDgwNmJjZTY5NWJlOGRlODA4Yjc5OTg0MjUxYTdhNTRkMjAyY2Y2MTAxZGQ0NTEiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImVmYWQzMjBiNGU3MDU2ZmMxODA3OTJhMTUyNGJlYWY3NDkwZDkxNDk4NzhhNmNlMmM4OTlkYjY2MTAzZWRhNGYiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImRkZDY3NGY1ZjNmNzE0MDJkZTllMjIyNDdkZjRmNzg2YjAxMmVjYjdiODIyOWE0MThlZjExOWMxN2IzMWZjMzIifQ"
+        },
+        {
+          "resource": "repo://src/kata/types.ts#L1-L23",
+          "version": "repo-lines-v1:sha256:94e5e9268d151f0faf9ca37ab97c9136b421c91032144d792ee728357e7fa529:eyJzZWxlY3RlZExpbmVDb3VudCI6MjMsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjAyODA0ZGQ1YmFhZjRkMTdhMzExYTBiNjhlMjhhOTBhMGM3YWY1YjUzOGRkYTY1MThmZTg5YjgxMDhiNGViYWUiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6ImRmY2YwZjE5MTJmNWNlNDY3ODBhYTAxNjMyNTA2NWEzODVkNmJjODFmMzMxM2M1ZGViNmVhMjkwYzE5YTUxNjQiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjowLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImUzYjBjNDQyOThmYzFjMTQ5YWZiZjRjODk5NmZiOTI0MjdhZTQxZTQ2NDliOTM0Y2E0OTU5OTFiNzg1MmI4NTUiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjowLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImUzYjBjNDQyOThmYzFjMTQ5YWZiZjRjODk5NmZiOTI0MjdhZTQxZTQ2NDliOTM0Y2E0OTU5OTFiNzg1MmI4NTUifQ"
+        }
+      ]
+    },
+    {
+      "id": "claim_3b099891c06243d5b3e8a7ef2422c1c7",
+      "statement": "parseKata(raw, fallbackId) matches leading YAML frontmatter with js-yaml, extracts the java template block out of the body, then dispatches on type to a per-type parser that validates fields and applies defaults; load.ts derives fallbackId as the filename minus .md and calls parseKata.",
+      "evidence": [
+        {
+          "resource": "repo://src/kata/load.ts#L4-L17",
+          "version": "repo-lines-v1:sha256:7b03004d771d31989a083da72cd0fe1749c274ec14aa1ff5ce48e9eed49fbe87:eyJzZWxlY3RlZExpbmVDb3VudCI6MTQsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6Ijc4Zjg3MjBkMWQyMjBhNDk3MzY2OTIwZDk0NTUwYjA5NWZhYWM1MDk0ZjI3NzM0NDZjOThkYTk3YzlhMWU3M2IiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6ImVmYmMyZWQ1MDc3ZDFiY2I0NjMyNDk3Zjg4MzdmN2M1ZjFlNGZlYWUyNDYwYWFlNGVhMjJmMjg5YTEzOWMxNTciLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjIzYjM3OGFlNWQwYzI1YjE3MGU3Y2Y4Y2Y5YzYzOGIxYmQ0MzkxODdmMDU3OGZiNWVjYWVlZjkzNzQ1ZjJiZDAiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImMxMDY2ZTk1NjE2MzlhNGFiMDU1Nzc0YmQ2N2Y0NjZkOTRiYmNiMDk4MDdiYjE5NjdmODVlZTE1M2M3OTJlMzYifQ"
+        },
+        {
+          "resource": "repo://src/kata/parse.ts#L8-L49",
+          "version": "repo-lines-v1:sha256:bb8b0a53fbcf923e7cfdeed466b06683abdfd2ec7b997cd2b8fec5cf4e6f2f82:eyJzZWxlY3RlZExpbmVDb3VudCI6NDIsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6Ijg4NmI2YzY2MGUwZjc2MGViYzZmOGZjNzFlNmE1ZmJjOTY3OTg0ZDEyMGFiYzhmYWI5Y2Q5OWQ4ZWY4ZjAwM2IiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjQxMmNhMzQ1Y2NmNzViZjljMDgwNmJjZTY5NWJlOGRlODA4Yjc5OTg0MjUxYTdhNTRkMjAyY2Y2MTAxZGQ0NTEiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImVmYWQzMjBiNGU3MDU2ZmMxODA3OTJhMTUyNGJlYWY3NDkwZDkxNDk4NzhhNmNlMmM4OTlkYjY2MTAzZWRhNGYiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImRkZDY3NGY1ZjNmNzE0MDJkZTllMjIyNDdkZjRmNzg2YjAxMmVjYjdiODIyOWE0MThlZjExOWMxN2IzMWZjMzIifQ"
+        }
+      ]
+    },
+    {
+      "id": "claim_d378eeee3f8f4737b1938c3585a3a3fa",
+      "statement": "A validation error in parseKata throws with an <id>-prefixed message, and load.ts logs the failure and skips that kata rather than crashing, so a malformed kata disappears from the list instead of breaking the build.",
+      "evidence": [
+        {
+          "resource": "repo://src/kata/load.ts#L6-L17",
+          "version": "repo-lines-v1:sha256:fb565a65c8ab784351e8466f06d85b94e54242d82fef3682e81b1c1749f6b0f9:eyJzZWxlY3RlZExpbmVDb3VudCI6MTIsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjJiZDU0NjI0OTkzMjlmOWI1ZjA2MjE1OThmZmMxMWFkODdiMTY0N2M1Y2MyNzNiYzAzMGI3ZWIzOTU2ZDFmYWYiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6ImVmYmMyZWQ1MDc3ZDFiY2I0NjMyNDk3Zjg4MzdmN2M1ZjFlNGZlYWUyNDYwYWFlNGVhMjJmMjg5YTEzOWMxNTciLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjVlMmZkNWNkNzEyZDY0MzI3MTNjMmNjOTMwYTJmM2NjZDgzMDNlY2JlNjZlY2JhNzUyZWIxZWIzNjg2MjhkYzIiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImMxMDY2ZTk1NjE2MzlhNGFiMDU1Nzc0YmQ2N2Y0NjZkOTRiYmNiMDk4MDdiYjE5NjdmODVlZTE1M2M3OTJlMzYifQ"
+        }
+      ]
+    },
+    {
+      "id": "claim_39ed02941f8f4918b51cc9415e32b78e",
+      "statement": "Common frontmatter fields are id (defaults to fallbackId, i.e. filename without .md), title (required string), type (required, one of text|choice|code), difficulty (required, one of easy|medium|hard), tags and hints (default to empty string arrays when absent; must be string arrays if present).",
+      "evidence": [
+        {
+          "resource": "repo://src/kata/parse.ts#L19-L35",
+          "version": "repo-lines-v1:sha256:010a42b590e7b20813c98e98119dab282043d3dd9522c39b3706ba87d6eb473d:eyJzZWxlY3RlZExpbmVDb3VudCI6MTcsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjFhOGZiN2I3MWNhYTYyNjNjZmNhNDgxZTlmMDI2Yzk1NDU1ZDcyZmMyYWM5YTFiYTg0NzgwNDE4Mzc0Y2Q1MWQiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6Ijk5NDE0YzFkMjg2NzdjZDg4MjljNmZmZmEwNWNkYTFjYjhmNWZhMjQ1YmE5YTYzMjFkZTZjY2U2OTM5NDNkYWUiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjllOWJiMDQ0YmQyYWI5NjAxMzZmNDU4ZTliNTkwYjExZjI5ODM3MWQxYjMwNzZjYTE5NmVmY2RjZGUxZjgyOGQiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImJmNzdlMGE2YzNiMDhiOGU2MjM1MjMyMzIwYTYxNmI5YmVlODA1ZTliNDZiMzMxYTdmOTIwZDEwOWM1YWZmMTYifQ"
+        }
+      ]
+    },
+    {
+      "id": "claim_e8d14d604fb5463d9ca014c7a04fb994",
+      "statement": "difficulty is strictly required in code, unlike tags/hints which default to []: a missing or invalid value throws <id>: \"difficulty\" must be one of easy|medium|hard.",
+      "evidence": [
+        {
+          "resource": "repo://src/kata/parse.ts#L29-L32",
+          "version": "repo-lines-v1:sha256:4a1d530af37cb036e7b798fe3ed7f41996932dfe87a4eabcfd8dbdfe4b0cce01:eyJzZWxlY3RlZExpbmVDb3VudCI6NCwiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiMzNhMzU2ODRjMjg3ZjhmYmQwMmY5YjZkZWYzY2Q3ZmMxMjU3OTdhZjk2YTQ5NTg1MmQyZmU3OGQ5YWE3MGM1MiIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiMjdlNTc4OGQ1ZDlkNzNkMjRhODFkYmMwYTVhNzRiZmE4MmM5YzNiM2FmOTllNTJhZjc5NmU5MGI0NjhhOGEzZCIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiYmMxMjgxNGU1MjE0ODM1NTRmOTk1NWU4NzkwYjNiNDUyNjEzYWE0NjFhZDhkMjM1MGJhODYzMDRmMzg0YjdhNiIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjMsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiZDg5YWExODgxYWExNjU4ZmUwZGQ2Yzg5YzY5OTczMTYxY2M0YWE2M2M1NmI2M2I4YzMwODYxNjlhYzI4MjIxMyJ9"
+        },
+        {
+          "resource": "repo://src/kata/parse.ts#L51-L57",
+          "version": "repo-lines-v1:sha256:b35ace34e8cef0cae4d060524ca5baf48af5faf1b1d51ea458682f14405fb1ea:eyJzZWxlY3RlZExpbmVDb3VudCI6NywiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiMzA3MmZhNDAyYzk0MTI2YzI5OGJhYThhZThkN2Q2OWFkMDZhNDdiZTcwNTIwNDc0NTFkN2ViZjNhOTdmZDgwOSIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiNDEyY2EzNDVjY2Y3NWJmOWMwODA2YmNlNjk1YmU4ZGU4MDhiNzk5ODQyNTFhN2E1NGQyMDJjZjYxMDFkZDQ1MSIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiYzcyZjFmYzY3NzAzMjBkNzkxOTgxM2ZlMjY3YWI5MGM3ODUwMDJjMGE5OTQzYTkzNzllNDMyZGQ0NzY2OTcxMiIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjMsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiYzNmYmI5YjEyZmZkZmY3MGExZjFkOTI0M2Y2OGM1NGM0YmM1NzJkNWUyMzgzMzhhYzM5MTVhMDY2MTA5ZGM1ZCJ9"
+        }
+      ]
+    },
+    {
+      "id": "claim_ab910eb4422c4dcd84c66279c6d72a29",
+      "statement": "Hints are an ordered list revealed one at a time after an incorrect submission raises attempts to >= 1; revealed count, attempt count, and solved state persist per kata id in localStorage under kata-progress:v1 as { [id]: { solved, attempts, hintsRevealed } }.",
+      "evidence": [
+        {
+          "resource": "repo://docs/CONTRACT.md#L215-L224",
+          "version": "repo-lines-v1:sha256:0fc8c5183c1d88e89948f990084ca5addcd943871668db2b3ceb504a9274d170:eyJzZWxlY3RlZExpbmVDb3VudCI6MTAsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjAxYmE0NzE5YzgwYjZmZTkxMWIwOTFhN2MwNTEyNGI2NGVlZWNlOTY0ZTA5YzA1OGVmOGY5ODA1ZGFjYTU0NmIiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjcxM2RlM2Q5Mjk0OGViODY1MTJhOWVjNmUzZmRiOWEzNGMxNmRjOWZiMDgyY2Y3MWNlNWUxM2U0ZDFhZDJhOTUiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjYwZmVhZjk1ZmE0OGE2MTc3MzYxNjY0MThkZjYyZjRiMDJjNWFiNDQwMzMxNGEwMzg5YzU1ODc3MWM5OTI2YzkiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjNmY2JjZmM3ZWY5NWM2YTFiZDE5NWQ0YWY5N2NhMDRmOTk5NDk0OTRiZjdlNTlkZTY1NjRkZDRmZTJiYzc4YTYifQ"
+        },
+        {
+          "resource": "repo://docs/TASK_FORMAT.md#L26-L31",
+          "version": "repo-lines-v1:sha256:170a44c571f549dbcbdc65db43bc85971126d26baeeb1ae7dbcb05834cd55b02:eyJzZWxlY3RlZExpbmVDb3VudCI6NiwiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiYjIxMTBiMDBmZGRjNTJhMzc1NDFmZGJjOWQxNTMzZmM0YmRhNTRmZmE2YTJiZDZhMzIwYWVlYTYxOTg3YTk0NiIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiOGY1YjZkN2YwNTkxMmNlMDBjZWM2NGVlYTk3NTYxNmM5NDhmMGYzMzEyNGUzZTZiZjgyY2ViMDgyMzkxYzhkNSIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiMWMwNjkwNGUzYzdlYTA0NTU4ZWUxMDk4OTNmODI3YjQ0MmUwNTBlZjE3NTg5M2FkNTY0NThhOTI1NzBhOTBmMSIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjMsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiMzA0Y2MyNGJhYjliM2RjNjA2YTQ1NDgyMGY1YWMxNjIzM2E2NjcwZDVjMDlkM2ZjZGVmOWJhNWJmNjI3NmJiYSJ9"
+        }
+      ]
+    },
+    {
+      "id": "claim_85bd575643ce4c86a0f3c565d76b08ca",
+      "statement": "text katas require a non-empty answers string array and an optional match object (mode: normalized|exact|regex defaulting to normalized, caseSensitive defaulting false); a submission is correct if it matches any answer under the configured mode, implemented by matchText in normalize.ts.",
+      "evidence": [
+        {
+          "resource": "repo://src/check/normalize.ts#L8-L34",
+          "version": "repo-lines-v1:sha256:7b856dea59c3a536343cc2a20cc46880a1b0a096deda3e793e30718b93553e48:eyJzZWxlY3RlZExpbmVDb3VudCI6MjcsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6ImQ5MGEyMDNmYzkzODNkNzFjMjQzZDQyMDY2MDEwZWU5NGFlZmY5ZGM4MTdjY2M1NmYyYTljNmNkYWZjNWMxZjMiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjQxMmNhMzQ1Y2NmNzViZjljMDgwNmJjZTY5NWJlOGRlODA4Yjc5OTg0MjUxYTdhNTRkMjAyY2Y2MTAxZGQ0NTEiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjYyM2Q2OGQ2ZWUzN2NiODBmODA4MjcxY2IyYmEzNDc0YmIxODA4MTNmMmVlY2ExZjM0Zjg5MTNhZWRiNDQ3ZjQiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjI3YzNjOTRlY2QxYjdlNjgzMjdmNjkxNWU2YWZjMzNiYzljMDY2OThiNzExZWM5ZjRlYzk5ODc5MTVkZTMwYWIifQ"
+        },
+        {
+          "resource": "repo://src/kata/parse.ts#L59-L72",
+          "version": "repo-lines-v1:sha256:67f84aa67a53252e1aa60812cabb0aa54b47cd0d39a95dfe563c13892b8eb3e6:eyJzZWxlY3RlZExpbmVDb3VudCI6MTQsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6ImE3Y2EzNjIzNzdhNDE5MzcyZDEzMDFmNzQ2ZTdmODYzNTU5NzU2MGI4ZWM3NmZiOGE5OTU5YjgxZjBiNDM0YjUiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjQxMmNhMzQ1Y2NmNzViZjljMDgwNmJjZTY5NWJlOGRlODA4Yjc5OTg0MjUxYTdhNTRkMjAyY2Y2MTAxZGQ0NTEiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjcxODg3MGE4MDQwOWY4YzRjOTk0ODA3YWY4MjU5Y2MwNGJkMGM1Y2EyZTlmMWMzYjEzZGVmMTBiMTYyNzg2ZDYiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjIwMzVjMzE2NGMzNDk4ODY1YWRhOTE5NmYyNjVhNmQ0NjkwMWFjODBjOGE2M2Y5OTJlYmY1NTE2NDkyOGZiNjQifQ"
+        },
+        {
+          "resource": "repo://src/kata/types.ts#L7-L7",
+          "version": "repo-lines-v1:sha256:4a0d5e5d90518dbaf36eea77956a20c243a3f989c85a408173049c168c672b08:eyJzZWxlY3RlZExpbmVDb3VudCI6MSwiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiNGEwZDVlNWQ5MDUxOGRiYWYzNmVlYTc3OTU2YTIwYzI0M2EzZjk4OWM4NWE0MDgxNzMwNDljMTY4YzY3MmIwOCIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiNGEwZDVlNWQ5MDUxOGRiYWYzNmVlYTc3OTU2YTIwYzI0M2EzZjk4OWM4NWE0MDgxNzMwNDljMTY4YzY3MmIwOCIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiYTQ3OWQ2YWFmY2QzYzU0MGE1MGQ2ZThjZjFjOTY1NzNkMDlkYzBkYzE3NjFmYzlmZTllMzYwMGZmNDdjNDNlNiIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjMsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiOTU2MmY2NDI1MzAxZWNlMDk5M2Q4ZmZjYjIzYWZkM2FlMjBkNDg4YjZkYzIyMTU0ZjQ4MGExMDlhZjk3ZjVlZiJ9"
+        }
+      ]
+    },
+    {
+      "id": "claim_dfc6924d466249339b337e2d3d80a8f5",
+      "statement": "text matching modes: normalized trims, collapses internal whitespace to one space, and lowercases (unless caseSensitive); exact compares raw strings after trimming leading/trailing whitespace (case-folding only if caseSensitive is false, no internal whitespace collapse); regex full-matches each answer as ^(?:pattern)$ against trimmed input with the i flag when caseSensitive is false.",
+      "evidence": [
+        {
+          "resource": "repo://src/check/normalize.ts#L4-L34",
+          "version": "repo-lines-v1:sha256:190cb5ff696d07268629c02d2b87717efc44b926819da1f247a80c03abc6728a:eyJzZWxlY3RlZExpbmVDb3VudCI6MzEsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjcxM2VkZDBkZTJhNTgyYjhlYzkzMDM1MjNhNzMzMTc5ZjRhZmRkYjA3ZDUwODg0Y2YwMmExMjBiMGFjZDUxNDQiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjQxMmNhMzQ1Y2NmNzViZjljMDgwNmJjZTY5NWJlOGRlODA4Yjc5OTg0MjUxYTdhNTRkMjAyY2Y2MTAxZGQ0NTEiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjMzNTNhMTk0ZjEwMTNmOTQzOGQyNDliOTkyNjE3MjA2MTE5OGUxZjY3NzE5ODAzMjU0NjExYzFlZDJjY2IzODEiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjI3YzNjOTRlY2QxYjdlNjgzMjdmNjkxNWU2YWZjMzNiYzljMDY2OThiNzExZWM5ZjRlYzk5ODc5MTVkZTMwYWIifQ"
+        }
+      ]
+    },
+    {
+      "id": "claim_25f21af875f44cd2b98809c6acfdcb51",
+      "statement": "choice katas require a non-empty options array where each option has text (string) and correct (boolean), with at least one correct option; multiple defaults to false and shuffle defaults to true (only an explicit false disables shuffling).",
+      "evidence": [
+        {
+          "resource": "repo://src/kata/parse.ts#L74-L90",
+          "version": "repo-lines-v1:sha256:c90e1f5d5c7eedf7a0330892feb971ab63e88258c84836bea68cf08127d9a817:eyJzZWxlY3RlZExpbmVDb3VudCI6MTcsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjliM2FkZDljZTdkYzJlMzIwNzU5MGU2NjNhMTZkNjczZGNlZGFmNWIxN2EwZWJkMGNhZDk0OTcxMTdkMmFjZTkiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjQxMmNhMzQ1Y2NmNzViZjljMDgwNmJjZTY5NWJlOGRlODA4Yjc5OTg0MjUxYTdhNTRkMjAyY2Y2MTAxZGQ0NTEiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImM0NGZmMTZhMzQ1MjUyODFhYmU1NTBmYWFjNmU4MTE2NTc2ZTM1OTNhMDYzNGQ4OWRkMGI2Y2E0MjE0MDM3YTciLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImFlNGE0MjRmNzhmNDY2MTE4YTQ3N2RiZWRkNDA0NmY3NTI3YTA1YWU4OThiYWYyODRiZTQ5Y2VhYzJhNDBiNDEifQ"
+        },
+        {
+          "resource": "repo://src/kata/types.ts#L8-L11",
+          "version": "repo-lines-v1:sha256:383342803d26404ac1708b8d3aeac4b09c59c9a218b87ab6064ebb5a9438c39e:eyJzZWxlY3RlZExpbmVDb3VudCI6NCwiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiMmYxMGE3ZTk4YTYyNzZhOTdjYzYxMWI3YjViNGQzNzllMDZhZWYxYmViNWVjNTJlYjkxOGNlMDJjZWM4ZjQxNiIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiNDEyY2EzNDVjY2Y3NWJmOWMwODA2YmNlNjk1YmU4ZGU4MDhiNzk5ODQyNTFhN2E1NGQyMDJjZjYxMDFkZDQ1MSIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiZDAzYzcwODYwNGQ3ODY0OTM4ZTYyYjg3MDZkYzEyOGU0YmZlMTQwNTkyNDQzZWVjYTQzMWI2NTgyYTliZDhhYSIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjMsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiNWNkY2YxMjQ4NGY4YmE2NjJkMzRiY2NkYmNjMWRiNDFkZTBiMDdiOGQyZjY0MjE3MmJjN2RjNGRlNjQzNjJiMCJ9"
+        }
+      ]
+    },
+    {
+      "id": "claim_46f2a4beaebe4cd391a0eee8517a2ff5",
+      "statement": "choice grading: single-select (multiple false) is correct iff the one selected option has correct true; multi-select (multiple true) is correct iff the selected set exactly equals the set of correct options with no partial credit; shuffle true randomizes option order on each render so task bodies must not reference option position.",
+      "evidence": [
+        {
+          "resource": "repo://docs/TASK_FORMAT.md#L84-L97",
+          "version": "repo-lines-v1:sha256:ea38e35d2f49a05e36403a1970c120d0a66a74cb0ba084f5d0ed9a7a0acc15ae:eyJzZWxlY3RlZExpbmVDb3VudCI6MTQsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjBmMDRhNjhmOGY1NTBhZjg4ODk1MTQ5MWYwMjc2OTFlYmM1OTgxODA4NTFmOGU1YTIzMzk3MTAxMzcyODY5N2MiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjAxYmE0NzE5YzgwYjZmZTkxMWIwOTFhN2MwNTEyNGI2NGVlZWNlOTY0ZTA5YzA1OGVmOGY5ODA1ZGFjYTU0NmIiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImE1YzkwN2YyOTE5NDBhOTFmNzNiYmQzMDljNjUxZGQ4NGYxYTJjNWIwMjM3MGNlNGQzNTU3ZDFkNDExMWMzMTUiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjM4YWNmYjk5NWE4MzBhMjNkMWU3NzNjZGQ4YzFiM2UyNjhiOGUxMTc5MDU5ZGRhYmZhZjQ5YTkyMTIyOTE2ZWYifQ"
+        }
+      ]
+    },
+    {
+      "id": "claim_0133753fe7794e9488aa0a904301e669",
+      "statement": "code katas carry mainClass (default Main), allowedImports (defaults to [] when absent), timeoutMs (default 5000, must be > 0), template (required java template block), and a non-empty checks array validated by parseChecks.",
+      "evidence": [
+        {
+          "resource": "repo://src/kata/parse.ts#L92-L128",
+          "version": "repo-lines-v1:sha256:6a577982d0619f04d451b5ae64b3dba4ca9031fc588393f167b0456f56b3815b:eyJzZWxlY3RlZExpbmVDb3VudCI6MzcsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6ImZmOThmNzk2YmU3MzBkNGY3MWY4YTQ2ZDhlZGNmMmY1YmYyNGI1YTU0MmU2MDcyY2E0ODNmZjEyODc1OGUzZDEiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjQxMmNhMzQ1Y2NmNzViZjljMDgwNmJjZTY5NWJlOGRlODA4Yjc5OTg0MjUxYTdhNTRkMjAyY2Y2MTAxZGQ0NTEiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImVjOWJhODA5NTRiOTMyMzRlZWIxYTBhNjAzY2FiYzRhNGIyZDUyZjczNmY4ZmRlNDZjZDBhYThiY2VlOWFhMWQiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjowLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImUzYjBjNDQyOThmYzFjMTQ5YWZiZjRjODk5NmZiOTI0MjdhZTQxZTQ2NDliOTM0Y2E0OTU5OTFiNzg1MmI4NTUifQ"
+        },
+        {
+          "resource": "repo://src/kata/types.ts#L19-L22",
+          "version": "repo-lines-v1:sha256:1ae0cefc1a13bc5909a8af18e21aa25acdb9029a9dc0ef6e01fcb3a0a9102188:eyJzZWxlY3RlZExpbmVDb3VudCI6NCwiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiNDE3YzNhMmNhOTdiYTdhMDEzYzJhYmI0ODc0N2Q0ZWVkOTg1ODNiMmI1ZWEwNTM0MjgzZDk1ZmRmN2JmYjhiNCIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiNDEyY2EzNDVjY2Y3NWJmOWMwODA2YmNlNjk1YmU4ZGU4MDhiNzk5ODQyNTFhN2E1NGQyMDJjZjYxMDFkZDQ1MSIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiN2FhM2YzNWUwNjYxMjY1MTY2MTE5YmZiY2U2MzU2NTEwOTExNTliNzAwNzVkYjQwYjZhODY4MDA2NDVkM2FkOCIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjEsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiZGZjZjBmMTkxMmY1Y2U0Njc4MGFhMDE2MzI1MDY1YTM4NWQ2YmM4MWYzMzEzYzVkZWI2ZWEyOTBjMTlhNTE2NCJ9"
+        }
+      ]
+    },
+    {
+      "id": "claim_c8f9ea729f2f4169b40f41561629bc1b",
+      "statement": "A code kata requires a fenced ```java template block in the body: if template is empty, parseCodeKata throws <id>: code kata requires a fenced ```java template block in the body.",
+      "evidence": [
+        {
+          "resource": "repo://src/kata/parse.ts#L92-L94",
+          "version": "repo-lines-v1:sha256:1fcebc06eab31e7dc50afa329444421aa4267e5e240db0fe9ee5cb547e733381:eyJzZWxlY3RlZExpbmVDb3VudCI6MywiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiZmY5OGY3OTZiZTczMGQ0ZjcxZjhhNDZkOGVkY2YyZjViZjI0YjVhNTQyZTYwNzJjYTQ4M2ZmMTI4NzU4ZTNkMSIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiYjk2MzU0MjhiYjNmYTc0ZDZkZTE3MWZlZjljZWFjYmM5MGIxMDk0OTFkMzZiNTc3MDNjYTc0ZjI4NWU4NWE3ZCIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiZWM5YmE4MDk1NGI5MzIzNGVlYjFhMGE2MDNjYWJjNGE0YjJkNTJmNzM2ZjhmZGU0NmNkMGFhOGJjZWU5YWExZCIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjMsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiOTVjNTVjYWE3OGQyZGIzNTYzZjQ4MjBiYmYyOGFjNjA3MTFkNzU2YmJlNzQ4NWYzZGJmMTliMjEzNjZjMmEyZSJ9"
+        }
+      ]
+    },
+    {
+      "id": "claim_7156bec615c644649c2365747aa25187",
+      "statement": "allowedImports defaults to [] when absent in code (parsed via parseStringArray), so an omitted list means no imports allowed; the prose docs label it required but the code is more lenient and treats omission as an empty whitelist.",
+      "evidence": [
+        {
+          "resource": "repo://docs/CONTRACT.md#L80-L81",
+          "version": "repo-lines-v1:sha256:45c618c36db33b4d92c1f4081ba28adb55ba352bf33450312c9d26db2a40a715:eyJzZWxlY3RlZExpbmVDb3VudCI6MiwiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiNzMxNDIyMzRiM2IxMTlmMjE1OTdjZmQzNTlhODUzNDNhYWEzMjBkMTIwZjcxZDBlMmJkOTdjYzY5N2E3NGUxMSIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiYjA1OTU4MzQ1MzhlYWUzNjg2ZDE3NTMxOTI4NDBjNDU5ZGM0NDhhMGU2ZTI1NjEzYmFhN2Q3ODg5ZWI4OTNmNyIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiYWNkODlkYzQxNzBlNjk3MGJhNjY5Zjc5ZDg4OWI4NDllODg2NTZlY2RjMDgwNjMyYjBiYzFhOTc1YjZhYzYzNCIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjMsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiM2UzYTk4MDgxZTljNDZlZGQ2ODM4ZWI5ZTIwNDk4ZmE4NWY3NGZmZDhjODMyYjhhYWM5NjFmMWFmYjZhODhjZSJ9"
+        },
+        {
+          "resource": "repo://src/kata/parse.ts#L95-L98",
+          "version": "repo-lines-v1:sha256:2ee4e5b9e58712c4a277a9592ae3e6b1795ba4c24f8b5aa8d1e33cd64e7c03f2:eyJzZWxlY3RlZExpbmVDb3VudCI6NCwiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiMDcxOTI1MGQyNzg3MmM3MThlMzJjZTFkZTU5NzM4NDljMDkyOTk0YmEwZDg0Zjc4OTIxOGQ3MGQxMGM1NGQwMCIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiYWIzZTQzZjAyN2ZmMzQzMzgxYTE3YjVlOTc5NzJlZTAxNjJmNzgxNTViNmYzZjcwNjFiOGJkZmZkMTM2ZmE2NCIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiMWZjZWJjMDZlYWIzMWU3ZGM1MGFmYTMyOTQ0NDQyMWFhNDI2N2U1ZTI0MGRiMGZlOWVlNWNiNTQ3ZTczMzM4MSIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjMsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiYmQ1MjM5OTM3ZTRmN2Q3ODU3YWRjZGQzNTlkY2FlNmFmOTgwNGY3M2YwZjkxMjZhMDc4NmUwNTAxNjlkYzYwOCJ9"
+        }
+      ]
+    },
+    {
+      "id": "claim_868f4ed400df42fb9a6cb0a486f76b25",
+      "statement": "The Check union has two members: { type: 'stdout'; expected: string } and { type: 'return'; method: string; cases: { args: JavaValue[]; expected: JavaValue }[] }; a check of any other type throws <id>: check <i> has unknown \"type\" (expected stdout|return).",
+      "evidence": [
+        {
+          "resource": "repo://src/kata/parse.ts#L101-L127",
+          "version": "repo-lines-v1:sha256:35f819b1c9ad58d8a19424bd23fd8a2853a5adbc1a67225224b6e5c69b0bc95a:eyJzZWxlY3RlZExpbmVDb3VudCI6MjcsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjRjYWYyZTQyNWY4NWFhZGIzNWY1MGFiMTMwOGNjOGJjYmEwNjQyMDI0MDU3M2IyYjZhNDFmMjI3MmQwMWUxMjMiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjNhM2U0NmY5NDI3NmI2ZjZmNGVkMWYwMmFmNzhiZWY2YTJlZTFjNDM5ZGQ1NTg0Yjk3Mzk0ODMxMzIxNGQyYjciLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjZiNTMyYTUxNTRmYWI3YmY3ZmE0MTYyODkyNGQxZWM5ZjE1YmFiMjk1ZGFjNmI4Nzc3ZjJmMzAwNGI3MTQxMTQiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjoxLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjQxMmNhMzQ1Y2NmNzViZjljMDgwNmJjZTY5NWJlOGRlODA4Yjc5OTg0MjUxYTdhNTRkMjAyY2Y2MTAxZGQ0NTEifQ"
+        },
+        {
+          "resource": "repo://src/kata/types.ts#L16-L18",
+          "version": "repo-lines-v1:sha256:7aa3f35e0661265166119bfbce635651091159b70075db40b6a86800645d3ad8:eyJzZWxlY3RlZExpbmVDb3VudCI6MywiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiZmY0NmE2Y2ZmMDJkYjEyOTIyNDY1YjIyMjQ4N2FhZTc5MDRlNWI0YTI5ZTdhZDc5ZjJmMTQxYTY1ZTc5MGZlMSIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiOTczMzg5MjFkNTkxNzMwZThiYTVkN2U4ZmVkOTNmOWZiMWNjOGNiODg2ZGQ3MTgxYTFhMGY5MjY5NWFmMjQxNiIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiNDA0OGFjNTZkMjg4OGNkN2QzZDI1MGY1NGU5M2Y5ZDY4YWRmMGYwYjViYzUzMDA3MzkzYTg2YzU4NjM1ZDJjZSIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjMsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiOTA0OGJiY2M4YzllNTg3MDhhZjU1N2ExNDY4Mjc4NTVkYjFiM2Q1N2U5MmNmY2UxNWUyOTYwMzA0NjQzY2FhMSJ9"
+        }
+      ]
+    },
+    {
+      "id": "claim_25d37725e4a74260b00f7c60bfabcd00",
+      "statement": "A stdout check requires expected as a string and compares it to captured System.out from calling Main.main(new String[0]) after both sides are normalized by normalizeStdout (CRLF to LF, per-line trailing whitespace stripped, trailing blank lines stripped); intra-line whitespace and mid-output blank lines are significant.",
+      "evidence": [
+        {
+          "resource": "repo://src/kata/parse.ts#L106-L108",
+          "version": "repo-lines-v1:sha256:34d493c57680f13042083bb93db42bccf8a39eb0fea4fd93ecb97e6f06769b37:eyJzZWxlY3RlZExpbmVDb3VudCI6MywiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiZjZkNWYwYzJiYmE5NmVmNWU4MDZiMDdiYWMyNDliYTA5MmM5NWFjMTQyZTRjMDBiYjM0OTVhODM1YjdiNmY4YSIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiNmQ0YzdmMDk5MzUxNzcwODMzNDg4N2MzOTVmNmFkNjRjMjY5ZGJhMTAwMjNlNWI5OTE5MTUzZmExMzI1M2MyNSIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiZDBmYjdiYjcxMjMyOTNmNmMxMTQzNTdkYjY2NGZiYWZjMTFmYWQ0MzlmN2ZjZTE0MWQyNThiYTEzNzA0M2MxNiIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjMsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiYWI2Y2EwOTc4NDQzMmExYWU1NTY5N2Y4YzZmOTA0NTNiZWEyYTA0YTA1MDE5ODI5YjU1OGU3YTViNzZlODIwMyJ9"
+        }
+      ]
+    },
+    {
+      "id": "claim_daf4ded473eb46fa933dea291c44683e",
+      "statement": "A return check requires a non-empty method string and a non-empty cases array (each case needs an args array and an expected value); method names a static method on mainClass invoked directly once per case, bypassing main, and the harness compares the JSON-serialized return against expected per case.",
+      "evidence": [
+        {
+          "resource": "repo://src/kata/parse.ts#L110-L125",
+          "version": "repo-lines-v1:sha256:2409f732fcf9fe94e92d545ad5f1d5c05860fee0e1a64f2b1885d96a5d8c5753:eyJzZWxlY3RlZExpbmVDb3VudCI6MTYsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6ImUyOWEyMmZjZDhmOTg2NjYxYTQ1MjI2ZjBhZjU5NDYxOTNjMGFkMTM2M2Y2NTc1YzU0NjZmMWZmMzU1MzlkZTkiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjQ4OTNmNDBlMzc4MWViODk2YzgyZDA0NmEwODA2N2ExMWUzNWNkZjJmMWRmYWYyNmZlYTkwYjhkYjY2NzY0MTMiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6Ijc4OGE4Mjk4NGIyYmRmZTRmNGMxN2EyM2Y5MDYxOGRhZjIxZTIzZDM5M2M0ODlkNjEwMWFjOTFmNzRjMmM1OTEiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImNiYzY0ZmExMzQ2ZjBiN2RjMjZmM2E2ZDI0MzFmYTE3ZTZjMzhlMGVhYWYwNjAyMWFhMjc4YzA1MzY4YjJiMjYifQ"
+        }
+      ]
+    },
+    {
+      "id": "claim_1d8522578b864cbf960c467ec5c1c373",
+      "statement": "JavaValue is a union of number|boolean|string|null, JavaValue[] (1-D arrays only), and the wrapper { type: 'long'|'float'|'char'|'double'|'int'; value: number|string }; the wrapper form is required for long (precision above 2^53), float (32-bit semantics), and char (no JSON char type), and optional for int/double which plain JSON numbers already represent.",
+      "evidence": [
+        {
+          "resource": "repo://docs/TASK_FORMAT.md#L201-L230",
+          "version": "repo-lines-v1:sha256:5a81807899abfa5c724dfbb0b5235f7600825ebc04caff6632364d7b03fa8120:eyJzZWxlY3RlZExpbmVDb3VudCI6MzAsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjlhZDhiYmNjMDQ5ZjZkNzdiNjBhNzVhM2Y5MDdjMGIyOTFlOGRiMTQ1YmVmNDE0MjQ1ZGM0NzExMGZhYjQwZmEiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6ImVlNjg3NGMxZjIyNjQzOGQ2OTZkNjU3M2FkNzQxYWU1MTI4ZDIzMWNiNmY5YTc0NzFiZGRjYTU3NWNkZmViM2MiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjIyNTdjNWQwYjI4MGQwZDBjMmRjMmFiNWRhOWEyZDY0OWNkYzg2YzE2ODUwOWUyZTIxMzRmYTdiM2YwYzkwZGYiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjVhZWU0NmM4ZDMxNzEwMDdkMTYyMmI5YWViZjg3NTU3YjZjNTlhYmRmYWM0NjhjMTQ0NThlYzZkNTExYjJjOTcifQ"
+        },
+        {
+          "resource": "repo://src/kata/types.ts#L12-L15",
+          "version": "repo-lines-v1:sha256:fb23655b6ba5b04ae86e156a2799315392045b9bfd1a83b78bc5b6b8215b2263:eyJzZWxlY3RlZExpbmVDb3VudCI6NCwiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiODYxMTM3OWM3MGJiZmMyNTg5OWI1OGYwZDBjZTAyY2I4M2I5NTBhYWQ4MWU4OGEyOWM0YzRkODgzM2IxNmRhOCIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiNzU2M2MxMTNjZDZkMTMxMDk3NDY0ZDY4NTJkMGZiYTU1ZGM3MTdlMDhhMzk5Y2I3ZGZjZTZkMDkxNjdhNzZiZCIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiZjM3ZjQyMTk5NDJkM2U4YzI0MTdiZGQ2MjY4MzlkOTZlNjNmYzJhZjZmNDEyOTc2YmNhODE1NjU4ZjYzMGJjNCIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjMsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiN2FhM2YzNWUwNjYxMjY1MTY2MTE5YmZiY2U2MzU2NTEwOTExNTliNzAwNzVkYjQwYjZhODY4MDA2NDVkM2FkOCJ9"
+        }
+      ]
+    },
+    {
+      "id": "claim_66da2d119fda471e9215ceba15425915",
+      "statement": "1-D arrays of plain or wrapper JavaValues are supported as JS arrays, e.g. args: [[1,2,3]] for an int[] parameter or [[{type:long,value:\"10000000000\"},{type:long,value:\"2\"}]] for a long[]; multi-dimensional arrays are not supported.",
+      "evidence": [
+        {
+          "resource": "repo://docs/TASK_FORMAT.md#L227-L230",
+          "version": "repo-lines-v1:sha256:0c0d4c6a6ee3ec3ced3f56d2c47d6811a17e656b4be26911dd2b690d6db18ba3:eyJzZWxlY3RlZExpbmVDb3VudCI6NCwiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiMDgwMDBlMzJkYjdmNjdmOTY4MTI4MzU1NmEyYTc5YjVmMTg0ZGUzMTFiYzhjYzk2MGFhMzU3OGYwNGJlYTVmYyIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiZWU2ODc0YzFmMjI2NDM4ZDY5NmQ2NTczYWQ3NDFhZTUxMjhkMjMxY2I2ZjlhNzQ3MWJkZGNhNTc1Y2RmZWIzYyIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiMjYwNGEzNTU5ZDMyOGYyNWRkNzJiMjI3MjNlNDEwNjkwZTVhNGEwZWI2MThmYmVlYTFkOTk1MjM1OGVlZjY1NSIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjMsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiNWFlZTQ2YzhkMzE3MTAwN2QxNjIyYjlhZWJmODc1NTdiNmM1OWFiZGZhYzQ2OGMxNDQ1OGVjNmQ1MTFiMmM5NyJ9"
+        },
+        {
+          "resource": "repo://katas/sum-array.md#L9-L20",
+          "version": "repo-lines-v1:sha256:8e54ce585957726dbbf76bf03c71f442bee80b257773c6e0bd254e9ddef95870:eyJzZWxlY3RlZExpbmVDb3VudCI6MTIsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6ImNhMDI2OGQ1Mzg3NmQ5NjJkMjAyYzQzN2JmOTNmYTliMDJiYzU4Njg0MjA5MTdmZGE2ZTI4Mzk1OGNhMGZhMDIiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjY1NDZiYmM5MjNiMTdkNDg2M2UyNjEyNjZjYzBlNDQ2NGYzMTRiNWRhNDNmMzZjMGE3NjQzNzkxZDFkZmNiNDIiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjE2OWQxYTk5MzgyNjQ3ZTNkMDBhZGQwYThlMzBjMjAwNzY1YmIyMTI4ZWVhN2FhMDM1ZTUwMDRhN2RiNTA4ZTkiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjdkNWYwYzIwNzQ2ZjdiM2FlNjRmOTA1NGNjMWU0ZjUwYTE5NTE3NGI0ZTRmNTQyZjc4NGExMDA0MGFlZGZlMWQifQ"
+        }
+      ]
+    },
+    {
+      "id": "claim_f67d75bf75a1412e8159a0125a0b3b55",
+      "statement": "allowedImports is enforced by src/check/imports.ts against the reassembled source after stripping comments, string/char literals, and text blocks; a no-.* entry is an exact class match, a .* entry is a package wildcard covering only that package not subpackages, java.lang is implicitly allowed, every import (incl. static) and every dotted FQN token starting java./javax./jakarta./sun./jdk./com./org./net./io. must match the whitelist or be banned.",
+      "evidence": [
+        {
+          "resource": "repo://src/check/imports.ts#L114-L163",
+          "version": "repo-lines-v1:sha256:26626a45591c7a27f55d72813a01a590a0c4eec3f8d3a82764e2862a42b90d53:eyJzZWxlY3RlZExpbmVDb3VudCI6NTAsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6ImFmZjIzMDY3NTJkNzAxYjAzZDdiYzM0NjU1NTM2NzIzZmUwZmRmZmY1ZWJjNjNhYTZjODI3NDdkZTZiN2ViNTkiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjE4M2RkODQ0ZjVmM2I5YjUyMGUwNWFjYjI0YTM3MWQxODUyNjQzZTE4MWQxYTU3MDMzYmNjODliNjMxOTg1ZjciLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImM0ZmYyZjVkMjM5NmNmNDcwMjk1NDIxYmE2ZmE4N2E4NTZiNTQ4ZDhiZTEwZjI0OTc3YmRjNjAzZGZhNTJlYjAiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjoxLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjQxMmNhMzQ1Y2NmNzViZjljMDgwNmJjZTY5NWJlOGRlODA4Yjc5OTg0MjUxYTdhNTRkMjAyY2Y2MTAxZGQ0NTEifQ"
+        },
+        {
+          "resource": "repo://src/check/imports.ts#L4-L5",
+          "version": "repo-lines-v1:sha256:748ffb6c55307017e4c99fbd856c1b28b9599d130c93487e70800396dde9996c:eyJzZWxlY3RlZExpbmVDb3VudCI6MiwiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiMTdkMjU0MGQ2Yjg2ZTc3NWMxZWQzZjI2ZmQ1MWM5ODQ3NWFmMzliNDRkMDk4YTVhOGJmNGUzYmYzYjdjZjBkNiIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiMjM2NTQ3ODQ3ZDhkZWE4MjUzMzkwY2UzNjQ5MzFmYmM4NWVkMzFhNzFhMmZlYjlhMTk5YTBkOGQ4ZWJmZDE2YiIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiMGQzNWQyZWQxNDJlZDI0OGZkNDEyMmIxMjc5Njg2NWZhOTkwZmYzZTMzOGJiMTM3MjZiNjQ4NWVjYTY2MmZjZSIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjMsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiMmJlYWJjMjkyNWVlZjg1MjlkNTk1MTgwNzA2NTNjNDU5MDk2MzkzYTljOTY3YTExNDA5MWQ5NzBmYTJmOGNjMSJ9"
+        }
+      ]
+    },
+    {
+      "id": "claim_9840d42f8611491bb382a777981df913",
+      "statement": "A hard ban list is enforced regardless of allowedImports: java.lang.reflect, Class.forName, ClassLoader, MethodHandles, Runtime.getRuntime, ProcessBuilder, ProcessHandle, System.exit, System.load, Unsafe, new Thread, Executors, and the packages java.io, java.net, java.nio, javax.*, sun.*, jdk.*; these produce kind 'banned' violations and a kata author cannot re-permit the core set (reflection, Runtime, ProcessBuilder, System.exit/load, Unsafe, ClassLoader).",
+      "evidence": [
+        {
+          "resource": "repo://src/check/imports.ts#L110-L163",
+          "version": "repo-lines-v1:sha256:efca30747102c0753c0f227122631bd95cd9fa6ed17c3e3f17a5246fcb4ae4d9:eyJzZWxlY3RlZExpbmVDb3VudCI6NTQsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6ImVhZjIyY2YwNzMyNTkyYzI0NzE0MWNiZTYxZWZhMTEwMTI2MTJmNWEzMTIyYjlhZjliYmFmNTJmNTcyNGQxOTQiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjE4M2RkODQ0ZjVmM2I5YjUyMGUwNWFjYjI0YTM3MWQxODUyNjQzZTE4MWQxYTU3MDMzYmNjODliNjMxOTg1ZjciLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImI2MmM0ZmZlZGM1NzYzNTZmYzllZGE5N2E2NTY3MzU1YTFiOTZkNzQ3NTk0MTEyMWM0ZTcxMDY5ODYyZDQ4NjYiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjoxLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjQxMmNhMzQ1Y2NmNzViZjljMDgwNmJjZTY5NWJlOGRlODA4Yjc5OTg0MjUxYTdhNTRkMjAyY2Y2MTAxZGQ0NTEifQ"
+        },
+        {
+          "resource": "repo://src/check/imports.ts#L9-L33",
+          "version": "repo-lines-v1:sha256:ec988c3602063b86cfb029113c0b9f31d0cceb5d8b2c7951eb7ac114b4589f4e:eyJzZWxlY3RlZExpbmVDb3VudCI6MjUsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjMwYjczMmIwMjcxNzU1NTUzOTFhYjUwZWI5MjM5YjI5NDJjZWFlOWU4YTY0ZGRjMGI2OTk5MTVhMDUwYzFmOGMiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjQxMmNhMzQ1Y2NmNzViZjljMDgwNmJjZTY5NWJlOGRlODA4Yjc5OTg0MjUxYTdhNTRkMjAyY2Y2MTAxZGQ0NTEiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjJiZWFiYzI5MjVlZWY4NTI5ZDU5NTE4MDcwNjUzYzQ1OTA5NjM5M2E5Yzk2N2ExMTQwOTFkOTcwZmEyZjhjYzEiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjFlOTQ0ODZjYjFlNmQyNmMzNGIyMjcyMmM0OWE3MGE0ZDQ5NzZmZTg0NDQxNTZkYzA3ZDI5MDQ4MmE0NGRjNjkifQ"
+        }
+      ]
+    },
+    {
+      "id": "claim_2b319fdbbb364401b5805b2a19388392",
+      "statement": "The java template block is matched by the regex /```java template\\r?\\n([\\s\\S]*?)```/ (exact info string java template), its inner text becomes CodeKata.template with a trailing newline trimmed, and the block is removed from body before body is trimmed and rendered, so the template never appears as prose.",
+      "evidence": [
+        {
+          "resource": "repo://src/kata/parse.ts#L37-L48",
+          "version": "repo-lines-v1:sha256:e0895c6d1918c19f52d801b3bb71f6ad75ab6e3435af1e029480adea9a2c7e0e:eyJzZWxlY3RlZExpbmVDb3VudCI6MTIsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjExZjg3NjY3NTJjMzJjNmU4MjIwYjhhYWJhOWNlZWZkZDZjZDczZWMxZmZlZTFkOTNmNDBjODc0ODA5MjFhMGIiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjZiNTI0M2Q4ZjcxNmZhZTZlNTIyZWE0OWI4NmM1OGRjMWQyNmVjMmY0MmRjMmRhYTUyYzJmMzFmZGMwOWEwYTUiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjZkZjhlOWI3YTYzOGM5OGU1MDkyOTQ5YjIyYWE5ZGVhMDAxYTY1M2ZlMTZkZmIxNGJmMmIzOWUzM2Q2NzI0NjEiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjFhMDg0ZDFhZDdmZmY3OGJlNDQ3MTA3NjZkNDYzOTE3ZWMyMDA3NjZjYWRiOGQyZDgxZmRiYjQ1NDU5M2RjZjEifQ"
+        },
+        {
+          "resource": "repo://src/kata/parse.ts#L4-L5",
+          "version": "repo-lines-v1:sha256:f480fbabba1e30bdef2d4801cb60dcbbba9fa3c438871539030a38aac1d4a141:eyJzZWxlY3RlZExpbmVDb3VudCI6MiwiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiYTQ5ZjdlYWY0ZDE2NWNhYjZjZDI3MGI2YjYxOWRlODA1YzdjZjUxNjM5NTBlNDU5ZDk2YjA3MmVkNWU1NzdlNiIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiZjFhMGNhZjA0MDRiZDg5NGUwMmJjNjczZDdlYWI3OTFkYWIwMWQyNzRkM2M4N2FjMGFmMDQzMmEyMDEzMWY4YiIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiZThlMTM4YmFlMGZlNGYyMDc1MzIyN2Q3NzgxOTQ1MGEyNTIzOWQ3MGVhNmUxZjhmMWVmODUyNWMxZTA0ZmY0OCIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjMsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiMzM2NGM5YTdiZDNjNGE4MWE0MzliYTZlMmNkNmFkMWFjNmUwMjRmNjRhNjU4Y2M1NWZmYTFkNTQ3NDU5MDEwYiJ9"
+        }
+      ]
+    },
+    {
+      "id": "claim_d5127dfdc80d4619a8d230bc9f5641bd",
+      "statement": "Inside a template, lines trimming to // BEGIN EDIT and // END EDIT delimit editable regions; parseTemplate in src/editor/regions.ts strips the marker lines, coalesces consecutive same-mode lines into segments, and returns a single fully-editable segment when the template has no markers at all.",
+      "evidence": [
+        {
+          "resource": "repo://src/editor/regions.ts#L1-L34",
+          "version": "repo-lines-v1:sha256:46897178d46480bdcb18013ebcc17cd95703542e861d0a6fa4109c68ac620b00:eyJzZWxlY3RlZExpbmVDb3VudCI6MzQsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6ImEzOWI0MDU2MDBmODIyN2IxZWY3NDJkYzE0ZjdhYTQyMDM5MDNiYjhmNDI0YjcwMWY1ODZlNmQ1M2M3YTk0MWQiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjQxMmNhMzQ1Y2NmNzViZjljMDgwNmJjZTY5NWJlOGRlODA4Yjc5OTg0MjUxYTdhNTRkMjAyY2Y2MTAxZGQ0NTEiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjowLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImUzYjBjNDQyOThmYzFjMTQ5YWZiZjRjODk5NmZiOTI0MjdhZTQxZTQ2NDliOTM0Y2E0OTU5OTFiNzg1MmI4NTUiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImIzOTIzMDhlYTA2NzU5YTJiMjQ2ZmZjMWMxOTk0NGVjNTM0ZTY0YmUzNzEzYmFmYWI4Y2RmZTc1ODU5NDQ5MDAifQ"
+        }
+      ]
+    },
+    {
+      "id": "claim_7d9218a8eb6c49a2b7482638296f4e1c",
+      "statement": "Locked regions are enforced live by the CodeMirror 6 editor via a transaction/change filter, and re-validated before every run by validateLocked, which requires each locked segment's text to occur verbatim, in order, and non-overlapping in the submitted source (using indexOf with a moving cursor); a failed locked-segment check refuses the run identically to a failed import check and nothing is sent to the sandbox.",
+      "evidence": [
+        {
+          "resource": "repo://docs/CONTRACT.md#L201-L212",
+          "version": "repo-lines-v1:sha256:32cc6dde500f35344b17e5af67085f4f02fd4e90c2bfdcc1915cdc1dcb3df6f2:eyJzZWxlY3RlZExpbmVDb3VudCI6MTIsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjEyZGQwZDgxZjY4MjQyZDIyYjY4NDIzYTYxODk0OGVmODg4NDhhODkyZDRiNDM3ZWRkMzFlYTAwYTNjZTM0OTIiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjNmN2Y5MTA2MmY3M2FlNGYzZDM5ZjliMDNlZWY5MmFlMjQ2ZTdmODE5NzExMWE2NmQyMWU5MThkNWUwYjcxMmEiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjViYjg4Y2ViY2M0YzExMzZlOWMwMjY5NjI1NGFmYzM4OTgwYjQ3ZDc4YTA2ODVmOGI5NWVhMmI0YjIyOWZjYWMiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjY5NzhmMzRkZThiZTdhYzg1Y2VmMWViNjBiMGRlMzRlNjNkZGE2MGUzMGM3ZjJhMzljNTk5YjcwNGYxZDQ1NDMifQ"
+        },
+        {
+          "resource": "repo://src/editor/regions.ts#L42-L51",
+          "version": "repo-lines-v1:sha256:b1789d29b7f0acd13a9cf14e56a9eb3650309b1d798ab1c8a48970f38f4c67fd:eyJzZWxlY3RlZExpbmVDb3VudCI6MTAsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6Ijc2YWMzMjMyNWJjMDU2NWMyNTQ4OTBjNWNkZWFjYzhhYWY2Yzg5N2NiZGUxZTUyZTJkZTNjNzFhNWY0MTU4ZjkiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjQxMmNhMzQ1Y2NmNzViZjljMDgwNmJjZTY5NWJlOGRlODA4Yjc5OTg0MjUxYTdhNTRkMjAyY2Y2MTAxZGQ0NTEiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjRhMDM0ZTc3MzdjNWNkYWMwZDAzODIyYmY5MGFkOWVlZTk4MjVhODg5N2M5MDNiMGY0ZWU4MDQ4YzcwZTIwYmMiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjowLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImUzYjBjNDQyOThmYzFjMTQ5YWZiZjRjODk5NmZiOTI0MjdhZTQxZTQ2NDliOTM0Y2E0OTU5OTFiNzg1MmI4NTUifQ"
+        }
+      ]
+    }
+  ],
+  "verification": {
+    "by": "openwiki/0.4.0",
+    "at": "2026-08-26T15:48:44.789Z"
+  }
+}

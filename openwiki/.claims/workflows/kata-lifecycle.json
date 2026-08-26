@@ -1,0 +1,234 @@
+{
+  "schemaVersion": 1,
+  "pageVersion": "sha256:8568f720b8454da8156c6c29ab8df332f74d61b7da35f6fb80ea8c7caabe6fdc",
+  "claims": [
+    {
+      "id": "claim_47ec3d71bd9445a0884fd85754f7dce1",
+      "statement": "Discovery is build-time only: src/kata/load.ts uses import.meta.glob('../../katas/*.md', {query:'?raw', eager:true}) to inline every katas/*.md file as a raw string at build time, with no manifest and no runtime filesystem scan; adding a kata requires dropping a .md file and rebuilding.",
+      "evidence": [
+        {
+          "resource": "repo://src/kata/load.ts#L1-L8",
+          "version": "repo-lines-v1:sha256:0c0b99be356c16bd378d250625b2445f3ab71a507c36b16f55217aa9843ece27:eyJzZWxlY3RlZExpbmVDb3VudCI6OCwiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiNDViN2MxODcwZDc1MjE1MjhhM2JiZWFhY2U3MzY3MDBlNWE4MzU5NGM2YWQxNzI2N2E5M2QzNDg1MWQxNjdjYiIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiZGMzYmZmZmVkODY0OTc0ZWM0ZDU3ODY1NTA0N2I1NGUwYTFjODViZmUyZmE0YjY3YTkyZTA3ZWE3MmYyN2YwMyIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjAsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiZTNiMGM0NDI5OGZjMWMxNDlhZmJmNGM4OTk2ZmI5MjQyN2FlNDFlNDY0OWI5MzRjYTQ5NTk5MWI3ODUyYjg1NSIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjMsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiYzA4ZGIwMDQ2Zjg1MjUwNGMyZDAyNGM4NGIzNTAxYTUzNDhiMzJiY2FiZjYzOWZlNjI5NDkxZWJhZjhlMDMzMCJ9"
+        }
+      ]
+    },
+    {
+      "id": "claim_e76c35587efd4c0f86d212157bc8ece6",
+      "statement": "load.ts runs loadAll() once at module load, sorts successfully parsed katas by title.localeCompare, caches them in a module-level singleton, and exposes getKatas() (sorted list) and getKata(id) (linear find by id).",
+      "evidence": [
+        {
+          "resource": "repo://src/kata/load.ts#L6-L27",
+          "version": "repo-lines-v1:sha256:767c48c0794d0b02fe4026dc39115e2ac72a7b458d93495a58e0c86799faa2e0:eyJzZWxlY3RlZExpbmVDb3VudCI6MjIsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjJiZDU0NjI0OTkzMjlmOWI1ZjA2MjE1OThmZmMxMWFkODdiMTY0N2M1Y2MyNzNiYzAzMGI3ZWIzOTU2ZDFmYWYiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjQ0YWFlMzgyNDE0MDg2NTBiMWU5NGM0OWM4NWNiMWJhOGM3Y2QwOTVkYTIzNjJkNWFhOGY0MDIyYzg3Y2M0MjUiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjVlMmZkNWNkNzEyZDY0MzI3MTNjMmNjOTMwYTJmM2NjZDgzMDNlY2JlNjZlY2JhNzUyZWIxZWIzNjg2MjhkYzIiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjoxLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjQxMmNhMzQ1Y2NmNzViZjljMDgwNmJjZTY5NWJlOGRlODA4Yjc5OTg0MjUxYTdhNTRkMjAyY2Y2MTAxZGQ0NTEifQ"
+        }
+      ]
+    },
+    {
+      "id": "claim_d600d8810d0f4025a6c70b7761b2c255",
+      "statement": "Parse failures are non-fatal: load.ts wraps parseKata in try/catch, logs 'Failed to parse kata \"<filename>\":' to console.error, and skips the malformed kata so one bad file cannot break the app.",
+      "evidence": [
+        {
+          "resource": "repo://src/kata/load.ts#L8-L16",
+          "version": "repo-lines-v1:sha256:a700ac2b40dd14dd82e8915d181e41c80c4439a2070cc2a42863f4cf35d24f3d:eyJzZWxlY3RlZExpbmVDb3VudCI6OSwiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiZGMzYmZmZmVkODY0OTc0ZWM0ZDU3ODY1NTA0N2I1NGUwYTFjODViZmUyZmE0YjY3YTkyZTA3ZWE3MmYyN2YwMyIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiMjdlNTc4OGQ1ZDlkNzNkMjRhODFkYmMwYTVhNzRiZmE4MmM5YzNiM2FmOTllNTJhZjc5NmU5MGI0NjhhOGEzZCIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiMGJiZDI1Njk1ZDkyODcwMGNiODI0YTBiOTcyZjlhYzMxNWU2NTY4M2EzNGFhMjFmNDVlZTIyYjkwYWNkNGEyMyIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjMsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiYmY1MDhiZDcwMjkwMzk1Yjg2ZGE0N2Q1NDY3YjJjMjJmY2MxYjFhNjRlOTNlMDE2NzUwZWNhM2E4NzNiOWNkOCJ9"
+        }
+      ]
+    },
+    {
+      "id": "claim_bfa82dd9e5914fd1b7330229073383a9",
+      "statement": "parseKata(raw, fallbackId) splits a leading YAML frontmatter block (js-yaml), throws if absent or not a mapping, and uses an explicit frontmatter id or the filename-based fallbackId as the kata id.",
+      "evidence": [
+        {
+          "resource": "repo://src/kata/parse.ts#L8-L22",
+          "version": "repo-lines-v1:sha256:6d308418c10885595e86d024be7e7611b6d0a5fecaf19695ec7bd8ce1e88a2ca:eyJzZWxlY3RlZExpbmVDb3VudCI6MTUsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6Ijg4NmI2YzY2MGUwZjc2MGViYzZmOGZjNzFlNmE1ZmJjOTY3OTg0ZDEyMGFiYzhmYWI5Y2Q5OWQ4ZWY4ZjAwM2IiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjAyNzQxYmI3ODZiOTU0ODFjMjc4ZDRmOTIxN2U0YWJmZjcxZjliMTFhZWYzYzE2Y2RjZjFhOGJmODU5MjdkYzAiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImVmYWQzMjBiNGU3MDU2ZmMxODA3OTJhMTUyNGJlYWY3NDkwZDkxNDk4NzhhNmNlMmM4OTlkYjY2MTAzZWRhNGYiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjgwMjIyMDM3MGUyM2ZkNjBjMWQwNDVjZGRmOGUxMTJiMjQ0ZjkyODRiYjFkMDUxNDZhMzgwNWE2OTliYjU2ZjEifQ"
+        }
+      ]
+    },
+    {
+      "id": "claim_0028aef227f84b50b54933e64de27586",
+      "statement": "parseKata validates shared fields (title required non-empty; type one of text|choice|code; difficulty easy|medium|hard; tags/hints arrays of strings), then extracts a ```java template fenced block from the body into CodeKata.template and removes it from the rendered body.",
+      "evidence": [
+        {
+          "resource": "repo://src/kata/parse.ts#L24-L48",
+          "version": "repo-lines-v1:sha256:39be687cd8e8dc60d7c5310902c7d6753c0b19ed017af4eacf9d32fe5a80bb33:eyJzZWxlY3RlZExpbmVDb3VudCI6MjUsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6ImViOTJhYTdmNjQzYzI3MzBmODJlYzMwOTY1ZGIyNGM0NDdlMjk3OWVlMWI0ODA2NWFjN2IzYzlkNTRmNThlMWYiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjZiNTI0M2Q4ZjcxNmZhZTZlNTIyZWE0OWI4NmM1OGRjMWQyNmVjMmY0MmRjMmRhYTUyYzJmMzFmZGMwOWEwYTUiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjY1YTQyOWVjNzFkZmM3NzU2ZjgwZDZhM2Q2NDI4MzdlYWQzOTk3MzM0MmYxODIyYmRlMzViMTI1ZDljZTlkYjciLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjFhMDg0ZDFhZDdmZmY3OGJlNDQ3MTA3NjZkNDYzOTE3ZWMyMDA3NjZjYWRiOGQyZDgxZmRiYjQ1NDU5M2RjZjEifQ"
+        }
+      ]
+    },
+    {
+      "id": "claim_f9a23ab08de349e593e4a03605e566ec",
+      "statement": "parseTextKata requires a non-empty answers string array and a match mapping whose mode defaults to normalized (one of normalized|exact|regex) with caseSensitive defaulting to false.",
+      "evidence": [
+        {
+          "resource": "repo://src/kata/parse.ts#L59-L72",
+          "version": "repo-lines-v1:sha256:67f84aa67a53252e1aa60812cabb0aa54b47cd0d39a95dfe563c13892b8eb3e6:eyJzZWxlY3RlZExpbmVDb3VudCI6MTQsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6ImE3Y2EzNjIzNzdhNDE5MzcyZDEzMDFmNzQ2ZTdmODYzNTU5NzU2MGI4ZWM3NmZiOGE5OTU5YjgxZjBiNDM0YjUiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjQxMmNhMzQ1Y2NmNzViZjljMDgwNmJjZTY5NWJlOGRlODA4Yjc5OTg0MjUxYTdhNTRkMjAyY2Y2MTAxZGQ0NTEiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjcxODg3MGE4MDQwOWY4YzRjOTk0ODA3YWY4MjU5Y2MwNGJkMGM1Y2EyZTlmMWMzYjEzZGVmMTBiMTYyNzg2ZDYiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjIwMzVjMzE2NGMzNDk4ODY1YWRhOTE5NmYyNjVhNmQ0NjkwMWFjODBjOGE2M2Y5OTJlYmY1NTE2NDkyOGZiNjQifQ"
+        }
+      ]
+    },
+    {
+      "id": "claim_6adfab4351784860a68e5b160835bf35",
+      "statement": "parseChoiceKata requires a non-empty options array where each option has string text and boolean correct, requires at least one correct option, defaults multiple to false, and defaults shuffle to true (opt-out with shuffle:false).",
+      "evidence": [
+        {
+          "resource": "repo://src/kata/parse.ts#L74-L90",
+          "version": "repo-lines-v1:sha256:c90e1f5d5c7eedf7a0330892feb971ab63e88258c84836bea68cf08127d9a817:eyJzZWxlY3RlZExpbmVDb3VudCI6MTcsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjliM2FkZDljZTdkYzJlMzIwNzU5MGU2NjNhMTZkNjczZGNlZGFmNWIxN2EwZWJkMGNhZDk0OTcxMTdkMmFjZTkiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjQxMmNhMzQ1Y2NmNzViZjljMDgwNmJjZTY5NWJlOGRlODA4Yjc5OTg0MjUxYTdhNTRkMjAyY2Y2MTAxZGQ0NTEiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImM0NGZmMTZhMzQ1MjUyODFhYmU1NTBmYWFjNmU4MTE2NTc2ZTM1OTNhMDYzNGQ4OWRkMGI2Y2E0MjE0MDM3YTciLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImFlNGE0MjRmNzhmNDY2MTE4YTQ3N2RiZWRkNDA0NmY3NTI3YTA1YWU4OThiYWYyODRiZTQ5Y2VhYzJhNDBiNDEifQ"
+        }
+      ]
+    },
+    {
+      "id": "claim_972aef4a0f58456facb9b369c7f34dc5",
+      "statement": "parseCodeKata requires a non-empty template (from the java template block) and a non-empty checks array of stdout|return checks, with defaults mainClass='Main', timeoutMs=5000, and allowedImports=[].",
+      "evidence": [
+        {
+          "resource": "repo://src/kata/parse.ts#L101-L127",
+          "version": "repo-lines-v1:sha256:35f819b1c9ad58d8a19424bd23fd8a2853a5adbc1a67225224b6e5c69b0bc95a:eyJzZWxlY3RlZExpbmVDb3VudCI6MjcsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjRjYWYyZTQyNWY4NWFhZGIzNWY1MGFiMTMwOGNjOGJjYmEwNjQyMDI0MDU3M2IyYjZhNDFmMjI3MmQwMWUxMjMiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjNhM2U0NmY5NDI3NmI2ZjZmNGVkMWYwMmFmNzhiZWY2YTJlZTFjNDM5ZGQ1NTg0Yjk3Mzk0ODMxMzIxNGQyYjciLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjZiNTMyYTUxNTRmYWI3YmY3ZmE0MTYyODkyNGQxZWM5ZjE1YmFiMjk1ZGFjNmI4Nzc3ZjJmMzAwNGI3MTQxMTQiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjoxLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjQxMmNhMzQ1Y2NmNzViZjljMDgwNmJjZTY5NWJlOGRlODA4Yjc5OTg0MjUxYTdhNTRkMjAyY2Y2MTAxZGQ0NTEifQ"
+        },
+        {
+          "resource": "repo://src/kata/parse.ts#L92-L99",
+          "version": "repo-lines-v1:sha256:3331fe798fbf50369883ca5953f2d761dd13d44f92371b43c95b0e52bd3df54f:eyJzZWxlY3RlZExpbmVDb3VudCI6OCwiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiZmY5OGY3OTZiZTczMGQ0ZjcxZjhhNDZkOGVkY2YyZjViZjI0YjVhNTQyZTYwNzJjYTQ4M2ZmMTI4NzU4ZTNkMSIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiNDEyY2EzNDVjY2Y3NWJmOWMwODA2YmNlNjk1YmU4ZGU4MDhiNzk5ODQyNTFhN2E1NGQyMDJjZjYxMDFkZDQ1MSIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiZWM5YmE4MDk1NGI5MzIzNGVlYjFhMGE2MDNjYWJjNGE0YjJkNTJmNzM2ZjhmZGU0NmNkMGFhOGJjZWU5YWExZCIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjMsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiOGViNzgzOGM3NmE3NDUxZWQzOGRiZGU3ZGQzMzRhYTZjNDY0ZTJiNzU1NjNkZmZkYmExMjg2NmE1YjVhMzRhMyJ9"
+        }
+      ]
+    },
+    {
+      "id": "claim_fb3eeaee230844e383964ac04c82619c",
+      "statement": "main.ts implements a no-framework hash router: route() matches ^#/kata/(.+)$, decodeURIComponent-decodes the id, renders the task view if found or a not-found paragraph otherwise, and renders the list view for any other hash including #/. It re-runs on hashchange and once at load.",
+      "evidence": [
+        {
+          "resource": "repo://src/main.ts#L89-L102",
+          "version": "repo-lines-v1:sha256:f05d2a5cc5732a311b91002f3c2ff8c0935ae0872c8f876af2d94a96010ebe0e:eyJzZWxlY3RlZExpbmVDb3VudCI6MTQsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6ImNiNzk1NzY2ZjUyMjVkODhkYjkyMjM4NjlkZGUxZTRjYWRkZjQ3NzNjMWQ4ZDA5NmNmM2M3ODQxYjZjNGIxZTAiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6ImFlN2EyNzNiMTQzNmNkNzYzMmNmMTdlNTIyODljZTAwOTBjNzU3NDkwZmZiZDc4MWIyOWMyYzUyNmNjMTM0OWQiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjNkYjhmMDEwYWQyNWE4ODQwY2M2OGFhOTY0OTNmYmFiNmRmMGIwNDExY2MyMWE2NGQyMTE2ODRhMThhNzlkNjgiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjowLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImUzYjBjNDQyOThmYzFjMTQ5YWZiZjRjODk5NmZiOTI0MjdhZTQxZTQ2NDliOTM0Y2E0OTU5OTFiNzg1MmI4NTUifQ"
+        }
+      ]
+    },
+    {
+      "id": "claim_f9d8a036b3ee412489ea350f64293cfe",
+      "statement": "renderListView builds a card grid where each card links to #/kata/<id> and shows title, difficulty, and tags; the solved badge ('check Solved') is appended to the title only when getProgress(kata.id).solved is true, read fresh from localStorage on each render.",
+      "evidence": [
+        {
+          "resource": "repo://src/main.ts#L11-L53",
+          "version": "repo-lines-v1:sha256:8b28c19146427b9cf6a52a66775dc69d179cdbd497e110342d33c9353f4fa003:eyJzZWxlY3RlZExpbmVDb3VudCI6NDMsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjUxMmIzMGFiMGViMDg1YzUyMTZhNGYzMDFmMTZiYTBhYzg2NTNiY2FhZTRhZDdhNTA2ZWJjM2Q5YzgxYzE1ZDUiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjQxMmNhMzQ1Y2NmNzViZjljMDgwNmJjZTY5NWJlOGRlODA4Yjc5OTg0MjUxYTdhNTRkMjAyY2Y2MTAxZGQ0NTEiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjNjYmE1YTdmOGFmYjNiOThkMTg4NzVhZTFiM2U3NTY5Y2NlZDNkZTg3ZTM0NDAzY2U4ZjEyM2EzOWU3MzAxMDciLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImY2YTM1MWY3MjRhM2UwMzNmNTY3MjMyYzljZTBkOTg0ZmFjOWFiOTY1OGU3NTQwMDFiYTY0M2MwOWIxNmRkYWEifQ"
+        }
+      ]
+    },
+    {
+      "id": "claim_b49cccd13c3e40778b3fbdd5d1c02ee3",
+      "statement": "renderTaskView clears #app, appends a back link to #/, an h2 title, a .kata-body div whose innerHTML is renderMarkdown(kata.body), an empty .kata-answer section, then dispatches on kata.type to renderTextView/renderChoiceView/renderCodeView.",
+      "evidence": [
+        {
+          "resource": "repo://src/main.ts#L55-L80",
+          "version": "repo-lines-v1:sha256:17c74982b736881de0ca5dfe94b486a7a9194d938a2c7e3ef277d174eff110a1:eyJzZWxlY3RlZExpbmVDb3VudCI6MjYsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjE4Y2E4NDFiMjEzZjBiZDVmN2FhMTc3OTMxYWFhNGMxODQzOGEwNDkxMGRkOTU3ZTRhYTI2YzMzZWJkOTRlNTciLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjQxMmNhMzQ1Y2NmNzViZjljMDgwNmJjZTY5NWJlOGRlODA4Yjc5OTg0MjUxYTdhNTRkMjAyY2Y2MTAxZGQ0NTEiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImVjNTFlOTI3MWU1NjdkNTA1MDVlN2UxYjA1NThiODMxMjgyNWJhZjA0OWE0ZjI1ZjgzYzJlODk1ODYzZDg0NzkiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjcyNzIxNWEyYjQ4Y2UyMGMwYzZkZjYxNGUwODg1OWEwNGIyOWE0MGJlNTM1YjRlMjY5MzEyNTc0NDI2ZTMyYzkifQ"
+        }
+      ]
+    },
+    {
+      "id": "claim_ad92f8986d8e44cfa92090a63a5008f9",
+      "statement": "src/ui/markdown.ts renders markdown with marked (gfm:true, breaks:false) and highlight.js/lib/core with only Java registered; fenced code blocks are highlighted when lang is a registered language, otherwise HTML-escaped. It exports renderMarkdown (block) and renderInline (no surrounding p, used for choice option text).",
+      "evidence": [
+        {
+          "resource": "repo://src/ui/markdown.ts#L1-L37",
+          "version": "repo-lines-v1:sha256:d4e3874251725644a21107b16b80b4b3f7cc302a563dccade8dcfae7b12c0268:eyJzZWxlY3RlZExpbmVDb3VudCI6MzcsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjY3NWUwMTgyYjBiMjNlODZkN2E3ZjNmYjZlM2ZkNjYwOWFlODdmNmE5MzY3ZjU3ZGZjYTliYzdiYzlhNDVlZDMiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjQxMmNhMzQ1Y2NmNzViZjljMDgwNmJjZTY5NWJlOGRlODA4Yjc5OTg0MjUxYTdhNTRkMjAyY2Y2MTAxZGQ0NTEiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjowLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImUzYjBjNDQyOThmYzFjMTQ5YWZiZjRjODk5NmZiOTI0MjdhZTQxZTQ2NDliOTM0Y2E0OTU5OTFiNzg1MmI4NTUiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjowLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImUzYjBjNDQyOThmYzFjMTQ5YWZiZjRjODk5NmZiOTI0MjdhZTQxZTQ2NDliOTM0Y2E0OTU5OTFiNzg1MmI4NTUifQ"
+        }
+      ]
+    },
+    {
+      "id": "claim_04c26f0b9dac46e69101e9469193bcaa",
+      "statement": "Text grading in matchText is pure and synchronous: an input is correct if it matches ANY entry in k.answers (any-answer match), with mode normalized (trim, collapse whitespace, lowercase), exact (trim only), or regex (pattern anchored as ^(?:pattern)$ with i flag unless caseSensitive).",
+      "evidence": [
+        {
+          "resource": "repo://src/check/normalize.ts#L8-L34",
+          "version": "repo-lines-v1:sha256:7b856dea59c3a536343cc2a20cc46880a1b0a096deda3e793e30718b93553e48:eyJzZWxlY3RlZExpbmVDb3VudCI6MjcsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6ImQ5MGEyMDNmYzkzODNkNzFjMjQzZDQyMDY2MDEwZWU5NGFlZmY5ZGM4MTdjY2M1NmYyYTljNmNkYWZjNWMxZjMiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjQxMmNhMzQ1Y2NmNzViZjljMDgwNmJjZTY5NWJlOGRlODA4Yjc5OTg0MjUxYTdhNTRkMjAyY2Y2MTAxZGQ0NTEiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjYyM2Q2OGQ2ZWUzN2NiODBmODA4MjcxY2IyYmEzNDc0YmIxODA4MTNmMmVlY2ExZjM0Zjg5MTNhZWRiNDQ3ZjQiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjI3YzNjOTRlY2QxYjdlNjgzMjdmNjkxNWU2YWZjMzNiYzljMDY2OThiNzExZWM5ZjRlYzk5ODc5MTVkZTMwYWIifQ"
+        }
+      ]
+    },
+    {
+      "id": "claim_1437ab3fe51d42c6867ea90976e8c7c3",
+      "statement": "renderTextView builds a text input form and on submit calls feedback.report(matchText(input.value, kata)); it clears the input when the kata is already solved on entry.",
+      "evidence": [
+        {
+          "resource": "repo://src/ui/views/text.ts#L5-L22",
+          "version": "repo-lines-v1:sha256:2a819b0853a237a6cdb71a69d5945d6d66fbbc4a505f17491d44e02f7324fc34:eyJzZWxlY3RlZExpbmVDb3VudCI6MTgsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjBkNTc3OThhNWJiMmYzNTE4ZTY5MDYxNzM3NzY3NjZiZjg5YjliNzYxMWE3NDQ4ZTkzMGY3MDA2ZTBmMWQ5MmUiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjNhM2U0NmY5NDI3NmI2ZjZmNGVkMWYwMmFmNzhiZWY2YTJlZTFjNDM5ZGQ1NTg0Yjk3Mzk0ODMxMzIxNGQyYjciLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjYwNjQxNjA4N2Y2MjdmNmU0ZGZlNmFkMzA0NjlhNmYxYTUzNmU1MzM1NmM1Yzg5NDgyYzhlMDBlMDdlMWE0ZDkiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjoxLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjQxMmNhMzQ1Y2NmNzViZjljMDgwNmJjZTY5NWJlOGRlODA4Yjc5OTg0MjUxYTdhNTRkMjAyY2Y2MTAxZGQ0NTEifQ"
+        }
+      ]
+    },
+    {
+      "id": "claim_73978ce4fa2641cfa64bd24b566ffe6d",
+      "statement": "Choice grading is a strict set equality: the selected option-index set must equal the correct-option-index set exactly, so single-select is the one-correct-index case and multi-select rejects extra/missing correct selections.",
+      "evidence": [
+        {
+          "resource": "repo://src/ui/views/choice.ts#L55-L62",
+          "version": "repo-lines-v1:sha256:33a261b1354ae6c3a4580006d0a5b73ff370ecdc0822574b52aafd9c3a9ef176:eyJzZWxlY3RlZExpbmVDb3VudCI6OCwiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiZTNmNTIwMDU3ZmNhY2E4OTcxNzI2MDMzMGJkN2M2ZTQ2MjMzYWE3MTMwOTIxNTZkY2UyMjRkM2QwNjI5ODgyMiIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiM2EzZTQ2Zjk0Mjc2YjZmNmY0ZWQxZjAyYWY3OGJlZjZhMmVlMWM0MzlkZDU1ODRiOTczOTQ4MzEzMjE0ZDJiNyIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiMDcwMWNjMjcyNDFiMjU5YzUxNTQ1M2MwOTg2M2IzNzA1ZDczYTQzOWZiNzJmMjI0YTQwMDU5ODZjY2U4MDgwNyIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjEsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiNDEyY2EzNDVjY2Y3NWJmOWMwODA2YmNlNjk1YmU4ZGU4MDhiNzk5ODQyNTFhN2E1NGQyMDJjZjYxMDFkZDQ1MSJ9"
+        }
+      ]
+    },
+    {
+      "id": "claim_4636d12b8ce74250850573587a453ce2",
+      "statement": "renderChoiceView uses radio inputs when multiple is false and checkboxes when true, Fisher–Yates shuffles options per render when shuffle is true (default), and renders option text via renderInline.",
+      "evidence": [
+        {
+          "resource": "repo://src/ui/views/choice.ts#L5-L51",
+          "version": "repo-lines-v1:sha256:069e20e6bf727c25a8162ee72699f3817fc77d03e3843ac96bd018697c76eda6:eyJzZWxlY3RlZExpbmVDb3VudCI6NDcsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6ImFlZTRlYmQwY2ZkYzQ0YjA3NmU3NDhmNzliYmFjYzE5MWNhNGUxNGU1YTFhODY4NWMwNjE2YWNiZTVkOGI0ZDQiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjI5MzA5M2EwMGVjOGI0ZWI1MmQxYjZhMTYxYTgzMjlkOTUyNjY4YjliZTUzMTkwMzI5YzYwOGFhZGUxMjExNDkiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImU1N2NlZjQ2ZWE3ZTU2NzNlMTkwOTBkYmU2N2QzNTI1NDgwYjVkNjQzOWIyOWUzNzY1Zjc3ODM0MDEwMzgzNzEiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjA3MDFjYzI3MjQxYjI1OWM1MTU0NTNjMDk4NjNiMzcwNWQ3M2E0MzlmYjcyZjIyNGE0MDA1OTg2Y2NlODA4MDcifQ"
+        }
+      ]
+    },
+    {
+      "id": "claim_b6af254741664ff7ae979d74f371c77d",
+      "statement": "Progress persists in localStorage under key kata-progress:v1 as Record<kataId, {solved, attempts, hintsRevealed}>; readAll is defensive (returns {} on parse/unavailability failure), getProgress defaults to {solved:false, attempts:0, hintsRevealed:0}, and setProgress re-reads and writes the whole map with no migration.",
+      "evidence": [
+        {
+          "resource": "repo://src/ui/progress.ts#L1-L27",
+          "version": "repo-lines-v1:sha256:7c3dbbc178c99142079c193cdd42849c55dda7b9478818c0f3bb4b0c1f168b2a:eyJzZWxlY3RlZExpbmVDb3VudCI6MjcsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjVmMWQ4OTc2NTU1MTFhOWI5OWYyZDk1MjZlY2I4M2E2MGM5MWMzZDBjMzIxOWEwMjdjN2Q4MDhjNzhmMzVmYmEiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjQxMmNhMzQ1Y2NmNzViZjljMDgwNmJjZTY5NWJlOGRlODA4Yjc5OTg0MjUxYTdhNTRkMjAyY2Y2MTAxZGQ0NTEiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjowLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImUzYjBjNDQyOThmYzFjMTQ5YWZiZjRjODk5NmZiOTI0MjdhZTQxZTQ2NDliOTM0Y2E0OTU5OTFiNzg1MmI4NTUiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjowLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImUzYjBjNDQyOThmYzFjMTQ5YWZiZjRjODk5NmZiOTI0MjdhZTQxZTQ2NDliOTM0Y2E0OTU5OTFiNzg1MmI4NTUifQ"
+        }
+      ]
+    },
+    {
+      "id": "claim_e7da6ddb22af4dafb4d2efd5bd1bb10f",
+      "statement": "setupFeedback is shared by all three view types: it creates an aria-live polite feedback line and a hints section, returns {progress, report}, pre-shows 'Solved' when progress.solved, and report(correct) sets solved on success or increments attempts on failure, persists via setProgress, then re-renders hints.",
+      "evidence": [
+        {
+          "resource": "repo://src/ui/hints.ts#L12-L68",
+          "version": "repo-lines-v1:sha256:e35ec16c01cbfe1b9bc5abb2157eb041c0958e49f23b7b69738f5e3a43e1c8e4:eyJzZWxlY3RlZExpbmVDb3VudCI6NTcsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjdhYTQyYWQ5ZmMzZWI3YmIxOWRhNzIwMmM4NWMyNTNiYmE2ZWMxNWY3MTE1YmRiMDkxZDFkMTdmYmY4N2QxMzkiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjAzMWFjMTk0MjMwYzQzOGRiOTJhOGZjOGI4NGUxM2RjMjdjMTBlYzEzNjBiMTEyNWU1MGQ1MTMxNDQ5MmJmNzEiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjA5YTA1YjQzOTBiMmU1NTQ3N2FiOTgyYzhmNmYzZTE2ZGVhZDFiZjg0MTAzYzQ1ZWU3NjJmNzQ1MDc4ZDI1ZGUiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjoxLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjQxMmNhMzQ1Y2NmNzViZjljMDgwNmJjZTY5NWJlOGRlODA4Yjc5OTg0MjUxYTdhNTRkMjAyY2Y2MTAxZGQ0NTEifQ"
+        }
+      ]
+    },
+    {
+      "id": "claim_4b230d4c148d4d31b7cee3866a1961c9",
+      "statement": "Hints are revealed one at a time and attempt-gated: the 'Reveal hint' button appears only when progress.attempts >= 1 and hintsRevealed < hints.length; clicking it increments hintsRevealed, persists, and re-renders, so hintsRevealed never exceeds hints.length.",
+      "evidence": [
+        {
+          "resource": "repo://src/ui/hints.ts#L29-L48",
+          "version": "repo-lines-v1:sha256:937734cc35eea265c4ebfc2aaa4fcbc8e0606f41ebc336db24d4d862c77101a3:eyJzZWxlY3RlZExpbmVDb3VudCI6MjAsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjQxNGIyYTkwNjNkZmEzZDc1N2M2ZjAyOWJlM2U0NmZjZmM5NjUyNjliMGZmODlhMjlmNTkwZDJhODBmZTNjZDEiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjI3ZTU3ODhkNWQ5ZDczZDI0YTgxZGJjMGE1YTc0YmZhODJjOWMzYjNhZjk5ZTUyYWY3OTZlOTBiNDY4YThhM2QiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjdlOTZhMTMyYWQ3OTZkZTkxMDIyNjY4MTBhMDViYzhlZjJjYzM0MGJkYzI0ZTk1ZTFlOTI2YjQyZTE3NzI2NjQiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjVkYzRhZTMxOTFkODNhZmZhNzdiMzM2YzlmMjUwMzZiMzVhYTY4NWZiYmNmZmM5OTNmODc3ZTQ0MDgxNGEzOWIifQ"
+        }
+      ]
+    },
+    {
+      "id": "claim_8f1538e82d88467eae312a7937f80cec",
+      "statement": "renderCodeView reuses setupFeedback/report for verdict persistence but distinguishes its two pre-run guards: locked-region tampering (validateLocked failure) calls showLockedError() and returns without invoking report (no attempts bump), while import violations call feedback.report(false) to bump attempts; a completed run passes the verdict's solved boolean to feedback.report(verdict.solved). The actual Java execution and Check[] comparison belong to the separate code-execution path.",
+      "evidence": [
+        {
+          "resource": "repo://src/ui/views/code.ts#L48-L116",
+          "version": "repo-lines-v1:sha256:58cdd5995b9811a89043ead5b8db95dc9c05f664aceece7b017c56aea3d29884:eyJzZWxlY3RlZExpbmVDb3VudCI6NjksImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6Ijk5MmFlMmM5MGRjZDQ5NDExNjA4YWQzNDUwZmE5OWVlMzgxOTNjZDBhNGE4NzRmN2I1MWQwYTZiYWUzMmRhMjciLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjI3ZTU3ODhkNWQ5ZDczZDI0YTgxZGJjMGE1YTc0YmZhODJjOWMzYjNhZjk5ZTUyYWY3OTZlOTBiNDY4YThhM2QiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjRhNDY3MjVkNDczZjY5ZGI0YTM3MzUxOThhMWVmMWY5MTk3MmRkYzFjZTIzNWE1Y2FjNzNjMWJlMzlmOGI2MmIiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImUwY2E5NGI5Yzc3MjI4YWIzZmZhNGYyNTI1YTA2MzU1Y2VhOGYwM2RmOTM0ZDhkY2Y3MmE0MDY3MmZjN2VlYjYifQ"
+        }
+      ]
+    },
+    {
+      "id": "claim_a0cfdc30b41145489e3f83d474eab00a",
+      "statement": "tests/parse.test.ts pins parser behavior: text-kata defaults, id-over-filename fallback, and the throwing cases (missing frontmatter/title/answers, no correct option, code kata without template, missing/empty checks); it also confirms the java template block is extracted into template and removed from body.",
+      "evidence": [
+        {
+          "resource": "repo://tests/parse.test.ts#L1-L195",
+          "version": "repo-lines-v1:sha256:1743d1cb31b555055bf124bf3fd039657879ade29a86148b3964d9d462217b8b:eyJzZWxlY3RlZExpbmVDb3VudCI6MTk1LCJmaXJzdFNlbGVjdGVkTGluZUhhc2giOiI2NjAzYTY0YTc5M2FjNWRhNDFmYmU3YmI4M2EzNjgzYmVmM2M3NTU1NzU0MDdjZThiNWE4ZjIzOWMzMTAxOTYzIiwibGFzdFNlbGVjdGVkTGluZUhhc2giOiJmNmY1YjQwYjE1ODQ1N2QxNzg2NGYyMTc5MDc4NmRkNWEyZWNkYjY0YjY2YTY1MWY3ODhkNGUyNWNkMzMwM2QyIiwicHJlY2VkaW5nQ29udGV4dExpbmVDb3VudCI6MCwicHJlY2VkaW5nQ29udGV4dEhhc2giOiJlM2IwYzQ0Mjk4ZmMxYzE0OWFmYmY0Yzg5OTZmYjkyNDI3YWU0MWU0NjQ5YjkzNGNhNDk1OTkxYjc4NTJiODU1IiwiZm9sbG93aW5nQ29udGV4dExpbmVDb3VudCI6MCwiZm9sbG93aW5nQ29udGV4dEhhc2giOiJlM2IwYzQ0Mjk4ZmMxYzE0OWFmYmY0Yzg5OTZmYjkyNDI3YWU0MWU0NjQ5YjkzNGNhNDk1OTkxYjc4NTJiODU1In0"
+        }
+      ]
+    },
+    {
+      "id": "claim_1d38a612e007497db6051e4e922b9a28",
+      "statement": "tests/normalize.test.ts pins text grading: normalizeText folding; matchText per mode (normalized/exact/regex), caseSensitive behavior including the regex i flag, ^(?:...)$ full-match anchoring, and any-answer semantics.",
+      "evidence": [
+        {
+          "resource": "repo://tests/normalize.test.ts#L1-L63",
+          "version": "repo-lines-v1:sha256:24d617bea65d3df628371a207df2ae82a6d473481de179c73ef55c49434579ba:eyJzZWxlY3RlZExpbmVDb3VudCI6NjMsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjY2MDNhNjRhNzkzYWM1ZGE0MWZiZTdiYjgzYTM2ODNiZWYzYzc1NTU3NTQwN2NlOGI1YThmMjM5YzMxMDE5NjMiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6ImY2ZjViNDBiMTU4NDU3ZDE3ODY0ZjIxNzkwNzg2ZGQ1YTJlY2RiNjRiNjZhNjUxZjc4OGQ0ZTI1Y2QzMzAzZDIiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjowLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImUzYjBjNDQyOThmYzFjMTQ5YWZiZjRjODk5NmZiOTI0MjdhZTQxZTQ2NDliOTM0Y2E0OTU5OTFiNzg1MmI4NTUiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjE1OWU5N2FlYzhhYmNlN2RhODE5YjFhYWI5MWE5ZTQ4ZTE1MDY3Y2Q0YTQzYzk3YjZjY2I3MmEzNDA0Njk1M2EifQ"
+        }
+      ]
+    }
+  ],
+  "verification": {
+    "by": "openwiki/0.4.0",
+    "at": "2026-08-26T15:48:44.789Z"
+  }
+}

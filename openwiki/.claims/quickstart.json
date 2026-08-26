@@ -1,0 +1,106 @@
+{
+  "schemaVersion": 1,
+  "pageVersion": "sha256:b1a10212e6f688cf593a9dc39a24af2641fde45927185280b504946cb1ed00e3",
+  "claims": [
+    {
+      "id": "claim_4c9c5e04f4064ef494b610ce090fb6fe",
+      "statement": "Code Kata is a static, backend-free site for practicing Java: it grades text, choice, and compile-and-run Java code exercises entirely in the browser, with no server, no code submission, and no accounts or tracking.",
+      "evidence": [
+        {
+          "resource": "repo://README.md#L1-L21",
+          "version": "repo-lines-v1:sha256:06338d1d97ffb45b97ecd1716123f27e8fa9c574b3703eda1565a929940b1c0e:eyJzZWxlY3RlZExpbmVDb3VudCI6MjEsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6ImJiNzg0YjE1NTdmMWFmMjYyMWJmZGYwYmQ3Y2VmY2E1ODk1MzhhODEwMmU3ZDc4NmM1NWM2ODUyZWIzZjFjMWQiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjY4MzA5MWQwODJjMjc5ODZjYWVkYjdhN2U1MDkzMzVmN2NkMTE4YmZhYTIyYWQyYjYwNTY5NWViNjg3Y2VlMzAiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjowLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImUzYjBjNDQyOThmYzFjMTQ5YWZiZjRjODk5NmZiOTI0MjdhZTQxZTQ2NDliOTM0Y2E0OTU5OTFiNzg1MmI4NTUiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImFmMWUyMmI5NWYzYWM4OTdmMTQyZDFlN2ViOWNiOWM3ZTI2ZDZjMDViOGNiZjFmZmRkZWI4NzJiYmRhNjBiODYifQ"
+        }
+      ]
+    },
+    {
+      "id": "claim_94bedb06ce304ef88f28ce7d328b7986",
+      "statement": "Java code katas compile and run client-side via CheerpJ (a WebAssembly JVM); text and choice katas have no such runtime dependency, and the whole app is deployable as a plain static site (GitHub Pages).",
+      "evidence": [
+        {
+          "resource": "repo://README.md#L59-L64",
+          "version": "repo-lines-v1:sha256:fc7b4bfe8e8f3d7973be85e4ddb996fdbd03911264c40676c5d5a7033fe418f4:eyJzZWxlY3RlZExpbmVDb3VudCI6NiwiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiNDAyZTJiMzIyZGYxOTNjMTM3ZmU1MGVkNDQ2ZWM3NDZkZWFjZjU4OGM5N2IzNzQwMmRhYTM2MmE4YjNiOWVkNSIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiZThmYmE5NzEzMzdjNGFhNzY4NjNkMGZhZTEwMzkwYTZkOGY5NTc1ZGJmNjMxNjYwMDhkNTU2Y2ZiYWM1NTIzYyIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiYmQ1ZWY1MjM0N2VlOTBiZmUxM2QwZDE2NWM2YTlmNTcyMDcyM2YxYTU2ZGI3Y2NkYjFiNDZjOTMzM2Q2NjJiZCIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjMsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiNmNjMDdmODI4NzUzODEyMjEwMDkwOTdjNDlmMzY3Yzk3YzU2ZTA3YmE5MDJhMmNhOTlkNjY0YzYwYmE1MThhNyJ9"
+        },
+        {
+          "resource": "repo://README.md#L9-L12",
+          "version": "repo-lines-v1:sha256:2b9a27100e228628be70ee82fb1cffb38be83d1d3463eaea1012f20eb7e6faa7:eyJzZWxlY3RlZExpbmVDb3VudCI6NCwiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiZmJkODQyNzBhNjRkYWFiNDZiMDA3YzZhMjQ2YmRiNjY0ZDRhMWEzZjM0ZDk0N2NkM2U4NTJiZjY2NTFlZGFkOSIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiZDdiZGRjMDk5YjRjZjg2ZGEyMTBkOGFlZTVlMDU2YWJjNGRhNDEwZThmMjhlZjQ3N2M4MDFmYzE2ZDQxMzlmMyIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiY2Y1NGJmOGE4Y2UyMWVjNGRhMGE5MjUxMTJlODNmN2FkYTcwNzlhMzc4OTMyMTczYjU5ZjdhOWZlNDA1ZWJkZSIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjMsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiZTViZDdiNjAxYjY0YzU1MzQzZDg3MDMzYTVhMThiNWI3OWQ4YTRlZjdhMTdmNWM2ODM0NzA1MWI5YjcyN2E0ZiJ9"
+        }
+      ]
+    },
+    {
+      "id": "claim_661b5da6552b4709b7ba57978ace2cf0",
+      "statement": "Local development requires Node.js 22, the version pinned in the deploy workflow's setup-node step.",
+      "evidence": [
+        {
+          "resource": "repo://.github/workflows/deploy.yml#L23-L24",
+          "version": "repo-lines-v1:sha256:d8538151084cd3b6a778f4e85e6114ee00e324ddd49c3c50703aeb9401cae324:eyJzZWxlY3RlZExpbmVDb3VudCI6MiwiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiMGIzMmI5ODcyNjNkZjIxNjNlNzI2ZDQ4YjkyZjZmOTY1MTQ4Y2I2YjZkMjgzMTc5MTUxNGM5MzlmODM3YTE0MiIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiYmMwM2E4ZmViZjRiMTA2NjkzYmY2N2VjNGE5YjQ1ZmZmZTYxNDUwMDhiY2QzMTdiZDhjZjY4N2IzNzQxNjI5NCIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiNGZmZDM1YTNhZjk3YWM3ODY5NzdiYzhjMTA3NjEyNDliMzQyYWM4YzYzMzZkMmJlNzVmYTg3YzViMDNiYmU0ZiIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjMsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiMTBlOGM5ZWM4MjQ2YjBkNzM3NjczNmRiYzdjMjk0YmM2M2I4MGFjNGM4YWI5ZjIyN2JkNGE1YzM5NGNlNjQ0NCJ9"
+        },
+        {
+          "resource": "repo://README.md#L23-L25",
+          "version": "repo-lines-v1:sha256:672bc39ef0c491a839a8b5010f605a4f6f00d1cf803aebee9f98a33e87ec97fa:eyJzZWxlY3RlZExpbmVDb3VudCI6MywiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiMTdjZDg1NjZmMDBhMDdjODBlZmFjMTE1MjczYTk2ODBlNWRjOWVhNThkYjNhYjM0OTQxNjUyZDE1ZDA2ODEyNSIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiNzE1OGRiMTM3NDFlZDgyOWY0MmE0ZTc4MGY0NmViNzE2N2UzNGZiN2U2NDIzMTJmY2UxNTdlMjc2NGYzNjE2ZiIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiNTgzMzBjOTRhYzNkYTNkZTg2YzZlYjY1N2I2MjlhZjZhZTA0N2YyYmY0NzkxNzliODhhODE2NGY2NjQwZTRjNiIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjMsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiZmIxYWEzYTE5MTg2MWU4NzFhMmZiNDRjM2Y2NWFlYmEyMWMxODZjNzMxYjhiZWQ0ZDQ2MjY5ODNjOGIwNjYxNSJ9"
+        }
+      ]
+    },
+    {
+      "id": "claim_14c610f25218470ca7e1c473e72bae47",
+      "statement": "The package.json scripts are: dev -> vite (Vite dev server with HMR); test -> vitest run; build -> tsc --noEmit && vite build (outputs dist/); preview -> vite preview.",
+      "evidence": [
+        {
+          "resource": "repo://package.json#L7-L12",
+          "version": "repo-lines-v1:sha256:b8e442715585e4bc46555dd8e4ee52a3f37f0df8be36ba38ec78d901cc6a3847:eyJzZWxlY3RlZExpbmVDb3VudCI6NiwiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiMzQ4MzNkNTk0OWMwM2E0MGNhOTUyNDkxNjEwYTY2NTk2NDRiM2FhNDY2MzYyZjc5OTAyMGRiZjE5ODE1NDdkYiIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiNGQ1Y2QyZmI0ZjNkZjg4NDUxNTI1NWIzOTUyM2YyZjhiNTQ3MmJlZWE5ZjU2NmZmY2EyMDRkYjgwMjU2MTA0MSIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiZWViMmFmMTdiMmY0ODA5NDliZTY2ZDY5MzQ4NjZhZGIxYmI4ZjRjNzVlZjZiYzk1NzJkZDBkYWRmODRiYzIzNSIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjMsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiYzVlMmMzMmQ1NDU3YzhlM2JjNDVhNDcxMmI3ZWFhYmJhZjVmN2JlYTIyNzRiN2Q4YjVlMTFjMTQ1MmEwYTc0NSJ9"
+        }
+      ]
+    },
+    {
+      "id": "claim_7249d2680e2345198932281a9eea298e",
+      "statement": "npm run build is the same pipeline CI runs: it type-checks (tsc --noEmit), builds the static bundle (vite build -> dist/), and the GitHub Actions workflow publishes dist/ to GitHub Pages on every push to main.",
+      "evidence": [
+        {
+          "resource": "repo://.github/workflows/deploy.yml#L17-L31",
+          "version": "repo-lines-v1:sha256:f9f498443e50fe86107d5319e871d3ff5a538d4327fbbba0bcb3a0e344514cdc:eyJzZWxlY3RlZExpbmVDb3VudCI6MTUsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6ImU5ZDgwMTU0ZWQ0MmZjNWM3NzliMTMzMTU3OGI1OGI4OWM4MDFlYWNlNzRmMjRjZDQ4ZWI0YTIzNTc5NDBhOTUiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6ImEyNWQ0YWQ2NjFhMjRkZDk3MGM2NWU2MWMwYmY1YTZlNzcxNTExYzU2OGJiYjRlNmZhOWQwZDU4MTdkZmE1YzciLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjBiMmY5ZTU5ZTQ0YjUxMWFhMzU3MTQ2ZDQ0MzNjN2RjYmYwZDlhNThkYzIyMTA2MDc2OTQ3MmM2ZWQzYWM2OTIiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImZhOWEyMmVmZTc2MWE0YzM4OTFiMjQwODZiM2IxZmFlODE1OWUyYmNhNjIyN2UxNDE3NGE5OTg4NDhkNWQ3ODgifQ"
+        },
+        {
+          "resource": "repo://package.json#L9-L10",
+          "version": "repo-lines-v1:sha256:9880163056fe1e365f16cd0cf20ae4d577db09dd7a6c0c35a69e5ab8e93001f1:eyJzZWxlY3RlZExpbmVDb3VudCI6MiwiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiNWNkYmVlMDI1MGZkN2VmOTVjMGYwNzZlNTlmY2ZiYjM1Mjc4OTBhNzNkZjU2MzVjZjkxYTUxNWNkNmRlY2I3YyIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiOTI5YjRiMjE1YjBhYmE4ZWQ1MzZmMTlkM2E5YTMxMTU1MDNjMDRmZTkyZjZiY2FkZDk5NTBhNjhhOTEzNzk2MiIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiYmFhYTIyOWRiMGNjNjA4MmI3YWZmY2ZmMDY1NDdjYTMwOGE2YWY4MDdiMzM4N2FjMTdlZDkxM2I4ZTAzYmFmYiIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjMsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiZmExNWI2NzgzOWRjYWNmNmM2MTE2NDE1ZTE2MmJhNjRjODZkNzI1OTk0ODRhNWYxZjhjODA5Y2JkMmJkZWZlYiJ9"
+        }
+      ]
+    },
+    {
+      "id": "claim_febad7a11b9c4f6486400132fb93c1ad",
+      "statement": "There is no manifest or registry for katas; katas are plain katas/*.md files discovered at build time via Vite's import.meta.glob('../../katas/*.md', { query: '?raw', import: 'default', eager: true }), so dropping a new .md file into katas/ is all that is required to add a kata.",
+      "evidence": [
+        {
+          "resource": "repo://README.md#L34-L40",
+          "version": "repo-lines-v1:sha256:542c3813026ad72dc3cf06d87227a399409df513449a8f20b2c8a9cf0517b4ce:eyJzZWxlY3RlZExpbmVDb3VudCI6NywiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiZmVmMjY3NWRhZjQwYTI2YTM1ZGM2ZWIyYmJhMWM3ZWRhZWZkNjE0NTU2ZjI2ODBjODk5MWMwZWNjYzRhN2NkMCIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiMDhmZTkxMDkxZmUzZDUyZjM2OTY5ZjRkNTQ3MzE1YjA2Y2U4NDg0NDZiMjEyYjY4NjI1MzQ2MGFhM2MwMzhhMyIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiZWEyZWRlZTg4MzZkOWZjMDg1ZTA3ZjQyOTdjNmVkMzVkOTVhMjVlM2MzMzViOTYzZjQ4ZGIzNTlmODQ3ODM1NSIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjMsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiYzEwZjI4MDFiNDg1N2EwYWYxNjE1YTAyNWQwYTEyMmNiN2E4ODE3YTUzM2Y0MTU1NWIyYTdmM2E1MzdlNGQ4ZiJ9"
+        },
+        {
+          "resource": "repo://src/kata/load.ts#L4-L18",
+          "version": "repo-lines-v1:sha256:930f6dc5c6610f754eaa7a7f7a64eec46f65cb563e4586e15bb2d0d186234365:eyJzZWxlY3RlZExpbmVDb3VudCI6MTUsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6Ijc4Zjg3MjBkMWQyMjBhNDk3MzY2OTIwZDk0NTUwYjA5NWZhYWM1MDk0ZjI3NzM0NDZjOThkYTk3YzlhMWU3M2IiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjQxMmNhMzQ1Y2NmNzViZjljMDgwNmJjZTY5NWJlOGRlODA4Yjc5OTg0MjUxYTdhNTRkMjAyY2Y2MTAxZGQ0NTEiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjIzYjM3OGFlNWQwYzI1YjE3MGU3Y2Y4Y2Y5YzYzOGIxYmQ0MzkxODdmMDU3OGZiNWVjYWVlZjkzNzQ1ZjJiZDAiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjBhMjBmZTgyZjQyNDhjZTkzZmVjOTRkYWQ3NzEyY2YwNjQ2ZGI0OGUxZDRhZDE4NjQ1YmEzZjk3MDQxMWNlMjQifQ"
+        }
+      ]
+    },
+    {
+      "id": "claim_ee1e654b98ec4595ac81ad849c7a6ded",
+      "statement": "The kata filename (minus .md) becomes the fallback id, and katas are sorted by title after parsing; a parse failure for one file logs an error and is skipped rather than aborting the whole load.",
+      "evidence": [
+        {
+          "resource": "repo://src/kata/load.ts#L6-L17",
+          "version": "repo-lines-v1:sha256:fb565a65c8ab784351e8466f06d85b94e54242d82fef3682e81b1c1749f6b0f9:eyJzZWxlY3RlZExpbmVDb3VudCI6MTIsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjJiZDU0NjI0OTkzMjlmOWI1ZjA2MjE1OThmZmMxMWFkODdiMTY0N2M1Y2MyNzNiYzAzMGI3ZWIzOTU2ZDFmYWYiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6ImVmYmMyZWQ1MDc3ZDFiY2I0NjMyNDk3Zjg4MzdmN2M1ZjFlNGZlYWUyNDYwYWFlNGVhMjJmMjg5YTEzOWMxNTciLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjVlMmZkNWNkNzEyZDY0MzI3MTNjMmNjOTMwYTJmM2NjZDgzMDNlY2JlNjZlY2JhNzUyZWIxZWIzNjg2MjhkYzIiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImMxMDY2ZTk1NjE2MzlhNGFiMDU1Nzc0YmQ2N2Y0NjZkOTRiYmNiMDk4MDdiYjE5NjdmODVlZTE1M2M3OTJlMzYifQ"
+        }
+      ]
+    },
+    {
+      "id": "claim_942a9a6512e24f35896224e03b283752",
+      "statement": "The Vite build uses base:'./' so the static bundle uses relative asset paths, which is what makes it deployable on GitHub Pages.",
+      "evidence": [
+        {
+          "resource": "repo://vite.config.ts#L1-L4",
+          "version": "repo-lines-v1:sha256:36d943ec9069dfb3f0d130c9f59dcc68a0a217e64ee6f59743e1d9dd121e4265:eyJzZWxlY3RlZExpbmVDb3VudCI6NCwiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiNzFkMDIxMjc5OTMzNTg3NjU5ODQyOTdkZDMzODM1ZTAwZjIyNzQyNGNiZDY0YzJjYmYwMmNiNzExNDVjZmYyYiIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiNjRiOThhZmI1M2I0Y2EwOTA2ZTMzMjA1ZWVjMmM1ZjcyN2JhNmZjOGM1MDVmODAzMDU2MmRhY2ZiODdhMGQxYiIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjAsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiZTNiMGM0NDI5OGZjMWMxNDlhZmJmNGM4OTk2ZmI5MjQyN2FlNDFlNDY0OWI5MzRjYTQ5NTk5MWI3ODUyYjg1NSIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjEsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiZjZmNWI0MGIxNTg0NTdkMTc4NjRmMjE3OTA3ODZkZDVhMmVjZGI2NGI2NmE2NTFmNzg4ZDRlMjVjZDMzMDNkMiJ9"
+        }
+      ]
+    }
+  ],
+  "verification": {
+    "by": "openwiki/0.4.0",
+    "at": "2026-08-26T15:48:44.789Z"
+  }
+}

@@ -3,7 +3,41 @@ import { EditorState, StateField, RangeSetBuilder } from '@codemirror/state';
 import { EditorView, Decoration, type DecorationSet, keymap } from '@codemirror/view';
 import { indentWithTab } from '@codemirror/commands';
 import { java } from '@codemirror/lang-java';
+import { HighlightStyle, syntaxHighlighting } from '@codemirror/language';
+import { tags as t } from '@lezer/highlight';
 import { parseTemplate, initialDoc, type Segment } from './regions.ts';
+
+// Editor chrome themed via CSS custom properties, so it follows [data-theme] live
+// without rebuilding the editor.
+const editorTheme = EditorView.theme({
+  '&': { color: 'var(--color-text)', backgroundColor: 'var(--color-surface)' },
+  '.cm-content': { caretColor: 'var(--color-accent)' },
+  '.cm-cursor, .cm-dropCursor': { borderLeftColor: 'var(--color-accent)' },
+  '&.cm-focused .cm-selectionBackground, .cm-selectionBackground, .cm-content ::selection': {
+    backgroundColor: 'var(--color-accent-soft)',
+  },
+  '.cm-activeLine': { backgroundColor: 'var(--color-accent-soft)' },
+  '.cm-activeLineGutter': { backgroundColor: 'var(--color-accent-soft)' },
+  '.cm-gutters': {
+    backgroundColor: 'var(--color-surface)',
+    color: 'var(--color-text-muted)',
+    borderRight: '1px solid var(--color-border)',
+  },
+  '&.cm-focused': { outline: 'none' },
+});
+
+// ~8 syntax token colors, verified ≥4.5:1 on --color-surface in both themes (see
+// tests/contrast.test.ts).
+const syntaxTheme = HighlightStyle.define([
+  { tag: t.keyword, color: 'var(--syntax-keyword)' },
+  { tag: [t.string, t.special(t.string), t.character], color: 'var(--syntax-string)' },
+  { tag: [t.number, t.bool, t.null], color: 'var(--syntax-number)' },
+  { tag: [t.comment, t.lineComment, t.blockComment], color: 'var(--syntax-comment)', fontStyle: 'italic' },
+  { tag: [t.typeName, t.className], color: 'var(--syntax-type)' },
+  { tag: [t.function(t.variableName), t.function(t.propertyName)], color: 'var(--syntax-function)' },
+  { tag: [t.variableName, t.propertyName], color: 'var(--syntax-variable)' },
+  { tag: [t.punctuation, t.bracket, t.operator], color: 'var(--syntax-punctuation)' },
+]);
 
 interface LockedRange { from: number; to: number }
 
@@ -66,7 +100,17 @@ const lockedTransactionFilter = EditorState.transactionFilter.of((tr) => {
   return blocked ? [] : tr;
 });
 
-export function createKataEditor(parent: HTMLElement, template: string): { getSource(): string; destroy(): void } {
+// Escape blurs the editor so a subsequent Tab press moves focus on to the next
+// focusable element instead of indentWithTab capturing it — without this, Tab
+// can never leave the editor (a keyboard trap). Must be registered before
+// indentWithTab in the keymap for Escape to take effect over CodeMirror's default
+// (Escape has no built-in binding in basicSetup, but ordering keeps this robust).
+const escapeToBlurKeymap = keymap.of([
+  { key: 'Escape', run: (view) => { view.contentDOM.blur(); return true; } },
+  indentWithTab,
+]);
+
+export function createKataEditor(parent: HTMLElement, template: string, describedById?: string): { getSource(): string; destroy(): void } {
   const segments = parseTemplate(template);
   const doc = initialDoc(segments);
   const lockedRanges = computeLockedRanges(segments);
@@ -76,7 +120,10 @@ export function createKataEditor(parent: HTMLElement, template: string): { getSo
     extensions: [
       basicSetup,
       java(),
-      keymap.of([indentWithTab]),
+      editorTheme,
+      syntaxHighlighting(syntaxTheme),
+      escapeToBlurKeymap,
+      ...(describedById ? [EditorView.contentAttributes.of({ 'aria-describedby': describedById })] : []),
       lockedRangesField.init(() => lockedRanges),
       lockedDecorationsField,
       lockedTransactionFilter,

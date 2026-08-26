@@ -12,7 +12,7 @@ export function renderTextView(container: HTMLElement, kata: TextKata): void {
   `;
   container.appendChild(form);
 
-  const feedback = setupFeedback(container, kata.id, kata.hints);
+  const feedback = setupFeedback(container, kata.slug, kata.hints);
   const input = form.querySelector('input') as HTMLInputElement;
   if (feedback.progress.solved) input.value = '';
 

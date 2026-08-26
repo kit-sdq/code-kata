@@ -15,15 +15,22 @@ const PHASE_TEXT: Record<'loading' | 'compiling' | 'running', string> = {
 export function renderCodeView(container: HTMLElement, kata: CodeKata): void {
   const segments = parseTemplate(kata.template);
 
+  const editorHintId = `editor-kbd-hint-${kata.slug}`;
+  const editorHint = document.createElement('p');
+  editorHint.id = editorHintId;
+  editorHint.className = 'sr-only';
+  editorHint.textContent = 'Code editor. Press Escape then Tab to leave it.';
+  container.appendChild(editorHint);
+
   const editorContainer = document.createElement('div');
   editorContainer.className = 'code-editor-container';
   container.appendChild(editorContainer);
 
-  let editor = createKataEditor(editorContainer, kata.template);
+  let editor = createKataEditor(editorContainer, kata.template, editorHintId);
   function resetEditor(): void {
     editor.destroy();
     editorContainer.innerHTML = '';
-    editor = createKataEditor(editorContainer, kata.template);
+    editor = createKataEditor(editorContainer, kata.template, editorHintId);
   }
 
   const controls = document.createElement('div');
@@ -38,14 +45,21 @@ export function renderCodeView(container: HTMLElement, kata: CodeKata): void {
 
   const phaseEl = document.createElement('p');
   phaseEl.className = 'phase-indicator';
+  phaseEl.setAttribute('role', 'status');
   phaseEl.setAttribute('aria-live', 'polite');
   container.appendChild(phaseEl);
 
+  // Persistent live region: this node itself is never removed/recreated, only its
+  // contents are replaced by showResult/showLockedError/showViolations, so screen
+  // readers reliably pick up the change (a brand-new aria-live node with content
+  // already set is not consistently announced).
   const resultContainer = document.createElement('div');
   resultContainer.className = 'result-panel';
+  resultContainer.setAttribute('role', 'status');
+  resultContainer.setAttribute('aria-live', 'polite');
   container.appendChild(resultContainer);
 
-  const feedback = setupFeedback(container, kata.id, kata.hints);
+  const feedback = setupFeedback(container, kata.slug, kata.hints);
 
   function showLockedError(): void {
     resultContainer.innerHTML = '';
@@ -143,7 +157,6 @@ export function showResult(container: HTMLElement, result: RunResult, kata: Code
 function renderFailure(container: HTMLElement, result: RunResult): void {
   const p = document.createElement('p');
   p.className = 'feedback feedback-incorrect';
-  p.setAttribute('aria-live', 'polite');
   p.textContent = FAILURE_LABEL[result.status] ?? result.status;
   container.appendChild(p);
   if ('message' in result && result.message) {
@@ -157,7 +170,6 @@ function renderFailure(container: HTMLElement, result: RunResult): void {
 function renderVerdict(container: HTMLElement, verdict: Verdict): void {
   const summary = document.createElement('p');
   summary.className = `feedback ${verdict.solved ? 'feedback-correct' : 'feedback-incorrect'}`;
-  summary.setAttribute('aria-live', 'polite');
   summary.textContent = verdict.solved ? '✓ All checks passed!' : '✗ Some checks failed.';
   container.appendChild(summary);
 

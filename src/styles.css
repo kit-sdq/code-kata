@@ -1,169 +1,426 @@
+/* ==========================================================================
+   Design tokens — the only place colors/sizes are defined literally.
+   Palette + contrast ratios verified in tests/contrast.test.ts.
+   ========================================================================== */
+
 :root {
   color-scheme: light;
-  --font: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
-  --bg: #ffffff;
-  --fg: #1a1a1a;
-  --muted: #5a5a5a;
-  --border: #d7d7d7;
-  --accent: #2b5fd9;
-  --correct-bg: #e6f4ea;
-  --correct-fg: #1e6b34;
-  --incorrect-bg: #fdecea;
-  --incorrect-fg: #a02020;
+
+  /* --- color: light (default) --- */
+  --color-bg: #ffffff;
+  --color-surface: #f6f8fa;
+  --color-text: #1f2328;
+  --color-text-muted: #59636e;
+  --color-accent: #4f46e5;
+  --color-accent-hover: #4338ca;
+  --color-accent-contrast: #ffffff;
+  --color-accent-soft: #dfdff7;
+  --color-border: #767676;
+  --color-success: #1a7f37;
+  --color-success-bg: #eef4f3;
+  --color-error: #d1242f;
+  --color-error-bg: #f5f0f2;
+  --color-focus: #4f46e5;
+
+  /* --- syntax colors (editor + markdown code blocks) --- */
+  --syntax-keyword: #a626a4;
+  --syntax-string: #40803f;
+  --syntax-number: #986801;
+  --syntax-comment: #6b7280;
+  --syntax-type: #0e7490;
+  --syntax-function: #2867f0;
+  --syntax-variable: #d72f20;
+  --syntax-punctuation: #383a42;
+
+  /* --- spacing --- */
+  --space-1: 4px;
+  --space-2: 8px;
+  --space-3: 12px;
+  --space-4: 16px;
+  --space-5: 24px;
+  --space-6: 32px;
+  --space-7: 48px;
+  --space-8: 64px;
+
+  /* --- type --- */
+  --fs-sm: 0.875rem;
+  --fs-base: 1rem;
+  --fs-md: 1.25rem;
+  --fs-lg: 1.5625rem;
+  --fs-xl: 1.953rem;
+  --font-sans: system-ui, -apple-system, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  --font-mono: ui-monospace, SFMono-Regular, "SF Mono", Consolas, "Liberation Mono", Menlo, monospace;
+
+  /* --- shape --- */
+  --radius-sm: 6px;
+  --radius-md: 10px;
 }
+
+[data-theme="dark"] {
+  color-scheme: dark;
+
+  --color-bg: #0d1117;
+  --color-surface: #161b22;
+  --color-text: #e6edf3;
+  --color-text-muted: #9198a1;
+  --color-accent: #818cf8;
+  --color-accent-hover: #a5b4fc;
+  --color-accent-contrast: #0d1117;
+  --color-accent-soft: #23293c;
+  --color-border: #7a828e;
+  --color-success: #3fb950;
+  --color-success-bg: #1d372a;
+  --color-error: #f85149;
+  --color-error-bg: #2a2026;
+  --color-focus: #818cf8;
+
+  --syntax-keyword: #ff7b72;
+  --syntax-string: #a5d6ff;
+  --syntax-number: #79c0ff;
+  --syntax-comment: #8b949e;
+  --syntax-type: #ffa657;
+  --syntax-function: #d2a8ff;
+  --syntax-variable: #7ee787;
+  --syntax-punctuation: #c9d1d9;
+}
+
+/* ==========================================================================
+   Base
+   ========================================================================== */
 
 * {
   box-sizing: border-box;
 }
 
+html {
+  scrollbar-color: var(--color-border) var(--color-surface);
+}
+
 body {
   margin: 0;
-  font-family: var(--font);
-  color: var(--fg);
-  background: var(--bg);
-  line-height: 1.5;
+  font-family: var(--font-sans);
+  font-size: var(--fs-base);
+  color: var(--color-text);
+  background: var(--color-bg);
+  line-height: 1.6;
 }
+
+@media (prefers-reduced-motion: no-preference) {
+  body,
+  a,
+  button,
+  input,
+  .kata-card,
+  .theme-toggle-icon {
+    transition:
+      background-color 150ms ease,
+      color 150ms ease,
+      border-color 150ms ease;
+  }
+}
+
+a {
+  color: var(--color-accent);
+}
+
+a:hover {
+  color: var(--color-accent-hover);
+}
+
+:focus-visible {
+  outline: 2px solid var(--color-focus);
+  outline-offset: 2px;
+}
+
+/* Visually hidden but available to assistive tech (e.g. aria-describedby targets). */
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+/* ==========================================================================
+   Header / footer landmarks
+   ========================================================================== */
 
 .site-header {
-  border-bottom: 1px solid var(--border);
-  padding: 1rem 1.5rem;
+  /* Absolute positioning for the toggle + text-align:center for the title:
+     true centering that never depends on the toggle's rendered width (a grid
+     with an equal-1fr spacer column breaks under space pressure, since the
+     spacer's content-min is 0 while the toggle's isn't — the toggle can end
+     up overflowing its track at narrow widths). */
+  position: relative;
+  border-bottom: 1px solid var(--color-border);
+  padding: var(--space-4) var(--space-5);
+  text-align: center;
 }
 
-.site-header h1 {
+.site-title-slot {
+  display: block;
+  /* Keep clear of the absolutely positioned toggle on the right (and mirror
+     on the left so centering stays visually correct) at narrow widths. */
+  padding-inline: var(--space-8);
+}
+
+.site-title {
   margin: 0;
-  font-size: 1.4rem;
+  font-size: var(--fs-md);
+  font-weight: 700;
+  line-height: 1.2;
+  overflow-wrap: break-word;
+}
+
+.site-title a,
+a.site-title {
+  color: var(--color-text);
+  text-decoration: none;
+}
+
+.site-title a:hover,
+a.site-title:hover {
+  color: var(--color-accent);
+}
+
+.theme-toggle {
+  position: absolute;
+  top: 50%;
+  right: var(--space-5);
+  transform: translateY(-50%);
+}
+
+.theme-toggle-icon {
+  font-size: var(--fs-base);
 }
 
 main#app {
   max-width: 860px;
   margin: 0 auto;
-  padding: 1.5rem;
+  padding: var(--space-5);
 }
 
-a {
-  color: var(--accent);
+.site-footer {
+  border-top: 1px solid var(--color-border);
+  padding: var(--space-4) var(--space-5);
+  color: var(--color-text-muted);
+  font-size: var(--fs-sm);
+  text-align: center;
 }
 
-:focus-visible {
-  outline: 3px solid var(--accent);
-  outline-offset: 2px;
+.site-footer p {
+  margin: 0;
 }
+
+/* ==========================================================================
+   Buttons, inputs, choices
+   ========================================================================== */
 
 button {
   font: inherit;
   cursor: pointer;
-  background: var(--accent);
-  color: #fff;
+  background: var(--color-accent);
+  color: var(--color-accent-contrast);
   border: none;
-  border-radius: 4px;
-  padding: 0.5rem 1rem;
+  border-radius: var(--radius-sm);
+  padding: var(--space-2) var(--space-4);
+  min-height: 24px;
+  min-width: 24px;
 }
 
 button:hover {
-  filter: brightness(1.1);
+  background: var(--color-accent-hover);
+}
+
+button:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
 }
 
 input[type="text"] {
   font: inherit;
-  padding: 0.4rem 0.6rem;
-  border: 1px solid var(--border);
-  border-radius: 4px;
+  color: var(--color-text);
+  background: var(--color-bg);
+  padding: var(--space-2) var(--space-3);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-sm);
   width: 100%;
   max-width: 24rem;
+  min-height: 24px;
 }
 
-/* --- kata list --- */
-
-.kata-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
-  gap: 1rem;
+input[type="radio"],
+input[type="checkbox"] {
+  accent-color: var(--color-accent);
+  width: 1.15em;
+  height: 1.15em;
 }
 
-.kata-card {
-  display: block;
-  border: 1px solid var(--border);
-  border-radius: 8px;
-  padding: 1rem;
-  text-decoration: none;
-  color: inherit;
-}
-
-.kata-card:hover {
-  border-color: var(--accent);
-}
-
-.kata-card h2 {
-  font-size: 1.1rem;
-  margin: 0 0 0.5rem;
-}
-
-.solved-badge {
-  margin-left: 0.5rem;
-  font-size: 0.8rem;
-  color: var(--correct-fg);
-}
-
-.kata-meta {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 0.4rem;
-}
-
-.difficulty,
-.tag {
-  font-size: 0.75rem;
-  padding: 0.15rem 0.5rem;
-  border-radius: 999px;
-  background: #eee;
-  color: var(--muted);
-}
-
-.difficulty-easy {
-  background: #e6f4ea;
-  color: var(--correct-fg);
-}
-
-.difficulty-medium {
-  background: #fff4dc;
-  color: #8a6100;
-}
-
-.difficulty-hard {
-  background: var(--incorrect-bg);
-  color: var(--incorrect-fg);
-}
-
-/* --- task view --- */
-
-.back-link {
-  display: inline-block;
-  margin-bottom: 1rem;
-}
-
-.kata-answer {
-  margin-top: 1.5rem;
-  padding-top: 1rem;
-  border-top: 1px solid var(--border);
-}
-
-.choice-option {
-  display: flex;
-  align-items: center;
-  gap: 0.5rem;
-  padding: 0.25rem 0;
+label {
+  cursor: pointer;
 }
 
 fieldset {
   border: none;
   padding: 0;
-  margin: 0 0 1rem;
+  margin: 0 0 var(--space-4);
 }
 
 legend {
   font-weight: 600;
   padding: 0;
-  margin-bottom: 0.5rem;
+  margin-bottom: var(--space-2);
+}
+
+.text-answer-form {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--space-3);
+}
+
+.text-answer-form label {
+  font-weight: 600;
+}
+
+.choice-option {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+  min-height: 24px;
+  padding: var(--space-1) 0;
+}
+
+/* ==========================================================================
+   Kata list / category sections
+   ========================================================================== */
+
+.category {
+  margin-bottom: var(--space-6);
+}
+
+.category h2 {
+  font-size: var(--fs-lg);
+  margin: 0 0 var(--space-2);
+}
+
+.category-description {
+  color: var(--color-text-muted);
+  margin: 0 0 var(--space-4);
+}
+
+.kata-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+}
+
+.kata-card {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: var(--space-2);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+  padding: var(--space-3) var(--space-4);
+  min-height: 24px;
+  text-decoration: none;
+  color: inherit;
+  background: var(--color-bg);
+}
+
+.kata-card:hover {
+  border-color: var(--color-accent);
+  background: var(--color-surface);
+}
+
+.kata-id {
+  display: inline-block;
+  min-width: 1.6em;
+  text-align: center;
+  font-size: var(--fs-sm);
+  font-weight: 600;
+  padding: var(--space-1) var(--space-2);
+  border-radius: 999px;
+  background: var(--color-surface);
+  color: var(--color-text-muted);
+  border: 1px solid var(--color-border);
+}
+
+.kata-title {
+  font-size: var(--fs-md);
+  font-weight: 600;
+}
+
+.solved-badge {
+  font-size: var(--fs-sm);
+  font-weight: 600;
+  color: var(--color-success);
+}
+
+.kata-meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-1);
+}
+
+.difficulty,
+.tag {
+  font-size: var(--fs-sm);
+  padding: var(--space-1) var(--space-2);
+  border-radius: 999px;
+  background: var(--color-surface);
+  color: var(--color-text-muted);
+  border: 1px solid var(--color-border);
+}
+
+.difficulty-easy {
+  background: var(--color-success-bg);
+  color: var(--color-success);
+  border-color: var(--color-success);
+}
+
+.difficulty-medium {
+  background: var(--color-accent-soft);
+  color: var(--color-accent);
+  border-color: var(--color-accent);
+}
+
+.difficulty-hard {
+  background: var(--color-error-bg);
+  color: var(--color-error);
+  border-color: var(--color-error);
+}
+
+/* ==========================================================================
+   Task view
+   ========================================================================== */
+
+.back-link {
+  display: inline-block;
+  margin-bottom: var(--space-4);
+}
+
+.kata-title-heading {
+  font-size: var(--fs-xl);
+  margin: 0 0 var(--space-4);
+}
+
+.kata-body {
+  margin-bottom: var(--space-5);
+}
+
+.kata-answer {
+  margin-top: var(--space-6);
+  padding-top: var(--space-4);
+  border-top: 1px solid var(--color-border);
 }
 
 .feedback {
@@ -172,42 +429,156 @@ legend {
 }
 
 .feedback-correct {
-  color: var(--correct-fg);
+  color: var(--color-success);
 }
 
 .feedback-incorrect {
-  color: var(--incorrect-fg);
+  color: var(--color-error);
 }
 
 .hints {
   display: flex;
   flex-direction: column;
   align-items: flex-start;
-  gap: 0.5rem;
-  margin-top: 0.5rem;
+  gap: var(--space-2);
+  margin-top: var(--space-2);
 }
 
 .hint {
-  background: #f5f5f5;
-  border-left: 3px solid var(--accent);
-  padding: 0.5rem 0.75rem;
+  background: var(--color-surface);
+  border-left: 3px solid var(--color-accent);
+  padding: var(--space-2) var(--space-3);
   margin: 0;
+  border-radius: var(--radius-sm);
+}
+
+/* ==========================================================================
+   Markdown content (kata body, hints)
+   ========================================================================== */
+
+.kata-body h1,
+.kata-body h2,
+.kata-body h3 {
+  line-height: 1.25;
+}
+
+.kata-body h2 {
+  font-size: var(--fs-lg);
+  margin: var(--space-5) 0 var(--space-2);
+}
+
+.kata-body h3 {
+  font-size: var(--fs-md);
+  margin: var(--space-4) 0 var(--space-2);
+}
+
+.kata-body p {
+  margin: 0 0 var(--space-3);
+}
+
+.kata-body ul,
+.kata-body ol {
+  margin: 0 0 var(--space-3);
+  padding-left: var(--space-5);
+}
+
+.kata-body table {
+  border-collapse: collapse;
+  margin: 0 0 var(--space-4);
+  width: 100%;
+}
+
+.kata-body th,
+.kata-body td {
+  text-align: left;
+  padding: var(--space-1) var(--space-3);
+  border-bottom: 1px solid var(--color-border);
+}
+
+.kata-body code {
+  font-family: var(--font-mono);
+  background: var(--color-surface);
+  border-radius: var(--radius-sm);
+  padding: 0.15em 0.35em;
+  font-size: 0.9em;
 }
 
 pre {
-  background: #f6f8fa;
-  padding: 0.75rem;
-  border-radius: 6px;
+  background: var(--color-surface);
+  padding: var(--space-3);
+  border-radius: var(--radius-sm);
   overflow-x: auto;
 }
 
-/* --- code editor task view --- */
+pre code {
+  background: none;
+  padding: 0;
+  font-size: var(--fs-sm);
+}
+
+/* highlight.js token mapping onto the shared syntax tokens (both editor + markdown
+   code blocks use the same ~8 colors, verified ≥4.5:1 on --color-surface). */
+.hljs {
+  color: var(--color-text);
+  background: none;
+}
+
+.hljs-keyword,
+.hljs-literal {
+  color: var(--syntax-keyword);
+}
+
+.hljs-string,
+.hljs-char,
+.hljs-regexp {
+  color: var(--syntax-string);
+}
+
+.hljs-number {
+  color: var(--syntax-number);
+}
+
+.hljs-comment,
+.hljs-doctag,
+.hljs-quote {
+  color: var(--syntax-comment);
+  font-style: italic;
+}
+
+.hljs-title.class_,
+.hljs-type {
+  color: var(--syntax-type);
+}
+
+.hljs-title.function_,
+.hljs-title,
+.hljs-built_in {
+  color: var(--syntax-function);
+}
+
+.hljs-variable,
+.hljs-params,
+.hljs-attr,
+.hljs-property {
+  color: var(--syntax-variable);
+}
+
+.hljs-punctuation,
+.hljs-operator,
+.hljs-meta,
+.hljs-symbol {
+  color: var(--syntax-punctuation);
+}
+
+/* ==========================================================================
+   Code editor task view
+   ========================================================================== */
 
 .code-editor-container {
-  border: 1px solid var(--border);
-  border-radius: 6px;
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-sm);
   overflow: hidden;
-  margin-bottom: 1rem;
+  margin-bottom: var(--space-4);
 }
 
 .code-editor-container .cm-editor {
@@ -216,84 +587,81 @@ pre {
 }
 
 .code-editor-container .cm-scroller {
-  font-family: ui-monospace, SFMono-Regular, Consolas, "Liberation Mono", Menlo, monospace;
+  font-family: var(--font-mono);
 }
 
 .cm-locked-range {
-  background: rgba(0, 0, 0, 0.05);
+  background-color: color-mix(in srgb, var(--color-text) 10%, transparent);
 }
 
 .code-controls {
   display: flex;
-  gap: 0.5rem;
-  margin-bottom: 0.75rem;
+  gap: var(--space-2);
+  margin-bottom: var(--space-3);
 }
 
 .code-controls .stop-btn {
-  background: var(--muted);
-}
-
-.code-controls button:disabled {
-  opacity: 0.5;
-  cursor: not-allowed;
+  background: var(--color-text-muted);
 }
 
 .phase-indicator {
   font-style: italic;
-  color: var(--muted);
+  color: var(--color-text-muted);
   min-height: 1.5em;
 }
 
 .result-panel {
-  margin-top: 0.5rem;
+  margin-top: var(--space-2);
 }
 
 .result-panel button {
-  margin-top: 0.5rem;
+  margin-top: var(--space-2);
 }
 
 .violations-list {
-  margin: 0.5rem 0 0;
-  padding-left: 1.25rem;
+  margin: var(--space-2) 0 0;
+  padding-left: var(--space-5);
 }
 
 .violations-list li {
-  color: var(--incorrect-fg);
-  margin-bottom: 0.25rem;
+  color: var(--color-error);
+  margin-bottom: var(--space-1);
 }
 
-/* --- result panel: checks, diffs, compiler output --- */
+/* ==========================================================================
+   Result panel: checks, diffs, compiler output
+   ========================================================================== */
 
 .compiler-output {
   white-space: pre-wrap;
-  border-left: 3px solid var(--incorrect-fg);
+  border-left: 3px solid var(--color-error);
 }
 
 .check-block {
-  margin-top: 1rem;
-  padding: 0.75rem 1rem;
-  border-radius: 6px;
-  border: 1px solid var(--border);
+  margin-top: var(--space-4);
+  padding: var(--space-3) var(--space-4);
+  border-radius: var(--radius-sm);
+  border: 1px solid var(--color-border);
 }
 
 .check-block.check-pass {
-  border-color: var(--correct-fg);
-  background: var(--correct-bg);
+  border-color: var(--color-success);
+  background: var(--color-success-bg);
 }
 
 .check-block.check-fail {
-  border-color: var(--incorrect-fg);
-  background: var(--incorrect-bg);
+  border-color: var(--color-error);
+  background: var(--color-error-bg);
 }
 
 .check-header {
   font-weight: 600;
-  margin: 0 0 0.5rem;
+  margin: 0 0 var(--space-2);
 }
 
 .diff-panel {
   display: flex;
-  gap: 1rem;
+  gap: var(--space-4);
   flex-wrap: wrap;
 }
 
@@ -303,48 +671,76 @@ pre {
 }
 
 .diff-column h4 {
-  margin: 0 0 0.25rem;
-  font-size: 0.85rem;
-  color: var(--muted);
+  margin: 0 0 var(--space-1);
+  font-size: var(--fs-sm);
+  color: var(--color-text-muted);
 }
 
 .diff-column pre {
   margin: 0;
-  background: #fff;
+  background: var(--color-bg);
 }
 
 .diff-line {
-  font-family: ui-monospace, SFMono-Regular, Consolas, "Liberation Mono", Menlo, monospace;
+  font-family: var(--font-mono);
   white-space: pre-wrap;
   word-break: break-all;
 }
 
 .diff-line-mismatch {
-  background: var(--incorrect-bg);
-  color: var(--incorrect-fg);
+  background: var(--color-error-bg);
+  color: var(--color-error);
   border-radius: 2px;
 }
 
 .cases-table {
   width: 100%;
   border-collapse: collapse;
-  font-size: 0.9rem;
+  font-size: var(--fs-sm);
 }
 
 .cases-table th,
 .cases-table td {
   text-align: left;
-  padding: 0.3rem 0.5rem;
-  border-bottom: 1px solid var(--border);
-  font-family: ui-monospace, SFMono-Regular, Consolas, "Liberation Mono", Menlo, monospace;
+  padding: var(--space-1) var(--space-2);
+  border-bottom: 1px solid var(--color-border);
+  font-family: var(--font-mono);
 }
 
 .cases-table tr.case-fail td {
-  color: var(--incorrect-fg);
+  color: var(--color-error);
 }
 
 @media (max-width: 640px) {
   .diff-panel {
     flex-direction: column;
+  }
+
+  .site-header {
+    padding: var(--space-3) var(--space-4);
+  }
+
+  main#app {
+    padding: var(--space-4);
+  }
+}
+
+/* Below this width the toggle button's own content (icon + "Dark mode") is wide
+   enough relative to the viewport that no side-padding reservation keeps it clear
+   of a horizontally centered title — stack instead so nothing overlaps. */
+@media (max-width: 420px) {
+  .site-header {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-2);
+  }
+
+  .site-title-slot {
+    padding-inline: 0;
+  }
+
+  .theme-toggle {
+    position: static;
+    transform: none;
   }
 }

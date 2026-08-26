@@ -1,7 +1,6 @@
 import { Marked } from 'marked';
 import hljs from 'highlight.js/lib/core';
 import java from 'highlight.js/lib/languages/java';
-import 'highlight.js/styles/github.css';
 
 hljs.registerLanguage('java', java);
 

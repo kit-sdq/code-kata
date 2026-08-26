@@ -24,7 +24,7 @@ export function renderChoiceView(container: HTMLElement, kata: ChoiceKata): void
   fieldset.appendChild(legend);
 
   options.forEach((opt, i) => {
-    const id = `choice-${kata.id}-${i}`;
+    const id = `choice-${kata.slug}-${i}`;
     const wrapper = document.createElement('div');
     wrapper.className = 'choice-option';
 
@@ -50,7 +50,7 @@ export function renderChoiceView(container: HTMLElement, kata: ChoiceKata): void
   form.appendChild(submit);
   container.appendChild(form);
 
-  const feedback = setupFeedback(container, kata.id, kata.hints);
+  const feedback = setupFeedback(container, kata.slug, kata.hints);
 
   form.addEventListener('submit', (e) => {
     e.preventDefault();

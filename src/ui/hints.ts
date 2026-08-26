@@ -14,12 +14,22 @@ export function setupFeedback(container: HTMLElement, kataId: string, hints: str
 
   const ariaLive = document.createElement('p');
   ariaLive.className = 'feedback';
+  ariaLive.setAttribute('role', 'status');
   ariaLive.setAttribute('aria-live', 'polite');
   container.appendChild(ariaLive);
 
   const hintsSection = document.createElement('div');
   hintsSection.className = 'hints';
   container.appendChild(hintsSection);
+
+  // Separate, persistent live region for hint reveals: hintsSection itself is fully
+  // rebuilt on every reveal (all prior hints + the button), so making it live would
+  // re-announce the whole list each time. This announces only the newly revealed hint.
+  const hintAnnounce = document.createElement('p');
+  hintAnnounce.className = 'sr-only';
+  hintAnnounce.setAttribute('role', 'status');
+  hintAnnounce.setAttribute('aria-live', 'polite');
+  container.appendChild(hintAnnounce);
 
   if (progress.solved) {
     ariaLive.textContent = '✓ Solved';
@@ -42,6 +52,7 @@ export function setupFeedback(container: HTMLElement, kataId: string, hints: str
         progress.hintsRevealed++;
         setProgress(kataId, progress);
         renderHints();
+        hintAnnounce.textContent = `Hint ${progress.hintsRevealed} revealed: ${hints[progress.hintsRevealed - 1]}`;
       });
       hintsSection.appendChild(btn);
     }

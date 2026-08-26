@@ -3,14 +3,42 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="color-scheme" content="light dark" />
+    <script>
+      (function () {
+        try {
+          var stored = localStorage.getItem('theme');
+          var theme =
+            stored === 'light' || stored === 'dark'
+              ? stored
+              : window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches
+                ? 'dark'
+                : 'light';
+          document.documentElement.setAttribute('data-theme', theme);
+        } catch (e) {
+          document.documentElement.setAttribute('data-theme', 'light');
+        }
+      })();
+    </script>
     <title>Java Code Katas</title>
     <link rel="stylesheet" href="/src/styles.css" />
   </head>
   <body>
     <header class="site-header">
-      <h1>Java Code Katas</h1>
+      <span id="site-title-slot" class="site-title-slot"></span>
+      <button id="theme-toggle" class="theme-toggle" type="button" aria-pressed="false">
+        <span class="theme-toggle-icon" aria-hidden="true"></span>
+        <span class="theme-toggle-label">Dark mode</span>
+      </button>
     </header>
     <main id="app"></main>
+    <footer class="site-footer">
+      <p>
+        <a href="https://gitlab.kit.edu/kit/kastel/sdq/lehre/programmieren-vorlesung/revamp2026/code-kata" target="_blank" rel="noopener noreferrer">Source</a>
+        <span aria-hidden="true"> · </span>
+        <span>GPL-3.0-or-later</span>
+      </p>
+    </footer>
     <script type="module" src="/src/main.ts"></script>
   </body>
 </html>

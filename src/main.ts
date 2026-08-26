@@ -1,55 +1,104 @@
 import { getKata, getKatas } from './kata/load.ts';
+import { groupKatas, loadCategories } from './kata/categories.ts';
 import type { Kata } from './kata/types.ts';
 import { renderMarkdown } from './ui/markdown.ts';
 import { renderTextView } from './ui/views/text.ts';
 import { renderChoiceView } from './ui/views/choice.ts';
 import { renderCodeView } from './ui/views/code.ts';
 import { getProgress } from './ui/progress.ts';
+import { initTheme } from './ui/theme.ts';
 
 const app = document.getElementById('app') as HTMLElement;
+const titleSlot = document.getElementById('site-title-slot') as HTMLElement;
+
+const SITE_TITLE = 'Java Code Katas';
+
+/** Front page: header title is the page's h1. Kata page: h1 lives on the kata title in
+ * <main>, so the header title becomes a plain (non-heading) link — one h1 per page. */
+function setHeaderTitle(isHome: boolean): void {
+  titleSlot.innerHTML = isHome
+    ? `<h1 class="site-title"><a href="#/">${SITE_TITLE}</a></h1>`
+    : `<a href="#/" class="site-title">${SITE_TITLE}</a>`;
+}
+
+function renderKataRow(kata: Kata): HTMLElement {
+  const solved = getProgress(kata.slug).solved;
+  const li = document.createElement('li');
+  li.className = 'kata-row';
+
+  const card = document.createElement('a');
+  card.className = 'kata-card';
+  card.href = `#/kata/${kata.slug}`;
+
+  const idBadge = document.createElement('span');
+  idBadge.className = 'kata-id';
+  idBadge.textContent = kata.id;
+  card.appendChild(idBadge);
+
+  const title = document.createElement('span');
+  title.className = 'kata-title';
+  title.textContent = kata.title;
+  card.appendChild(title);
+
+  const meta = document.createElement('span');
+  meta.className = 'kata-meta';
+
+  const difficulty = document.createElement('span');
+  difficulty.className = `difficulty difficulty-${kata.difficulty}`;
+  difficulty.textContent = kata.difficulty;
+  meta.appendChild(difficulty);
+
+  for (const tag of kata.tags) {
+    const tagEl = document.createElement('span');
+    tagEl.className = 'tag';
+    tagEl.textContent = tag;
+    meta.appendChild(tagEl);
+  }
+  card.appendChild(meta);
+
+  if (solved) {
+    const badge = document.createElement('span');
+    badge.className = 'solved-badge';
+    badge.textContent = '✓ Solved';
+    card.appendChild(badge);
+  }
+
+  li.appendChild(card);
+  return li;
+}
 
 function renderListView(): void {
-  const katas = getKatas();
-  const grid = document.createElement('div');
-  grid.className = 'kata-grid';
+  const groups = groupKatas(getKatas(), loadCategories());
+  const wrapper = document.createElement('div');
+  wrapper.className = 'kata-categories';
 
-  for (const kata of katas) {
-    const solved = getProgress(kata.id).solved;
-    const card = document.createElement('a');
-    card.className = 'kata-card';
-    card.href = `#/kata/${kata.id}`;
+  for (const group of groups) {
+    const section = document.createElement('section');
+    section.className = 'category';
 
-    const title = document.createElement('h2');
-    title.textContent = kata.title;
-    if (solved) {
-      const badge = document.createElement('span');
-      badge.className = 'solved-badge';
-      badge.textContent = '✓ Solved';
-      title.appendChild(badge);
+    const heading = document.createElement('h2');
+    heading.textContent = group.category === 'uncategorized' ? 'Uncategorized' : group.category.name;
+    section.appendChild(heading);
+
+    if (group.category !== 'uncategorized' && group.category.description) {
+      const desc = document.createElement('p');
+      desc.className = 'category-description';
+      desc.textContent = group.category.description;
+      section.appendChild(desc);
     }
 
-    const meta = document.createElement('div');
-    meta.className = 'kata-meta';
-
-    const difficulty = document.createElement('span');
-    difficulty.className = `difficulty difficulty-${kata.difficulty}`;
-    difficulty.textContent = kata.difficulty;
-    meta.appendChild(difficulty);
-
-    for (const tag of kata.tags) {
-      const tagEl = document.createElement('span');
-      tagEl.className = 'tag';
-      tagEl.textContent = tag;
-      meta.appendChild(tagEl);
+    const list = document.createElement('ul');
+    list.className = 'kata-list';
+    for (const kata of group.katas) {
+      list.appendChild(renderKataRow(kata));
     }
+    section.appendChild(list);
 
-    card.appendChild(title);
-    card.appendChild(meta);
-    grid.appendChild(card);
+    wrapper.appendChild(section);
   }
 
   app.innerHTML = '';
-  app.appendChild(grid);
+  app.appendChild(wrapper);
 }
 
 function renderTaskView(kata: Kata): void {
@@ -61,7 +110,8 @@ function renderTaskView(kata: Kata): void {
   back.textContent = '← All katas';
   app.appendChild(back);
 
-  const header = document.createElement('h2');
+  const header = document.createElement('h1');
+  header.className = 'kata-title-heading';
   header.textContent = kata.title;
   app.appendChild(header);
 
@@ -79,16 +129,17 @@ function renderTaskView(kata: Kata): void {
   else renderCodeView(answerSection, kata);
 }
 
-function renderNotFound(id: string): void {
+function renderNotFound(slug: string): void {
   app.innerHTML = '';
   const p = document.createElement('p');
-  p.textContent = `Kata "${id}" not found.`;
+  p.textContent = `Kata "${slug}" not found.`;
   app.appendChild(p);
 }
 
 function route(): void {
   const hash = location.hash;
   const kataMatch = hash.match(/^#\/kata\/(.+)$/);
+  setHeaderTitle(!kataMatch);
   if (kataMatch) {
     const kata = getKata(decodeURIComponent(kataMatch[1]));
     if (kata) renderTaskView(kata);
@@ -98,5 +149,6 @@ function route(): void {
   renderListView();
 }
 
+initTheme();
 window.addEventListener('hashchange', route);
 route();

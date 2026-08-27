@@ -212,6 +212,39 @@ public class Main {
     ]);
   });
 
+  it('parses stdin and label on stdout checks, and supports multiple stdout checks', () => {
+    const raw = `---
+id: 1
+category: basics
+title: Sum two ints
+type: code
+difficulty: easy
+allowedImports: [java.util.Scanner]
+checks:
+  - type: stdout
+    label: small numbers
+    stdin: "1 2\\n"
+    expected: |
+      3
+  - type: stdout
+    expected: |
+      30
+---
+Body.
+
+\`\`\`java template
+public class Main {
+    public static void main(String[] args) {}
+}
+\`\`\`
+`;
+    const k = parseKata(raw, 'sum-stdin') as CodeKata;
+    expect(k.checks).toEqual([
+      { type: 'stdout', label: 'small numbers', stdin: '1 2\n', expected: '3\n' },
+      { type: 'stdout', expected: '30\n' },
+    ]);
+  });
+
   it('throws when a code kata has no template', () => {
     const raw = `---
 id: 1

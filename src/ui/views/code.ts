@@ -173,19 +173,36 @@ function renderVerdict(container: HTMLElement, verdict: Verdict): void {
   summary.textContent = verdict.solved ? '✓ All checks passed!' : '✗ Some checks failed.';
   container.appendChild(summary);
 
+  const stdoutTotal = verdict.checks.filter((c) => c.type === 'stdout').length;
+  let stdoutIdx = 0;
   for (const outcome of verdict.checks) {
-    container.appendChild(outcome.type === 'stdout' ? renderStdoutCheck(outcome) : renderReturnCheck(outcome));
+    container.appendChild(
+      outcome.type === 'stdout' ? renderStdoutCheck(outcome, ++stdoutIdx, stdoutTotal) : renderReturnCheck(outcome),
+    );
   }
 }
 
-function renderStdoutCheck(outcome: Extract<CheckOutcome, { type: 'stdout' }>): HTMLElement {
+function renderStdoutCheck(outcome: Extract<CheckOutcome, { type: 'stdout' }>, caseNum: number, total: number): HTMLElement {
   const wrap = document.createElement('div');
   wrap.className = `check-block ${outcome.pass ? 'check-pass' : 'check-fail'}`;
 
+  const label = outcome.label ?? (total > 1 ? `Case ${caseNum}` : undefined);
   const header = document.createElement('p');
   header.className = 'check-header';
-  header.textContent = outcome.pass ? '✓ Output matches' : '✗ Output does not match';
+  header.textContent = label
+    ? `${outcome.pass ? '✓' : '✗'} ${label}: ${outcome.pass ? 'output matches' : 'output does not match'}`
+    : outcome.pass ? '✓ Output matches' : '✗ Output does not match';
   wrap.appendChild(header);
+
+  if (outcome.stdin) {
+    const stdinHeading = document.createElement('h4');
+    stdinHeading.textContent = 'Input';
+    wrap.appendChild(stdinHeading);
+    const stdinPre = document.createElement('pre');
+    stdinPre.className = 'stdin-panel';
+    stdinPre.textContent = outcome.stdin;
+    wrap.appendChild(stdinPre);
+  }
 
   if (!outcome.pass) {
     const expectedLines = outcome.expected.split('\n');

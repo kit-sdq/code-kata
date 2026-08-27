@@ -8,8 +8,15 @@
 // target parameter/return types.
 import type { Check, JavaValue } from '../kata/types.ts';
 
-export const OUT_BEGIN = '___KATA_OUT_BEGIN___';
-export const OUT_END = '___KATA_OUT_END___';
+// One indexed BEGIN/END pair per stdout check (index = position among stdout checks only, in
+// kata order), so each check's stdin/output stays isolated instead of one block for the whole
+// run. DONE is an unconditional marker printed after the try/catch/finally completes, so the
+// worker (public/sandbox-worker.js) can tell "ran to the print stage" apart from "crashed before
+// printing anything" even for a kata with zero stdout checks (which then has zero BEGIN/END pairs).
+export const OUT_BEGIN_PREFIX = '___KATA_OUT_BEGIN_';
+export const OUT_END_PREFIX = '___KATA_OUT_END_';
+export const OUT_SUFFIX = '___';
+export const DONE = '___KATA_DONE___';
 export const RET_PREFIX = '___KATA_RET___';
 export const ERR_PREFIX = '___KATA_ERR___';
 
@@ -127,9 +134,18 @@ function indent(lines: string[], depth: number): string {
 /** Generates the full source of `KataRunner.java` for the given main class and checks. */
 export function generateHarness(mainClass: string, checks: Check[]): string {
   const body: string[] = [];
+  let stdoutIdx = 0;
   for (const check of checks) {
     if (check.type === 'stdout') {
-      body.push(`${mainClass}.main(new String[0]);`);
+      const k = stdoutIdx++;
+      const stdinLiteral = javaStringLiteral(check.stdin ?? '');
+      body.push(
+        `ByteArrayOutputStream buf${k} = new ByteArrayOutputStream();`,
+        `System.setOut(new PrintStream(buf${k}, true, "UTF-8"));`,
+        `System.setIn(new ByteArrayInputStream(${stdinLiteral}.getBytes("UTF-8")));`,
+        `${mainClass}.main(new String[0]);`,
+        `outs.add(buf${k}.toByteArray());`,
+      );
     } else {
       for (const kase of check.cases) {
         const args = kase.args.map((a, i) => literalForArg(a, check.cases.map((c) => c.args[i])));
@@ -143,24 +159,28 @@ import java.util.*;
 
 public class KataRunner {
     public static void main(String[] args) throws Exception {
+        Locale.setDefault(Locale.ROOT);
         PrintStream real = System.out;
-        ByteArrayOutputStream buf = new ByteArrayOutputStream();
-        PrintStream captured = new PrintStream(buf, true, "UTF-8");
+        InputStream realIn = System.in;
         List<String> rets = new ArrayList<String>();
+        List<byte[]> outs = new ArrayList<byte[]>();
         String errMsg = null;
         try {
-            System.setOut(captured);
 ${indent(body, 3)}
         } catch (Throwable t) {
             StackTraceElement[] st = t.getStackTrace();
             errMsg = t.toString() + (st.length > 0 ? (" at " + st[0]) : "");
         } finally {
             System.setOut(real);
+            System.setIn(realIn);
         }
-        real.println("${OUT_BEGIN}");
-        real.print(buf.toString("UTF-8"));
-        real.println();
-        real.println("${OUT_END}");
+        real.println("${DONE}");
+        for (int i = 0; i < outs.size(); i++) {
+            real.println("${OUT_BEGIN_PREFIX}" + i + "${OUT_SUFFIX}");
+            real.print(new String(outs.get(i), "UTF-8"));
+            real.println();
+            real.println("${OUT_END_PREFIX}" + i + "${OUT_SUFFIX}");
+        }
         for (String r : rets) real.println("${RET_PREFIX}" + r);
         if (errMsg != null) real.println("${ERR_PREFIX}" + errMsg);
     }

@@ -1,16 +1,59 @@
 import { describe, expect, it } from 'vitest';
-import { generateHarness, OUT_BEGIN, OUT_END, RET_PREFIX, ERR_PREFIX } from '../src/runner/harness.ts';
+import {
+  generateHarness,
+  OUT_BEGIN_PREFIX,
+  OUT_END_PREFIX,
+  OUT_SUFFIX,
+  DONE,
+  RET_PREFIX,
+  ERR_PREFIX,
+} from '../src/runner/harness.ts';
 import type { Check } from '../src/kata/types.ts';
 
 describe('generateHarness', () => {
-  it('emits Main.main(new String[0]) for a stdout check and the output sentinels', () => {
+  it('emits Main.main(new String[0]) for a stdout check and the indexed output sentinels', () => {
     const src = generateHarness('Main', [{ type: 'stdout', expected: 'x' }]);
     expect(src).toContain('Main.main(new String[0]);');
-    expect(src).toContain(OUT_BEGIN);
-    expect(src).toContain(OUT_END);
+    expect(src).toContain(`${OUT_BEGIN_PREFIX}" + i + "${OUT_SUFFIX}`);
+    expect(src).toContain(`${OUT_END_PREFIX}" + i + "${OUT_SUFFIX}`);
+    expect(src).toContain(DONE);
     expect(src).toContain(RET_PREFIX);
     expect(src).toContain(ERR_PREFIX);
     expect(src).toContain('public class KataRunner');
+  });
+
+  it('sets Locale.setDefault(Locale.ROOT) at harness start for deterministic printf formatting', () => {
+    const src = generateHarness('Main', [{ type: 'stdout', expected: 'x' }]);
+    expect(src).toContain('Locale.setDefault(Locale.ROOT);');
+  });
+
+  it('redirects System.in to an empty stream when a stdout check has no stdin', () => {
+    const src = generateHarness('Main', [{ type: 'stdout', expected: 'x' }]);
+    expect(src).toContain('System.setIn(new ByteArrayInputStream("".getBytes("UTF-8")));');
+  });
+
+  it('feeds each stdout check its own stdin bytes, escaping newlines/quotes/umlauts', () => {
+    const checks: Check[] = [
+      { type: 'stdout', expected: 'a', stdin: '3\n4' },
+      { type: 'stdout', expected: 'b', stdin: 'sag "hü"' },
+    ];
+    const src = generateHarness('Main', checks);
+    expect(src).toContain('System.setIn(new ByteArrayInputStream("3\\n4".getBytes("UTF-8")));');
+    expect(src).toContain('System.setIn(new ByteArrayInputStream("sag \\"h\\u00fc\\"".getBytes("UTF-8")));');
+  });
+
+  it('runs Main.main once per stdout check with per-check buffers appended in order', () => {
+    const checks: Check[] = [
+      { type: 'stdout', expected: 'a', stdin: 'x' },
+      { type: 'stdout', expected: 'b', stdin: 'y' },
+    ];
+    const src = generateHarness('Main', checks);
+    expect(src).toContain('ByteArrayOutputStream buf0 = new ByteArrayOutputStream();');
+    expect(src).toContain('ByteArrayOutputStream buf1 = new ByteArrayOutputStream();');
+    const firstOut = src.indexOf('outs.add(buf0.toByteArray());');
+    const secondOut = src.indexOf('outs.add(buf1.toByteArray());');
+    expect(firstOut).toBeGreaterThan(-1);
+    expect(secondOut).toBeGreaterThan(firstOut);
   });
 
   it('generates a typed method call for a return check', () => {

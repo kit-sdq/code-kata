@@ -14,7 +14,7 @@ export interface ReturnCaseOutcome {
 }
 
 export type CheckOutcome =
-  | { type: 'stdout'; pass: boolean; expected: string; actual: string }
+  | { type: 'stdout'; pass: boolean; expected: string; actual: string; stdin?: string; label?: string }
   | { type: 'return'; pass: boolean; method: string; cases: ReturnCaseOutcome[] };
 
 export interface Verdict {
@@ -90,11 +90,20 @@ export function verifyResult(result: RunResult, kata: CodeKata): Verdict {
 
   const checks: CheckOutcome[] = [];
   let returnIdx = 0;
+  let stdoutIdx = 0;
   for (const check of kata.checks) {
     if (check.type === 'stdout') {
       const expected = normalizeStdout(check.expected);
-      const actual = normalizeStdout(result.stdout);
-      checks.push({ type: 'stdout', pass: expected === actual, expected, actual });
+      const raw = result.stdouts[stdoutIdx++];
+      const actual = normalizeStdout(raw ?? '');
+      checks.push({
+        type: 'stdout',
+        pass: raw !== undefined && expected === actual,
+        expected,
+        actual,
+        stdin: check.stdin,
+        label: check.label,
+      });
     } else {
       const cases = check.cases.map((c) => {
         const raw = result.returns[returnIdx++];

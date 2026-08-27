@@ -24,7 +24,7 @@ export interface ResultMessage {
   type: 'result';
   requestId: string;
   result:
-    | { status: 'ok'; stdout: string; returns: { json: string }[] }
+    | { status: 'ok'; stdouts: string[]; returns: { json: string }[] }
     | { status: 'compile-error' | 'runtime-error' | 'error'; message: string }
     | { status: 'timeout' }
     | { status: 'stopped' };

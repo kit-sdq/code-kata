@@ -13,8 +13,12 @@
 // own console shows the Java program's println output). We intercept those to capture it.
 importScripts('https://cjrtnc.leaningtech.com/4.3/loader.js');
 
-const OUT_BEGIN = '___KATA_OUT_BEGIN___';
-const OUT_END = '___KATA_OUT_END___';
+// Keep these in sync with src/runner/harness.ts (this file is a plain static asset, not built
+// by Vite/TS, so the sentinel strings are duplicated by hand rather than imported).
+const OUT_BEGIN_PREFIX = '___KATA_OUT_BEGIN_';
+const OUT_END_PREFIX = '___KATA_OUT_END_';
+const OUT_SUFFIX = '___';
+const DONE = '___KATA_DONE___';
 const RET_PREFIX = '___KATA_RET___';
 const ERR_PREFIX = '___KATA_ERR___';
 const CLASSPATH = '/app/tools.jar:/files/';
@@ -70,15 +74,21 @@ self.onmessage = async (event) => {
       return;
     }
 
-    const beginIdx = out.indexOf(OUT_BEGIN);
-    const endIdx = out.indexOf(OUT_END);
-    let stdout = '';
-    if (beginIdx !== -1 && endIdx !== -1) {
-      // Strip *all* leading/trailing blank lines, not just one: CheerpJ's console bridge can
-      // flush print() vs println() into a different number of underlying writes than Java calls
-      // made, so the exact newline count around the captured block isn't reliable — only the
-      // sentinel positions are.
-      stdout = out.slice(beginIdx + OUT_BEGIN.length, endIdx).replace(/^\n+/, '').replace(/\n+$/, '');
+    const doneIdx = out.indexOf(DONE);
+    const stdouts = [];
+    if (doneIdx !== -1) {
+      for (let i = 0; ; i++) {
+        const beginTag = OUT_BEGIN_PREFIX + i + OUT_SUFFIX;
+        const endTag = OUT_END_PREFIX + i + OUT_SUFFIX;
+        const b = out.indexOf(beginTag);
+        const e = out.indexOf(endTag);
+        if (b === -1 || e === -1) break;
+        // Strip *all* leading/trailing blank lines, not just one: CheerpJ's console bridge can
+        // flush print() vs println() into a different number of underlying writes than Java calls
+        // made, so the exact newline count around the captured block isn't reliable — only the
+        // sentinel positions are.
+        stdouts.push(out.slice(b + beginTag.length, e).replace(/^\n+/, '').replace(/\n+$/, ''));
+      }
     }
 
     const returns = [];
@@ -86,12 +96,12 @@ self.onmessage = async (event) => {
     let m;
     while ((m = retRe.exec(out)) !== null) returns.push({ json: m[1] });
 
-    if (runExit !== 0 && beginIdx === -1) {
+    if (runExit !== 0 && doneIdx === -1) {
       postMessage({ type: 'result', result: { status: 'runtime-error', message: out.trim() || 'Program exited with code ' + runExit } });
       return;
     }
 
-    postMessage({ type: 'result', result: { status: 'ok', stdout, returns } });
+    postMessage({ type: 'result', result: { status: 'ok', stdouts, returns } });
   } catch (e) {
     postMessage({ type: 'result', result: { status: 'error', message: String((e && e.message) || e) } });
   }

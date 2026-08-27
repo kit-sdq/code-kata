@@ -15,7 +15,7 @@ export type JavaValue =
   | JavaValue[]
   | { type: 'long' | 'float' | 'char' | 'double' | 'int'; value: number | string };
 export type Check =
-  | { type: 'stdout'; expected: string }
+  | { type: 'stdout'; expected: string; stdin?: string; label?: string }
   | { type: 'return'; method: string; cases: { args: JavaValue[]; expected: JavaValue }[] };
 export interface CodeKata extends KataBase {
   type: 'code'; mainClass: string; allowedImports: string[];

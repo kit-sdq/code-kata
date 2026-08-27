@@ -116,7 +116,16 @@ function parseChecks(raw: unknown, id: string): Check[] {
     const check = c as Record<string, unknown>;
     if (check.type === 'stdout') {
       if (typeof check.expected !== 'string') throw new Error(`${id}: stdout check ${i} requires "expected" (string)`);
-      return { type: 'stdout', expected: check.expected };
+      if (check.stdin !== undefined && typeof check.stdin !== 'string') {
+        throw new Error(`${id}: stdout check ${i} "stdin" must be a string`);
+      }
+      if (check.label !== undefined && typeof check.label !== 'string') {
+        throw new Error(`${id}: stdout check ${i} "label" must be a string`);
+      }
+      const result: Check = { type: 'stdout', expected: check.expected };
+      if (check.stdin !== undefined) result.stdin = check.stdin;
+      if (check.label !== undefined) result.label = check.label;
+      return result;
     }
     if (check.type === 'return') {
       if (typeof check.method !== 'string' || !check.method) {

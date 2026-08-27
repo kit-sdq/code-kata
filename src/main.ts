@@ -17,6 +17,8 @@ const LEFT_ARROW_ICON =
   '<svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="19" y1="12" x2="5" y2="12"/><polyline points="12 19 5 12 12 5"/></svg>';
 const RIGHT_ARROW_ICON =
   '<svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>';
+const OVERVIEW_ICON =
+  '<svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="3" width="8" height="8" rx="1"/><rect x="13" y="3" width="8" height="8" rx="1"/><rect x="3" y="13" width="8" height="8" rx="1"/><rect x="13" y="13" width="8" height="8" rx="1"/></svg>';
 
 /** Flat kata order matching the front page (categories in designer order, katas by
  * compareIds within each, uncategorized last). Used to find the "next kata" link. */
@@ -118,16 +120,31 @@ function renderTaskView(kata: Kata): void {
   const nav = document.createElement('div');
   nav.className = 'kata-nav';
 
-  const back = document.createElement('a');
-  back.href = '#/';
-  back.className = 'icon-link';
-  back.setAttribute('aria-label', 'Back to all katas');
-  back.setAttribute('title', 'Back to all katas');
-  back.innerHTML = LEFT_ARROW_ICON;
-  nav.appendChild(back);
-
   const ordered = getOrderedKatas();
-  const next = ordered[ordered.findIndex((k) => k.slug === kata.slug) + 1];
+  const index = ordered.findIndex((k) => k.slug === kata.slug);
+  const prev = ordered[index - 1];
+  const next = ordered[index + 1];
+
+  if (prev) {
+    const prevLink = document.createElement('a');
+    prevLink.href = `#/kata/${prev.slug}`;
+    prevLink.className = 'icon-link';
+    prevLink.setAttribute('aria-label', `Previous kata: ${prev.title}`);
+    prevLink.setAttribute('title', `Previous kata: ${prev.title}`);
+    prevLink.innerHTML = LEFT_ARROW_ICON;
+    nav.appendChild(prevLink);
+  } else {
+    nav.appendChild(document.createElement('span'));
+  }
+
+  const overview = document.createElement('a');
+  overview.href = '#/';
+  overview.className = 'icon-link';
+  overview.setAttribute('aria-label', 'All katas');
+  overview.setAttribute('title', 'All katas');
+  overview.innerHTML = OVERVIEW_ICON;
+  nav.appendChild(overview);
+
   if (next) {
     const nextLink = document.createElement('a');
     nextLink.href = `#/kata/${next.slug}`;
@@ -136,6 +153,8 @@ function renderTaskView(kata: Kata): void {
     nextLink.setAttribute('title', `Next kata: ${next.title}`);
     nextLink.innerHTML = RIGHT_ARROW_ICON;
     nav.appendChild(nextLink);
+  } else {
+    nav.appendChild(document.createElement('span'));
   }
 
   app.appendChild(nav);

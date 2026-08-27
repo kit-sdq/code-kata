@@ -13,6 +13,17 @@ const titleSlot = document.getElementById('site-title-slot') as HTMLElement;
 
 const SITE_TITLE = 'Java Code Katas';
 
+const LEFT_ARROW_ICON =
+  '<svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="19" y1="12" x2="5" y2="12"/><polyline points="12 19 5 12 12 5"/></svg>';
+const RIGHT_ARROW_ICON =
+  '<svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>';
+
+/** Flat kata order matching the front page (categories in designer order, katas by
+ * compareIds within each, uncategorized last). Used to find the "next kata" link. */
+function getOrderedKatas(): Kata[] {
+  return groupKatas(getKatas(), loadCategories()).flatMap((group) => group.katas);
+}
+
 /** Front page: header title is the page's h1. Kata page: h1 lives on the kata title in
  * <main>, so the header title becomes a plain (non-heading) link — one h1 per page. */
 function setHeaderTitle(isHome: boolean): void {
@@ -104,11 +115,30 @@ function renderListView(): void {
 function renderTaskView(kata: Kata): void {
   app.innerHTML = '';
 
+  const nav = document.createElement('div');
+  nav.className = 'kata-nav';
+
   const back = document.createElement('a');
   back.href = '#/';
-  back.className = 'back-link';
-  back.textContent = '← All katas';
-  app.appendChild(back);
+  back.className = 'icon-link';
+  back.setAttribute('aria-label', 'Back to all katas');
+  back.setAttribute('title', 'Back to all katas');
+  back.innerHTML = LEFT_ARROW_ICON;
+  nav.appendChild(back);
+
+  const ordered = getOrderedKatas();
+  const next = ordered[ordered.findIndex((k) => k.slug === kata.slug) + 1];
+  if (next) {
+    const nextLink = document.createElement('a');
+    nextLink.href = `#/kata/${next.slug}`;
+    nextLink.className = 'icon-link';
+    nextLink.setAttribute('aria-label', `Next kata: ${next.title}`);
+    nextLink.setAttribute('title', `Next kata: ${next.title}`);
+    nextLink.innerHTML = RIGHT_ARROW_ICON;
+    nav.appendChild(nextLink);
+  }
+
+  app.appendChild(nav);
 
   const header = document.createElement('h1');
   header.className = 'kata-title-heading';

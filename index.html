@@ -26,14 +26,17 @@
   <body>
     <header class="site-header">
       <span id="site-title-slot" class="site-title-slot"></span>
-      <button id="theme-toggle" class="theme-toggle" type="button" aria-pressed="false">
-        <span class="theme-toggle-icon" aria-hidden="true"></span>
-      </button>
+      <div class="header-actions">
+        <button id="lang-toggle" class="lang-toggle" type="button"></button>
+        <button id="theme-toggle" class="theme-toggle" type="button" aria-pressed="false">
+          <span class="theme-toggle-icon" aria-hidden="true"></span>
+        </button>
+      </div>
     </header>
     <main id="app"></main>
     <footer class="site-footer">
       <p>
-        <a href="https://gitlab.kit.edu/kit/kastel/sdq/lehre/programmieren-vorlesung/revamp2026/code-kata" target="_blank" rel="noopener noreferrer">Source</a>
+        <a id="footer-source-link" href="https://gitlab.kit.edu/kit/kastel/sdq/lehre/programmieren-vorlesung/revamp2026/code-kata" target="_blank" rel="noopener noreferrer"></a>
         <span aria-hidden="true"> · </span>
         <span>GPL-3.0-or-later</span>
       </p>

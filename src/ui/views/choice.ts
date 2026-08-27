@@ -1,6 +1,7 @@
 import type { ChoiceKata } from '../../kata/types.ts';
 import { renderInline } from '../markdown.ts';
 import { setupFeedback } from '../hints.ts';
+import { t } from '../i18n.ts';
 
 function shuffled<T>(items: T[]): T[] {
   const arr = items.slice();
@@ -20,7 +21,7 @@ export function renderChoiceView(container: HTMLElement, kata: ChoiceKata): void
 
   const fieldset = document.createElement('fieldset');
   const legend = document.createElement('legend');
-  legend.textContent = kata.multiple ? 'Select all that apply' : 'Select one';
+  legend.textContent = kata.multiple ? t('selectAll') : t('selectOne');
   fieldset.appendChild(legend);
 
   options.forEach((opt, i) => {
@@ -46,7 +47,7 @@ export function renderChoiceView(container: HTMLElement, kata: ChoiceKata): void
   form.appendChild(fieldset);
   const submit = document.createElement('button');
   submit.type = 'submit';
-  submit.textContent = 'Submit';
+  submit.textContent = t('submit');
   form.appendChild(submit);
   container.appendChild(form);
 

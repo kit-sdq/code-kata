@@ -1,3 +1,5 @@
+import { t, onLangChange } from './i18n.ts';
+
 type Theme = 'light' | 'dark';
 
 const STORAGE_KEY = 'theme';
@@ -18,10 +20,13 @@ const SUN_ICON =
 const MOON_ICON =
   '<svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"/></svg>';
 
+let activeTheme: Theme = 'light';
+
 function apply(theme: Theme, toggle: HTMLButtonElement): void {
+  activeTheme = theme;
   document.documentElement.setAttribute('data-theme', theme);
   toggle.setAttribute('aria-pressed', String(theme === 'dark'));
-  const label = theme === 'dark' ? 'Switch to light mode' : 'Switch to dark mode';
+  const label = theme === 'dark' ? t('theme.toLight') : t('theme.toDark');
   toggle.setAttribute('aria-label', label);
   toggle.setAttribute('title', label);
   const icon = toggle.querySelector('.theme-toggle-icon');
@@ -48,4 +53,6 @@ export function initTheme(): void {
     if (getStored()) return;
     apply(e.matches ? 'dark' : 'light', toggle);
   });
+
+  onLangChange(() => apply(activeTheme, toggle));
 }

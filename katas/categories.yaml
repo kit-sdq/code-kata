@@ -1,28 +1,56 @@
 - id: 01-java-verwenden
-  name: "Java verwenden"
-  description: "Installation, Kompilieren und Ausführen von Java-Programmen mit javac und java."
+  name:
+    de: "Java verwenden"
+    en: "Using Java"
+  description:
+    de: "Installation, Kompilieren und Ausführen von Java-Programmen mit javac und java."
+    en: "Installing, compiling, and running Java programs with javac and java."
   order: 1
 - id: 02-datentypen-variablen
-  name: "Datentypen und Variablen"
-  description: "Primitive Datentypen, String, Variablen und Zuweisungen."
+  name:
+    de: "Datentypen und Variablen"
+    en: "Data Types and Variables"
+  description:
+    de: "Primitive Datentypen, String, Variablen und Zuweisungen."
+    en: "Primitive data types, String, variables, and assignments."
   order: 2
 - id: 03-ein-ausgabe
-  name: "Ein- und Ausgabe"
-  description: "Konsolenausgabe mit System.out und Eingaben mit Scanner."
+  name:
+    de: "Ein- und Ausgabe"
+    en: "Input and Output"
+  description:
+    de: "Konsolenausgabe mit System.out und Eingaben mit Scanner."
+    en: "Console output with System.out and input with Scanner."
   order: 3
 - id: 04-operatoren-ausdruecke
-  name: "Operatoren und Ausdrücke"
-  description: "Operatoren, Ausdrücke, Prioritäten und Typumwandlung."
+  name:
+    de: "Operatoren und Ausdrücke"
+    en: "Operators and Expressions"
+  description:
+    de: "Operatoren, Ausdrücke, Prioritäten und Typumwandlung."
+    en: "Operators, expressions, precedence, and type conversion."
   order: 4
 - id: 05-kontrollfluss-schleifen
-  name: "Kontrollfluss und Schleifen"
-  description: "if/else, switch, Schleifen, break und continue."
+  name:
+    de: "Kontrollfluss und Schleifen"
+    en: "Control Flow and Loops"
+  description:
+    de: "if/else, switch, Schleifen, break und continue."
+    en: "if/else, switch, loops, break, and continue."
   order: 5
 - id: 06-funktionen-rekursion
-  name: "Funktionen und Rekursion"
-  description: "Funktionen, Parameter, Rückgabewerte und rekursive Funktionen."
+  name:
+    de: "Funktionen und Rekursion"
+    en: "Functions and Recursion"
+  description:
+    de: "Funktionen, Parameter, Rückgabewerte und rekursive Funktionen."
+    en: "Functions, parameters, return values, and recursive functions."
   order: 6
 - id: 07-git
-  name: "Git"
-  description: "Versionsverwaltung mit Git: Grundlagen und typische Arbeitsabläufe."
+  name:
+    de: "Git"
+    en: "Git"
+  description:
+    de: "Versionsverwaltung mit Git: Grundlagen und typische Arbeitsabläufe."
+    en: "Version control with Git: basics and typical workflows."
   order: 7

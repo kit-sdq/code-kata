@@ -1,9 +1,28 @@
 import yaml from 'js-yaml';
-import type { Category, Kata } from './types.ts';
+import type { Category, Kata, Lang, Localized } from './types.ts';
 
 const modules = import.meta.glob('../../katas/categories.yaml', { query: '?raw', import: 'default', eager: true }) as Record<string, string>;
 
 export interface KataGroup { category: Category | 'uncategorized'; katas: Kata[] }
+
+/** A category's `name`/`description` is either a plain string (all languages) or a
+ * `{de, en}` map. Throws if `value` is neither. */
+function parseLocalized(value: unknown, field: string, i: number): Localized {
+  if (typeof value === 'string' && value) return value;
+  if (typeof value === 'object' && value !== null) {
+    const v = value as Record<string, unknown>;
+    if (typeof v.de === 'string' && v.de && typeof v.en === 'string' && v.en) {
+      return { de: v.de, en: v.en };
+    }
+  }
+  throw new Error(`category ${i}: "${field}" must be a string or a {de, en} map`);
+}
+
+/** Resolves a Localized value to a plain string for `lang` (plain strings are used as-is
+ * for every language). */
+export function resolveLocalized(value: Localized, lang: Lang): string {
+  return typeof value === 'string' ? value : value[lang];
+}
 
 /** Loads katas/categories.yaml, sorted by `order`. Malformed manifest → console.error + []. */
 export function loadCategories(): Category[] {
@@ -19,10 +38,10 @@ export function loadCategories(): Category[] {
       if (typeof entry !== 'object' || entry === null) throw new Error(`category ${i} malformed`);
       const c = entry as Record<string, unknown>;
       if (typeof c.id !== 'string' || !c.id) throw new Error(`category ${i}: missing "id"`);
-      if (typeof c.name !== 'string' || !c.name) throw new Error(`category ${i}: missing "name"`);
+      if (c.name === undefined) throw new Error(`category ${i}: missing "name"`);
       if (typeof c.order !== 'number') throw new Error(`category ${i}: missing "order"`);
-      const category: Category = { id: c.id, name: c.name, order: c.order };
-      if (typeof c.description === 'string') category.description = c.description;
+      const category: Category = { id: c.id, name: parseLocalized(c.name, 'name', i), order: c.order };
+      if (c.description !== undefined) category.description = parseLocalized(c.description, 'description', i);
       return category;
     });
     return categories.sort((a, b) => a.order - b.order);

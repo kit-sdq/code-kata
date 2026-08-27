@@ -188,6 +188,7 @@ a.site-title:hover {
 }
 
 .theme-toggle,
+.lang-toggle,
 .icon-link {
   display: inline-flex;
   align-items: center;
@@ -201,16 +202,25 @@ a.site-title:hover {
 }
 
 .theme-toggle:hover,
+.lang-toggle:hover,
 .icon-link:hover {
   background: var(--color-surface);
   color: var(--color-text);
 }
 
-.theme-toggle {
+.lang-toggle {
+  font-size: var(--fs-sm);
+  font-weight: 700;
+}
+
+.header-actions {
   position: absolute;
   top: 50%;
   right: var(--space-5);
   transform: translateY(-50%);
+  display: flex;
+  align-items: center;
+  gap: var(--space-1);
 }
 
 .theme-toggle-icon {
@@ -445,6 +455,13 @@ legend {
 
 .kata-body {
   margin-bottom: var(--space-5);
+}
+
+.lang-fallback-note {
+  color: var(--color-text-muted);
+  font-size: var(--fs-sm);
+  font-style: italic;
+  margin: 0 0 var(--space-4);
 }
 
 .kata-answer {
@@ -778,8 +795,9 @@ pre code {
     padding-inline: 0;
   }
 
-  .theme-toggle {
+  .header-actions {
     position: static;
     transform: none;
+    justify-content: center;
   }
 }

@@ -1,10 +1,13 @@
 export type Difficulty = 'easy' | 'medium' | 'hard';
+export type Lang = 'de' | 'en';
+export type Localized = string | { de: string; en: string };
 export interface Match { mode: 'normalized' | 'exact' | 'regex'; caseSensitive: boolean }
 export interface KataBase {
   slug: string; id: string; category: string; title: string; difficulty: Difficulty; tags: string[];
   hints: string[]; body: string;           // markdown, template block removed
+  langFallback?: boolean;                  // true when shown in a language the kata has no file for
 }
-export interface Category { id: string; name: string; description?: string; order: number }
+export interface Category { id: string; name: Localized; description?: Localized; order: number }
 export interface TextKata extends KataBase { type: 'text'; answers: string[]; match: Match }
 export interface ChoiceKata extends KataBase {
   type: 'choice'; multiple: boolean; shuffle: boolean;

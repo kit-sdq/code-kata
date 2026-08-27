@@ -1,5 +1,5 @@
 import { getKata, getKatas } from './kata/load.ts';
-import { groupKatas, loadCategories } from './kata/categories.ts';
+import { groupKatas, loadCategories, resolveLocalized } from './kata/categories.ts';
 import type { Kata } from './kata/types.ts';
 import { renderMarkdown } from './ui/markdown.ts';
 import { renderTextView } from './ui/views/text.ts';
@@ -7,6 +7,7 @@ import { renderChoiceView } from './ui/views/choice.ts';
 import { renderCodeView } from './ui/views/code.ts';
 import { getProgress } from './ui/progress.ts';
 import { initTheme } from './ui/theme.ts';
+import { getLang, initLangToggle, onLangChange, t } from './ui/i18n.ts';
 
 const app = document.getElementById('app') as HTMLElement;
 const titleSlot = document.getElementById('site-title-slot') as HTMLElement;
@@ -58,7 +59,7 @@ function renderKataRow(kata: Kata): HTMLElement {
 
   const difficulty = document.createElement('span');
   difficulty.className = `difficulty difficulty-${kata.difficulty}`;
-  difficulty.textContent = kata.difficulty;
+  difficulty.textContent = t(`difficulty.${kata.difficulty}`);
   meta.appendChild(difficulty);
 
   for (const tag of kata.tags) {
@@ -72,7 +73,7 @@ function renderKataRow(kata: Kata): HTMLElement {
   if (solved) {
     const badge = document.createElement('span');
     badge.className = 'solved-badge';
-    badge.textContent = '✓ Solved';
+    badge.textContent = t('solvedBadge');
     card.appendChild(badge);
   }
 
@@ -89,14 +90,15 @@ function renderListView(): void {
     const section = document.createElement('section');
     section.className = 'category';
 
+    const lang = getLang();
     const heading = document.createElement('h2');
-    heading.textContent = group.category === 'uncategorized' ? 'Uncategorized' : group.category.name;
+    heading.textContent = group.category === 'uncategorized' ? t('uncategorized') : resolveLocalized(group.category.name, lang);
     section.appendChild(heading);
 
     if (group.category !== 'uncategorized' && group.category.description) {
       const desc = document.createElement('p');
       desc.className = 'category-description';
-      desc.textContent = group.category.description;
+      desc.textContent = resolveLocalized(group.category.description, lang);
       section.appendChild(desc);
     }
 
@@ -129,8 +131,8 @@ function renderTaskView(kata: Kata): void {
     const prevLink = document.createElement('a');
     prevLink.href = `#/kata/${prev.slug}`;
     prevLink.className = 'icon-link';
-    prevLink.setAttribute('aria-label', `Previous kata: ${prev.title}`);
-    prevLink.setAttribute('title', `Previous kata: ${prev.title}`);
+    prevLink.setAttribute('aria-label', `${t('nav.previous')}: ${prev.title}`);
+    prevLink.setAttribute('title', `${t('nav.previous')}: ${prev.title}`);
     prevLink.innerHTML = LEFT_ARROW_ICON;
     nav.appendChild(prevLink);
   } else {
@@ -140,8 +142,8 @@ function renderTaskView(kata: Kata): void {
   const overview = document.createElement('a');
   overview.href = '#/';
   overview.className = 'icon-link';
-  overview.setAttribute('aria-label', 'All katas');
-  overview.setAttribute('title', 'All katas');
+  overview.setAttribute('aria-label', t('nav.all'));
+  overview.setAttribute('title', t('nav.all'));
   overview.innerHTML = OVERVIEW_ICON;
   nav.appendChild(overview);
 
@@ -149,8 +151,8 @@ function renderTaskView(kata: Kata): void {
     const nextLink = document.createElement('a');
     nextLink.href = `#/kata/${next.slug}`;
     nextLink.className = 'icon-link';
-    nextLink.setAttribute('aria-label', `Next kata: ${next.title}`);
-    nextLink.setAttribute('title', `Next kata: ${next.title}`);
+    nextLink.setAttribute('aria-label', `${t('nav.next')}: ${next.title}`);
+    nextLink.setAttribute('title', `${t('nav.next')}: ${next.title}`);
     nextLink.innerHTML = RIGHT_ARROW_ICON;
     nav.appendChild(nextLink);
   } else {
@@ -163,6 +165,13 @@ function renderTaskView(kata: Kata): void {
   header.className = 'kata-title-heading';
   header.textContent = kata.title;
   app.appendChild(header);
+
+  if (kata.langFallback) {
+    const note = document.createElement('p');
+    note.className = 'lang-fallback-note';
+    note.textContent = t(getLang() === 'de' ? 'kata.onlyEnglish' : 'kata.onlyGerman');
+    app.appendChild(note);
+  }
 
   const body = document.createElement('div');
   body.className = 'kata-body';
@@ -181,8 +190,13 @@ function renderTaskView(kata: Kata): void {
 function renderNotFound(slug: string): void {
   app.innerHTML = '';
   const p = document.createElement('p');
-  p.textContent = `Kata "${slug}" not found.`;
+  p.textContent = t('notFound', { slug });
   app.appendChild(p);
+}
+
+function setFooterText(): void {
+  const link = document.getElementById('footer-source-link');
+  if (link) link.textContent = t('footer.source');
 }
 
 function route(): void {
@@ -199,5 +213,11 @@ function route(): void {
 }
 
 initTheme();
+initLangToggle();
+setFooterText();
+onLangChange(() => {
+  setFooterText();
+  route();
+});
 window.addEventListener('hashchange', route);
 route();

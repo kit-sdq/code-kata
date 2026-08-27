@@ -1,4 +1,5 @@
 import { getProgress, setProgress, type KataProgress } from './progress.ts';
+import { t } from './i18n.ts';
 
 /**
  * Shared feedback/hints/progress wiring used by the text and choice views:
@@ -32,7 +33,7 @@ export function setupFeedback(container: HTMLElement, kataId: string, hints: str
   container.appendChild(hintAnnounce);
 
   if (progress.solved) {
-    ariaLive.textContent = '✓ Solved';
+    ariaLive.textContent = t('feedback.solved');
     ariaLive.classList.add('feedback-correct');
   }
 
@@ -41,18 +42,18 @@ export function setupFeedback(container: HTMLElement, kataId: string, hints: str
     for (let i = 0; i < progress.hintsRevealed; i++) {
       const p = document.createElement('p');
       p.className = 'hint';
-      p.textContent = `Hint ${i + 1}: ${hints[i]}`;
+      p.textContent = `${t('hint.item', { n: i + 1 })}: ${hints[i]}`;
       hintsSection.appendChild(p);
     }
     if (progress.attempts >= 1 && progress.hintsRevealed < hints.length) {
       const btn = document.createElement('button');
       btn.type = 'button';
-      btn.textContent = 'Reveal hint';
+      btn.textContent = t('hint.reveal');
       btn.addEventListener('click', () => {
         progress.hintsRevealed++;
         setProgress(kataId, progress);
         renderHints();
-        hintAnnounce.textContent = `Hint ${progress.hintsRevealed} revealed: ${hints[progress.hintsRevealed - 1]}`;
+        hintAnnounce.textContent = `${t('hint.announced', { n: progress.hintsRevealed })}: ${hints[progress.hintsRevealed - 1]}`;
       });
       hintsSection.appendChild(btn);
     }
@@ -61,12 +62,12 @@ export function setupFeedback(container: HTMLElement, kataId: string, hints: str
   function report(correct: boolean): void {
     if (correct) {
       progress.solved = true;
-      ariaLive.textContent = '✓ Correct!';
+      ariaLive.textContent = t('feedback.correct');
       ariaLive.classList.remove('feedback-incorrect');
       ariaLive.classList.add('feedback-correct');
     } else {
       progress.attempts++;
-      ariaLive.textContent = '✗ Incorrect, try again.';
+      ariaLive.textContent = t('feedback.incorrect');
       ariaLive.classList.remove('feedback-correct');
       ariaLive.classList.add('feedback-incorrect');
     }

@@ -1,5 +1,5 @@
 import { describe, expect, it, vi } from 'vitest';
-import { compareIds, groupKatas } from '../src/kata/categories.ts';
+import { compareIds, groupKatas, resolveLocalized } from '../src/kata/categories.ts';
 import type { Category, TextKata } from '../src/kata/types.ts';
 
 function kata(overrides: Partial<TextKata> = {}): TextKata {
@@ -32,6 +32,19 @@ describe('compareIds', () => {
     expect(compareIds('1.a', '1.b')).toBeLessThan(0);
     expect(warnSpy).toHaveBeenCalled();
     warnSpy.mockRestore();
+  });
+});
+
+describe('resolveLocalized', () => {
+  it('returns a plain string as-is regardless of language', () => {
+    expect(resolveLocalized('Java Basics', 'de')).toBe('Java Basics');
+    expect(resolveLocalized('Java Basics', 'en')).toBe('Java Basics');
+  });
+
+  it('picks the requested language from a {de, en} map', () => {
+    const localized = { de: 'Grundlagen', en: 'Basics' };
+    expect(resolveLocalized(localized, 'de')).toBe('Grundlagen');
+    expect(resolveLocalized(localized, 'en')).toBe('Basics');
   });
 });
 

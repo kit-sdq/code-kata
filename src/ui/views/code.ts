@@ -5,11 +5,12 @@ import { validateImports, type ImportViolation } from '../../check/imports.ts';
 import { runJava, stop, type RunResult } from '../../runner/runner.ts';
 import { verifyResult, type Verdict, type CheckOutcome, type ReturnCaseOutcome } from '../../check/verify.ts';
 import { setupFeedback } from '../hints.ts';
+import { t } from '../i18n.ts';
 
-const PHASE_TEXT: Record<'loading' | 'compiling' | 'running', string> = {
-  loading: 'Loading Java runtime…',
-  compiling: 'Compiling…',
-  running: 'Running…',
+const PHASE_KEY: Record<'loading' | 'compiling' | 'running', string> = {
+  loading: 'code.phase.loading',
+  compiling: 'code.phase.compiling',
+  running: 'code.phase.running',
 };
 
 export function renderCodeView(container: HTMLElement, kata: CodeKata): void {
@@ -19,7 +20,7 @@ export function renderCodeView(container: HTMLElement, kata: CodeKata): void {
   const editorHint = document.createElement('p');
   editorHint.id = editorHintId;
   editorHint.className = 'sr-only';
-  editorHint.textContent = 'Code editor. Press Escape then Tab to leave it.';
+  editorHint.textContent = t('editor.escapeHint');
   container.appendChild(editorHint);
 
   const editorContainer = document.createElement('div');
@@ -36,8 +37,8 @@ export function renderCodeView(container: HTMLElement, kata: CodeKata): void {
   const controls = document.createElement('div');
   controls.className = 'code-controls';
   controls.innerHTML = `
-    <button type="button" class="run-btn">Run</button>
-    <button type="button" class="stop-btn" disabled>Stop</button>
+    <button type="button" class="run-btn">${t('code.run')}</button>
+    <button type="button" class="stop-btn" disabled>${t('code.stop')}</button>
   `;
   container.appendChild(controls);
   const runBtn = controls.querySelector('.run-btn') as HTMLButtonElement;
@@ -65,12 +66,12 @@ export function renderCodeView(container: HTMLElement, kata: CodeKata): void {
     resultContainer.innerHTML = '';
     const p = document.createElement('p');
     p.className = 'feedback feedback-incorrect';
-    p.textContent = 'Locked code was modified — reset or fix.';
+    p.textContent = t('code.lockedError');
     resultContainer.appendChild(p);
 
     const resetBtn = document.createElement('button');
     resetBtn.type = 'button';
-    resetBtn.textContent = 'Reset';
+    resetBtn.textContent = t('code.reset');
     resetBtn.addEventListener('click', () => {
       resetEditor();
       resultContainer.innerHTML = '';
@@ -82,7 +83,7 @@ export function renderCodeView(container: HTMLElement, kata: CodeKata): void {
     resultContainer.innerHTML = '';
     const p = document.createElement('p');
     p.className = 'feedback feedback-incorrect';
-    p.textContent = `Disallowed code (${violations.length}):`;
+    p.textContent = t('code.violationsIntro', { n: violations.length });
     resultContainer.appendChild(p);
 
     const list = document.createElement('ul');
@@ -118,7 +119,7 @@ export function renderCodeView(container: HTMLElement, kata: CodeKata): void {
     try {
       const result = await runJava(
         { source, mainClass: kata.mainClass, checks: kata.checks, timeoutMs: kata.timeoutMs },
-        (phase) => { phaseEl.textContent = PHASE_TEXT[phase]; },
+        (phase) => { phaseEl.textContent = t(PHASE_KEY[phase]); },
       );
       phaseEl.textContent = '';
       const verdict = showResult(resultContainer, result, kata);
@@ -133,12 +134,12 @@ export function renderCodeView(container: HTMLElement, kata: CodeKata): void {
   stopBtn.addEventListener('click', () => { stop(); });
 }
 
-const FAILURE_LABEL: Record<string, string> = {
-  'compile-error': 'Compilation failed:',
-  'runtime-error': 'Runtime error:',
-  timeout: 'Timed out — check for infinite loops or long-running code.',
-  stopped: 'Stopped.',
-  error: 'Something went wrong running your code:',
+const FAILURE_KEY: Record<string, string> = {
+  'compile-error': 'code.failure.compile-error',
+  'runtime-error': 'code.failure.runtime-error',
+  timeout: 'code.failure.timeout',
+  stopped: 'code.failure.stopped',
+  error: 'code.failure.error',
 };
 
 /** Renders a RunResult (compile/verify it first if 'ok') and returns the Verdict so the caller
@@ -157,7 +158,7 @@ export function showResult(container: HTMLElement, result: RunResult, kata: Code
 function renderFailure(container: HTMLElement, result: RunResult): void {
   const p = document.createElement('p');
   p.className = 'feedback feedback-incorrect';
-  p.textContent = FAILURE_LABEL[result.status] ?? result.status;
+  p.textContent = FAILURE_KEY[result.status] ? t(FAILURE_KEY[result.status]) : result.status;
   container.appendChild(p);
   if ('message' in result && result.message) {
     const pre = document.createElement('pre');
@@ -170,7 +171,7 @@ function renderFailure(container: HTMLElement, result: RunResult): void {
 function renderVerdict(container: HTMLElement, verdict: Verdict): void {
   const summary = document.createElement('p');
   summary.className = `feedback ${verdict.solved ? 'feedback-correct' : 'feedback-incorrect'}`;
-  summary.textContent = verdict.solved ? '✓ All checks passed!' : '✗ Some checks failed.';
+  summary.textContent = verdict.solved ? t('code.allPassed') : t('code.somePassed');
   container.appendChild(summary);
 
   const stdoutTotal = verdict.checks.filter((c) => c.type === 'stdout').length;
@@ -186,17 +187,18 @@ function renderStdoutCheck(outcome: Extract<CheckOutcome, { type: 'stdout' }>, c
   const wrap = document.createElement('div');
   wrap.className = `check-block ${outcome.pass ? 'check-pass' : 'check-fail'}`;
 
-  const label = outcome.label ?? (total > 1 ? `Case ${caseNum}` : undefined);
+  const label = outcome.label ?? (total > 1 ? t('code.case', { n: caseNum }) : undefined);
   const header = document.createElement('p');
   header.className = 'check-header';
+  const matchKey = outcome.pass ? 'code.outputMatches' : 'code.outputDiffers';
   header.textContent = label
-    ? `${outcome.pass ? '✓' : '✗'} ${label}: ${outcome.pass ? 'output matches' : 'output does not match'}`
-    : outcome.pass ? '✓ Output matches' : '✗ Output does not match';
+    ? `${outcome.pass ? '✓' : '✗'} ${label}: ${t(matchKey + '.inline')}`
+    : `${outcome.pass ? '✓' : '✗'} ${t(matchKey)}`;
   wrap.appendChild(header);
 
   if (outcome.stdin) {
     const stdinHeading = document.createElement('h4');
-    stdinHeading.textContent = 'Input';
+    stdinHeading.textContent = t('code.input');
     wrap.appendChild(stdinHeading);
     const stdinPre = document.createElement('pre');
     stdinPre.className = 'stdin-panel';
@@ -210,8 +212,8 @@ function renderStdoutCheck(outcome: Extract<CheckOutcome, { type: 'stdout' }>, c
     const max = Math.max(expectedLines.length, actualLines.length);
     const panel = document.createElement('div');
     panel.className = 'diff-panel';
-    panel.appendChild(renderDiffColumn('Expected', expectedLines, actualLines, max));
-    panel.appendChild(renderDiffColumn('Actual', actualLines, expectedLines, max));
+    panel.appendChild(renderDiffColumn(t('code.expected'), expectedLines, actualLines, max));
+    panel.appendChild(renderDiffColumn(t('code.actual'), actualLines, expectedLines, max));
     wrap.appendChild(panel);
   }
   return wrap;
@@ -268,7 +270,7 @@ function renderReturnCheck(outcome: Extract<CheckOutcome, { type: 'return' }>): 
   table.className = 'cases-table';
   const thead = document.createElement('thead');
   const headRow = document.createElement('tr');
-  for (const label of ['Args', 'Expected', 'Actual', '']) {
+  for (const label of [t('code.args'), t('code.expected'), t('code.actual'), '']) {
     const th = document.createElement('th');
     th.textContent = label;
     headRow.appendChild(th);

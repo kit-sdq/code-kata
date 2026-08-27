@@ -33,11 +33,11 @@ npm run build    # tsc --noEmit && vite build -> dist/
 
 ## Adding a new kata
 
-Drop a new `.md` file into `katas/`. That's it — kata discovery uses Vite's
-`import.meta.glob` at build time, so there is no manifest to edit or register
-the file in. On the next `npm run dev` reload, or the next push to `main`
-(the included GitHub Actions workflow rebuilds and redeploys automatically),
-the new kata appears in the list.
+Drop a new `katas/<slug>.de.md` (or `.en.md`) file into `katas/`. That's it —
+kata discovery uses Vite's `import.meta.glob` at build time, so there is no
+manifest to edit or register the file in. On the next `npm run dev` reload,
+or the next push to `main` (the included GitHub Actions workflow rebuilds
+and redeploys automatically), the new kata appears in the list.
 
 The Markdown format (frontmatter fields, matching modes, code-check syntax,
 locked-region template syntax) is fully specified in
@@ -47,7 +47,8 @@ example files (text, choice, code).
 ## Adding a category
 
 Categories are defined in `katas/categories.yaml`, a flat list of
-`{ id, name, description?, order }` entries. A kata joins a category by
+`{ id, name, description?, order }` entries (`name`/`description` may be a
+plain string or a `{de, en}` map — see Localization below). A kata joins a category by
 setting its frontmatter `category` to a manifest `id`. To add a new category:
 add an entry to `categories.yaml` with a unique `id` and an `order` (ascending
 front-page section position), then point kata(s) at it via `category: <id>`.
@@ -61,6 +62,28 @@ dotted-numeric string (`1`, `2`, `2.1`, `10`, ...) compared segment-by-segment
 as numbers, not as plain strings, so `id: 10` sorts after `id: 3`, not before
 `id: 2`. Full semantics (duplicate-id/unknown-category warnings, comparison
 rules) are in [`docs/TASK_FORMAT.md`](docs/TASK_FORMAT.md).
+
+## Localization
+
+The UI is available in German and English. The header's language toggle (a
+button showing the *target* language — "EN" while German is active, "DE"
+while English is active) switches the whole UI live, persists the choice in
+`localStorage['lang']`, and updates the `<html lang>` attribute; with no
+stored choice, the browser's language (`navigator.language`) picks the
+default.
+
+Kata content is per-language: each task is a separate
+`katas/<slug>.de.md` / `katas/<slug>.en.md` file (a bare `katas/<slug>.md`
+is treated as `de`, for older files). Both files share the same slug, so
+routing and solved/progress state don't care which language was used to
+solve a kata. To add a translation of an existing kata, copy its `.de.md` to
+an `.en.md` (or vice versa) with the same slug and translate the frontmatter
+and body; if only one language exists, the site falls back to it
+automatically and shows a small note that the task isn't translated yet.
+Full details in [`docs/TASK_FORMAT.md`](docs/TASK_FORMAT.md).
+
+Category names/descriptions in `katas/categories.yaml` can be a plain string
+(shown for every language) or a `{de, en}` map.
 
 ## Theming
 

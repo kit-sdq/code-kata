@@ -1,14 +1,15 @@
 import type { TextKata } from '../../kata/types.ts';
 import { matchText } from '../../check/normalize.ts';
 import { setupFeedback } from '../hints.ts';
+import { t } from '../i18n.ts';
 
 export function renderTextView(container: HTMLElement, kata: TextKata): void {
   const form = document.createElement('form');
   form.className = 'text-answer-form';
   form.innerHTML = `
-    <label for="text-answer">Your answer</label>
+    <label for="text-answer">${t('yourAnswer')}</label>
     <input id="text-answer" name="answer" type="text" autocomplete="off" />
-    <button type="submit">Submit</button>
+    <button type="submit">${t('submit')}</button>
   `;
   container.appendChild(form);
 

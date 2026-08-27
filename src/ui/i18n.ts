@@ -8,6 +8,7 @@ const de: Dict = {
   'nav.previous': 'Vorherige Aufgabe',
   'nav.next': 'Nächste Aufgabe',
   'nav.all': 'Alle Aufgaben',
+  'lang.choose': 'Sprache wählen',
   notFound: 'Aufgabe "{slug}" nicht gefunden.',
   uncategorized: 'Unkategorisiert',
   'difficulty.easy': 'leicht',
@@ -60,6 +61,7 @@ const en: Dict = {
   'nav.previous': 'Previous kata',
   'nav.next': 'Next kata',
   'nav.all': 'All katas',
+  'lang.choose': 'Choose language',
   notFound: 'Kata "{slug}" not found.',
   uncategorized: 'Uncategorized',
   'difficulty.easy': 'easy',
@@ -158,22 +160,127 @@ export function t(key: string, vars?: Record<string, string | number>): string {
   return text;
 }
 
-/** Wires the header language toggle: shows the target language's own name/label, clicking
- * switches to it. Same interaction pattern as initTheme in theme.ts. */
+const GLOBE_ICON =
+  '<svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><ellipse cx="12" cy="12" rx="4" ry="9"/><line x1="3" y1="12" x2="21" y2="12"/></svg>';
+const CHECK_ICON =
+  '<svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="20 6 9 17 4 12"/></svg>';
+
+// Native, untranslated names: each language names itself.
+const LANG_NAMES: Record<Lang, string> = { de: 'Deutsch', en: 'English' };
+const LANG_ORDER: Lang[] = ['de', 'en'];
+
+/** Wires the header language menu: a globe button opens a small menu of native language
+ * names; picking one calls setLang. Full menu keyboard support (Arrow keys, Enter/Space,
+ * Escape, click-outside). Same overall wiring pattern as initTheme in theme.ts. */
 export function initLangToggle(): void {
   const btn = document.getElementById('lang-toggle') as HTMLButtonElement | null;
-  if (!btn) return;
+  const menu = document.getElementById('lang-menu') as HTMLUListElement | null;
+  if (!btn || !menu) return;
 
-  function apply(lang: Lang): void {
+  btn.innerHTML = GLOBE_ICON;
+
+  const items = LANG_ORDER.map((lang) => {
+    const li = document.createElement('li');
+    li.setAttribute('role', 'none');
+    const item = document.createElement('button');
+    item.type = 'button';
+    item.className = 'lang-menu-item';
+    item.setAttribute('role', 'menuitemradio');
+    item.setAttribute('tabindex', '-1');
+    const check = document.createElement('span');
+    check.className = 'lang-menu-check';
+    check.setAttribute('aria-hidden', 'true');
+    const label = document.createElement('span');
+    label.textContent = LANG_NAMES[lang];
+    item.append(check, label);
+    item.addEventListener('click', () => {
+      setLang(lang);
+      close({ focusButton: true });
+    });
+    li.appendChild(item);
+    menu.appendChild(li);
+    return { lang, item, check };
+  });
+
+  function applySelection(): void {
+    for (const { lang, item, check } of items) {
+      const selected = lang === currentLang;
+      item.setAttribute('aria-checked', String(selected));
+      check.innerHTML = selected ? CHECK_ICON : '';
+    }
+  }
+
+  function applyLabel(): void {
     if (!btn) return;
-    const target: Lang = lang === 'de' ? 'en' : 'de';
-    btn.textContent = target === 'en' ? 'EN' : 'DE';
-    const label = target === 'en' ? 'Switch to English' : 'Auf Deutsch umschalten';
+    const label = t('lang.choose');
     btn.setAttribute('aria-label', label);
     btn.setAttribute('title', label);
   }
 
-  apply(currentLang);
-  btn.addEventListener('click', () => setLang(currentLang === 'de' ? 'en' : 'de'));
-  onLangChange(() => apply(currentLang));
+  function isOpen(): boolean {
+    return !menu!.hidden;
+  }
+
+  function focusItem(index: number): void {
+    const i = (index + items.length) % items.length;
+    items.forEach(({ item }, idx) => item.setAttribute('tabindex', idx === i ? '0' : '-1'));
+    items[i].item.focus();
+  }
+
+  function open(): void {
+    menu!.hidden = false;
+    btn!.setAttribute('aria-expanded', 'true');
+    const selectedIndex = items.findIndex(({ lang }) => lang === currentLang);
+    focusItem(selectedIndex === -1 ? 0 : selectedIndex);
+    document.addEventListener('click', onDocumentClick);
+  }
+
+  function close(opts?: { focusButton?: boolean }): void {
+    menu!.hidden = true;
+    btn!.setAttribute('aria-expanded', 'false');
+    document.removeEventListener('click', onDocumentClick);
+    if (opts?.focusButton) btn!.focus();
+  }
+
+  function onDocumentClick(e: MouseEvent): void {
+    if (!(e.target instanceof Node)) return;
+    if (btn!.contains(e.target) || menu!.contains(e.target)) return;
+    close();
+  }
+
+  btn.addEventListener('click', () => (isOpen() ? close() : open()));
+
+  btn.addEventListener('keydown', (e) => {
+    if (e.key === 'ArrowDown' || e.key === 'ArrowUp') {
+      e.preventDefault();
+      open();
+    }
+  });
+
+  menu.addEventListener('keydown', (e) => {
+    const focusedIndex = items.findIndex(({ item }) => item === document.activeElement);
+    if (e.key === 'ArrowDown') {
+      e.preventDefault();
+      focusItem(focusedIndex + 1);
+    } else if (e.key === 'ArrowUp') {
+      e.preventDefault();
+      focusItem(focusedIndex - 1);
+    } else if (e.key === 'Escape') {
+      e.preventDefault();
+      close({ focusButton: true });
+    } else if (e.key === 'Enter' || e.key === ' ') {
+      e.preventDefault();
+      if (focusedIndex !== -1) items[focusedIndex].item.click();
+    } else if (e.key === 'Tab') {
+      close();
+    }
+  });
+
+  applySelection();
+  applyLabel();
+  close();
+  onLangChange(() => {
+    applySelection();
+    applyLabel();
+  });
 }

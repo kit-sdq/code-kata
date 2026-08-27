@@ -27,7 +27,16 @@
     <header class="site-header">
       <span id="site-title-slot" class="site-title-slot"></span>
       <div class="header-actions">
-        <button id="lang-toggle" class="lang-toggle" type="button"></button>
+        <div class="lang-menu-wrap">
+          <button
+            id="lang-toggle"
+            class="lang-toggle icon-link"
+            type="button"
+            aria-haspopup="menu"
+            aria-expanded="false"
+          ></button>
+          <ul id="lang-menu" class="lang-menu" role="menu" hidden></ul>
+        </div>
         <button id="theme-toggle" class="theme-toggle" type="button" aria-pressed="false">
           <span class="theme-toggle-icon" aria-hidden="true"></span>
         </button>

@@ -1,7 +1,28 @@
-- id: basics
-  name: Java Basics
-  description: Core language fundamentals — keywords, types, and control flow.
+- id: 01-java-verwenden
+  name: "Java verwenden"
+  description: "Installation, Kompilieren und Ausführen von Java-Programmen mit javac und java."
   order: 1
-- id: arrays
-  name: Arrays
+- id: 02-datentypen-variablen
+  name: "Datentypen und Variablen"
+  description: "Primitive Datentypen, String, Variablen und Zuweisungen."
   order: 2
+- id: 03-ein-ausgabe
+  name: "Ein- und Ausgabe"
+  description: "Konsolenausgabe mit System.out und Eingaben mit Scanner."
+  order: 3
+- id: 04-operatoren-ausdruecke
+  name: "Operatoren und Ausdrücke"
+  description: "Operatoren, Ausdrücke, Prioritäten und Typumwandlung."
+  order: 4
+- id: 05-kontrollfluss-schleifen
+  name: "Kontrollfluss und Schleifen"
+  description: "if/else, switch, Schleifen, break und continue."
+  order: 5
+- id: 06-funktionen-rekursion
+  name: "Funktionen und Rekursion"
+  description: "Funktionen, Parameter, Rückgabewerte und rekursive Funktionen."
+  order: 6
+- id: 07-git
+  name: "Git"
+  description: "Versionsverwaltung mit Git: Grundlagen und typische Arbeitsabläufe."
+  order: 7

@@ -1,5 +1,5 @@
-import { describe, expect, it } from 'vitest';
-import { parseFilename, resolveVariant } from '../src/kata/load.ts';
+import { describe, expect, it, vi } from 'vitest';
+import { buildIndex, parseFilename, resolveVariant } from '../src/kata/load.ts';
 import type { TextKata } from '../src/kata/types.ts';
 
 function kata(overrides: Partial<TextKata> = {}): TextKata {
@@ -43,5 +43,66 @@ describe('resolveVariant', () => {
 
   it('returns undefined when neither language variant exists', () => {
     expect(resolveVariant({}, 'en')).toBeUndefined();
+  });
+});
+
+function multilingualSrc(id: string): string {
+  return `---
+id: ${id}
+category: basics
+title: {de: Titel ${id}, en: Title ${id}}
+type: text
+difficulty: easy
+answers: ["x"]
+---
+Body.
+`;
+}
+
+function suffixedSrc(id: string, lang: string): string {
+  return `---
+id: ${id}
+category: basics
+title: Suffixed ${lang}
+type: text
+difficulty: easy
+answers: ["x"]
+---
+Body.
+`;
+}
+
+describe('buildIndex', () => {
+  it('registers both language variants from a bare multilingual file', () => {
+    const modules = { '/katas/greet.md': multilingualSrc('1') };
+    const bySlug = buildIndex(modules);
+    const variants = bySlug.get('greet');
+    expect(variants?.de?.title).toBe('Titel 1');
+    expect(variants?.en?.title).toBe('Title 1');
+  });
+
+  it('suffixed file wins over a multilingual file for the same slug/language, with a warning', () => {
+    const warnSpy = vi.spyOn(console, 'warn').mockImplementation(() => {});
+    const modules = {
+      '/katas/greet.md': multilingualSrc('1'),
+      '/katas/greet.en.md': suffixedSrc('1', 'en'),
+    };
+    const bySlug = buildIndex(modules);
+    const variants = bySlug.get('greet');
+    expect(variants?.de?.title).toBe('Titel 1');
+    expect(variants?.en?.title).toBe('Suffixed en');
+    expect(warnSpy).toHaveBeenCalled();
+    warnSpy.mockRestore();
+  });
+
+  it('precedence is order-independent (suffixed file listed before the multilingual one)', () => {
+    const modules = {
+      '/katas/greet.de.md': suffixedSrc('1', 'de'),
+      '/katas/greet.md': multilingualSrc('1'),
+    };
+    const bySlug = buildIndex(modules);
+    const variants = bySlug.get('greet');
+    expect(variants?.de?.title).toBe('Suffixed de');
+    expect(variants?.en?.title).toBe('Title 1');
   });
 });

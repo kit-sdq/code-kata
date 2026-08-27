@@ -72,14 +72,21 @@ while English is active) switches the whole UI live, persists the choice in
 stored choice, the browser's language (`navigator.language`) picks the
 default.
 
-Kata content is per-language: each task is a separate
-`katas/<slug>.de.md` / `katas/<slug>.en.md` file (a bare `katas/<slug>.md`
-is treated as `de`, for older files). Both files share the same slug, so
-routing and solved/progress state don't care which language was used to
-solve a kata. To add a translation of an existing kata, copy its `.de.md` to
-an `.en.md` (or vice versa) with the same slug and translate the frontmatter
-and body; if only one language exists, the site falls back to it
-automatically and shows a small note that the task isn't translated yet.
+Kata content is per-language. The recommended format is a **single**
+`katas/<slug>.md` file holding both languages: localizable frontmatter
+fields (`title`, `hints`, `answers`, `tags`, `options[].text`, stdout checks'
+`expected`/`label`) are either a plain value (shared) or a `{de, en}` map,
+and the body uses `<!-- de -->` / `<!-- en -->` / `<!-- all -->` markers to
+switch which language subsequent lines belong to — this avoids the drift
+risk of hand-keeping two files in sync. The older alternative — a separate
+`katas/<slug>.de.md` / `katas/<slug>.en.md` pair (a bare `katas/<slug>.md`
+with no localized maps is treated as `de`-only, for pre-existing files) —
+still works unchanged. Either way, all variants of a kata share the same
+slug, so routing and solved/progress state don't care which language was
+used to solve a kata; if only one language exists, the site falls back to it
+automatically and shows a small note that the task isn't translated yet. If
+both a multilingual `<slug>.md` and a suffixed `<slug>.<lang>.md` exist for
+the same slug/language, the suffixed file wins (and a warning is logged).
 Full details in [`docs/TASK_FORMAT.md`](docs/TASK_FORMAT.md).
 
 Category names/descriptions in `katas/categories.yaml` can be a plain string

@@ -1,5 +1,5 @@
 import { describe, expect, it, vi } from 'vitest';
-import { parseKata } from '../src/kata/parse.ts';
+import { parseKata, parseMultilingualKata } from '../src/kata/parse.ts';
 import type { ChoiceKata, CodeKata, TextKata } from '../src/kata/types.ts';
 
 describe('parseKata — text', () => {
@@ -276,5 +276,247 @@ public class Main {}
 \`\`\`
 `;
     expect(() => parseKata(raw, 'id')).toThrow();
+  });
+});
+
+describe('parseMultilingualKata — frontmatter localization', () => {
+  it('resolves plain (non-map) values identically for both languages', () => {
+    const raw = `---
+id: 1
+category: basics
+title: Shared title
+type: text
+difficulty: easy
+answers: ["x"]
+tags: [foo]
+hints: ["h1"]
+---
+Shared body.
+`;
+    const { de, en } = parseMultilingualKata(raw, 'shared');
+    expect(de.title).toBe('Shared title');
+    expect(en.title).toBe('Shared title');
+    expect(de.tags).toEqual(['foo']);
+    expect(en.tags).toEqual(['foo']);
+    expect(de.hints).toEqual(['h1']);
+    expect(en.hints).toEqual(['h1']);
+  });
+
+  it('resolves {de, en} maps for title, hints, answers, tags', () => {
+    const raw = `---
+id: 1
+category: basics
+title: {de: Deutscher Titel, en: English title}
+type: text
+difficulty: easy
+answers: {de: ["ja"], en: ["yes"]}
+tags: {de: [schluessel], en: [keyword]}
+hints: {de: ["Hinweis"], en: ["hint"]}
+---
+Body.
+`;
+    const { de, en } = parseMultilingualKata(raw, 'localized');
+    expect(de.title).toBe('Deutscher Titel');
+    expect(en.title).toBe('English title');
+    expect((de as TextKata).answers).toEqual(['ja']);
+    expect((en as TextKata).answers).toEqual(['yes']);
+    expect(de.tags).toEqual(['schluessel']);
+    expect(en.tags).toEqual(['keyword']);
+    expect(de.hints).toEqual(['Hinweis']);
+    expect(en.hints).toEqual(['hint']);
+  });
+
+  it('resolves localized options[].text and choice.correct stays shared', () => {
+    const raw = `---
+id: 1
+category: basics
+title: T
+type: choice
+difficulty: easy
+options:
+  - text: {de: "richtig", en: "correct"}
+    correct: true
+  - text: {de: "falsch", en: "wrong"}
+    correct: false
+---
+Body.
+`;
+    const { de, en } = parseMultilingualKata(raw, 'choice-loc');
+    expect((de as ChoiceKata).options[0]).toEqual({ text: 'richtig', correct: true });
+    expect((en as ChoiceKata).options[0]).toEqual({ text: 'correct', correct: true });
+  });
+
+  it('resolves localized stdout expected/label, shared stdin', () => {
+    const raw = `---
+id: 1
+category: basics
+title: T
+type: code
+difficulty: easy
+allowedImports: []
+checks:
+  - type: stdout
+    label: {de: "Fall 1", en: "Case 1"}
+    stdin: "shared\\n"
+    expected: {de: "10", en: "10"}
+---
+Body.
+
+\`\`\`java template
+public class Main {}
+\`\`\`
+`;
+    const { de, en } = parseMultilingualKata(raw, 'stdout-loc');
+    expect((de as CodeKata).checks[0]).toEqual({ type: 'stdout', label: 'Fall 1', stdin: 'shared\n', expected: '10' });
+    expect((en as CodeKata).checks[0]).toEqual({ type: 'stdout', label: 'Case 1', stdin: 'shared\n', expected: '10' });
+  });
+
+  it('throws when a localized map is missing the "en" key, naming the field', () => {
+    const raw = `---
+id: 1
+category: basics
+title: {de: "Nur Deutsch"}
+type: text
+difficulty: easy
+answers: ["x"]
+---
+Body.
+`;
+    expect(() => parseMultilingualKata(raw, 'missing-en')).toThrow(/title/);
+  });
+});
+
+describe('parseMultilingualKata — body sections', () => {
+  it('treats content before any marker as shared', () => {
+    const raw = `---
+id: 1
+category: basics
+title: T
+type: text
+difficulty: easy
+answers: ["x"]
+---
+Shared intro.
+`;
+    const { de, en } = parseMultilingualKata(raw, 'shared-body');
+    expect(de.body.trim()).toBe('Shared intro.');
+    expect(en.body.trim()).toBe('Shared intro.');
+  });
+
+  it('assembles interleaved de/en/all sections in document order, stripping markers', () => {
+    const raw = `---
+id: 1
+category: basics
+title: T
+type: text
+difficulty: easy
+answers: ["x"]
+---
+Intro shared.
+<!-- de -->
+Deutscher Absatz.
+<!-- en -->
+English paragraph.
+<!-- all -->
+Outro shared.
+`;
+    const { de, en } = parseMultilingualKata(raw, 'interleaved-body');
+    expect(de.body).not.toContain('<!--');
+    expect(en.body).not.toContain('<!--');
+    expect(de.body).toContain('Intro shared.');
+    expect(de.body).toContain('Deutscher Absatz.');
+    expect(de.body).not.toContain('English paragraph.');
+    expect(de.body).toContain('Outro shared.');
+    expect(en.body).toContain('Intro shared.');
+    expect(en.body).toContain('English paragraph.');
+    expect(en.body).not.toContain('Deutscher Absatz.');
+    expect(en.body).toContain('Outro shared.');
+  });
+});
+
+describe('parseMultilingualKata — code template', () => {
+  it('shares a single template defined in an "all" section', () => {
+    const raw = `---
+id: 1
+category: basics
+title: T
+type: code
+difficulty: easy
+allowedImports: []
+checks:
+  - type: stdout
+    expected: "1"
+---
+Shared body.
+
+\`\`\`java template
+public class Main {}
+\`\`\`
+`;
+    const { de, en } = parseMultilingualKata(raw, 'shared-template');
+    expect((de as CodeKata).template).toContain('public class Main');
+    expect((en as CodeKata).template).toBe((de as CodeKata).template);
+  });
+
+  it('supports a per-language template in each language section', () => {
+    const raw = `---
+id: 1
+category: basics
+title: T
+type: code
+difficulty: easy
+allowedImports: []
+checks:
+  - type: stdout
+    expected: "1"
+---
+<!-- de -->
+Deutsche Beschreibung.
+
+\`\`\`java template
+public class Main {
+    // BEGIN EDIT
+    // DE
+    // END EDIT
+}
+\`\`\`
+<!-- en -->
+English description.
+
+\`\`\`java template
+public class Main {
+    // BEGIN EDIT
+    // EN
+    // END EDIT
+}
+\`\`\`
+`;
+    const { de, en } = parseMultilingualKata(raw, 'per-lang-template');
+    expect((de as CodeKata).template).toContain('// DE');
+    expect((en as CodeKata).template).toContain('// EN');
+  });
+
+  it('throws when only one language defines a template', () => {
+    const raw = `---
+id: 1
+category: basics
+title: T
+type: code
+difficulty: easy
+allowedImports: []
+checks:
+  - type: stdout
+    expected: "1"
+---
+<!-- de -->
+Deutsche Beschreibung.
+
+\`\`\`java template
+public class Main {}
+\`\`\`
+<!-- en -->
+English description, no template here.
+`;
+    expect(() => parseMultilingualKata(raw, 'missing-one-template')).toThrow();
   });
 });

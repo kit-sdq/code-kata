@@ -168,6 +168,32 @@ a:hover {
   padding-inline: var(--space-8);
 }
 
+.header-brand {
+  position: absolute;
+  top: 50%;
+  left: var(--space-5);
+  transform: translateY(-50%);
+  display: inline-flex;
+  align-items: center;
+  /* The SDQ logo has black linework with no background, so it needs a light
+     backing chip to stay legible against the dark theme's near-black header. */
+  background: #ffffff;
+  padding: var(--space-1) var(--space-2);
+  border-radius: var(--radius-sm);
+  line-height: 0;
+}
+
+.header-brand:focus-visible {
+  outline: 2px solid var(--color-focus);
+  outline-offset: 2px;
+}
+
+.header-brand-logo {
+  display: block;
+  height: 32px;
+  width: auto;
+}
+
 .site-title {
   margin: 0;
   font-size: var(--fs-md);
@@ -844,6 +870,12 @@ pre code {
 
   .site-title-slot {
     padding-inline: 0;
+  }
+
+  .header-brand {
+    position: static;
+    transform: none;
+    order: -1;
   }
 
   .header-actions {

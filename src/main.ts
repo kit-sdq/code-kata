@@ -20,6 +20,10 @@ const RIGHT_ARROW_ICON =
   '<svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>';
 const OVERVIEW_ICON =
   '<svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="12" y1="19" x2="12" y2="5"/><polyline points="5 12 12 5 19 12"/></svg>';
+const LINK_ICON =
+  '<svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/></svg>';
+const CHECK_ICON =
+  '<svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="20 6 9 17 4 12"/></svg>';
 
 /** Flat kata order matching the front page (categories in designer order, katas by
  * compareIds within each, uncategorized last). Used to find the "next kata" link. */
@@ -81,19 +85,80 @@ function renderKataRow(kata: Kata): HTMLElement {
   return li;
 }
 
+/** Copies `url` to the clipboard (falling back to a hidden textarea when the async
+ * Clipboard API is unavailable), then shows a brief checkmark + status-message confirmation
+ * on `btn`. Silently does nothing on failure. */
+function copyViaTextarea(url: string): void {
+  const ta = document.createElement('textarea');
+  ta.value = url;
+  ta.style.position = 'fixed';
+  ta.style.opacity = '0';
+  document.body.appendChild(ta);
+  ta.select();
+  document.execCommand('copy');
+  document.body.removeChild(ta);
+}
+
+async function copyCategoryLink(url: string, btn: HTMLButtonElement, status: HTMLElement): Promise<void> {
+  try {
+    if (navigator.clipboard?.writeText) {
+      await navigator.clipboard.writeText(url);
+    } else {
+      copyViaTextarea(url);
+    }
+  } catch {
+    try {
+      copyViaTextarea(url);
+    } catch {
+      return;
+    }
+  }
+  btn.innerHTML = CHECK_ICON;
+  status.textContent = t('category.linkCopied');
+  setTimeout(() => {
+    btn.innerHTML = LINK_ICON;
+  }, 1500);
+}
+
 function renderListView(): void {
   const groups = groupKatas(getKatas(), loadCategories());
   const wrapper = document.createElement('div');
   wrapper.className = 'kata-categories';
 
+  const copyStatus = document.createElement('p');
+  copyStatus.className = 'sr-only';
+  copyStatus.setAttribute('role', 'status');
+  copyStatus.setAttribute('aria-live', 'polite');
+  wrapper.appendChild(copyStatus);
+
   for (const group of groups) {
+    const slug = group.category === 'uncategorized' ? 'uncategorized' : group.category.id;
     const section = document.createElement('section');
     section.className = 'category';
+    section.id = `category-${slug}`;
 
     const lang = getLang();
+    const headingRow = document.createElement('div');
+    headingRow.className = 'category-heading';
+
     const heading = document.createElement('h2');
     heading.textContent = group.category === 'uncategorized' ? t('uncategorized') : resolveLocalized(group.category.name, lang);
-    section.appendChild(heading);
+    headingRow.appendChild(heading);
+
+    const copyLinkLabel = t('category.copyLink');
+    const copyBtn = document.createElement('button');
+    copyBtn.type = 'button';
+    copyBtn.className = 'icon-link category-copy-link';
+    copyBtn.setAttribute('aria-label', copyLinkLabel);
+    copyBtn.setAttribute('title', copyLinkLabel);
+    copyBtn.innerHTML = LINK_ICON;
+    copyBtn.addEventListener('click', () => {
+      const url = `${location.origin}${location.pathname}#/category/${slug}`;
+      void copyCategoryLink(url, copyBtn, copyStatus);
+    });
+    headingRow.appendChild(copyBtn);
+
+    section.appendChild(headingRow);
 
     if (group.category !== 'uncategorized' && group.category.description) {
       const desc = document.createElement('p');
@@ -202,6 +267,7 @@ function setFooterText(): void {
 function route(): void {
   const hash = location.hash;
   const kataMatch = hash.match(/^#\/kata\/(.+)$/);
+  const categoryMatch = hash.match(/^#\/category\/(.+)$/);
   setHeaderTitle(!kataMatch);
   if (kataMatch) {
     const kata = getKata(decodeURIComponent(kataMatch[1]));
@@ -210,6 +276,10 @@ function route(): void {
     return;
   }
   renderListView();
+  if (categoryMatch) {
+    const section = document.getElementById(`category-${decodeURIComponent(categoryMatch[1])}`);
+    section?.scrollIntoView({ block: 'start', behavior: 'auto' });
+  }
 }
 
 initTheme();

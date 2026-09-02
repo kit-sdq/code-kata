@@ -13,10 +13,10 @@ tags:
 hints:
   de:
     - Eines der beiden Pakete enthält zusätzlich den Übersetzer (Compiler).
-    - Seit Java 11 wird ohnehin nur noch eines von beiden überhaupt als eigener Download angeboten.
+    - Auch das JRE lässt sich herunterladen – zum Entwickeln reicht es aber nicht aus. Zum Schreiben und Übersetzen eigener Programme brauchen Sie immer das JDK.
   en:
     - One of the two packages additionally contains the compiler.
-    - Since Java 11, only one of the two is even offered as a separate download anyway.
+    - The JRE can be downloaded too, but it isn't enough for development. To write and compile your own programs you always need the JDK.
 multiple: false
 shuffle: true
 options:

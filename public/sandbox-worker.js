@@ -21,7 +21,7 @@ const OUT_SUFFIX = '___';
 const DONE = '___KATA_DONE___';
 const RET_PREFIX = '___KATA_RET___';
 const ERR_PREFIX = '___KATA_ERR___';
-const CLASSPATH = '/app/tools.jar:/files/';
+const CLASSPATH = '/str/tools.jar:/files/';
 
 let initPromise = null;
 let captured = '';
@@ -41,7 +41,29 @@ function addStringFile(path, text) {
 }
 
 async function ensureInit() {
-  if (!initPromise) initPromise = cheerpjInit({ status: 'none' });
+  if (!initPromise) {
+    initPromise = (async () => {
+      await cheerpjInit({ status: 'none' });
+      // CheerpJ's /app/ mount always points at the root of the web server's origin (per
+      // https://cheerpj.com/docs/guides/filesystem — "Read-only mount that points to the root
+      // of your web server"), not at this file's own directory. On a site served from a subpath
+      // (e.g. GitHub Pages project pages at https://host/repo/) that makes /app/tools.jar 404
+      // ("Could not find or load main class com.sun.tools.javac.Main"), since tools.jar
+      // actually lives at https://host/repo/tools.jar, not https://host/tools.jar. Fetch it
+      // ourselves, resolved relative to this worker script's own URL (which is correct under
+      // any subpath), and load it into /str/ instead — the one mount cheerpOSAddStringFile can
+      // actually write to (/files/ is Java-write-only, /app/ is HTTP-read-only from Java; see
+      // https://cheerpj.com/docs/explanation/File-System-support).
+      const toolsJarUrl = new URL('tools.jar', self.location.href).href;
+      const response = await fetch(toolsJarUrl);
+      if (!response.ok) {
+        throw new Error('Failed to load tools.jar from ' + toolsJarUrl + ': HTTP ' + response.status);
+      }
+      const bytes = new Uint8Array(await response.arrayBuffer());
+      const add = typeof cheerpOSAddStringFile === 'function' ? cheerpOSAddStringFile : cheerpjAddStringFile;
+      add('/str/tools.jar', bytes);
+    })();
+  }
   return initPromise;
 }
 

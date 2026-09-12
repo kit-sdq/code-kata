@@ -40,11 +40,11 @@
   order: 5
 - id: 06-funktionen-rekursion
   name:
-    de: "Funktionen und Rekursion"
-    en: "Functions and Recursion"
+    de: "Funktionen"
+    en: "Functions"
   description:
-    de: "Funktionen, Parameter, Rückgabewerte und rekursive Funktionen."
-    en: "Functions, parameters, return values, and recursive functions."
+    de: "Funktionen, Parameter, Rückgabewerte und lokale Variablen."
+    en: "Functions, parameters, return values, and local variables."
   order: 6
 - id: 07-git
   name:
@@ -54,3 +54,11 @@
     de: "Versionsverwaltung mit Git: Grundlagen und typische Arbeitsabläufe."
     en: "Version control with Git: basics and typical workflows."
   order: 7
+- id: 08-rekursion
+  name:
+    de: "Rekursion"
+    en: "Recursion"
+  description:
+    de: "Rekursive Methoden: Basisfall, Rekursionsschritt und Aufrufstapel. Wird in der Vorlesung eingeführt, nicht in den Videos."
+    en: "Recursive methods: base case, recursive step, and the call stack. Introduced in the lecture, not in the videos."
+  order: 8

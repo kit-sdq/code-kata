@@ -1,6 +1,6 @@
 ---
 id: 3.5
-category: 06-funktionen-rekursion
+category: 08-rekursion
 title:
   de: Trockendurchlauf einer rekursiven Methode
   en: Dry-Running a Recursive Method

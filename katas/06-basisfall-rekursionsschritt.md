@@ -1,6 +1,6 @@
 ---
 id: 3.1
-category: 06-funktionen-rekursion
+category: 08-rekursion
 title:
   de: Basisfall und Rekursionsschritt
   en: Base Case and Recursive Step

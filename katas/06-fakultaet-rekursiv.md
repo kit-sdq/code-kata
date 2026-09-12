@@ -1,6 +1,6 @@
 ---
 id: 3.2
-category: 06-funktionen-rekursion
+category: 08-rekursion
 title:
   de: Fakultät (rekursiv)
   en: Factorial (recursive)

@@ -8,12 +8,12 @@ type: code
 difficulty: medium
 tags:
   de:
-    - funktionen
+    - methoden
     - parameter
     - rückgabewert
     - schleifen
   en:
-    - functions
+    - methods
     - parameters
     - return-value
     - loops

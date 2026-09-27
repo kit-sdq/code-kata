@@ -8,12 +8,12 @@ type: code
 difficulty: easy
 tags:
   de:
-    - funktionen
+    - methoden
     - parameter
     - rückgabewert
     - boolean
   en:
-    - functions
+    - methods
     - parameters
     - return-value
     - boolean

@@ -8,10 +8,10 @@ type: choice
 difficulty: easy
 tags:
   de:
-    - funktionen
+    - methoden
     - signatur
   en:
-    - functions
+    - methods
     - signature
 hints:
   de:

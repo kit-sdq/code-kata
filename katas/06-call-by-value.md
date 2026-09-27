@@ -8,11 +8,11 @@ type: text
 difficulty: medium
 tags:
   de:
-    - funktionen
+    - methoden
     - parameter
     - call-by-value
   en:
-    - functions
+    - methods
     - parameters
     - call-by-value
 hints:

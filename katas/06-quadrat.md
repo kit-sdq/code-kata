@@ -8,11 +8,11 @@ type: code
 difficulty: easy
 tags:
   de:
-    - funktionen
+    - methoden
     - parameter
     - rückgabewert
   en:
-    - functions
+    - methods
     - parameters
     - return-value
 hints:

@@ -8,11 +8,11 @@ type: choice
 difficulty: easy
 tags:
   de:
-    - funktionen
+    - methoden
     - void
     - return
   en:
-    - functions
+    - methods
     - void
     - return
 hints:

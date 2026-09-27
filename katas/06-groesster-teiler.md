@@ -1,6 +1,6 @@
 ---
 id: 2.2
-category: 06-funktionen-rekursion
+category: 06-methoden
 title:
   de: Methode largestDivisor
   en: Method largestDivisor

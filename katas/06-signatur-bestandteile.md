@@ -1,6 +1,6 @@
 ---
 id: 1.1
-category: 06-funktionen-rekursion
+category: 06-methoden
 title:
   de: Bestandteile einer Methodensignatur
   en: Parts of a Method Signature

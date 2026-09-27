@@ -1,6 +1,6 @@
 ---
 id: 2.3
-category: 06-funktionen-rekursion
+category: 06-methoden
 title:
   de: Call-by-Value bei primitiven Parametern
   en: Call-by-Value for Primitive Parameters

@@ -38,13 +38,13 @@
     de: "if/else, switch, Schleifen, break und continue."
     en: "if/else, switch, loops, break, and continue."
   order: 5
-- id: 06-funktionen-rekursion
+- id: 06-methoden
   name:
-    de: "Funktionen"
-    en: "Functions"
+    de: "Methoden"
+    en: "Methods"
   description:
-    de: "Funktionen, Parameter, Rückgabewerte und lokale Variablen."
-    en: "Functions, parameters, return values, and local variables."
+    de: "Methoden, Parameter, Rückgabewerte und lokale Variablen."
+    en: "Methods, parameters, return values, and local variables."
   order: 6
 - id: 07-git
   name:

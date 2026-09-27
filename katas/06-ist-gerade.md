@@ -1,6 +1,6 @@
 ---
 id: 2.1
-category: 06-funktionen-rekursion
+category: 06-methoden
 title:
   de: Methode isEven
   en: Method isEven

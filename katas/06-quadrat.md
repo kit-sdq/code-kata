@@ -1,6 +1,6 @@
 ---
 id: 1.3
-category: 06-funktionen-rekursion
+category: 06-methoden
 title:
   de: Methode square
   en: Method square

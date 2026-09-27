@@ -1,6 +1,6 @@
 ---
 id: 1.2
-category: 06-funktionen-rekursion
+category: 06-methoden
 title:
   de: void oder Rückgabewert?
   en: void or Return Value?

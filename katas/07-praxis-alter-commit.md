@@ -27,6 +27,8 @@ answers:
 <!-- de -->
 **Praxisaufgabe – am eigenen Rechner ausführen.**
 
+Falls noch nicht geschehen, legen Sie vorher einmal fest, wer committet, wie im Video gezeigt: `git config --global user.name "Ihr Name"`, `git config --global user.email "ihre@adresse"` und `git config --global init.defaultBranch main`.
+
 Führen Sie nacheinander aus:
 
 1. Erstellen Sie einen neuen Ordner `git-uebung-checkout` und wechseln Sie hinein.
@@ -40,10 +42,12 @@ Führen Sie nacheinander aus:
 
 Welchen Inhalt zeigt `notizen.txt` jetzt? Geben Sie den Text genau so an.
 
-Kehren Sie anschließend mit `git checkout -` wieder zum aktuellen Stand zurück.
+Kehren Sie anschließend mit `git checkout main` wieder zum aktuellen Stand zurück.
 
 <!-- en -->
 **Hands-on task – run this on your own machine.**
+
+If you haven't done so yet, first set once who is committing, as shown in the video: `git config --global user.name "Your Name"`, `git config --global user.email "your@address"` and `git config --global init.defaultBranch main`.
 
 Run the following in order:
 
@@ -58,4 +62,4 @@ Run the following in order:
 
 What content does `notes.txt` show now? Give the text exactly.
 
-Afterwards, return to the current state with `git checkout -`.
+Afterwards, return to the current state with `git checkout main`.

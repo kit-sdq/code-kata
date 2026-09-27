@@ -24,6 +24,8 @@ answers:
 <!-- de -->
 **Praxisaufgabe – am eigenen Rechner ausführen.**
 
+Falls noch nicht geschehen, legen Sie vorher einmal fest, wer committet, wie im Video gezeigt: `git config --global user.name "Ihr Name"`, `git config --global user.email "ihre@adresse"` und `git config --global init.defaultBranch main`.
+
 Führen Sie nacheinander aus:
 
 1. Erstellen Sie einen neuen Ordner `git-uebung-diff` und wechseln Sie hinein.
@@ -37,12 +39,14 @@ dritte Zeile
 vierte Zeile
 ```
 
-6. Führen Sie `git diff notizen.txt` aus.
+6. Führen Sie `git diff notizen.txt` aus. Der Befehl zeigt, was sich in der Datei seit dem letzten Commit geändert hat.
 
 Wie viele Zeilen im Ausgabetext beginnen mit einem einzelnen `+` und zeigen neu hinzugefügten Inhalt (die Kopfzeile `+++ b/notizen.txt` zählt nicht mit)? Antworten Sie nur mit der Zahl.
 
 <!-- en -->
 **Hands-on task – run this on your own machine.**
+
+If you haven't done so yet, first set once who is committing, as shown in the video: `git config --global user.name "Your Name"`, `git config --global user.email "your@address"` and `git config --global init.defaultBranch main`.
 
 Run the following in order:
 
@@ -57,6 +61,6 @@ third line
 fourth line
 ```
 
-6. Run `git diff notes.txt`.
+6. Run `git diff notes.txt`. The command shows what has changed in the file since the last commit.
 
 How many lines in the output start with a single `+` and show newly added content (the header line `+++ b/notes.txt` doesn't count)? Answer with just the number.

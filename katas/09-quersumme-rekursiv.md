@@ -1,6 +1,6 @@
 ---
 id: 3.3
-category: 08-rekursion
+category: 09-rekursion
 title:
   de: Quersumme (rekursiv)
   en: Digit Sum (recursive)

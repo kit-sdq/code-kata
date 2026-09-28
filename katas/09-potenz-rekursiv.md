@@ -1,6 +1,6 @@
 ---
 id: 3.4
-category: 08-rekursion
+category: 09-rekursion
 title:
   de: Potenz (rekursiv)
   en: Power (recursive)

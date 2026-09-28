@@ -54,11 +54,11 @@
     de: "Versionsverwaltung mit Git: Grundlagen und typische Arbeitsabläufe."
     en: "Version control with Git: basics and typical workflows."
   order: 7
-- id: 08-rekursion
+- id: 09-rekursion
   name:
     de: "Rekursion"
     en: "Recursion"
   description:
     de: "Rekursive Methoden: Basisfall, Rekursionsschritt und Aufrufstapel. Wird in der Vorlesung eingeführt, nicht in den Videos."
     en: "Recursive methods: base case, recursive step, and the call stack. Introduced in the lecture, not in the videos."
-  order: 8
+  order: 9

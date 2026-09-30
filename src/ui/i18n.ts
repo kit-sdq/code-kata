@@ -55,6 +55,7 @@ const de: Dict = {
   'code.failure.error': 'Beim Ausführen Ihres Codes ist ein Fehler aufgetreten:',
   'editor.escapeHint': 'Code-Editor. Escape und dann Tab drücken, um ihn zu verlassen.',
   'footer.source': 'Quelle',
+  'header.lectures': 'Vorlesungen (Lesefassungen)',
   'category.copyLink': 'Link zu diesem Kapitel kopieren',
   'category.linkCopied': 'Link kopiert',
 };
@@ -110,6 +111,7 @@ const en: Dict = {
   'code.failure.error': 'Something went wrong running your code:',
   'editor.escapeHint': 'Code editor. Press Escape then Tab to leave it.',
   'footer.source': 'Source',
+  'header.lectures': 'Lectures (reading versions, German)',
   'category.copyLink': 'Copy link to this category',
   'category.linkCopied': 'Link copied',
 };

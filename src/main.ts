@@ -262,6 +262,9 @@ function renderNotFound(slug: string): void {
 function setFooterText(): void {
   const link = document.getElementById('footer-source-link');
   if (link) link.textContent = t('footer.source');
+  const lectures = document.getElementById('lectures-link');
+  lectures?.setAttribute('aria-label', t('header.lectures'));
+  lectures?.setAttribute('title', t('header.lectures'));
 }
 
 function route(): void {

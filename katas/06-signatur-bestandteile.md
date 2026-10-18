@@ -2,8 +2,8 @@
 id: 1.1
 category: 06-methoden
 title:
-  de: Bestandteile einer Methodensignatur
-  en: Parts of a Method Signature
+  de: Bestandteile eines Methodenkopfs
+  en: Parts of a Method Header
 type: choice
 difficulty: easy
 tags:
@@ -46,19 +46,19 @@ options:
 ---
 
 <!-- de -->
-Gegeben ist die folgende Methodensignatur:
+Gegeben ist der folgende Methodenkopf:
 
 ```java
 public static int verdoppleUndAddiere(int zahl, int summand)
 ```
 
-Welche der folgenden Aussagen über diese Signatur sind **richtig**?
+Welche der folgenden Aussagen über diesen Methodenkopf sind **richtig**?
 
 <!-- en -->
-Given the following method signature:
+Given the following method header:
 
 ```java
 public static int doubleAndAdd(int zahl, int summand)
 ```
 
-Which of the following statements about this signature are **correct**?
+Which of the following statements about this method header are **correct**?

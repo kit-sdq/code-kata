@@ -147,3 +147,7 @@ dist
 vite.config.js.timestamp-*
 vite.config.ts.timestamp-*
 .vite/
+
+# Windows download marker (Mark of the Web), e.g. "notes.md:Zone.Identifier". The colon
+# makes the path invalid on Windows, so a pushed one breaks everyone's checkout there.
+*Zone.Identifier

@@ -62,3 +62,11 @@
     de: "Rekursive Methoden: Basisfall, Rekursionsschritt und Aufrufstapel. Wird in der Vorlesung eingeführt, nicht in den Videos."
     en: "Recursive methods: base case, recursive step, and the call stack. Introduced in the lecture, not in the videos."
   order: 9
+- id: 10-vererbung
+  name:
+    de: "Vererbung"
+    en: "Inheritance"
+  description:
+    de: "Oberklasse und Unterklasse, extends und super, Überschreiben mit @Override, dynamische Bindung und abstrakte Klassen, am Beispiel der Bibliothek. Gehört zur Vorlesung VL05, nicht zu den Videos."
+    en: "Superclass and subclass, extends and super, overriding with @Override, dynamic dispatch and abstract classes, using the library example. Belongs to lecture VL05, not to the videos."
+  order: 10

@@ -57,6 +57,8 @@ Heft: c't Nr. 14
 Zeitung: Stadtanzeiger vom 25.11.2026
 ```
 
+**Hinweis zu `@Override`:** Die Prüfung dieser Aufgabe vergleicht nur die Ausgabe Ihres Programms. Ob über einer Methode `@Override` steht, kann sie nicht sehen. Java verlangt die Annotation auch nicht. Ohne `@Override` übersetzt und läuft das Programm genauso. In diesem Kurs schreiben Sie aber über jede überschreibende Methode `@Override`, damit der Übersetzer einen Tippfehler im Methodennamen meldet. Prüfen Sie deshalb selbst, ob über jedem `describe()` in Ihrer Lösung `@Override` steht.
+
 Hier stehen alle Klassen in einer Datei. Deshalb fehlt vor den Klassen außer `Main` das Wort `public`.
 
 ```java template

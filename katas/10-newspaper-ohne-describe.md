@@ -1,5 +1,5 @@
 ---
-id: 7
+id: 10
 category: 10-vererbung
 title: Newspaper ohne eigenes describe()
 type: text

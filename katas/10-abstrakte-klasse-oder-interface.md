@@ -1,5 +1,5 @@
 ---
-id: 13
+id: 16
 category: 10-vererbung
 title: Abstrakte Klasse oder Interface
 type: choice

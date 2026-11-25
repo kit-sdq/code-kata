@@ -1,5 +1,5 @@
 ---
-id: 11
+id: 14
 category: 10-vererbung
 title: Eine instanceof-Kette durch Überschreiben ersetzen
 type: code

@@ -1,5 +1,5 @@
 ---
-id: 3
+id: 6
 category: 10-vererbung
 title: Konstruktor ohne super(…)
 type: choice

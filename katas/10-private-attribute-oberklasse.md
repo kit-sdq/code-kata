@@ -1,5 +1,5 @@
 ---
-id: 4
+id: 7
 category: 10-vererbung
 title: Private Attribute der Oberklasse
 type: choice
@@ -20,7 +20,7 @@ options:
     correct: true
   - text: "Ein `Book`-Objekt enthält das Attribut `title`, auch wenn `Book` es nicht mit Namen ansprechen darf."
     correct: true
-  - text: "Die Methode übersetzt, weil `Book` das Attribut `title` von `LibraryItem` erbt."
+  - text: "Die Methode übersetzt, weil ein `Book`-Objekt das Attribut `title` enthält."
     correct: false
   - text: "Mit `return super.title + \" von \" + author;` übersetzt die Methode."
     correct: false

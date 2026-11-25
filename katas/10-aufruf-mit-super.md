@@ -1,5 +1,5 @@
 ---
-id: 12
+id: 15
 category: 10-vererbung
 title: Aufruf mit super
 type: text

@@ -1,7 +1,7 @@
 ---
 id: 1
 category: 10-vererbung
-title: Oberklasse und Unterklasse mit extends
+title: Oberklasse und Unterklasse erkennen
 type: choice
 difficulty: easy
 tags:
@@ -9,48 +9,27 @@ tags:
   - extends
   - oberklasse
 hints:
-  - "Mit `extends` erbt `Book` alle Attribute und Methoden von `LibraryItem`. Ein `Book`-Objekt enthält also auch `title` und `signature`."
-  - "Konstruktoren werden nicht geerbt. In Java kann eine Klasse höchstens eine Oberklasse haben."
-multiple: true
+  - "Die Klasse vor `extends` ist die neue Klasse. Die Klasse hinter `extends` ist die Klasse, von der sie erbt."
+  - "Die Klasse, von der geerbt wird, heißt Oberklasse."
+multiple: false
 shuffle: true
 options:
-  - text: "Ein `Book`-Objekt enthält die Attribute `title`, `signature` und `author`."
+  - text: "`LibraryItem` ist die Oberklasse, `Book` ist die Unterklasse."
     correct: true
-  - text: "`Book` kann die Methode `getTitle()` aufrufen, obwohl sie nur in `LibraryItem` steht."
-    correct: true
-  - text: "`LibraryItem` ist die Oberklasse, `Book` und `Magazine` sind Unterklassen."
-    correct: true
-  - text: "`Book` erbt den Konstruktor `LibraryItem(String title, String signature)` und braucht deshalb keinen eigenen."
+  - text: "`Book` ist die Oberklasse, `LibraryItem` ist die Unterklasse."
     correct: false
-  - text: "`Book` kann zusätzlich mit `extends` von einer zweiten Klasse erben, zum Beispiel `class Book extends LibraryItem, Member`."
+  - text: "Beide Klassen sind Oberklassen."
     correct: false
 ---
 
-Eine Bibliothek hat Bücher und Zeitschriften. Beide haben einen Titel und eine Signatur. Damit diese Attribute nur einmal im Code stehen, kommen sie in eine gemeinsame **Oberklasse** `LibraryItem`. Die **Unterklassen** `Book` und `Magazine` erben mit `extends` von `LibraryItem` und erweitern sie um das, was nur sie haben: `Book` um einen Autor, `Magazine` um eine Heftnummer.
+Eine Bibliothek hat Bücher und Zeitschriften. Beide haben einen Titel und eine Signatur. Diese gemeinsamen Teile stehen einmal in der Klasse `LibraryItem`. Die Klasse `Book` erweitert `LibraryItem` mit `extends`:
 
 ```java
-public class LibraryItem {
-    private final String title;
-    private final String signature;
-
-    public LibraryItem(String title, String signature) {
-        this.title = title;
-        this.signature = signature;
-    }
-
-    public String getTitle() {
-        return title;
-    }
-
-    public String describe() {
-        return title + " (" + signature + ")";
-    }
-}
-
 public class Book extends LibraryItem {
-    private final String author;
-    // … Konstruktor und getAuthor()
+    // …
 }
 ```
 
-Welche der folgenden Aussagen sind **richtig**?
+Die Klasse hinter `extends` heißt **Oberklasse**. Die Klasse mit `extends` im Kopf heißt **Unterklasse**.
+
+Welche Klasse ist hier die Oberklasse und welche die Unterklasse?

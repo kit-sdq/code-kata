@@ -1,5 +1,5 @@
 ---
-id: 2
+id: 5
 category: 10-vererbung
 title: Unterklasse Magazine schreiben
 type: code

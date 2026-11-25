@@ -170,13 +170,17 @@ function parseChoiceKata(fm: Record<string, unknown>, base: Omit<ChoiceKata, 'ty
   return { ...base, type: 'choice', multiple, shuffle, options };
 }
 
-function parseCodeKata(fm: Record<string, unknown>, base: Omit<CodeKata, 'type' | 'mainClass' | 'allowedImports' | 'timeoutMs' | 'template' | 'checks'>, id: string, template: string, lang: Lang): CodeKata {
+function parseCodeKata(fm: Record<string, unknown>, base: Omit<CodeKata, 'type' | 'mainClass' | 'allowedImports' | 'timeoutMs' | 'template' | 'checks' | 'requireOverride'>, id: string, template: string, lang: Lang): CodeKata {
   if (!template) throw new Error(`${id}: code kata requires a fenced \`\`\`java template block in the body`);
   const mainClass = typeof fm.mainClass === 'string' && fm.mainClass ? fm.mainClass : 'Main';
   const allowedImports = parseStringArray(fm.allowedImports, id, 'allowedImports');
   const timeoutMs = typeof fm.timeoutMs === 'number' && fm.timeoutMs > 0 ? fm.timeoutMs : 5000;
   const checks = parseChecks(fm.checks, id, lang);
-  return { ...base, type: 'code', mainClass, allowedImports, timeoutMs, template, checks };
+  if (fm.requireOverride !== undefined && typeof fm.requireOverride !== 'boolean') {
+    throw new Error(`${id}: "requireOverride" must be true or false`);
+  }
+  const requireOverride = fm.requireOverride === true;
+  return { ...base, type: 'code', mainClass, allowedImports, timeoutMs, template, checks, requireOverride };
 }
 
 function parseChecks(raw: unknown, id: string, lang: Lang): Check[] {

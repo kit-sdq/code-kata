@@ -22,8 +22,13 @@ const DONE = '___KATA_DONE___';
 const RET_PREFIX = '___KATA_RET___';
 const ERR_PREFIX = '___KATA_ERR___';
 const CLASSPATH = '/str/tools.jar:/files/';
+// Opt-in course rule (kata frontmatter `requireOverride: true`): javac runs the annotation
+// processor from tools/override-check, which rejects an overriding method without @Override.
+const OVERRIDE_CHECK_JAR = '/str/override-check.jar';
+const OVERRIDE_CHECK_ARGS = ['-processorpath', OVERRIDE_CHECK_JAR, '-processor', 'OverrideCheck'];
 
 let initPromise = null;
+let overrideCheckPromise = null;
 let captured = '';
 
 for (const method of ['log', 'error', 'warn', 'info']) {
@@ -67,11 +72,28 @@ async function ensureInit() {
   return initPromise;
 }
 
+async function loadStrFile(name, strPath) {
+  const url = new URL(name, self.location.href).href;
+  const response = await fetch(url);
+  if (!response.ok) {
+    throw new Error('Failed to load ' + name + ' from ' + url + ': HTTP ' + response.status);
+  }
+  const bytes = new Uint8Array(await response.arrayBuffer());
+  const add = typeof cheerpOSAddStringFile === 'function' ? cheerpOSAddStringFile : cheerpjAddStringFile;
+  add(strPath, bytes);
+}
+
+function ensureOverrideCheck() {
+  if (!overrideCheckPromise) overrideCheckPromise = loadStrFile('override-check.jar', OVERRIDE_CHECK_JAR);
+  return overrideCheckPromise;
+}
+
 self.onmessage = async (event) => {
-  const { source, mainClass, harnessSource } = event.data;
+  const { source, mainClass, harnessSource, requireOverride } = event.data;
   try {
     postMessage({ type: 'phase', phase: 'loading' });
     await ensureInit();
+    if (requireOverride) await ensureOverrideCheck();
 
     postMessage({ type: 'phase', phase: 'compiling' });
     captured = '';
@@ -79,7 +101,8 @@ self.onmessage = async (event) => {
     addStringFile('/str/KataRunner.java', harnessSource);
     const srcMain = '/str/' + mainClass + '.java';
     const srcHarness = '/str/KataRunner.java';
-    const compileExit = await cheerpjRunMain('com.sun.tools.javac.Main', CLASSPATH, srcMain, srcHarness, '-d', '/files/');
+    const javacArgs = requireOverride ? OVERRIDE_CHECK_ARGS.concat([srcMain, srcHarness]) : [srcMain, srcHarness];
+    const compileExit = await cheerpjRunMain('com.sun.tools.javac.Main', CLASSPATH, ...javacArgs, '-d', '/files/');
     if (compileExit !== 0) {
       postMessage({ type: 'result', result: { status: 'compile-error', message: captured.trim() || 'Compilation failed.' } });
       return;

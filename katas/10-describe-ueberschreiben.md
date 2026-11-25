@@ -15,6 +15,7 @@ hints:
 mainClass: Main
 allowedImports: []
 timeoutMs: 5000
+requireOverride: true
 checks:
   - type: stdout
     expected: |
@@ -27,7 +28,7 @@ Eine Methode der Unterklasse mit gleichem Namen und gleichen Parametern **übers
 
 **Aufgabe:** Überschreiben Sie in `Book` die Methode `describe()` mit `@Override`. Für `new Book("Faust", "L 100", "Goethe")` soll sie `Buch: Faust von Goethe` liefern.
 
-**Hinweis zu `@Override`:** Die Prüfung dieser Aufgabe vergleicht nur die Ausgabe Ihres Programms. Ob über einer Methode `@Override` steht, kann sie nicht sehen. Java verlangt die Annotation auch nicht. Ohne `@Override` übersetzt und läuft das Programm genauso. In diesem Kurs schreiben Sie aber über jede überschreibende Methode `@Override`, damit der Übersetzer einen Tippfehler im Methodennamen meldet. Prüfen Sie deshalb selbst, ob über jedem `describe()` in Ihrer Lösung `@Override` steht.
+**Hinweis zu `@Override`:** Java selbst verlangt `@Override` nicht. Ohne die Annotation übersetzt und läuft das Programm genauso. In diesem Kurs bekommt aber jede überschreibende Methode `@Override`, damit der Übersetzer einen Tippfehler im Methodennamen meldet. Diese Aufgabe prüft das. Fehlt `@Override` über einer überschreibenden Methode, meldet die Prüfung einen Übersetzungsfehler.
 
 Hier stehen alle Klassen in einer Datei. Deshalb fehlt vor `class LibraryItem` und `class Book` das Wort `public`.
 

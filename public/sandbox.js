@@ -54,7 +54,12 @@ window.addEventListener('message', (event) => {
       finish({ status: 'error', message: e.message || 'worker error' });
     };
 
-    worker.postMessage({ source: msg.source, mainClass: msg.mainClass, harnessSource: msg.harnessSource });
+    worker.postMessage({
+      source: msg.source,
+      mainClass: msg.mainClass,
+      harnessSource: msg.harnessSource,
+      requireOverride: msg.requireOverride === true,
+    });
   } else if (msg.type === 'stop') {
     if (run && run.requestId === msg.requestId) finish({ status: 'stopped' });
   }

@@ -7,6 +7,7 @@ export interface RunRequest {
   mainClass: string;
   checks: Check[];       // runner executes; verify.ts compares
   timeoutMs: number;
+  requireOverride?: boolean; // run javac with the @Override check (public/override-check.jar)
 }
 
 export type RunResult =
@@ -107,6 +108,7 @@ export async function runJava(
           mainClass: req.mainClass,
           checks: req.checks,
           timeoutMs: req.timeoutMs,
+          requireOverride: req.requireOverride === true,
           harnessSource: generateHarness(req.mainClass, req.checks),
         };
         iframe!.contentWindow!.postMessage(msg, '*');

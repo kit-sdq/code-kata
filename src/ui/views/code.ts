@@ -118,7 +118,7 @@ export function renderCodeView(container: HTMLElement, kata: CodeKata): void {
 
     try {
       const result = await runJava(
-        { source, mainClass: kata.mainClass, checks: kata.checks, timeoutMs: kata.timeoutMs },
+        { source, mainClass: kata.mainClass, checks: kata.checks, timeoutMs: kata.timeoutMs, requireOverride: kata.requireOverride },
         (phase) => { phaseEl.textContent = t(PHASE_KEY[phase]); },
       );
       phaseEl.textContent = '';

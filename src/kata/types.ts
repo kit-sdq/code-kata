@@ -23,5 +23,7 @@ export type Check =
 export interface CodeKata extends KataBase {
   type: 'code'; mainClass: string; allowedImports: string[];
   timeoutMs: number; template: string; checks: Check[];
+  /** Opt-in course rule: javac rejects an overriding method without @Override (tools/override-check). */
+  requireOverride: boolean;
 }
 export type Kata = TextKata | ChoiceKata | CodeKata;
